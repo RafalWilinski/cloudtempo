@@ -27,6 +27,10 @@ export class SearchServiceStack extends cdk.Stack {
     });
     dumpBucket.grantRead(searchEndpoint);
 
+    const searchUrl = searchEndpoint.addFunctionUrl({
+      authType: FunctionUrlAuthType.NONE,
+    }).url;
+
     const indexer = new lambda.NodejsFunction(this, "Indexer", {
       entry: "./lambdas/indexer.ts",
       handler: "handler",
@@ -37,6 +41,7 @@ export class SearchServiceStack extends cdk.Stack {
       memorySize: 2048,
     });
     dumpBucket.grantReadWrite(indexer);
+
     indexer.addToRolePolicy(
       new PolicyStatement({
         actions: [
@@ -53,10 +58,6 @@ export class SearchServiceStack extends cdk.Stack {
         resources: ["*"],
       })
     );
-
-    const searchUrl = searchEndpoint.addFunctionUrl({
-      authType: FunctionUrlAuthType.NONE,
-    }).url;
 
     const indexerTriggerUrl = indexer.addFunctionUrl({
       authType: FunctionUrlAuthType.NONE,

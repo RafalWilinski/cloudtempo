@@ -100,7 +100,7 @@ async function indexFunctions(): Promise<Document[]> {
         name: fn.FunctionName,
         arn: fn.FunctionArn,
         description: fn.Description,
-        awsService: "dynamodb",
+        awsService: "lambda",
         region,
       })),
     ];

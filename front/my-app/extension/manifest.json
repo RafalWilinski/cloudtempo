@@ -3,10 +3,13 @@
   "description": "AWS Search",
   "version": "0.0.1",
   "manifest_version": 3,
-
+  "permissions": ["tabs", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
   "content_scripts": [
     {
-      "js": ["background.js"],
+      "js": ["content.js"],
       "matches": ["https://us-east-1.console.aws.amazon.com/*"]
     }
   ],
@@ -15,5 +18,12 @@
       "resources": ["dist/*"],
       "matches": ["https://us-east-1.console.aws.amazon.com/*"]
     }
-  ]
+  ],
+  "externally_connectable": {
+    "ids": ["dfdbbkddkbcggkpdkgnogjhpijiahcep"],
+    "matches": ["https://us-east-1.console.aws.amazon.com/*"]
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
 }

@@ -1,15 +1,41 @@
-var htmlBody = ` <div id="app"></div>
-<script type="module" src="/index.89dadfae.js"></script>
-`;
+console.log("Background.js started");
 
-document.body.insertAdjacentHTML("beforeend", htmlBody);
+chrome.runtime.onMessage.addListener(async function (
+  request,
+  sender,
+  sendResponse
+) {
+  console.log(
+    sender.tab
+      ? "from a content script:" + sender.tab.url
+      : "from the extension"
+  );
 
-let scripts = ["dist/index.89dadfae.js"];
+  console.log(request);
 
-scripts.forEach((file) => {
-  var s = document.createElement("script");
-  s.src = chrome.runtime.getURL(file);
-  (document.head || document.documentElement).appendChild(s);
+  fetch(
+    `https://qrda6vijsce767dglefttcrrcy0uldfr.lambda-url.us-east-1.on.aws/?q=${request.q}`
+  )
+    .then((res) => res.json())
+    .then((res) => sendResponse(res));
 });
 
-console.log("Injected!");
+chrome.runtime.onMessageExternal.addListener(async function (
+  request,
+  sender,
+  sendResponse
+) {
+  console.log(
+    sender.tab
+      ? "from a content script:" + sender.tab.url
+      : "from the extension"
+  );
+
+  console.log(request);
+
+  fetch(
+    `https://qrda6vijsce767dglefttcrrcy0uldfr.lambda-url.us-east-1.on.aws/?q=${request.q}`
+  )
+    .then((res) => res.json())
+    .then((res) => sendResponse(res));
+});
