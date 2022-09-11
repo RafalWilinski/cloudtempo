@@ -1,0 +1,148 @@
+import React, { useEffect, useState } from "react";
+import { Command } from "cmdk";
+import LambdaIcon from "./LambdaIcon";
+import S3Icon from "./S3Icon";
+import DynamoDBIcon from "./DynamoDBIcon";
+
+const serviceIconMap: Record<string, () => JSX.Element> = {
+  lambda: LambdaIcon,
+  s3: S3Icon,
+  dynamodb: DynamoDBIcon,
+};
+
+export function VercelCMDK() {
+  const ref = React.useRef<HTMLDivElement | null>(null);
+  const [isVisible, setVisibility] = useState(false);
+  const [inputValue, setInputValue] = React.useState("");
+
+  const [pages, setPages] = React.useState<string[]>(["home"]);
+  const activePage = pages[pages.length - 1];
+  const isHome = activePage === "home";
+
+  console.log("VercelCMDK!");
+
+  const popPage = React.useCallback(() => {
+    setPages((pages) => {
+      const x = [...pages];
+      x.splice(-1, 1);
+      return x;
+    });
+  }, []);
+
+  const _onKeyDown = React.useCallback(
+    (e: KeyboardEvent) => {
+      console.log(e);
+
+      if (e.metaKey && e.code === "KeyK") {
+        setVisibility((v) => !v);
+      }
+
+      if (isHome || inputValue.length) {
+        return;
+      }
+
+      if (e.key === "Backspace") {
+        e.preventDefault();
+        popPage();
+      }
+    },
+    [inputValue.length, isHome, popPage]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", _onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", _onKeyDown);
+    };
+  }, [_onKeyDown]);
+
+  const [loading, setLoading] = React.useState(false);
+  const [items, setItems] = React.useState([]);
+
+  React.useEffect(() => {
+    async function getItems() {
+      setLoading(true);
+      const res = await fetch(
+        `https://qrda6vijsce767dglefttcrrcy0uldfr.lambda-url.us-east-1.on.aws/?q=${inputValue}`
+      );
+      const json = await res.json();
+
+      setItems(json.results);
+      setLoading(false);
+    }
+
+    if (inputValue && inputValue.length > 1) {
+      getItems();
+    }
+  }, [inputValue]);
+
+  function bounce() {
+    if (ref.current) {
+      ref.current.style.transform = "scale(0.96)";
+      setTimeout(() => {
+        if (ref.current) {
+          ref.current.style.transform = "";
+        }
+      }, 100);
+
+      setInputValue("");
+    }
+  }
+
+  return (
+    <div className={`bg ${isVisible ? "cmdk-visible" : "cmdk-not-visible"}`}>
+      <div className="vercel">
+        <Command
+          ref={ref}
+          onKeyDown={(e: React.KeyboardEvent) => {
+            if (e.key === "Enter") {
+              bounce();
+            }
+
+            if (isHome || inputValue.length) {
+              return;
+            }
+
+            if (e.key === "Backspace") {
+              e.preventDefault();
+              popPage();
+              bounce();
+            }
+          }}
+        >
+          <div>
+            {pages.map((p) => (
+              <div key={p} cmdk-vercel-badge="">
+                {p}
+              </div>
+            ))}
+          </div>
+          <Command.Input
+            autoFocus={true}
+            placeholder="Start typing to search..."
+            onValueChange={(value) => {
+              setInputValue(value);
+            }}
+          />
+          <Command.List>
+            <Command.Empty>No results found.</Command.Empty>
+            {loading && (
+              <Command.Loading>Fetching resources...</Command.Loading>
+            )}
+            {items.map((item) => {
+              return (
+                <Command.Item
+                  key={(item as any).name}
+                  value={(item as any).name!}
+                >
+                  {serviceIconMap[(item as any).awsService]()}
+                  {(item as any).name}
+                </Command.Item>
+              );
+            })}
+          </Command.List>
+        </Command>
+      </div>
+    </div>
+  );
+}

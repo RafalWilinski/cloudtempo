@@ -1,0 +1,19 @@
+{
+  "name": "AWS Search",
+  "description": "AWS Search",
+  "version": "0.0.1",
+  "manifest_version": 3,
+
+  "content_scripts": [
+    {
+      "js": ["background.js"],
+      "matches": ["https://us-east-1.console.aws.amazon.com/*"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["dist/*"],
+      "matches": ["https://us-east-1.console.aws.amazon.com/*"]
+    }
+  ]
+}
