@@ -2,12 +2,12 @@ var htmlBody = `<div id="aws-search-app"></div><div aws-search-extensionid="${ch
 
 document.body.insertAdjacentHTML("beforeend", htmlBody);
 
-const scriptPath = "dist/index.de89fb1f.js";
+const scriptPath = "dist/index.1adc50c3.js";
 const scriptElement = document.createElement("script");
 scriptElement.src = chrome.runtime.getURL(scriptPath);
 (document.head || document.documentElement).appendChild(scriptElement);
 
-const stylesPath = "dist/index.e61759e4.css";
+const stylesPath = "dist/index.ce5e55a2.css";
 const linkElement = document.createElement("link");
 linkElement.rel = "stylesheet";
 linkElement.href = chrome.runtime.getURL(stylesPath);

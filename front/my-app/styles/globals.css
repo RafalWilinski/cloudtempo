@@ -139,12 +139,12 @@
 
 .cmdk-visible {
   opacity: 0 !important;
-  display: block;
+  display: none !important;
+  height: 0px !important;
 }
 .cmdk-not-visible {
   opacity: 1 !important;
-  display: none;
-  height: 0px;
+  display: block;
 }
 .bg {
   transition: all 0.1s ease-in-out;
