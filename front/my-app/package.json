@@ -7,6 +7,7 @@
     "build": "rm -fr dist && rm -fr extension/dist && parcel build src/index.html && cp -R ./dist extension/dist"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.10",
     "aws-svg-icons": "^3.0.0-2021-07-30",
     "cmdk": "^0.1.20",
     "next": "12.3.0",

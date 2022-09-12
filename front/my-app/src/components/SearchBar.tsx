@@ -1,14 +1,29 @@
 /// <reference types="chrome"/>
 import React, { useEffect, useState } from "react";
 import { Command } from "cmdk";
-import LambdaIcon from "./LambdaIcon";
-import S3Icon from "./S3Icon";
-import DynamoDBIcon from "./DynamoDBIcon";
+import * as lambda from "./Lambda";
+import * as s3 from "./S3";
+import * as dynamodb from "./DynamoDB";
+import * as cloudformation from "./Cloudformation";
+import { Document } from "../document";
+import {
+  ArrowPathIcon,
+  LifebuoyIcon,
+  CheckBadgeIcon,
+} from "@heroicons/react/24/outline";
 
 const serviceIconMap: Record<string, any> = {
-  lambda: LambdaIcon,
-  s3: S3Icon,
-  dynamodb: DynamoDBIcon,
+  lambda: lambda.icon,
+  s3: s3.icon,
+  dynamodb: dynamodb.icon,
+  cloudformation: cloudformation.icon,
+};
+
+const serviceResourceNameMap: Record<string, string> = {
+  lambda: "Lambda Function",
+  s3: "S3 Bucket",
+  dynamodb: "DynamoDB Table",
+  cloudformation: "CloudFormation Stack",
 };
 
 export function VercelCMDK() {
@@ -16,7 +31,12 @@ export function VercelCMDK() {
   const [isVisible, setVisibility] = useState(false);
   const [inputValue, setInputValue] = React.useState("");
 
-  const [pages, setPages] = React.useState<string[]>(["us-east-1"]);
+  const [pages, setPages] = React.useState<string[]>(["Home"]);
+  const [selectedDocument, setSelectedDocument] = useState<
+    Document | undefined
+  >();
+  const activePage = pages[pages.length - 1];
+  const isHome = activePage === "Home";
 
   const popPage = React.useCallback(() => {
     setPages((pages) => {
@@ -28,6 +48,14 @@ export function VercelCMDK() {
 
   const _onKeyDown = React.useCallback(
     (e: KeyboardEvent) => {
+      if (e.code === "Backspace") {
+        if (isHome || inputValue.length) {
+          return;
+        }
+
+        popPage();
+      }
+
       if (e.metaKey && e.code === "KeyK") {
         setVisibility((v) => !v);
       }
@@ -70,22 +98,10 @@ export function VercelCMDK() {
       }
     }
 
-    if (inputValue && inputValue.length > 1) {
+    if (inputValue && inputValue.length > 1 && activePage === "Home") {
       getItems();
     }
   }, [inputValue]);
-
-  function bounce() {
-    // if (ref.current) {
-    //   ref.current.style.transform = "scale(0.96)";
-    //   setTimeout(() => {
-    //     if (ref.current) {
-    //       ref.current.style.transform = "";
-    //     }
-    //   }, 100);
-    //   setInputValue("");
-    // }
-  }
 
   return (
     <div className={`bg ${isVisible ? "cmdk-not-visible" : "cmdk-visible"}`}>
@@ -94,7 +110,7 @@ export function VercelCMDK() {
           ref={ref}
           onKeyDown={(e: React.KeyboardEvent) => {
             if (e.key === "Enter") {
-              bounce();
+              // bounce();
             }
 
             if (e.key === "Escape") {
@@ -110,44 +126,120 @@ export function VercelCMDK() {
             ))}
           </div>
           <Command.Input
+            value={inputValue}
             autoFocus={true}
             placeholder="Start typing to search..."
             onValueChange={(value) => {
               setInputValue(value);
             }}
           />
-          <Command.List>
-            {!loading && items.length === 0 && (
-              <Command.Empty>No results found.</Command.Empty>
-            )}
-            {loading && (
-              <div className="aws-search-loading">Fetching resources...</div>
-            )}
-            {items.map((item) => {
-              return (
-                <Command.Item
-                  key={(item as any).name}
-                  value={(item as any).name!}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    {serviceIconMap[(item as any).awsService]()}
-                    <span style={{ marginLeft: "8px" }}>
-                      {(item as any).name}{" "}
-                    </span>
-                  </div>
-                  <span>{(item as any).region}</span>
-                </Command.Item>
-              );
-            })}
-          </Command.List>
+          {isHome && (
+            <ResourcesMenu
+              items={items}
+              loading={loading}
+              setPages={setPages}
+              setSelectedDocument={setSelectedDocument}
+              setInputValue={setInputValue}
+              pages={pages}
+            />
+          )}
+          {activePage === "lambda" && (
+            <lambda.Menu document={selectedDocument!} />
+          )}
         </Command>
       </div>
     </div>
+  );
+}
+
+interface ResourcesMenuProps {
+  loading: boolean;
+  items: any[];
+  pages: string[];
+  setPages: (pages: string[]) => void;
+  setInputValue: (value: string) => void;
+  setSelectedDocument: (document: Document) => void;
+}
+
+function ResourcesMenu({
+  items,
+  loading,
+  setPages,
+  setSelectedDocument,
+  setInputValue,
+  pages,
+}: ResourcesMenuProps) {
+  return (
+    <>
+      <Command.Group heading="Resources">
+        <Command.List>
+          {!loading && items.length === 0 && (
+            <Command.Empty>No results found.</Command.Empty>
+          )}
+          {loading && (
+            <div className="aws-search-loading">Fetching resources...</div>
+          )}
+          {items.map((item) => {
+            return (
+              <Command.Item
+                style={{
+                  justifyContent: "space-between",
+                }}
+                key={(item as any).name}
+                value={(item as any).name!}
+                onSelect={() => {
+                  setSelectedDocument(item);
+                  setPages([...pages, "lambda"]);
+                  setInputValue("");
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <img
+                    src={serviceIconMap[(item as any).awsService]}
+                    style={{
+                      width: "24px",
+                      height: "24px",
+                    }}
+                  />
+                  <div style={{ marginLeft: "8px" }}>
+                    <span>{(item as any).name} </span>
+                    <p
+                      style={{
+                        marginTop: 0,
+                        marginBottom: 0,
+                        fontSize: "10px",
+                      }}
+                    >
+                      {serviceResourceNameMap[(item as any).awsService]}
+                    </p>
+                  </div>
+                </div>
+                <span>{(item as any).region}</span>
+              </Command.Item>
+            );
+          })}
+        </Command.List>
+      </Command.Group>
+      <Command.Group heading="Actions">
+        <Command.Item>
+          <ArrowPathIcon width={20} height={20} />
+          Reindex search
+        </Command.Item>
+        <Command.Item>
+          <CheckBadgeIcon width={20} height={20} />
+          Activate (6 days of trial left)
+        </Command.Item>
+        <Command.Item>
+          <LifebuoyIcon width={20} height={20} />
+          Help
+        </Command.Item>
+      </Command.Group>
+    </>
   );
 }

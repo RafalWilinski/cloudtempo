@@ -139,9 +139,11 @@
 
 .cmdk-visible {
   opacity: 0 !important;
+  display: block;
 }
 .cmdk-not-visible {
   opacity: 1 !important;
+  display: none;
 }
 .bg {
   transition: all 0.1s ease-in-out;
@@ -170,7 +172,7 @@
   font-family: var(--font-sans);
   border: 1px solid var(--gray6);
   box-shadow: var(--cmdk-shadow);
-  transition: transform 100ms ease;
+  transition: transform 250ms ease;
 }
 .dark .vercel [cmdk-root] {
   background: rgba(22, 22, 22, 0.7);
@@ -214,7 +216,7 @@
   font-size: 14px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   gap: 8px;
   padding: 0 16px;
   color: var(--gray11);

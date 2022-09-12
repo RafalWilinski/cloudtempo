@@ -5,6 +5,8 @@ import * as s3 from "aws-cdk-lib/aws-s3";
 import { FunctionUrlAuthType } from "aws-cdk-lib/aws-lambda";
 import { PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { Duration } from "aws-cdk-lib";
+import * as events from "aws-cdk-lib/aws-events";
+import { LambdaFunction } from "aws-cdk-lib/aws-events-targets";
 
 export class SearchServiceStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -31,6 +33,10 @@ export class SearchServiceStack extends cdk.Stack {
       authType: FunctionUrlAuthType.NONE,
     }).url;
 
+    new cdk.CfnOutput(this, "SearchUrl", {
+      value: searchUrl,
+    });
+
     const indexer = new lambda.NodejsFunction(this, "Indexer", {
       entry: "./lambdas/indexer.ts",
       handler: "handler",
@@ -45,15 +51,14 @@ export class SearchServiceStack extends cdk.Stack {
     indexer.addToRolePolicy(
       new PolicyStatement({
         actions: [
-          "dynamodb:ListTables",
-          "s3:ListBuckets",
-          "lambda:ListFunctions",
           "lambda:DescribeFunction",
           "s3:DescribeBucket",
           "dynamodb:DescribeTable",
           "s3:List*",
           "lambda:List*",
           "dynamodb:List*",
+          "ec2:List*",
+          "cloudformation:List*",
         ],
         resources: ["*"],
       })
@@ -63,9 +68,10 @@ export class SearchServiceStack extends cdk.Stack {
       authType: FunctionUrlAuthType.NONE,
     }).url;
 
-    new cdk.CfnOutput(this, "SearchUrl", {
-      value: searchUrl,
+    const rule = new events.Rule(this, "IndexerSchedule", {
+      schedule: events.Schedule.rate(cdk.Duration.minutes(15)),
     });
+    rule.addTarget(new LambdaFunction(indexer));
 
     new cdk.CfnOutput(this, "IndexerTriggerUrl", {
       value: indexerTriggerUrl,
