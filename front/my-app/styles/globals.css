@@ -144,6 +144,7 @@
 .cmdk-not-visible {
   opacity: 1 !important;
   display: none;
+  height: 0px;
 }
 .bg {
   transition: all 0.1s ease-in-out;

@@ -5,6 +5,7 @@ import * as lambda from "./Lambda";
 import * as s3 from "./S3";
 import * as dynamodb from "./DynamoDB";
 import * as cloudformation from "./Cloudformation";
+import * as cloudwatchlogs from "./CloudwatchLogs";
 import { Document } from "../document";
 import {
   ArrowPathIcon,
@@ -17,6 +18,7 @@ const serviceIconMap: Record<string, any> = {
   s3: s3.icon,
   dynamodb: dynamodb.icon,
   cloudformation: cloudformation.icon,
+  logs: cloudwatchlogs.icon,
 };
 
 const serviceResourceNameMap: Record<string, string> = {
@@ -24,6 +26,7 @@ const serviceResourceNameMap: Record<string, string> = {
   s3: "S3 Bucket",
   dynamodb: "DynamoDB Table",
   cloudformation: "CloudFormation Stack",
+  logs: "CloudWatch Log Group",
 };
 
 export function VercelCMDK() {

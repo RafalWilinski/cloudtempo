@@ -1,5 +1,4 @@
 import MiniSearch from "minisearch";
-
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
 import { Stream } from "stream";
@@ -34,8 +33,6 @@ export const handler = async (
   if (!isSearchInitialized) {
     const bodyContents = await streamToString((await documents).Body);
 
-    console.log({ bodyContents });
-
     miniSearch.addAll(JSON.parse(bodyContents));
     isSearchInitialized = true;
   }
@@ -51,7 +48,6 @@ export const handler = async (
     body: JSON.stringify({ results }),
     headers: {
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials": true,
       "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
       "Content-Type": "application/json",
     },

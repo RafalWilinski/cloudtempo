@@ -2,17 +2,9 @@ console.log("Background.js started");
 
 chrome.runtime.onMessage.addListener(async function (
   request,
-  sender,
+  _sender,
   sendResponse
 ) {
-  console.log(
-    sender.tab
-      ? "from a content script:" + sender.tab.url
-      : "from the extension"
-  );
-
-  console.log(request);
-
   fetch(
     `https://qrda6vijsce767dglefttcrrcy0uldfr.lambda-url.us-east-1.on.aws/?q=${request.q}`
   )
@@ -22,17 +14,9 @@ chrome.runtime.onMessage.addListener(async function (
 
 chrome.runtime.onMessageExternal.addListener(async function (
   request,
-  sender,
+  _sender,
   sendResponse
 ) {
-  console.log(
-    sender.tab
-      ? "from a content script:" + sender.tab.url
-      : "from the extension"
-  );
-
-  console.log(request);
-
   fetch(
     `https://qrda6vijsce767dglefttcrrcy0uldfr.lambda-url.us-east-1.on.aws/?q=${request.q}`
   )
