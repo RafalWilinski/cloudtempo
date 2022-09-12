@@ -1,5 +1,5 @@
 /// <reference types="chrome"/>
-import React, { useEffect, useState } from "react";
+import React, { createRef, useEffect, useRef, useState } from "react";
 import { Command } from "cmdk";
 import * as lambda from "./Lambda";
 import * as s3 from "./S3";
@@ -11,6 +11,7 @@ import {
   ArrowPathIcon,
   LifebuoyIcon,
   CheckBadgeIcon,
+  Cog6ToothIcon,
 } from "@heroicons/react/24/outline";
 
 const serviceIconMap: Record<string, any> = {
@@ -33,6 +34,7 @@ export function VercelCMDK() {
   const ref = React.useRef<HTMLDivElement | null>(null);
   const [isVisible, setVisibility] = useState(false);
   const [inputValue, setInputValue] = React.useState("");
+  const inputRef = createRef();
 
   const [pages, setPages] = React.useState<string[]>(["Home"]);
   const [selectedDocument, setSelectedDocument] = useState<
@@ -73,6 +75,10 @@ export function VercelCMDK() {
     };
   }, [_onKeyDown]);
 
+  useEffect(() => {
+    // setItems([]);
+  }, [isVisible]);
+
   const [loading, setLoading] = React.useState(false);
   const [items, setItems] = React.useState([]);
 
@@ -108,49 +114,52 @@ export function VercelCMDK() {
 
   return (
     <div className={`bg ${isVisible ? "cmdk-not-visible" : "cmdk-visible"}`}>
-      <div className="vercel">
-        <Command
-          ref={ref}
-          onKeyDown={(e: React.KeyboardEvent) => {
-            if (e.key === "Enter") {
-              // bounce();
-            }
+      {isVisible && (
+        <div className="vercel">
+          <Command
+            ref={ref}
+            onKeyDown={(e: React.KeyboardEvent) => {
+              if (e.key === "Enter") {
+                // bounce();
+              }
 
-            if (e.key === "Escape") {
-              setVisibility(false);
-            }
-          }}
-        >
-          <div>
-            {pages.map((p) => (
-              <div key={p} cmdk-vercel-badge="">
-                {p}
-              </div>
-            ))}
-          </div>
-          <Command.Input
-            value={inputValue}
-            autoFocus={true}
-            placeholder="Start typing to search..."
-            onValueChange={(value) => {
-              setInputValue(value);
+              if (e.key === "Escape") {
+                setVisibility(false);
+              }
             }}
-          />
-          {isHome && (
-            <ResourcesMenu
-              items={items}
-              loading={loading}
-              setPages={setPages}
-              setSelectedDocument={setSelectedDocument}
-              setInputValue={setInputValue}
-              pages={pages}
+          >
+            <div>
+              {pages.map((p) => (
+                <div key={p} cmdk-vercel-badge="">
+                  {p}
+                </div>
+              ))}
+            </div>
+            <Command.Input
+              ref={inputRef as any}
+              value={inputValue}
+              autoFocus={true}
+              placeholder="Start typing to search..."
+              onValueChange={(value) => {
+                setInputValue(value);
+              }}
             />
-          )}
-          {activePage === "lambda" && (
-            <lambda.Menu document={selectedDocument!} />
-          )}
-        </Command>
-      </div>
+            {isHome && (
+              <ResourcesMenu
+                items={items}
+                loading={loading}
+                setPages={setPages}
+                setSelectedDocument={setSelectedDocument}
+                setInputValue={setInputValue}
+                pages={pages}
+              />
+            )}
+            {activePage === "lambda" && (
+              <lambda.Menu document={selectedDocument!} />
+            )}
+          </Command>
+        </div>
+      )}
     </div>
   );
 }
@@ -172,6 +181,33 @@ function ResourcesMenu({
   setInputValue,
   pages,
 }: ResourcesMenuProps) {
+  const onSelect = (item: Document) => {
+    switch (item.awsService) {
+      case "lambda": {
+        setSelectedDocument(item);
+        setPages([...pages, "lambda"]);
+        setInputValue("");
+        break;
+      }
+      case "s3": {
+        location.href = s3.url(item.name!, item.region);
+        break;
+      }
+      case "dynamodb": {
+        location.href = dynamodb.url(item.name!, item.region);
+        break;
+      }
+      case "cloudformation": {
+        location.href = cloudformation.url(item.name!, item.region, "0", "0"); // todo
+        break;
+      }
+      case "logs": {
+        location.href = cloudwatchlogs.url(item.name!, item.region);
+        break;
+      }
+    }
+  };
+
   return (
     <>
       <Command.Group heading="Resources">
@@ -191,9 +227,7 @@ function ResourcesMenu({
                 key={(item as any).name}
                 value={(item as any).name!}
                 onSelect={() => {
-                  setSelectedDocument(item);
-                  setPages([...pages, "lambda"]);
-                  setInputValue("");
+                  onSelect(item);
                 }}
               >
                 <div
@@ -230,6 +264,10 @@ function ResourcesMenu({
         </Command.List>
       </Command.Group>
       <Command.Group heading="Actions">
+        <Command.Item>
+          <Cog6ToothIcon width={20} height={20} />
+          Configuration
+        </Command.Item>
         <Command.Item>
           <ArrowPathIcon width={20} height={20} />
           Reindex search

@@ -15,12 +15,13 @@ export const handler = async (
     regions.map((region) => processRegion(region))
   );
 
-  const allDocuments: Document[] = ([] as Document[]).concat.apply(
-    [] as Document[],
+  // Flatten
+  const allDocuments = ([] as Document[]).concat.apply(
+    [],
     regionsData.map((r) => r.documents)
   );
 
-  await putObject("state.json", allDocuments);
+  await putObject("index.json", allDocuments);
 
   return {
     statusCode: 200,

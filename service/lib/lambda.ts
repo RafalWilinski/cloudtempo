@@ -1,11 +1,10 @@
 import { LambdaClient, paginateListFunctions } from "@aws-sdk/client-lambda";
 import { Document } from "./document";
 
-const lambdaClient = new LambdaClient({});
-
 export async function indexFunctions(region: string): Promise<Document[]> {
   let documents: Document[] = [];
 
+  const lambdaClient = new LambdaClient({ region });
   const paginatorConfig = {
     client: lambdaClient,
     pageSize: 100,

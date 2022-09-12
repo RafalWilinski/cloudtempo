@@ -4,16 +4,15 @@ import {
 } from "@aws-sdk/client-cloudwatch-logs";
 import { Document } from "./document";
 
-const client = new CloudWatchLogsClient({});
-
 export async function indexCloudwatchLogGroups(
   region: string
 ): Promise<Document[]> {
   let documents: Document[] = [];
 
+  const client = new CloudWatchLogsClient({ region });
   const paginatorConfig = {
     client: client,
-    pageSize: 100,
+    pageSize: 50,
   };
   const commandParams = {};
   const paginator = paginateDescribeLogGroups(paginatorConfig, commandParams);

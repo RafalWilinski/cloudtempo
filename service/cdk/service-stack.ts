@@ -59,6 +59,7 @@ export class SearchServiceStack extends cdk.Stack {
           "dynamodb:List*",
           "ec2:List*",
           "cloudformation:List*",
+          "logs:DescribeLogGroups",
         ],
         resources: ["*"],
       })

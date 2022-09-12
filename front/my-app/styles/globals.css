@@ -143,6 +143,7 @@
   height: 0px !important;
 }
 .cmdk-not-visible {
+  z-index: 10000 !important;
   opacity: 1 !important;
   display: block;
 }

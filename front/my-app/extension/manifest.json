@@ -10,18 +10,27 @@
   "content_scripts": [
     {
       "js": ["content.js"],
-      "matches": ["https://us-east-1.console.aws.amazon.com/*"]
+      "matches": [
+        "https://us-east-1.console.aws.amazon.com/*",
+        "https://s3.console.aws.amazon.com/*"
+      ]
     }
   ],
   "web_accessible_resources": [
     {
       "resources": ["dist/*"],
-      "matches": ["https://us-east-1.console.aws.amazon.com/*"]
+      "matches": [
+        "https://us-east-1.console.aws.amazon.com/*",
+        "https://s3.console.aws.amazon.com/*"
+      ]
     }
   ],
   "externally_connectable": {
     "ids": ["dfdbbkddkbcggkpdkgnogjhpijiahcep"],
-    "matches": ["https://us-east-1.console.aws.amazon.com/*"]
+    "matches": [
+      "https://us-east-1.console.aws.amazon.com/*",
+      "https://s3.console.aws.amazon.com/*"
+    ]
   },
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"

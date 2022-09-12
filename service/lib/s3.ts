@@ -6,9 +6,14 @@ import {
 } from "@aws-sdk/client-s3";
 import { Document } from "./document";
 
-const s3Client = new S3Client({});
+const mainS3Client = new S3Client({});
 
 export async function indexBuckets(region: string): Promise<Document[]> {
+  if (region !== "us-east-1") {
+    return [];
+  }
+
+  const s3Client = new S3Client({ region });
   let firstRun = true;
   let listBucketsResult: ListBucketsCommandOutput;
   let paginationToken;
@@ -39,7 +44,7 @@ export async function indexBuckets(region: string): Promise<Document[]> {
 }
 
 export async function putObject(key: string, body: any): Promise<void> {
-  await s3Client.send(
+  await mainS3Client.send(
     new PutObjectCommand({
       Bucket: process.env.DUMP_BUCKET!,
       Key: key,

@@ -1,11 +1,10 @@
 import { Document } from "./document";
 import { DynamoDBClient, paginateListTables } from "@aws-sdk/client-dynamodb";
 
-const ddbClient = new DynamoDBClient({});
-
 export async function indexDynamoDBTables(region: string): Promise<Document[]> {
   let documents: Document[] = [];
 
+  const ddbClient = new DynamoDBClient({ region });
   const paginatorConfig = {
     client: ddbClient,
     pageSize: 100,

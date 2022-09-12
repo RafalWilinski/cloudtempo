@@ -39,6 +39,7 @@ export const handler = async (
 
   const results = miniSearch.search(query, {
     boost: { title: 2 },
+    fuzzy: true,
   });
 
   console.log({ query, results });

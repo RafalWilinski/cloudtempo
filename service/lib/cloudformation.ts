@@ -4,13 +4,12 @@ import {
 } from "@aws-sdk/client-cloudformation";
 import { Document } from "./document";
 
-const cloudFormationClient = new CloudFormationClient({});
-
 export async function indexCloudformationStacks(
   region: string
 ): Promise<Document[]> {
   let documents: Document[] = [];
 
+  const cloudFormationClient = new CloudFormationClient({ region });
   const paginatorConfig = {
     client: cloudFormationClient,
     pageSize: 100,
