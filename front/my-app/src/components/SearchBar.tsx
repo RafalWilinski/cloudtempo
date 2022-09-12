@@ -1,5 +1,5 @@
 /// <reference types="chrome"/>
-import React, { createRef, useEffect, useRef, useState } from "react";
+import React, { createRef, useEffect, useState } from "react";
 import { Command } from "cmdk";
 import * as lambda from "./Lambda";
 import * as s3 from "./S3";
@@ -12,6 +12,7 @@ import {
   LifebuoyIcon,
   CheckBadgeIcon,
   Cog6ToothIcon,
+  GlobeEuropeAfricaIcon,
 } from "@heroicons/react/24/outline";
 
 const serviceIconMap: Record<string, any> = {
@@ -157,6 +158,7 @@ export function VercelCMDK() {
             {activePage === "lambda" && (
               <lambda.Menu document={selectedDocument!} />
             )}
+            {activePage === "Regions" && <RegionsMenu />}
           </Command>
         </div>
       )}
@@ -264,6 +266,10 @@ function ResourcesMenu({
         </Command.List>
       </Command.Group>
       <Command.Group heading="Actions">
+        <Command.Item onSelect={() => setPages([...pages, "Regions"])}>
+          <GlobeEuropeAfricaIcon width={20} height={20} />
+          Switch Region
+        </Command.Item>
         <Command.Item>
           <Cog6ToothIcon width={20} height={20} />
           Configuration
@@ -282,5 +288,50 @@ function ResourcesMenu({
         </Command.Item>
       </Command.Group>
     </>
+  );
+}
+
+function RegionsMenu() {
+  const regions = [
+    { name: "US East (N. Virginia)", code: "us-east-1" },
+    { name: "US East (Ohio)", code: "us-east-2" },
+    { name: "US West (N. California)", code: "us-west-1" },
+    { name: "US West (Oregon)", code: "us-west-2" },
+    { name: "Africa (Cape Town)", code: "af-south-1" },
+    { name: "Asia Pacific (Hong Kong)", code: "ap-east-1" },
+    { name: "Asia Pacific (Osaka-Local)", code: "ap-northeast-3" },
+    { name: "Asia Pacific (Seoul)", code: "ap-northeast-2" },
+    { name: "Asia Pacific (Tokyo)", code: "ap-northeast-1" },
+    { name: "Asia Pacific (Mumbai)", code: "ap-south-1" },
+    { name: "Asia Pacific (Singapore)", code: "ap-southeast-1" },
+    { name: "Asia Pacific (Sydney)", code: "ap-southeast-2" },
+    { name: "Canada (Central)", code: "ca-central-1" },
+    { name: "Europe (Frankfurt)", code: "eu-central-1" },
+    { name: "Europe (Ireland)", code: "eu-west-1" },
+    { name: "Europe (London)", code: "eu-west-2" },
+    { name: "Europe (Milan)", code: "eu-south-1" },
+    { name: "Europe (Paris)", code: "eu-west-3" },
+    { name: "Europe (Stockholm)", code: "eu-north-1" },
+    { name: "Middle East (Bahrain)", code: "me-south-1" },
+    { name: "South America (São Paulo)", code: "sa-east-1" },
+  ];
+
+  return (
+    <Command.Group heading="Regions">
+      <Command.List>
+        {regions.map((region) => {
+          return (
+            <Command.Item
+              value={`${region.code} ${region.name}`}
+              onSelect={() => {
+                location.href = `https://${region}.console.aws.amazon.com/console/home?region=${region}`;
+              }}
+            >
+              {region.name} - ${region.code}
+            </Command.Item>
+          );
+        })}
+      </Command.List>
+    </Command.Group>
   );
 }

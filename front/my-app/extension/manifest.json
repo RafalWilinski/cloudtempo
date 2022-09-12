@@ -11,7 +11,7 @@
     {
       "js": ["content.js"],
       "matches": [
-        "https://us-east-1.console.aws.amazon.com/*",
+        "https://*.console.aws.amazon.com/*",
         "https://s3.console.aws.amazon.com/*"
       ]
     }
@@ -20,7 +20,7 @@
     {
       "resources": ["dist/*"],
       "matches": [
-        "https://us-east-1.console.aws.amazon.com/*",
+        "https://*.console.aws.amazon.com/*",
         "https://s3.console.aws.amazon.com/*"
       ]
     }
@@ -28,7 +28,7 @@
   "externally_connectable": {
     "ids": ["dfdbbkddkbcggkpdkgnogjhpijiahcep"],
     "matches": [
-      "https://us-east-1.console.aws.amazon.com/*",
+      "https://*.console.aws.amazon.com/*",
       "https://s3.console.aws.amazon.com/*"
     ]
   },

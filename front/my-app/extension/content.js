@@ -2,7 +2,7 @@ var htmlBody = `<div id="aws-search-app"></div><div aws-search-extensionid="${ch
 
 document.body.insertAdjacentHTML("beforeend", htmlBody);
 
-const scriptPath = "dist/index.3fda1587.js";
+const scriptPath = "dist/index.a513ede2.js";
 const scriptElement = document.createElement("script");
 scriptElement.src = chrome.runtime.getURL(scriptPath);
 (document.head || document.documentElement).appendChild(scriptElement);
