@@ -5,6 +5,7 @@ import { indexFunctions } from "../lib/lambda";
 import { indexCloudformationStacks } from "../lib/cloudformation";
 import { indexCloudwatchLogGroups } from "../lib/cloudwatchLogs";
 import { Document } from "../lib/document";
+import { Credentials } from "@aws-sdk/types";
 
 const regions = ["us-east-1", "us-west-2", "eu-central-1"];
 
@@ -34,7 +35,7 @@ export const handler = async (
   };
 };
 
-async function processRegion(region: string) {
+export async function processRegion(region: string, credentials?: Credentials) {
   const [
     bucketDocuments,
     tablesDocuments,
@@ -42,11 +43,11 @@ async function processRegion(region: string) {
     cloudformationStacks,
     cloudwatchLogs,
   ] = await Promise.all([
-    indexBuckets(region),
-    indexDynamoDBTables(region),
-    indexFunctions(region),
-    indexCloudformationStacks(region),
-    indexCloudwatchLogGroups(region),
+    indexBuckets(region, credentials),
+    indexDynamoDBTables(region, credentials),
+    indexFunctions(region, credentials),
+    indexCloudformationStacks(region, credentials),
+    indexCloudwatchLogGroups(region, credentials),
   ]);
 
   const documents = [
@@ -57,7 +58,7 @@ async function processRegion(region: string) {
     ...cloudwatchLogs,
   ];
 
-  await putObject(`${region}.json`, documents);
+  // await putObject(`${region}.json`, documents, credentials);
 
   return {
     documents,

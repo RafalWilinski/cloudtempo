@@ -168,7 +168,7 @@
   min-width: 640px;
   width: 100%;
   padding: 8px 12px;
-  background: #fff;
+  background: var(--app-bg);
   border-radius: 12px;
   overflow: hidden;
   font-family: var(--font-sans);
@@ -247,7 +247,7 @@
   height: 18px;
 } */
 .vercel [cmdk-list] {
-  max-height: 400px;
+  max-height: 300px;
   overflow: auto;
   overscroll-behavior: contain;
   transition: 100ms ease;
@@ -299,4 +299,37 @@
   height: 48px;
   white-space: pre-wrap;
   color: var(--gray11);
+}
+
+.spinning {
+  -webkit-animation: spin 2s linear infinite;
+  -moz-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.password-input {
+  display: block;
+  margin: 4px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  background: var(--app-bg);
+  border: 1px solid var(--gray10);
+  margin-bottom: 6px;
+  width: 95%;
 }

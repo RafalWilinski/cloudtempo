@@ -1,5 +1,8 @@
 /// <reference types="chrome"/>
 import React, { createRef, useEffect, useState } from "react";
+import { useDebouncedCallback } from "use-debounce";
+import { Toaster } from "react-hot-toast";
+import { get, set } from "js-cookie";
 import { Command } from "cmdk";
 import * as lambda from "./Lambda";
 import * as s3 from "./S3";
@@ -7,13 +10,12 @@ import * as dynamodb from "./DynamoDB";
 import * as cloudformation from "./Cloudformation";
 import * as cloudwatchlogs from "./CloudwatchLogs";
 import { Document } from "../document";
-import {
-  ArrowPathIcon,
-  LifebuoyIcon,
-  CheckBadgeIcon,
-  Cog6ToothIcon,
-  GlobeEuropeAfricaIcon,
-} from "@heroicons/react/24/outline";
+import { RegionsMenu } from "./RegionsMenu";
+import { ActionsMenu } from "./ActionsMenu";
+import { ConfigurationMenu } from "./ConfigurationMenu";
+import { extensionId } from "../lib/extension";
+import { ServicesMenu } from "./ServicesMenu";
+import { getCurrentAccountId } from "../lib/getCurrentAccountId";
 
 const serviceIconMap: Record<string, any> = {
   lambda: lambda.icon,
@@ -34,6 +36,9 @@ const serviceResourceNameMap: Record<string, string> = {
 export function VercelCMDK() {
   const ref = React.useRef<HTMLDivElement | null>(null);
   const [isVisible, setVisibility] = useState(false);
+  const [isDarkMode, setDarkMode] = useState(
+    get("cloudtempo-dark-mode") === "true"
+  );
   const [inputValue, setInputValue] = React.useState("");
   const inputRef = createRef();
 
@@ -76,25 +81,27 @@ export function VercelCMDK() {
     };
   }, [_onKeyDown]);
 
-  useEffect(() => {
-    // setItems([]);
-  }, [isVisible]);
-
   const [loading, setLoading] = React.useState(false);
   const [items, setItems] = React.useState([]);
 
-  React.useEffect(() => {
-    async function getItems() {
+  const debouncedGetItems = useDebouncedCallback(
+    async () => {
+      if (inputValue === "" || !inputValue) {
+        setLoading(false);
+        setItems([]);
+        return;
+      }
+
       setLoading(true);
 
       if (window.location.href.indexOf("localhost") < 0) {
         chrome.runtime.sendMessage(
-          "dfdbbkddkbcggkpdkgnogjhpijiahcep",
+          extensionId,
           { q: inputValue },
           function (response) {
             console.log(response);
 
-            setItems(response.results);
+            setItems(response);
             setLoading(false);
           }
         );
@@ -106,17 +113,21 @@ export function VercelCMDK() {
         setItems(json.results);
         setLoading(false);
       }
-    }
+    },
 
-    if (inputValue && inputValue.length > 1 && activePage === "Home") {
-      getItems();
+    100
+  );
+
+  React.useEffect(() => {
+    if (activePage === "Home") {
+      debouncedGetItems();
     }
   }, [inputValue]);
 
   return (
     <div className={`bg ${isVisible ? "cmdk-not-visible" : "cmdk-visible"}`}>
       {isVisible && (
-        <div className="vercel">
+        <div className={`vercel ${isDarkMode ? "dark" : ""}`}>
           <Command
             ref={ref}
             onKeyDown={(e: React.KeyboardEvent) => {
@@ -132,19 +143,31 @@ export function VercelCMDK() {
             <div>
               {pages.map((p) => (
                 <div key={p} cmdk-vercel-badge="">
-                  {p}
+                  {p === "Home" ? (
+                    <div
+                      style={{ cursor: "pointer" }}
+                      onClick={() => setPages(["Home"])}
+                    >
+                      {p} ({getCurrentAccountId() ?? "AWS Account ID not found"}
+                      )
+                    </div>
+                  ) : (
+                    p
+                  )}
                 </div>
               ))}
             </div>
-            <Command.Input
-              ref={inputRef as any}
-              value={inputValue}
-              autoFocus={true}
-              placeholder="Start typing to search..."
-              onValueChange={(value) => {
-                setInputValue(value);
-              }}
-            />
+            {activePage !== "Configuration" && (
+              <Command.Input
+                ref={inputRef as any}
+                value={inputValue}
+                autoFocus={true}
+                placeholder="Start typing to search..."
+                onValueChange={(value) => {
+                  setInputValue(value);
+                }}
+              />
+            )}
             {isHome && (
               <ResourcesMenu
                 items={items}
@@ -155,13 +178,26 @@ export function VercelCMDK() {
                 pages={pages}
               />
             )}
+            {isHome && <ServicesMenu />}
             {activePage === "lambda" && (
               <lambda.Menu document={selectedDocument!} />
             )}
             {activePage === "Regions" && <RegionsMenu />}
+            {activePage === "Configuration" && (
+              <ConfigurationMenu
+                goToHome={() => setPages(["Home"])}
+                setDarkMode={() =>
+                  setDarkMode((d) => {
+                    set("cloudtempo-dark-mode", (!d).toString());
+                    return !d;
+                  })
+                }
+              />
+            )}
           </Command>
         </div>
       )}
+      <Toaster />
     </div>
   );
 }
@@ -212,22 +248,28 @@ function ResourcesMenu({
 
   return (
     <>
-      <Command.Group heading="Resources">
+      <Command.Group
+        heading={`Resources${
+          items && items.length > 0 ? ` (${items.length} found)` : ""
+        }`}
+      >
         <Command.List>
-          {!loading && items.length === 0 && (
+          {!loading && (items ?? []).length === 0 && (
             <Command.Empty>No results found.</Command.Empty>
           )}
           {loading && (
             <div className="aws-search-loading">Fetching resources...</div>
           )}
-          {items.map((item) => {
+          {(items ?? []).map((item) => {
             return (
               <Command.Item
                 style={{
                   justifyContent: "space-between",
                 }}
-                key={(item as any).name}
-                value={(item as any).name!}
+                key={(item as any).arn}
+                value={`${(item as any).name!} ${(item as any).region} ${
+                  (item as any).awsService
+                }}`}
                 onSelect={() => {
                   onSelect(item);
                 }}
@@ -265,73 +307,7 @@ function ResourcesMenu({
           })}
         </Command.List>
       </Command.Group>
-      <Command.Group heading="Actions">
-        <Command.Item onSelect={() => setPages([...pages, "Regions"])}>
-          <GlobeEuropeAfricaIcon width={20} height={20} />
-          Switch Region
-        </Command.Item>
-        <Command.Item>
-          <Cog6ToothIcon width={20} height={20} />
-          Configuration
-        </Command.Item>
-        <Command.Item>
-          <ArrowPathIcon width={20} height={20} />
-          Reindex search
-        </Command.Item>
-        <Command.Item>
-          <CheckBadgeIcon width={20} height={20} />
-          Activate (6 days of trial left)
-        </Command.Item>
-        <Command.Item>
-          <LifebuoyIcon width={20} height={20} />
-          Help
-        </Command.Item>
-      </Command.Group>
+      <ActionsMenu setPages={setPages} pages={pages} />
     </>
-  );
-}
-
-function RegionsMenu() {
-  const regions = [
-    { name: "US East (N. Virginia)", code: "us-east-1" },
-    { name: "US East (Ohio)", code: "us-east-2" },
-    { name: "US West (N. California)", code: "us-west-1" },
-    { name: "US West (Oregon)", code: "us-west-2" },
-    { name: "Africa (Cape Town)", code: "af-south-1" },
-    { name: "Asia Pacific (Hong Kong)", code: "ap-east-1" },
-    { name: "Asia Pacific (Osaka-Local)", code: "ap-northeast-3" },
-    { name: "Asia Pacific (Seoul)", code: "ap-northeast-2" },
-    { name: "Asia Pacific (Tokyo)", code: "ap-northeast-1" },
-    { name: "Asia Pacific (Mumbai)", code: "ap-south-1" },
-    { name: "Asia Pacific (Singapore)", code: "ap-southeast-1" },
-    { name: "Asia Pacific (Sydney)", code: "ap-southeast-2" },
-    { name: "Canada (Central)", code: "ca-central-1" },
-    { name: "Europe (Frankfurt)", code: "eu-central-1" },
-    { name: "Europe (Ireland)", code: "eu-west-1" },
-    { name: "Europe (London)", code: "eu-west-2" },
-    { name: "Europe (Milan)", code: "eu-south-1" },
-    { name: "Europe (Paris)", code: "eu-west-3" },
-    { name: "Europe (Stockholm)", code: "eu-north-1" },
-    { name: "Middle East (Bahrain)", code: "me-south-1" },
-    { name: "South America (São Paulo)", code: "sa-east-1" },
-  ];
-
-  return (
-    <Command.Group heading="Regions">
-      <Command.List>
-        {regions.map((region) => {
-          return (
-            <Command.Item
-              value={`${region.code} ${region.name}`}
-              onSelect={() => {
-                location.href = `https://${region}.console.aws.amazon.com/console/home?region=${region}`;
-              }}
-            >
-              {region.name} - ${region.code}
-            </Command.Item>
-          );
-        })}
-      </Command.List>
-    </Command.Group>
   );
 }

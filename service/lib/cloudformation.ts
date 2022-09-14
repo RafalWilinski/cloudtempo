@@ -2,14 +2,19 @@ import {
   CloudFormationClient,
   paginateListStacks,
 } from "@aws-sdk/client-cloudformation";
+import { Credentials } from "@aws-sdk/types";
 import { Document } from "./document";
 
 export async function indexCloudformationStacks(
-  region: string
+  region: string,
+  credentials?: Credentials
 ): Promise<Document[]> {
   let documents: Document[] = [];
 
-  const cloudFormationClient = new CloudFormationClient({ region });
+  const cloudFormationClient = new CloudFormationClient({
+    region,
+    credentials,
+  });
   const paginatorConfig = {
     client: cloudFormationClient,
     pageSize: 100,

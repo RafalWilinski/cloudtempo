@@ -2,14 +2,16 @@ import {
   CloudWatchLogsClient,
   paginateDescribeLogGroups,
 } from "@aws-sdk/client-cloudwatch-logs";
+import { Credentials } from "@aws-sdk/types";
 import { Document } from "./document";
 
 export async function indexCloudwatchLogGroups(
-  region: string
+  region: string,
+  credentials?: Credentials
 ): Promise<Document[]> {
   let documents: Document[] = [];
 
-  const client = new CloudWatchLogsClient({ region });
+  const client = new CloudWatchLogsClient({ region, credentials });
   const paginatorConfig = {
     client: client,
     pageSize: 50,
