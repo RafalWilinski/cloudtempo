@@ -1,3 +1,4 @@
+// <reference types="chrome"/>
 import React, { createRef, useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { Toaster } from "react-hot-toast";
