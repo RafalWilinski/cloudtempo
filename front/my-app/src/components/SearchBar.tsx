@@ -16,6 +16,7 @@ import { ConfigurationMenu } from "./ConfigurationMenu";
 import { extensionId } from "../lib/extension";
 import { ServicesMenu } from "./ServicesMenu";
 import { getCurrentAccountId } from "../lib/getCurrentAccountId";
+import { demoResources } from "./demoResources";
 
 const serviceIconMap: Record<string, any> = {
   lambda: lambda.icon,
@@ -80,7 +81,7 @@ export function VercelCMDK({ isDemo }: { isDemo?: boolean }) {
   }, [_onKeyDown]);
 
   const [loading, setLoading] = React.useState(false);
-  const [items, setItems] = React.useState([]);
+  const [items, setItems] = React.useState<Document[]>([] as Document[]);
 
   const debouncedGetItems = useDebouncedCallback(
     async () => {
@@ -104,11 +105,11 @@ export function VercelCMDK({ isDemo }: { isDemo?: boolean }) {
           }
         );
       } else {
-        const res = await fetch(
-          `https://qrda6vijsce767dglefttcrrcy0uldfr.lambda-url.us-east-1.on.aws/?q=${inputValue}`
-        );
-        const json = await res.json();
-        setItems(json.results);
+        // const res = await fetch(
+        //   `https://qrda6vijsce767dglefttcrrcy0uldfr.lambda-url.us-east-1.on.aws/?q=${inputValue}`
+        // );
+        // const json = await res.json();
+        setItems(demoResources);
         setLoading(false);
       }
     },
@@ -163,7 +164,9 @@ export function VercelCMDK({ isDemo }: { isDemo?: boolean }) {
                 value={inputValue}
                 autoFocus={true}
                 placeholder={
-                  isDemo ? `Type "Dynobase"...` : "Start typing to search..."
+                  isDemo
+                    ? `Type "DynamoDB", "s3", "graphql" or something else...`
+                    : "Start typing to search..."
                 }
                 onValueChange={(value) => {
                   setInputValue(value);
@@ -181,7 +184,7 @@ export function VercelCMDK({ isDemo }: { isDemo?: boolean }) {
                 pages={pages}
               />
             )}
-            {isHome && <ServicesMenu />}
+            {isHome && <ServicesMenu isDemo={isDemo} />}
             {activePage === "lambda" && (
               <lambda.Menu document={selectedDocument!} />
             )}

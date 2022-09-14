@@ -4,6 +4,8 @@ import {
   LifebuoyIcon,
   CheckBadgeIcon,
   Cog6ToothIcon,
+  UserIcon,
+  ChatBubbleBottomCenterTextIcon,
   GlobeEuropeAfricaIcon,
 } from "@heroicons/react/24/outline";
 import { useState } from "react";
@@ -30,47 +32,73 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
         <GlobeEuropeAfricaIcon width={20} height={20} />
         Switch Region
       </Command.Item>
-      {!isDemo && (
-        <Command.Item onSelect={() => setPages([...pages, "Configuration"])}>
-          <Cog6ToothIcon width={20} height={20} />
-          Configuration
-        </Command.Item>
-      )}
-      {!isDemo && (
-        <Command.Item
-          disabled={isReindexing || !credentials || isDemo}
-          onSelect={() => {
-            if (!credentials) {
-              console.log("Please set your credentials first");
-            }
 
-            if (!(isReindexing || isDemo)) {
-              chrome.runtime.sendMessage(
-                extensionId,
-                {
-                  type: "reindex",
-                  ...credentials,
-                },
-                function (_response) {
-                  setIsReindexing(false);
-                  toast("Reindexing done");
-                }
-              );
+      <Command.Item
+        onSelect={() => {
+          if (isDemo) {
+            toast.error("Not available in demo.");
+            return;
+          }
+          setPages([...pages, "Configuration"]);
+        }}
+      >
+        <Cog6ToothIcon width={20} height={20} />
+        Configuration
+      </Command.Item>
+      <Command.Item
+        onSelect={() => {
+          if (isDemo) {
+            toast.error("Not available in demo.");
+            return;
+          }
+        }}
+      >
+        <UserIcon width={20} height={20} />
+        Create new IAM User...
+      </Command.Item>
+      <Command.Item
+        onSelect={() => {
+          location.href =
+            "https://support.console.aws.amazon.com/support/home?region=us-east-1#/case/create";
+        }}
+      >
+        <ChatBubbleBottomCenterTextIcon width={20} height={20} />
+        Create Support Ticket
+      </Command.Item>
 
-              setIsReindexing(true);
-            }
-          }}
-        >
-          <ArrowPathIcon
-            width={20}
-            height={20}
-            className={isReindexing ? "spinning" : ""}
-          />
-          {isReindexing ? "Reindexing..." : "Reindex search"}
-          {!(credentials || isReindexing) &&
-            " (please set your credentials first)"}
-        </Command.Item>
-      )}
+      <Command.Item
+        disabled={isReindexing || !credentials || isDemo}
+        onSelect={() => {
+          if (!credentials) {
+            console.log("Please set your credentials first");
+          }
+
+          if (!(isReindexing || isDemo)) {
+            chrome.runtime.sendMessage(
+              extensionId,
+              {
+                type: "reindex",
+                ...credentials,
+              },
+              function (_response) {
+                setIsReindexing(false);
+                toast("Reindexing done");
+              }
+            );
+
+            setIsReindexing(true);
+          }
+        }}
+      >
+        <ArrowPathIcon
+          width={20}
+          height={20}
+          className={isReindexing ? "spinning" : ""}
+        />
+        {isReindexing ? "Reindexing..." : "Reindex search"}
+        {!(credentials || isReindexing) &&
+          " (please set your credentials first)"}
+      </Command.Item>
       {!isDemo && (
         <Command.Item>
           <CheckBadgeIcon width={20} height={20} />

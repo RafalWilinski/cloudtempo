@@ -1,7 +1,8 @@
 import { Command } from "cmdk";
 import { services } from "../lib/services";
+import { toast } from "react-hot-toast";
 
-export function ServicesMenu() {
+export function ServicesMenu({ isDemo }: { isDemo?: boolean }) {
   const currentRegion = "us-east-1";
   return (
     <Command.Group heading="Services" style={{ marginTop: "10px" }}>
@@ -11,6 +12,11 @@ export function ServicesMenu() {
             <Command.Item
               value={`${service.ServiceName} ${service.ServiceShortName}`}
               onSelect={() => {
+                if (isDemo) {
+                  toast.success("Come on, this ain't real console!");
+                  return;
+                }
+
                 if (service.ConsoleLink) {
                   location.href = service.ConsoleLink;
                 } else {
