@@ -1,15 +1,16 @@
 import { VercelCMDK } from "./components/SearchBar";
+interface HomeProps {
+  isDemo?: boolean;
+}
 
-const Home = () => {
+const Home = ({ isDemo }: HomeProps) => {
   return (
     <div>
       <main>
-        <VercelCMDK />
+        <VercelCMDK isDemo={isDemo} />
       </main>
     </div>
   );
 };
-
-console.log("Home!");
 
 export default Home;

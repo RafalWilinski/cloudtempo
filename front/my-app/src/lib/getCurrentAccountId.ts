@@ -1,7 +1,11 @@
 import { get } from "js-cookie";
 import { toast } from "react-hot-toast";
 
-export function getCurrentAccountId() {
+export function getCurrentAccountId(isDemo?: boolean) {
+  if (isDemo) {
+    return "demo-account-id";
+  }
+
   const userInfo = get("aws-userInfo");
 
   if (!userInfo) {

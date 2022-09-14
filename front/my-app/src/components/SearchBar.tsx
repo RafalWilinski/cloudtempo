@@ -1,4 +1,3 @@
-/// <reference types="chrome"/>
 import React, { createRef, useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { Toaster } from "react-hot-toast";
@@ -33,12 +32,10 @@ const serviceResourceNameMap: Record<string, string> = {
   logs: "CloudWatch Log Group",
 };
 
-export function VercelCMDK() {
+export function VercelCMDK({ isDemo }: { isDemo?: boolean }) {
   const ref = React.useRef<HTMLDivElement | null>(null);
   const [isVisible, setVisibility] = useState(false);
-  const [isDarkMode, setDarkMode] = useState(
-    get("cloudtempo-dark-mode") === "true"
-  );
+  const [isDarkMode, setDarkMode] = useState("true");
   const [inputValue, setInputValue] = React.useState("");
   const inputRef = createRef();
 
@@ -94,7 +91,7 @@ export function VercelCMDK() {
 
       setLoading(true);
 
-      if (window.location.href.indexOf("localhost") < 0) {
+      if (window.location.href.indexOf("localhost") < 0 && !isDemo) {
         chrome.runtime.sendMessage(
           extensionId,
           { q: inputValue },
@@ -148,7 +145,9 @@ export function VercelCMDK() {
                       style={{ cursor: "pointer" }}
                       onClick={() => setPages(["Home"])}
                     >
-                      {p} ({getCurrentAccountId() ?? "AWS Account ID not found"}
+                      {p} (
+                      {getCurrentAccountId(isDemo) ??
+                        "AWS Account ID not found"}
                       )
                     </div>
                   ) : (
@@ -170,6 +169,7 @@ export function VercelCMDK() {
             )}
             {isHome && (
               <ResourcesMenu
+                isDemo={isDemo}
                 items={items}
                 loading={loading}
                 setPages={setPages}
@@ -203,6 +203,7 @@ export function VercelCMDK() {
 }
 
 interface ResourcesMenuProps {
+  isDemo?: boolean;
   loading: boolean;
   items: any[];
   pages: string[];
@@ -212,6 +213,7 @@ interface ResourcesMenuProps {
 }
 
 function ResourcesMenu({
+  isDemo,
   items,
   loading,
   setPages,
@@ -307,7 +309,7 @@ function ResourcesMenu({
           })}
         </Command.List>
       </Command.Group>
-      <ActionsMenu setPages={setPages} pages={pages} />
+      <ActionsMenu setPages={setPages} pages={pages} isDemo={isDemo} />
     </>
   );
 }

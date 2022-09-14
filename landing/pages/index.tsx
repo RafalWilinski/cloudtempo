@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import Demo from "../../front/my-app/src/App";
 
 const Home: NextPage = () => {
   return (
@@ -32,6 +33,7 @@ const Home: NextPage = () => {
           </span>{" "}
           Command Bar for AWS Console
         </h1>
+        <Demo isDemo={true} />
       </main>
 
       <footer className={styles.footer}>
