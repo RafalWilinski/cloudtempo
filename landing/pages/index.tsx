@@ -23,7 +23,7 @@ const Home: NextPage = () => {
         }}
       >
         <span className={styles.logo} style={{ marginRight: "10px" }}>
-          <Image src="/logo.png" alt="CloudTempo Logo" width={20} height={20} />
+          <Image src="/logo.svg" alt="CloudTempo Logo" width={20} height={20} />
         </span>
         <strong style={{ marginTop: "1px" }}>CloudTempo</strong>
       </nav>
