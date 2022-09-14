@@ -1,7 +1,7 @@
 import React, { createRef, useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { Toaster } from "react-hot-toast";
-import { get, set } from "js-cookie";
+import { set } from "js-cookie";
 import { Command } from "cmdk";
 import * as lambda from "./Lambda";
 import * as s3 from "./S3";
@@ -35,7 +35,7 @@ const serviceResourceNameMap: Record<string, string> = {
 export function VercelCMDK({ isDemo }: { isDemo?: boolean }) {
   const ref = React.useRef<HTMLDivElement | null>(null);
   const [isVisible, setVisibility] = useState(false);
-  const [isDarkMode, setDarkMode] = useState("true");
+  const [isDarkMode, setDarkMode] = useState(true);
   const [inputValue, setInputValue] = React.useState("");
   const inputRef = createRef();
 
