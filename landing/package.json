@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "cmdk": "^0.1.20",
     "js-cookie": "^3.0.1",
     "next": "12.3.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-hot-toast": "^2.4.0",
+    "use-debounce": "^8.0.4"
   },
   "devDependencies": {
     "@types/node": "18.7.18",
