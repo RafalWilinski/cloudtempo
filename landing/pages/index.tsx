@@ -73,11 +73,11 @@ const Home: NextPage = () => {
 
       <footer className={styles.footer}>
         <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          href="https://twitter.com/_cloudtempo"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Copyright Rafal Wilinski 2022
+          Twitter
         </a>
       </footer>
     </div>

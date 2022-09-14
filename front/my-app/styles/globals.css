@@ -334,3 +334,16 @@
   margin-bottom: 6px;
   width: 95%;
 }
+
+#revue-embed input {
+  background: var(--app-bg);
+  border: 1px solid var(--gray10);
+  border-radius: 5px;
+  padding: 8px 12px;
+  margin: 4px;
+  width: 95%;
+}
+
+.revue-form-footer {
+  font-size: 12px;
+}

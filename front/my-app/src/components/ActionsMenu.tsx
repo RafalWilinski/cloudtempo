@@ -63,7 +63,7 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
         }}
       >
         <ChatBubbleBottomCenterTextIcon width={20} height={20} />
-        Create Support Ticket
+        Create Support Ticket...
       </Command.Item>
 
       <Command.Item
