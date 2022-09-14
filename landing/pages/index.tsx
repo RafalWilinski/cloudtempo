@@ -16,7 +16,17 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <nav></nav>
+      <nav
+        style={{
+          padding: "20px",
+          display: "flex",
+        }}
+      >
+        <span className={styles.logo} style={{ marginRight: "10px" }}>
+          <Image src="/logo.png" alt="CloudTempo Logo" width={20} height={20} />
+        </span>
+        <strong style={{ marginTop: "1px" }}>CloudTempo</strong>
+      </nav>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
@@ -67,10 +77,7 @@ const Home: NextPage = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{" "}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
+          Copyright Rafal Wilinski 2022
         </a>
       </footer>
     </div>
