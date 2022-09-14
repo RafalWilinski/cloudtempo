@@ -139,16 +139,17 @@
 
 .cmdk-visible {
   opacity: 0 !important;
-  display: none !important;
+  /* display: none !important; */
   height: 0px !important;
 }
 .cmdk-not-visible {
   z-index: 10000 !important;
   opacity: 1 !important;
-  display: block;
+  /* display: block; */
 }
 .bg {
-  transition: all 0.1s ease-in-out;
+  transition: opacity 0.1s ease-in-out;
+  backdrop-filter: blur(2px);
   position: absolute;
   background: rgba(22, 22, 22, 0.7);
   display: flex;

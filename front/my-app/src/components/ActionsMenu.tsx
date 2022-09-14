@@ -36,39 +36,41 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
           Configuration
         </Command.Item>
       )}
-      <Command.Item
-        disabled={isReindexing || !credentials || isDemo}
-        onSelect={() => {
-          if (!credentials) {
-            console.log("Please set your credentials first");
-          }
+      {!isDemo && (
+        <Command.Item
+          disabled={isReindexing || !credentials || isDemo}
+          onSelect={() => {
+            if (!credentials) {
+              console.log("Please set your credentials first");
+            }
 
-          if (!(isReindexing || isDemo)) {
-            chrome.runtime.sendMessage(
-              extensionId,
-              {
-                type: "reindex",
-                ...credentials,
-              },
-              function (_response) {
-                setIsReindexing(false);
-                toast("Reindexing done");
-              }
-            );
+            if (!(isReindexing || isDemo)) {
+              chrome.runtime.sendMessage(
+                extensionId,
+                {
+                  type: "reindex",
+                  ...credentials,
+                },
+                function (_response) {
+                  setIsReindexing(false);
+                  toast("Reindexing done");
+                }
+              );
 
-            setIsReindexing(true);
-          }
-        }}
-      >
-        <ArrowPathIcon
-          width={20}
-          height={20}
-          className={isReindexing ? "spinning" : ""}
-        />
-        {isReindexing ? "Reindexing..." : "Reindex search"}
-        {!(credentials || isReindexing) &&
-          " (please set your credentials first)"}
-      </Command.Item>
+              setIsReindexing(true);
+            }
+          }}
+        >
+          <ArrowPathIcon
+            width={20}
+            height={20}
+            className={isReindexing ? "spinning" : ""}
+          />
+          {isReindexing ? "Reindexing..." : "Reindex search"}
+          {!(credentials || isReindexing) &&
+            " (please set your credentials first)"}
+        </Command.Item>
+      )}
       {!isDemo && (
         <Command.Item>
           <CheckBadgeIcon width={20} height={20} />

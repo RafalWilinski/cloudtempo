@@ -161,7 +161,9 @@ export function VercelCMDK({ isDemo }: { isDemo?: boolean }) {
                 ref={inputRef as any}
                 value={inputValue}
                 autoFocus={true}
-                placeholder="Start typing to search..."
+                placeholder={
+                  isDemo ? `Type "Dynobase"...` : "Start typing to search..."
+                }
                 onValueChange={(value) => {
                   setInputValue(value);
                 }}

@@ -16,6 +16,8 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <nav></nav>
+
       <main className={styles.main}>
         <h1 className={styles.title}>
           Fast &{" "}
@@ -33,6 +35,29 @@ const Home: NextPage = () => {
           </span>{" "}
           Command Bar for AWS Console
         </h1>
+        <h3
+          style={{
+            color: "#eee",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          Press
+          <div
+            style={{
+              fontSize: "1rem",
+              backgroundColor: "#333",
+              padding: "10px",
+              margin: "0 10px",
+              borderRadius: "10px",
+              color: "#ccc",
+            }}
+          >
+            ⌘ + K
+          </div>
+          and see for yourself.
+        </h3>
         <Demo isDemo={true} />
       </main>
 
