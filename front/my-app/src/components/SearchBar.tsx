@@ -17,6 +17,7 @@ import { extensionId } from "../lib/extension";
 import { ServicesMenu } from "./ServicesMenu";
 import { getCurrentAccountId } from "../lib/getCurrentAccountId";
 import { demoResources } from "./demoResources";
+import { ActivateMenu } from "./ActivateMenu";
 
 const serviceIconMap: Record<string, any> = {
   lambda: lambda.icon,
@@ -192,6 +193,7 @@ export function VercelCMDK({ isDemo }: { isDemo?: boolean }) {
               <cloudformation.Menu document={selectedDocument!} />
             )}
             {activePage === "Regions" && <RegionsMenu />}
+            {activePage === "License" && <ActivateMenu />}
             {activePage === "Configuration" && (
               <ConfigurationMenu
                 goToHome={() => setPages(["Home"])}

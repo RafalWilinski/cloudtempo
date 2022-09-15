@@ -1,5 +1,10 @@
 import { Command } from "cmdk";
 import { useState } from "react";
+import {
+  MoonIcon,
+  ServerStackIcon,
+  ArrowUturnLeftIcon,
+} from "@heroicons/react/24/outline";
 
 import { toast } from "react-hot-toast";
 
@@ -11,36 +16,18 @@ interface Props {
 export function ConfigurationMenu({ goToHome, setDarkMode }: Props) {
   return (
     <Command.Group heading="Indexer Role">
-      {/* <input
-        value={credentials.accessKeyId}
-        type="password"
-        placeholder="Access Key Id"
-        className="password-input"
-        onChange={(e) => setValue("accessKeyId", e.target.value)}
-      />
-      <input
-        value={credentials.secretAccessKey}
-        type="password"
-        placeholder="Secret Access Key"
-        className="password-input"
-        onChange={(e) => setValue("secretAccessKey", e.target.value)}
-      />
-      <p style={{ fontSize: "12px", color: "#6f6f6f", marginLeft: "6px" }}>
-        Find or create AWS Credentials in the{" "}
-        <a href="https://us-east-1.console.aws.amazon.com/iamv2/home?region=us-east-1#/users">
-          IAM Console
-        </a>
-        . Please use a role with minimally scoped permissions, preferably
-        read-only{" "}
-        <a href="https://us-east-1.console.aws.amazon.com/iamv2/home?region=us-east-1#/users">
-          Learn more
-        </a>
-        .
-      </p> */}
+      <Command.Item onSelect={() => {}}>
+        <ServerStackIcon width={20} height={20} />
+        Selected Services
+      </Command.Item>
       <Command.Item onSelect={() => setDarkMode()}>
+        <MoonIcon width={20} height={20} />
         Toggle dark mode
       </Command.Item>
-      <Command.Item onSelect={() => goToHome()}>Save & Go Back</Command.Item>
+      <Command.Item onSelect={() => goToHome()}>
+        <ArrowUturnLeftIcon width={20} height={20} />
+        Save & Go Back
+      </Command.Item>
     </Command.Group>
   );
 }

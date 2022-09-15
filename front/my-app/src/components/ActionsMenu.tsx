@@ -108,7 +108,7 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
           " (please set your credentials first)"}
       </Command.Item>
       {!isDemo && (
-        <Command.Item>
+        <Command.Item onSelect={() => setPages(["Home", "License"])}>
           <CheckBadgeIcon width={20} height={20} />
           Activate (6 days of trial left)
         </Command.Item>
