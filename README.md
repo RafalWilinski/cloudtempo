@@ -1,6 +1,5 @@
 Todos:
 
-- [ ] Cloudformation indexing
 - [ ] Cloudformation menu
 - [ ] License checking
 - [ ] Indexing tags
@@ -9,6 +8,23 @@ Todos:
 - [ ] Sentry? (With a prompt to enable it, add setting to config)
 - [ ] Recently opened section
 - [ ] Aliases
+- [ ] Menu for selecting services with coming soon section inside configuration
 - [ ] Get rid of vercel references
 
+Marketing:
+
 - [ ] Lifetime believer plan
+
+Services for initial launch:
+
+- [x] Lambda
+- [x] DynamoDB
+- [x] S3
+- [ ] CloudFormation
+- [ ] Cloudwatch Logs
+- [ ] IAM (Roles, Users, Policies)
+- [ ] EC2 (Instances)
+- [ ] VPC (VPCs, Subnets, SGs)
+- [ ] ECS (Clusters, Services)
+- [ ] RDS (Just databases first)
+- [ ] Route53
