@@ -1,0 +1,2 @@
+https://github.com/iann0036/vscode-aws-cloudshell/blob/main/src/extension.ts
+https://blog.christophetd.fr/retrieving-aws-security-credentials-from-the-aws-console/
