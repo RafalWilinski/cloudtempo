@@ -2,6 +2,9 @@
 import MiniSearch from "minisearch";
 import { get, set } from "idb-keyval";
 import { Document } from "../src/document";
+import { getAllDynamoDBTables } from "./services/dynamodb";
+import { getAllLambdaFunctions } from "./services/lambda";
+import { getAllS3Buckets } from "./services/s3";
 
 let minisearch: MiniSearch | undefined;
 
@@ -106,95 +109,4 @@ async function processRegion(
   await set(`documents-${region}`, JSON.stringify(documents));
 
   return documents;
-}
-
-async function getAllS3Buckets(
-  credentials: any,
-  region: string
-): Promise<Document[]> {
-  if (region !== "us-east-1") {
-    return [];
-  }
-
-  const s3 = new AWS.S3({
-    credentials,
-    region,
-  });
-
-  const response = await s3.listBuckets().promise();
-
-  return (response.Buckets ?? []).map((bucket: any) => ({
-    name: bucket.Name,
-    awsService: "s3",
-    arn: `arn:aws:s3:::${bucket.Name}`,
-    region,
-  }));
-}
-
-async function getAllLambdaFunctions(
-  credentials: any,
-  region: string
-): Promise<Document[]> {
-  const lambda = new AWS.Lambda({
-    credentials,
-    region,
-  });
-  let token;
-  let firstRun = true;
-  let functions: Document[] = [];
-
-  do {
-    const response: any = await lambda
-      .listFunctions({
-        Marker: token,
-      })
-      .promise();
-
-    functions = [
-      ...functions,
-      ...(response.Functions ?? []).map((fn: any) => ({
-        name: fn.FunctionName,
-        arn: fn.FunctionArn,
-        description: fn.Description,
-        awsService: "lambda",
-        region,
-      })),
-    ];
-    token = response.NextMarker;
-    firstRun = false;
-  } while (token || firstRun);
-
-  return functions;
-}
-
-async function getAllDynamoDBTables(credentials: any, region: string) {
-  const dynamo = new AWS.DynamoDB({
-    credentials,
-    region,
-  });
-  let token;
-  let firstRun = true;
-  let tables: Document[] = [];
-
-  do {
-    const response: any = await dynamo
-      .listTables({
-        ExclusiveStartTableName: token,
-      })
-      .promise();
-
-    tables = [
-      ...tables,
-      ...(response.TableNames ?? []).map((name: string) => ({
-        name,
-        arn: `arn:aws:dynamodb:${region}:${credentials.accountId}:table/${name}`,
-        awsService: "dynamodb",
-        region,
-      })),
-    ];
-    token = response.NextMarker;
-    firstRun = false;
-  } while (token || firstRun);
-
-  return tables;
 }

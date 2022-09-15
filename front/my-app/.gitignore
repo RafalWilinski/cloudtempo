@@ -3,5 +3,5 @@ node_modules
 dist
 extension/dist
 extension/background.js
-extension/content.template.js
+extension/content.js
 extension/aws-sdk.js
