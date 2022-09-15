@@ -6,16 +6,16 @@ import {
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
-interface ActivateMenuProps {
+interface HelpMenuProps {
   isDemo?: boolean;
   isActivated?: boolean;
 }
 
-export function ActivateMenu({ isDemo, isActivated }: ActivateMenuProps) {
+export function HelpMenu({ isDemo, isActivated }: HelpMenuProps) {
   return (
     <Command.Group heading="Actions">
       <Command.Item
-        onSelect={() => (location.href = "https://cloudtempo.dev/buy?ref=app")}
+        onSelect={() => (location.href = "https://cloudtempo.dev/faq")}
       >
         <InformationCircleIcon width={20} height={20} />
         FAQ

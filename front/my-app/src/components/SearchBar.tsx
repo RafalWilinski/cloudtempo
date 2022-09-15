@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 // <reference types="chrome"/>
 import React, { createRef, useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
@@ -18,6 +19,7 @@ import { ServicesMenu } from "./ServicesMenu";
 import { getCurrentAccountId } from "../lib/getCurrentAccountId";
 import { demoResources } from "./demoResources";
 import { ActivateMenu } from "./ActivateMenu";
+import { HelpMenu } from "./HelpMenu";
 
 const serviceIconMap: Record<string, any> = {
   lambda: lambda.icon,
@@ -194,6 +196,7 @@ export function VercelCMDK({ isDemo }: { isDemo?: boolean }) {
             )}
             {activePage === "Regions" && <RegionsMenu />}
             {activePage === "License" && <ActivateMenu />}
+            {activePage === "Home" && <HelpMenu />}
             {activePage === "Configuration" && (
               <ConfigurationMenu
                 goToHome={() => setPages(["Home"])}
@@ -295,6 +298,7 @@ function ResourcesMenu({
                   }}
                 >
                   <img
+                    alt="service icon"
                     src={serviceIconMap[(item as any).awsService]}
                     style={{
                       width: "24px",

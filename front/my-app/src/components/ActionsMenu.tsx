@@ -114,7 +114,7 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
         </Command.Item>
       )}
       {!isDemo && (
-        <Command.Item>
+        <Command.Item onSelect={() => setPages(["Home", "Help"])}>
           <LifebuoyIcon width={20} height={20} />
           Help
         </Command.Item>
