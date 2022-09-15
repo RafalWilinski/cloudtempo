@@ -8,8 +8,11 @@ import {
   ChatBubbleBottomCenterTextIcon,
   GlobeEuropeAfricaIcon,
 } from "@heroicons/react/24/outline";
-import { useState } from "react";
-import { getCurrentAccountCredentials } from "../lib/getCredentials";
+import { useEffect, useState } from "react";
+import {
+  Credentials,
+  getTemporarySessionCredentials,
+} from "../lib/getCredentials";
 import { extensionId } from "../lib/extension";
 import { toast } from "react-hot-toast";
 
@@ -21,10 +24,14 @@ interface ActionsMenuProps {
 
 export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
   const [isReindexing, setIsReindexing] = useState(false);
+  const [credentials, setCredentials] = useState<Credentials>();
 
-  const credentials = isDemo
-    ? { accessKeyId: "aaa", secretAccessKey: "bbb" }
-    : getCurrentAccountCredentials();
+  useEffect(() => {
+    if (isDemo) {
+      return;
+    }
+    getTemporarySessionCredentials().then(setCredentials);
+  }, []);
 
   return (
     <Command.Group heading="Actions">
@@ -71,6 +78,7 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
         onSelect={() => {
           if (!credentials) {
             console.log("Please set your credentials first");
+            toast.error("Credentials not found!");
           }
 
           if (!(isReindexing || isDemo)) {
@@ -78,7 +86,7 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
               extensionId,
               {
                 type: "reindex",
-                ...credentials,
+                credentials,
               },
               function (_response) {
                 setIsReindexing(false);

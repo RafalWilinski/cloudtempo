@@ -188,6 +188,9 @@ export function VercelCMDK({ isDemo }: { isDemo?: boolean }) {
             {activePage === "lambda" && (
               <lambda.Menu document={selectedDocument!} />
             )}
+            {activePage === "cloudformation" && (
+              <cloudformation.Menu document={selectedDocument!} />
+            )}
             {activePage === "Regions" && <RegionsMenu />}
             {activePage === "Configuration" && (
               <ConfigurationMenu

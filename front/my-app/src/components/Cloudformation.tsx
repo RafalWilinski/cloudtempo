@@ -1,3 +1,12 @@
+import { Command } from "cmdk";
+import {
+  CalendarDaysIcon,
+  PlayIcon,
+  CubeTransparentIcon,
+  IdentificationIcon,
+} from "@heroicons/react/24/outline";
+import { Document } from "../document";
+
 export const url = (
   name: string,
   region: string,
@@ -8,3 +17,48 @@ export const url = (
 
 export const icon =
   "https://d2q66yyjeovezo.cloudfront.net/icon/5d3629a64564e611bbeae9b3045be424-e9ebf1d2d9d9c14a684cec1c80e127eb.svg";
+
+export interface MenuProps {
+  document: Document;
+}
+
+export function Menu({ document }: MenuProps) {
+  return (
+    <>
+      <Command.Group heading={document.name}>
+        <Command.Item
+          onSelect={() => {
+            /* todo */
+          }}
+        >
+          <PlayIcon width={20} height={20} />
+          Open
+        </Command.Item>
+        <Command.Item
+          onSelect={() => {
+            /* todo */
+          }}
+        >
+          <IdentificationIcon width={20} height={20} />
+          Copy ARN
+        </Command.Item>
+        <Command.Item
+          onSelect={() => {
+            /* todo */
+          }}
+        >
+          <CalendarDaysIcon width={20} height={20} />
+          Events
+        </Command.Item>
+        <Command.Item
+          onSelect={() => {
+            /* todo */
+          }}
+        >
+          <CubeTransparentIcon width={20} height={20} />
+          Show Resources...
+        </Command.Item>
+      </Command.Group>
+    </>
+  );
+}

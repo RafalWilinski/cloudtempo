@@ -8,6 +8,7 @@ import {
   PlayIcon,
   PaperAirplaneIcon,
   Cog6ToothIcon,
+  IdentificationIcon,
 } from "@heroicons/react/24/outline";
 
 export const icon =
@@ -37,6 +38,14 @@ export function Menu({ document }: MenuProps) {
         >
           <PlayIcon width={20} height={20} />
           Open
+        </Command.Item>
+        <Command.Item
+          onSelect={() => {
+            window.location.href = url(document.name!, document.region);
+          }}
+        >
+          <IdentificationIcon width={20} height={20} />
+          Copy ARN
         </Command.Item>
         <Command.Item
           onSelect={() => {

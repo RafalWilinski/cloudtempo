@@ -40,12 +40,7 @@ chrome.runtime.onMessageExternal.addListener(async function (
   console.log("Received message", request);
 
   if (request.type === "reindex") {
-    sendResponse(
-      await reindex({
-        accessKeyId: request.accessKeyId,
-        secretAccessKey: request.secretAccessKey,
-      })
-    );
+    sendResponse(await reindex(request.credentials));
   } else if (request.q) {
     const results = (await getOrInitializeMinisearch()).search(request.q);
     sendResponse(results);
@@ -73,7 +68,7 @@ async function reindex(
   credentials,
   regions = ["us-east-1", "eu-central-1", "us-west-2"]
 ) {
-  console.log("Reindexing...");
+  console.log("Reindexing...", { credentials });
 
   const documentsFromRegions = await Promise.all(
     regions.map((region) => processRegion(credentials, region))
