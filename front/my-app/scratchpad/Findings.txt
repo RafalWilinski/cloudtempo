@@ -1,0 +1,25 @@
+Endpoint https://us-east-1.console.aws.amazon.com/dynamodbv2/home?region=us-east-1 gives access to credentials to:
+- Lambda
+- DynamoDB
+- S3
+
+Endpoint https://us-east-1.console.aws.amazon.com/ecs/v2/home?region=us-east-1 gives access to:
+- ECS
+- Lambdas
+- ECs2
+- VPCs
+- SGs
+- Roles
+- CloudFormation
+
+BOTH WORK CROSS REGION!!!
+
+
+Firing these requests requires having a valid CSRF token. CSRF token is embedded on home pages of respective services.
+It is impossible to get them reliably using fetch because of noscript. instead of firing a get,
+a full browser navigation event should be performed to these pages (which will also perform a fully fledged auth).
+This can be done (theories):
+- By using an IFrame but AWS Console detects this and blocks it. Maybe we can get rid of this header by intercepting the request?
+  - https://stackoverflow.com/questions/15532791/getting-around-x-frame-options-deny-in-a-chrome-extension/15534822#15534822
+  - https://stackoverflow.com/questions/17299322/chrome-extension-loading-a-hidden-page-without-iframe
+- Opening a new Tab and getting info from the new tab (nice and clean)

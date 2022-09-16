@@ -4,8 +4,9 @@ Todos:
 - [ ] License checking
 - [ ] Indexing tags
 - [ ] Drop us a line
+- [ ] Store documents with accountId prefix to ensure tenant isolation
+- [ ] Encode documents with accountId + something to keep it safe
 - [ ] Onboarding flow (thanks for installing, bla bla initial scan in the background)
-- [ ] Sentry? (With a prompt to enable it, add setting to config)
 - [ ] Recently opened section
 - [ ] Aliases
 - [ ] Menu for selecting services with coming soon section inside configuration
@@ -17,14 +18,24 @@ Marketing:
 
 Services for initial launch:
 
-- [x] Lambda
-- [x] DynamoDB
-- [x] S3
-- [ ] CloudFormation
-- [ ] Cloudwatch Logs
-- [ ] IAM (Roles, Users, Policies)
-- [ ] EC2 (Instances)
-- [ ] VPC (VPCs, Subnets, SGs)
-- [ ] ECS (Clusters, Services)
-- [ ] RDS (Just databases first)
-- [ ] Route53
+- [x] Lambda - covered by DynamoDB & ECS
+- [x] DynamoDB - covered by DynamoDB
+- [x] S3 - covered by DynamoDB
+- [ ] CloudFormation - covered by ECS
+- [ ] Cloudwatch Logs - covered by ECS
+- [ ] IAM (Roles, Users, Policies) - covered by ECS
+- [ ] EC2 (Instances) - covered by ECS
+- [ ] VPC (VPCs, Subnets, SGs) - covered by ECS
+- [ ] ECS (Clusters, Services) - covered by ECS
+
+Later add:
+
+- RDS
+- Route53
+
+Current challennge:
+Endpoint https://eu-central-1.console.aws.amazon.com/lambda/services/ajax?operation=listFunctions&locale=en
+is awesome but does not work for regions that haven't been previously visited.
+
+How to headlessly auth to other regions?
+Maybe discover other endpoints, similar to /tb/credentials from dynamodb?

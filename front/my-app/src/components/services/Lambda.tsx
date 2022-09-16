@@ -1,5 +1,5 @@
 import { Command } from "cmdk";
-import { Document } from "../document";
+import { Document } from "../../document";
 import {
   ArchiveBoxIcon,
   ArrowDownCircleIcon,
@@ -16,6 +16,9 @@ export const icon =
 
 export const url = (name: string, region: string, tab: string = "code") =>
   `https://${region}.console.aws.amazon.com/lambda/home?region=${region}#/functions/${name}?tab=${tab}`;
+
+export const code = "lambda";
+export const name = "AWS Lambda";
 
 const logsUrl = (name: string, region: string) =>
   `https://${region}.console.aws.amazon.com/cloudwatch/home?region=${region}#logsV2:log-groups/log-group/$252Faws$252Flambda$252F${name}`;

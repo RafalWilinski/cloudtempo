@@ -5,6 +5,13 @@ import { Document } from "../src/document";
 import { getAllDynamoDBTables } from "./services/dynamodb";
 import { getAllLambdaFunctions } from "./services/lambda";
 import { getAllS3Buckets } from "./services/s3";
+import { getAllCloudformationStacks } from "./services/cloudformation";
+import {
+  Credentials,
+  getDynamoDBCredentials,
+  getECSCredentials,
+} from "../src/lib/getCredentials";
+import { getCurrentAccountId } from "../src/lib/getCurrentAccountId";
 
 let minisearch: MiniSearch | undefined;
 
@@ -38,10 +45,15 @@ chrome.runtime.onMessageExternal.addListener(async function (
   _sender,
   sendResponse
 ) {
-  console.log("Received message", request);
+  console.log("MSG", request);
 
   if (request.type === "reindex") {
-    sendResponse(await reindex(request.credentials));
+    const ddbCredentials = await getDynamoDBCredentials();
+    const ecsCredentials = await getECSCredentials();
+
+    console.log({ ddbCredentials, ecsCredentials });
+
+    sendResponse(await reindex(ddbCredentials));
   } else if (request.q) {
     const results = (await getOrInitializeMinisearch()).search(request.q);
     sendResponse(results);
@@ -66,20 +78,20 @@ async function getOrInitializeMinisearch() {
 }
 
 async function reindex(
-  credentials: any,
+  dynamodbCredentials: Credentials,
   regions = ["us-east-1", "eu-central-1", "us-west-2"]
 ) {
-  console.log("Reindexing...", { credentials });
+  console.log("Reindexing...", { dynamodbCredentials });
 
   const documentsFromRegions = await Promise.all(
-    regions.map((region) => processRegion(credentials, region))
+    regions.map((region) => processRegion(dynamodbCredentials, region))
   );
   const allDocuments: Document[] = ([] as Document[]).concat.apply(
     [],
     documentsFromRegions
   );
 
-  await set("documents", JSON.stringify(allDocuments));
+  await set(`documents-${getCurrentAccountId()}`, JSON.stringify(allDocuments));
 
   if (minisearch) {
     minisearch.removeAll();
@@ -98,13 +110,20 @@ async function processRegion(
   credentials: any,
   region: string
 ): Promise<Document[]> {
-  const [allBuckets, allFunctions, allTables] = await Promise.all([
-    getAllS3Buckets(credentials, region),
-    getAllLambdaFunctions(credentials, region),
-    getAllDynamoDBTables(credentials, region),
-  ]);
+  const [allBuckets, allFunctions, allTables, allCloudformationStacks] =
+    await Promise.all([
+      getAllS3Buckets(credentials, region),
+      getAllLambdaFunctions(credentials, region),
+      getAllDynamoDBTables(credentials, region),
+      getAllCloudformationStacks(credentials, region),
+    ]);
 
-  const documents = [...allBuckets, ...allFunctions, ...allTables];
+  const documents = [
+    ...allBuckets,
+    ...allFunctions,
+    ...allTables,
+    ...allCloudformationStacks,
+  ];
 
   await set(`documents-${region}`, JSON.stringify(documents));
 

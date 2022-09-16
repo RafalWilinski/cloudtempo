@@ -5,7 +5,7 @@ import {
   CubeTransparentIcon,
   IdentificationIcon,
 } from "@heroicons/react/24/outline";
-import { Document } from "../document";
+import { Document } from "../../document";
 
 export const url = (
   name: string,
@@ -17,6 +17,9 @@ export const url = (
 
 export const icon =
   "https://d2q66yyjeovezo.cloudfront.net/icon/5d3629a64564e611bbeae9b3045be424-e9ebf1d2d9d9c14a684cec1c80e127eb.svg";
+
+export const code = "cloudformation";
+export const name = "AWS CloudFormation";
 
 export interface MenuProps {
   document: Document;

@@ -11,7 +11,8 @@
     "https://*.aws.amazon.com/*",
     "https://*.amazonaws.com/*",
     "https://*.amazonaws.com.cn/*",
-    "https://developer.amazon.com/*"
+    "https://developer.amazon.com/*",
+    "https://*.console.aws.amazon.com/*"
   ],
   "content_scripts": [
     {

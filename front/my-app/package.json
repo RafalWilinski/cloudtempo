@@ -10,10 +10,14 @@
     "build:content": "npm run rewrite-content-file:add-scriptpath && npm run rewrite-content-file:add-stylespath",
     "rewrite-content-file:add-scriptpath": "echo \"const scriptPath = \\\"$(find ./dist -iname *.js)\\\";\" | cat - extension/content.template.js > /tmp/out && mv /tmp/out extension/content.js",
     "rewrite-content-file:add-stylespath": "echo \"const stylesPath = \\\"$(find ./dist -iname *.css)\\\";\" | cat - extension/content.js > /tmp/out && mv /tmp/out extension/content.js",
-    "build": "npm run build:aws-sdk && npm run build:front && npm run build:background"
+    "build:full": "npm run build:aws-sdk && npm run build:front && npm run build:background",
+    "build": "npm run build:front && npm run build:background"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.10",
+    "@sentry/browser": "^7.13.0",
+    "@sentry/react": "^7.13.0",
+    "@sentry/tracing": "^7.13.0",
     "aws-sdk": "^2.1214.0",
     "aws-svg-icons": "^3.0.0-2021-07-30",
     "cmdk": "^0.1.20",

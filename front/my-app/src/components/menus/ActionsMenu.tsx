@@ -1,19 +1,15 @@
 import { Command } from "cmdk";
 import {
   ArrowPathIcon,
-  LifebuoyIcon,
+  InformationCircleIcon,
   CheckBadgeIcon,
   Cog6ToothIcon,
   UserIcon,
   ChatBubbleBottomCenterTextIcon,
   GlobeEuropeAfricaIcon,
 } from "@heroicons/react/24/outline";
-import { useEffect, useState } from "react";
-import {
-  Credentials,
-  getTemporarySessionCredentials,
-} from "../lib/getCredentials";
-import { extensionId } from "../lib/extension";
+import { useState } from "react";
+import { extensionId } from "../../lib/extension";
 import { toast } from "react-hot-toast";
 
 interface ActionsMenuProps {
@@ -24,14 +20,6 @@ interface ActionsMenuProps {
 
 export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
   const [isReindexing, setIsReindexing] = useState(false);
-  const [credentials, setCredentials] = useState<Credentials>();
-
-  useEffect(() => {
-    if (isDemo) {
-      return;
-    }
-    getTemporarySessionCredentials().then(setCredentials);
-  }, []);
 
   return (
     <Command.Group heading="Actions">
@@ -74,19 +62,18 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
       </Command.Item>
 
       <Command.Item
-        disabled={isReindexing || !credentials || isDemo}
+        disabled={isReindexing || isDemo}
         onSelect={() => {
-          if (!credentials) {
-            console.log("Please set your credentials first");
-            toast.error("Credentials not found!");
+          if (isDemo) {
+            toast.error("This is just a demo, chill out.");
+            return;
           }
 
-          if (!(isReindexing || isDemo)) {
+          if (!isReindexing) {
             chrome.runtime.sendMessage(
               extensionId,
               {
                 type: "reindex",
-                credentials,
               },
               function (_response) {
                 setIsReindexing(false);
@@ -104,8 +91,6 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
           className={isReindexing ? "spinning" : ""}
         />
         {isReindexing ? "Reindexing..." : "Reindex search"}
-        {!(credentials || isReindexing) &&
-          " (please set your credentials first)"}
       </Command.Item>
       {!isDemo && (
         <Command.Item onSelect={() => setPages(["Home", "License"])}>
@@ -113,12 +98,17 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
           Activate (6 days of trial left)
         </Command.Item>
       )}
-      {!isDemo && (
-        <Command.Item onSelect={() => setPages(["Home", "Help"])}>
-          <LifebuoyIcon width={20} height={20} />
-          Help
-        </Command.Item>
-      )}
+
+      <Command.Item
+        onSelect={() => (location.href = "https://cloudtempo.dev/faq")}
+      >
+        <InformationCircleIcon width={20} height={20} />
+        FAQ
+      </Command.Item>
+      <Command.Item onSelect={() => {}}>
+        <ChatBubbleBottomCenterTextIcon width={20} height={20} />
+        Drop us a line / send feedback
+      </Command.Item>
     </Command.Group>
   );
 }

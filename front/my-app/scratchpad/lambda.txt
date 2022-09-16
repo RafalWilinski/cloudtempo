@@ -23,6 +23,7 @@ curl 'https://us-east-1.console.aws.amazon.com/lambda/services/ajax?operation=li
   --compressed
 
 
+This is basically AWS SDK Call
 --------------- Their, working ------------ (With CSRF token) b52726c29fc130699d2be643dc3ac45f8ac198b47a8d65b8756dac80a5dd78f4
 
 curl 'https://us-east-1.console.aws.amazon.com/lambda/services/ajax?operation=listFunctions&locale=en' \

@@ -15,7 +15,7 @@ interface Props {
 
 export function ConfigurationMenu({ goToHome, setDarkMode }: Props) {
   return (
-    <Command.Group heading="Indexer Role">
+    <Command.Group heading="Config">
       <Command.Item onSelect={() => {}}>
         <ServerStackIcon width={20} height={20} />
         Selected Services

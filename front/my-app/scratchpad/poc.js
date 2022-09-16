@@ -9,6 +9,8 @@ async function getTemporaryCredentials() {
   const splitStartToken = "csrfToken&quot;:&quot;";
   const splitEndToken = "&quot;";
 
+  console.log(htmlContent);
+
   const csrfToken = htmlContent
     .split(splitStartToken)[1]
     .split(splitEndToken)[0];

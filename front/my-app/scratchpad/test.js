@@ -1,29 +1,85 @@
 const credentials = {
-  accessKeyId: "ASIARHUGWZCWIX4WRICC",
-  secretAccessKey: "V1+m3u1CQT2XJKYO/qFHj/i5NBO9AVQ9Oxgk4lkm",
+  accessKeyId: "ASIARHUGWZCWH6HDZMSM",
+  secretAccessKey: "2lkm/jRKmWMQRw4mFBirIJlZnocVJJsHCeXbobEh",
   sessionToken:
-    "IQoJb3JpZ2luX2VjEDkaCXVzLWVhc3QtMSJHMEUCIQDBDQk0F5gZAuWhiw9RNrUNjQzmaeIb5K2NVIvjZaMwXgIgUtFTgc4ED0WTsTrmF/8eWhfz58H5xuEunYT86fUbH/QqqgII0f//////////ARAEGgwwODUxMDgxMTU2MjgiDLDY20nTXFufAy57rSr+AeEWOA1sdO/CiWxURtFmkUkPKzCSOylyGZdS30WzlmjjFjgShdBw4wuW6X/VvPdO8FYTp9oXxz2QJoVE58z8pwVWFPgcUbrpRvbyzcQ4yTXjuWgBIIVqMP9ZU9FY8J82i+LGANHHuYxWYLl3IzyxR8tXrLP/9h8ioI5gR891cJCQhMkhe/jFqkd5bhi3KeEhLpLqTIQmv+n/RDUmZZga7BN0LxOGV2a0y+gohvKF0DC0zHTQkJNsntX8menRuIUqELk5ijrgYjGfshBP2NOgdqjZzVYcms0O2ivKYCYWmZiyxTVM3SM97Id9+IvqzpFu+qRMFuBLrgKzuwnyKfk4MJani5kGOt8BHogqac5pHObxJCLt7QvTfyvmDVJ5mirxHsu81QYmnQClJfofrz2Z50H77KOhZmE3b3+QLuxSR5ME+6yHjNrfHmkOnLsoNWirUCln1wdzCE68raejVR9kUkeNso10oEEUuHKKIyP5+R4GGyy+hpf1S7magGkGy3WccR+LoXqWbmkE1H8YuyG4Ss4MV5vggvgeKiaH2LVKCfjonv1pe5CnnhKmkR57iGnKSeCg7+cSJSD56cCKxgNqKCxNJHyqoIFWzL8Dyy0mkEJu8QkxMht/FyNkOjrbRC1DFdHtCCWomg==",
-  expiration: "2022-09-15T08:30:27.000Z",
+    "IQoJb3JpZ2luX2VjEFwaCXVzLWVhc3QtMSJHMEUCIHsIrcTqn5zNESWUahivWF8Ju+rnhukJwXE9ehNYVQXrAiEA0guaWfMwDw9lbL87EAMtqi5YPfkOGN7wdTj1LWxgNBwqpQII9f//////////ARAEGgwwODUxMDgxMTU2MjgiDCcYPIRHpZ1CkzvIvir5AUzJLVDmpIefn9/eh59nYWtEhBtWym96efwF+cjl0QSTrux2LdkLLdTXIMgz5Ottp1UIv651XdJf8HPFrPFxMWFAGU+1kSuFlByxhCjEl4aJxIfZid8kCoZmr0A8sXMU7A6tfs0AAtnncoB0x/avDn0dA80bZiMU4cn9+VNJ5CQnYcDs3knt18bEPVBplXnHk7NMrQfP1DjC3pWl+z14vR/qPqAasJBCYFnYROFKrsm3eUYwod6kpqY+4/WUrvhM5j5zbWqwhNem1XNr6EO4YdtjHoLf2bAamZJ7gnJbYuRqxQzKhPV3hd/snO2fAvxR1TGkmpbUqJC/OTDlnZOZBjrfAWbf/vbC7YbGhxeH6mt/Z6npHFZn466hu1A8XCvRSLviHAcY/aFAV02nRf66OrOHl+dZhUOcWWOSiMF5K+oyi+aXe5Q43Iwiur8VZ8DJSzi/wuItA/IfwG2gfYwxkBVGi+DXoAxh0YTPWQj1Q+oRmnIaiFAp47GbJzqmdnhbQXY6KOvrl3CT3bNNnCdwOxjuB7woE2TkAsugwhr+O4xHMtcHdQQ0Q1p7PbFxrjmF3eUP8b5XzzUuD3gxgHJpQmWCorAhDhqFPbKcG2i711sq4n/A9OQ4HwapNPj7saelm3g=",
+  expiration: "2022-09-16T19:59:00.000Z",
 };
 
 const AWS = require("aws-sdk");
 
-const dynamodb = new AWS.DynamoDB({
+// DOES NOT WORK WITH ECS CREDS
+// const dynamodb = new AWS.DynamoDB({
+//   region: "us-east-1",
+//   credentials,
+// });
+
+// dynamodb
+//   .listTables({
+//     Limit: 1,
+//   })
+//   .promise()
+//   .then(console.log)
+//   .catch(console.error);
+
+// WORKS
+// const lambda = new AWS.Lambda({
+//   region: "us-east-1",
+//   credentials,
+// });
+
+// lambda.listFunctions({}).promise().then(console.log).catch(console.error);
+
+// WORKS
+// const ec2 = new AWS.EC2({
+//   region: "ap-southeast-2",
+//   credentials,
+// });
+
+// ec2.describeInstances({}).promise().then(console.log).catch(console.error);
+
+// ec2.describeSecurityGroups({}).promise().then(console.log).catch(console.error);
+
+// does not work
+// const rds = new AWS.RDS({
+//   region: "us-east-1",
+//   credentials,
+// });
+
+// rds.describeDBClusters({}).promise().then(console.log).catch(console.error);
+
+// const iam = new AWS.IAM({
+//   region: "us-east-1",
+//   credentials,
+// });
+
+// iam.listRoles({}).promise().then(console.log).catch(console.error);
+
+// const s3 = new AWS.S3({
+//   region: "us-east-1",
+//   credentials,
+// });
+
+// s3.listBuckets({}).promise().then(console.log).catch(console.error);
+
+// const cloudformation = new AWS.CloudFormation({
+//   region: "us-east-1",
+//   credentials,
+// });
+
+// cloudformation
+//   .describeStacks({})
+//   .promise()
+//   .then(console.log)
+//   .catch(console.error);
+
+const cloudwatchlogs = new AWS.CloudWatchLogs({
   region: "us-east-1",
   credentials,
 });
 
-dynamodb
-  .listTables({
-    Limit: 1,
-  })
+cloudwatchlogs
+  .describeLogGroups({})
   .promise()
   .then(console.log)
   .catch(console.error);
-
-const lambda = new AWS.Lambda({
-  region: "us-east-1",
-  credentials,
-});
-
-lambda.listFunctions({}).promise().then(console.log).catch(console.error);

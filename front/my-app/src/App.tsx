@@ -1,4 +1,5 @@
 import { VercelCMDK } from "./components/SearchBar";
+
 interface HomeProps {
   isDemo?: boolean;
 }

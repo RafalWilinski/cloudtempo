@@ -1,5 +1,5 @@
 import { Command } from "cmdk";
-import { services } from "../lib/services";
+import { services } from "../../lib/services";
 import { toast } from "react-hot-toast";
 
 export function ServicesMenu({ isDemo }: { isDemo?: boolean }) {
@@ -10,6 +10,7 @@ export function ServicesMenu({ isDemo }: { isDemo?: boolean }) {
         {services.map((service) => {
           return (
             <Command.Item
+              key={`${service.ServiceName} ${service.ServiceShortName}`}
               value={`${service.ServiceName} ${service.ServiceShortName}`}
               onSelect={() => {
                 if (isDemo) {

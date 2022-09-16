@@ -31,6 +31,7 @@ export function RegionsMenu() {
         {regions.map((region) => {
           return (
             <Command.Item
+              key={`${region.code} ${region.name}`}
               value={`${region.code} ${region.name}`}
               onSelect={() => {
                 location.href = `https://${region.code}.console.aws.amazon.com/console/home?region=${region.code}`;

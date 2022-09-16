@@ -1,17 +1,32 @@
-import { get, set } from "js-cookie";
-import { getCurrentAccountId } from "./getCurrentAccountId";
-
 export interface Credentials {
   accessKeyId: string;
   secretAccessKey: string;
+  sessionToken: string;
+  expiration: string;
 }
 
-let cachedTemporaryCredentials: Credentials | undefined;
+let cachedDynamoDBCredentials: Credentials | undefined;
+let cachedECSCredentials: Credentials | undefined;
 
-export async function getTemporarySessionCredentials(): Promise<Credentials> {
-  if (cachedTemporaryCredentials) {
-    return cachedTemporaryCredentials;
+export async function getDynamoDBCredentials(): Promise<Credentials> {
+  if (cachedDynamoDBCredentials) {
+    return cachedDynamoDBCredentials;
   }
+
+  const tab = await chrome.tabs.create({
+    url: "https://us-east-1.console.aws.amazon.com/dynamodbv2/home?region=us-east-1",
+    active: false,
+  });
+
+  // Wait for 3 seconds
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
+  // Todo - replace with something smarter
+  // let isLoaded = false;
+  // while (!isLoaded) {
+  //   isLoaded = tab.status === "complete";
+  // }
+
   // Get CSRF token from AWS DynamoDB Console home
   const dynamoDBHomePage = await fetch(
     "https://us-east-1.console.aws.amazon.com/dynamodbv2/home?region=us-east-1"
@@ -40,32 +55,71 @@ export async function getTemporarySessionCredentials(): Promise<Credentials> {
 
   const temporaryCredentialsJson = await temporaryCredentials.json();
 
-  console.log("New temporary credentials", temporaryCredentialsJson);
-  cachedTemporaryCredentials = temporaryCredentialsJson;
+  await chrome.tabs.remove(tab.id!);
+
+  cachedDynamoDBCredentials = temporaryCredentialsJson;
 
   return temporaryCredentialsJson;
 }
 
-export function getCredentials(accountId: string): Credentials | undefined {
-  const credentials = get(`aws-account-${accountId}`);
-  if (credentials) {
-    return JSON.parse(credentials) as Credentials;
+export async function getECSCredentials(): Promise<Credentials> {
+  if (cachedECSCredentials) {
+    return cachedECSCredentials;
   }
-}
 
-export function getCurrentAccountCredentials(): Credentials | undefined {
-  const currentAccountId = getCurrentAccountId();
+  /// ---------- Get CSRF token from AWS DynamoDB Console home -------------
+  const tab = await chrome.tabs.create({
+    url: "https://us-east-1.console.aws.amazon.com/ecs/v2/clusters?region=us-east-1",
+    active: false,
+  });
 
-  if (currentAccountId) {
-    const credentials = getCredentials(currentAccountId);
-    return credentials;
-  }
-}
+  // Wait for 3 seconds
+  await new Promise((resolve) => setTimeout(resolve, 3000));
 
-export function saveCurrentAccountCredentials(credentials: Credentials): void {
-  const currentAccountId = getCurrentAccountId();
+  // Todo - replace with something smarter
+  // let isLoaded = false;
+  // while (!isLoaded) {
+  //   isLoaded = tab.status === "complete";
+  // }
 
-  if (currentAccountId) {
-    set(`aws-account-${currentAccountId}`, JSON.stringify(credentials));
-  }
+  console.log("ECS Console loaded");
+
+  const ecsHomePage = await fetch(
+    "https://us-east-1.console.aws.amazon.com/ecs/v2/clusters?region=us-east-1"
+  );
+
+  const ecsHomePageContent = await (await ecsHomePage.blob()).text();
+
+  console.log({ ecsHomePageContent });
+
+  const splitStartToken = "csrfToken&quot;:&quot;";
+  const splitEndToken = "&quot;";
+
+  const csrfToken = ecsHomePageContent
+    .split(splitStartToken)[1]
+    .split(splitEndToken)[0];
+
+  //// -----
+
+  console.log({ csrfToken });
+
+  // Fetch temporary credentials from DynamoDB Console
+  const temporaryCredentials = await fetch(
+    "https://us-east-1.console.aws.amazon.com/ecs/v2/tb/creds",
+    {
+      credentials: "same-origin",
+      method: "POST",
+      headers: {
+        "X-CSRF-Token": csrfToken,
+      },
+    }
+  );
+
+  const temporaryCredentialsJson = await temporaryCredentials.json();
+
+  await chrome.tabs.remove(tab.id!);
+
+  cachedECSCredentials = temporaryCredentialsJson;
+
+  return temporaryCredentialsJson;
 }

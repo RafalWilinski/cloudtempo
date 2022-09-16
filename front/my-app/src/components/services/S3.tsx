@@ -3,3 +3,6 @@ export const url = (name: string, region: string, tab: string = "code") =>
 
 export const icon =
   "https://d2q66yyjeovezo.cloudfront.net/icon/c0828e0381730befd1f7a025057c74fb-43acc0496e64afba82dbc9ab774dc622.svg";
+
+export const code = "s3";
+export const name = "AWS S3";

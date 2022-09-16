@@ -5,21 +5,20 @@ import { useDebouncedCallback } from "use-debounce";
 import { Toaster } from "react-hot-toast";
 import { set } from "js-cookie";
 import { Command } from "cmdk";
-import * as lambda from "./Lambda";
-import * as s3 from "./S3";
-import * as dynamodb from "./DynamoDB";
-import * as cloudformation from "./Cloudformation";
-import * as cloudwatchlogs from "./CloudwatchLogs";
+import * as lambda from "./services/Lambda";
+import * as s3 from "./services/S3";
+import * as dynamodb from "./services/DynamoDB";
+import * as cloudformation from "./services/Cloudformation";
+import * as cloudwatchlogs from "./services/CloudwatchLogs";
 import { Document } from "../document";
-import { RegionsMenu } from "./RegionsMenu";
-import { ActionsMenu } from "./ActionsMenu";
-import { ConfigurationMenu } from "./ConfigurationMenu";
+import { RegionsMenu } from "./menus/RegionsMenu";
+import { ActionsMenu } from "./menus/ActionsMenu";
+import { ConfigurationMenu } from "./menus/ConfigurationMenu";
 import { extensionId } from "../lib/extension";
-import { ServicesMenu } from "./ServicesMenu";
+import { ServicesMenu } from "./menus/ServicesMenu";
 import { getCurrentAccountId } from "../lib/getCurrentAccountId";
-import { demoResources } from "./demoResources";
-import { ActivateMenu } from "./ActivateMenu";
-import { HelpMenu } from "./HelpMenu";
+import { demoResources } from "../lib/demoResources";
+import { ActivateMenu } from "./menus/ActivateMenu";
 
 const serviceIconMap: Record<string, any> = {
   lambda: lambda.icon,
@@ -124,10 +123,13 @@ export function VercelCMDK({ isDemo }: { isDemo?: boolean }) {
     if (activePage === "Home") {
       debouncedGetItems();
     }
-  }, [inputValue]);
+  }, [inputValue, activePage, debouncedGetItems]);
 
   return (
-    <div className={`bg ${isVisible ? "cmdk-not-visible" : "cmdk-visible"}`}>
+    <div
+      className={`bg ${isVisible ? "cmdk-not-visible" : "cmdk-visible"}`}
+      onClick={() => setVisibility(false)}
+    >
       {isVisible && (
         <div className={`vercel ${isDarkMode ? "dark" : ""}`}>
           <Command
@@ -196,7 +198,6 @@ export function VercelCMDK({ isDemo }: { isDemo?: boolean }) {
             )}
             {activePage === "Regions" && <RegionsMenu />}
             {activePage === "License" && <ActivateMenu />}
-            {activePage === "Home" && <HelpMenu />}
             {activePage === "Configuration" && (
               <ConfigurationMenu
                 goToHome={() => setPages(["Home"])}
