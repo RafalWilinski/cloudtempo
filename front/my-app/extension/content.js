@@ -1,5 +1,5 @@
 const stylesPath = "./dist/index.e8eb3dcf.css";
-const scriptPath = "./dist/index.f172d386.js";
+const scriptPath = "./dist/index.b6817eb1.js";
 const htmlBody = `<div id="aws-search-app"></div><div aws-search-extensionid="${chrome.runtime.id}"></div>`;
 
 document.body.insertAdjacentHTML("beforeend", htmlBody);

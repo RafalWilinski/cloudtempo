@@ -25,6 +25,7 @@
     "idb-keyval": "^6.2.0",
     "js-cookie": "^3.0.1",
     "minisearch": "^5.0.0",
+    "p-limit": "^4.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.3.0",

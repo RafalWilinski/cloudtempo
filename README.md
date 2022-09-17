@@ -21,7 +21,7 @@ Services for initial launch:
 - [x] Lambda - covered by DynamoDB & ECS
 - [x] DynamoDB - covered by DynamoDB
 - [x] S3 - covered by DynamoDB
-- [ ] CloudFormation - covered by ECS
+- [x] CloudFormation - covered by ECS
 - [ ] Cloudwatch Logs - covered by ECS
 - [ ] IAM (Roles, Users, Policies) - covered by ECS
 - [ ] EC2 (Instances) - covered by ECS

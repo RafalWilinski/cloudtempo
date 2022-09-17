@@ -9,10 +9,12 @@ let cachedDynamoDBCredentials: Credentials | undefined;
 let cachedECSCredentials: Credentials | undefined;
 
 export async function getDynamoDBCredentials(): Promise<Credentials> {
+  // todo - check if they're not expired first AND valid
   if (cachedDynamoDBCredentials) {
     return cachedDynamoDBCredentials;
   }
 
+  // todo: do not reauth if not needed!
   const tab = await chrome.tabs.create({
     url: "https://us-east-1.console.aws.amazon.com/dynamodbv2/home?region=us-east-1",
     active: false,
@@ -90,8 +92,6 @@ export async function getECSCredentials(): Promise<Credentials> {
 
   const ecsHomePageContent = await (await ecsHomePage.blob()).text();
 
-  console.log({ ecsHomePageContent });
-
   const splitStartToken = "csrfToken&quot;:&quot;";
   const splitEndToken = "&quot;";
 
@@ -101,7 +101,7 @@ export async function getECSCredentials(): Promise<Credentials> {
 
   //// -----
 
-  console.log({ csrfToken });
+  console.log({ csrfToken, type: "ecs" });
 
   // Fetch temporary credentials from DynamoDB Console
   const temporaryCredentials = await fetch(

@@ -1,19 +1,38 @@
 import { Document } from "../../src/document";
 
 export async function getAllCloudformationStacks(
-  _credentials: any,
+  credentials: any,
   region: string
 ) {
-  // await authenticateAgainstRegion(region);
+  const cfn = new AWS.CloudFormation({
+    credentials,
+    region,
+  });
+  let token;
+  let firstRun = true;
+  let stacks: Document[] = [];
 
-  // const resp = await fetch(
-  //   `https://${region}.console.aws.amazon.com/cloudformation/service/stacks?region=${region}&status=CREATE_IN_PROGRESS&status=UPDATE_COMPLETE&status=DELETE_FAILED&status=REVIEW_IN_PROGRESS&status=ROLLBACK_IN_PROGRESS&status=UPDATE_ROLLBACK_IN_PROGRESS&status=CREATE_COMPLETE&status=UPDATE_ROLLBACK_COMPLETE&status=UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS&status=ROLLBACK_COMPLETE&status=ROLLBACK_FAILED&status=CREATE_FAILED&status=UPDATE_ROLLBACK_FAILED&status=UPDATE_COMPLETE_CLEANUP_IN_PROGRESS&status=UPDATE_IN_PROGRESS&status=UPDATE_FAILED&status=DELETE_IN_PROGRESS&status=IMPORT_COMPLETE&status=IMPORT_IN_PROGRESS&status=IMPORT_ROLLBACK_IN_PROGRESS&status=IMPORT_ROLLBACK_FAILED&status=IMPORT_ROLLBACK_COMPLETE`,
-  //   {
-  //     credentials: "include",
-  //   }
-  // ).then((r) => r.json());
+  do {
+    const response: AWS.CloudFormation.DescribeStacksOutput = await cfn
+      .describeStacks({
+        NextToken: token,
+      })
+      .promise();
 
-  // console.log(resp);
+    stacks = [
+      ...stacks,
+      ...(response.Stacks ?? []).map((stack) => ({
+        name: stack.StackName,
+        arn: stack.StackId,
+        awsService: "cloudformation",
+        description: stack.Description,
+        tags: stack.Tags,
+        region,
+      })),
+    ];
+    token = response.NextToken;
+    firstRun = false;
+  } while (token || firstRun);
 
-  return [];
+  return stacks;
 }
