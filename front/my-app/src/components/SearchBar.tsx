@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 // <reference types="chrome"/>
-import React, { createRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { Toaster } from "react-hot-toast";
 import { set } from "js-cookie";
@@ -23,6 +23,7 @@ import { getCurrentAccountId } from "../lib/getCurrentAccountId";
 import { demoResources } from "../lib/demoResources";
 import { ActivateMenu } from "./menus/ActivateMenu";
 import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
+import { SubCommand } from "./SubCommand";
 
 const serviceIconMap: Record<string, any> = {
   lambda: lambda.icon,
@@ -51,7 +52,8 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
   const [isVisible, setVisibility] = useState(false);
   const [isDarkMode, setDarkMode] = useState(true);
   const [inputValue, setInputValue] = React.useState("");
-  const inputRef = createRef();
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
+  const listRef = React.useRef(null);
   const currentAccountId = getCurrentAccountId();
 
   const [pages, setPages] = React.useState<string[]>(["Home"]);
@@ -60,6 +62,8 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
   >();
   const activePage = pages[pages.length - 1];
   const isHome = activePage === "Home";
+
+  console.log(selectedDocument);
 
   const popPage = React.useCallback(() => {
     setPages((pages) => {
@@ -187,7 +191,7 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
                   <ArrowSmallLeftIcon width={20} height={20} className="back" />
                 )}
                 <Command.Input
-                  ref={inputRef as any}
+                  ref={inputRef}
                   value={inputValue}
                   autoFocus={true}
                   placeholder={
@@ -201,40 +205,48 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
                 />
               </div>
             )}
-            {isHome && items.length > 0 && (
-              <ResourcesMenu
-                isDemo={isDemo}
-                items={items}
-                loading={loading}
-                setPages={setPages}
-                setSelectedDocument={setSelectedDocument}
-                setInputValue={setInputValue}
-                pages={pages}
-              />
-            )}
-            {isHome && (
-              <ActionsMenu setPages={setPages} pages={pages} isDemo={isDemo} />
-            )}
-            {isHome && <ServicesMenu isDemo={isDemo} />}
-            {activePage === "lambda" && (
-              <lambda.Menu document={selectedDocument!} />
-            )}
-            {activePage === "cloudformation" && (
-              <cloudformation.Menu document={selectedDocument!} />
-            )}
-            {activePage === "Regions" && <RegionsMenu />}
-            {activePage === "License" && <ActivateMenu />}
-            {activePage === "Configuration" && (
-              <ConfigurationMenu
-                goToHome={() => setPages(["Home"])}
-                setDarkMode={() =>
-                  setDarkMode((d) => {
-                    set("cloudtempo-dark-mode", (!d).toString());
-                    return !d;
-                  })
-                }
-              />
-            )}
+            <Command.List ref={listRef}>
+              {isHome && items.length > 0 && (
+                <ResourcesMenu
+                  listRef={listRef}
+                  isDemo={isDemo}
+                  items={items}
+                  loading={loading}
+                  setPages={setPages}
+                  setSelectedDocument={setSelectedDocument}
+                  setInputValue={setInputValue}
+                  pages={pages}
+                />
+              )}
+              {isHome && (
+                <ActionsMenu
+                  setPages={setPages}
+                  pages={pages}
+                  isDemo={isDemo}
+                />
+              )}
+              {isHome && <ServicesMenu isDemo={isDemo} />}
+              {activePage === "lambda" && (
+                <lambda.Menu document={selectedDocument!} />
+              )}
+              {activePage === "cloudformation" && (
+                <cloudformation.Menu document={selectedDocument!} />
+              )}
+              {activePage === "Regions" && <RegionsMenu />}
+              {activePage === "License" && <ActivateMenu />}
+              {activePage === "Configuration" && (
+                <ConfigurationMenu
+                  goToHome={() => setPages(["Home"])}
+                  setDarkMode={() =>
+                    setDarkMode((d) => {
+                      set("cloudtempo-dark-mode", (!d).toString());
+                      return !d;
+                    })
+                  }
+                />
+              )}
+            </Command.List>
+            {isHome && <SubCommand inputRef={inputRef} listRef={listRef} />}
           </Command>
         </div>
       )}
@@ -247,6 +259,7 @@ interface ResourcesMenuProps {
   isDemo?: boolean;
   loading: boolean;
   items: any[];
+  listRef: any;
   pages: string[];
   setPages: (pages: string[]) => void;
   setInputValue: (value: string) => void;
@@ -254,7 +267,8 @@ interface ResourcesMenuProps {
 }
 
 function ResourcesMenu({
-  isDemo,
+  listRef,
+  // isDemo,
   items,
   loading,
   setPages,
@@ -312,60 +326,58 @@ function ResourcesMenu({
           items && items.length > 0 ? ` (${items.length} found)` : ""
         }`}
       >
-        <Command.List>
-          {!loading && (items ?? []).length === 0 && (
-            <Command.Empty>No results found.</Command.Empty>
-          )}
-          {loading && (
-            <div className="aws-search-loading">Fetching resources...</div>
-          )}
-          {(items ?? []).map((item) => {
-            return (
-              <Command.Item
+        {!loading && (items ?? []).length === 0 && (
+          <Command.Empty>No results found.</Command.Empty>
+        )}
+        {loading && (
+          <div className="aws-search-loading">Fetching resources...</div>
+        )}
+        {(items ?? []).map((item) => {
+          return (
+            <Command.Item
+              style={{
+                justifyContent: "space-between",
+              }}
+              key={(item as any).arn}
+              value={`${(item as any).name!} ${(item as any).region} ${
+                (item as any).awsService
+              }}`}
+              onSelect={() => {
+                onSelect(item);
+              }}
+            >
+              <div
                 style={{
-                  justifyContent: "space-between",
-                }}
-                key={(item as any).arn}
-                value={`${(item as any).name!} ${(item as any).region} ${
-                  (item as any).awsService
-                }}`}
-                onSelect={() => {
-                  onSelect(item);
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
-                <div
+                <img
+                  alt="service icon"
+                  src={serviceIconMap[(item as any).awsService]}
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
+                    width: "24px",
+                    height: "24px",
                   }}
-                >
-                  <img
-                    alt="service icon"
-                    src={serviceIconMap[(item as any).awsService]}
+                />
+                <div style={{ marginLeft: "8px" }}>
+                  <span>{(item as any).name} </span>
+                  <p
                     style={{
-                      width: "24px",
-                      height: "24px",
+                      marginTop: 0,
+                      marginBottom: 0,
+                      fontSize: "10px",
                     }}
-                  />
-                  <div style={{ marginLeft: "8px" }}>
-                    <span>{(item as any).name} </span>
-                    <p
-                      style={{
-                        marginTop: 0,
-                        marginBottom: 0,
-                        fontSize: "10px",
-                      }}
-                    >
-                      {serviceResourceNameMap[(item as any).awsService]}
-                    </p>
-                  </div>
+                  >
+                    {serviceResourceNameMap[(item as any).awsService]}
+                  </p>
                 </div>
-                <span>{(item as any).region}</span>
-              </Command.Item>
-            );
-          })}
-        </Command.List>
+              </div>
+              <span>{(item as any).region}</span>
+            </Command.Item>
+          );
+        })}
       </Command.Group>
     </>
   );

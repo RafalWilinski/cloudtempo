@@ -861,6 +861,28 @@
     "@babel/runtime" "^7.13.10"
     "@radix-ui/react-use-layout-effect" "1.0.0"
 
+"@radix-ui/react-popover@^1.0.0":
+  "integrity" "sha512-osxFFO0TiZ9ABpEOitZu0R1Fdd+tSpJgAqLZxRLLdZQ7ya0onSODcITp5hXDVuYQeVXH6pKEBGwXN6ZGjZ0a5g=="
+  "resolved" "https://registry.npmjs.org/@radix-ui/react-popover/-/react-popover-1.0.0.tgz"
+  "version" "1.0.0"
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@radix-ui/primitive" "1.0.0"
+    "@radix-ui/react-compose-refs" "1.0.0"
+    "@radix-ui/react-context" "1.0.0"
+    "@radix-ui/react-dismissable-layer" "1.0.0"
+    "@radix-ui/react-focus-guards" "1.0.0"
+    "@radix-ui/react-focus-scope" "1.0.0"
+    "@radix-ui/react-id" "1.0.0"
+    "@radix-ui/react-popper" "1.0.0"
+    "@radix-ui/react-portal" "1.0.0"
+    "@radix-ui/react-presence" "1.0.0"
+    "@radix-ui/react-primitive" "1.0.0"
+    "@radix-ui/react-slot" "1.0.0"
+    "@radix-ui/react-use-controllable-state" "1.0.0"
+    "aria-hidden" "^1.1.1"
+    "react-remove-scroll" "2.5.4"
+
 "@radix-ui/react-popper@1.0.0":
   "integrity" "sha512-k2dDd+1Wl0XWAMs9ZvAxxYsB9sOsEhrFQV4CINd7IUZf0wfdye4OHen9siwxvZImbzhgVeKTJi68OQmPRvVdMg=="
   "resolved" "https://registry.npmjs.org/@radix-ui/react-popper/-/react-popper-1.0.0.tgz"

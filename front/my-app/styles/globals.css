@@ -248,7 +248,7 @@
   height: 18px;
 } */
 .cloudtempo [cmdk-list] {
-  max-height: 300px;
+  max-height: 600px;
   overflow: auto;
   overscroll-behavior: contain;
   transition: 100ms ease;
@@ -291,6 +291,24 @@
   align-items: center;
   margin-bottom: 8px;
 }
+.cloudtempo [cmdk-cloudtempo-submenu-open-trigger],
+.cloudtempo [cmdk-cloudtempo-submenu-subcommand-trigger] {
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  display: flex;
+  color: var(--gray11);
+  background: var(--app-bg);
+  border: 0;
+  padding: 0px 4px 0px 8px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 12px;
+  height: 28px;
+  letter-spacing: -0.25px;
+  float: right;
+}
+
 .cloudtempo [cmdk-empty],
 .aws-search-loading {
   font-size: 14px;
@@ -354,4 +372,143 @@
 
 .revue-form-footer {
   font-size: 12px;
+}
+
+.cloudtempo-submenu-submenu {
+  animation-duration: 0.2s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  transform-origin: var(--radix-popover-content-transform-origin);
+}
+.cloudtempo-submenu-submenu [cmdk-root] {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  border: 1px solid var(--gray6);
+  background: var(--gray2);
+  border-radius: 8px;
+}
+.cloudtempo-submenu-submenu [cmdk-list] {
+  padding: 8px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  transition: 100ms ease;
+  transition-property: height;
+}
+.cloudtempo-submenu-submenu [cmdk-item] {
+  height: 40px;
+  cursor: pointer;
+  height: 40px;
+  border-radius: 8px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+  color: var(--gray12);
+  user-select: none;
+  will-change: background, color;
+  transition: all 150ms ease;
+  transition-property: none;
+}
+.cloudtempo-submenu-submenu [cmdk-item][aria-selected="true"] {
+  background: var(--gray5);
+  color: var(--gray12);
+}
+.cloudtempo-submenu-submenu
+  [cmdk-item][aria-selected="true"]
+  [cmdk-cloudtempo-submenu-submenu-shortcuts]
+  kbd {
+  background: var(--gray7);
+}
+.cloudtempo-submenu-submenu [cmdk-item][aria-disabled="true"] {
+  color: var(--gray8);
+  cursor: not-allowed;
+}
+.cloudtempo-submenu-submenu [cmdk-item] svg {
+  width: 16px;
+  height: 16px;
+}
+.cloudtempo-submenu-submenu
+  [cmdk-item]
+  [cmdk-cloudtempo-submenu-submenu-shortcuts] {
+  display: flex;
+  margin-left: auto;
+  gap: 2px;
+}
+.cloudtempo-submenu-submenu
+  [cmdk-item]
+  [cmdk-cloudtempo-submenu-submenu-shortcuts]
+  kbd {
+  font-family: var(--font-sans);
+  background: var(--gray5);
+  color: var(--gray11);
+  height: 20px;
+  width: 20px;
+  border-radius: 4px;
+  padding: 0 4px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cloudtempo-submenu-submenu
+  [cmdk-item]
+  [cmdk-cloudtempo-submenu-submenu-shortcuts]
+  kbd:first-of-type {
+  margin-left: 8px;
+}
+.cloudtempo-submenu-submenu [cmdk-group-heading] {
+  text-transform: capitalize;
+  font-size: 12px;
+  color: var(--gray11);
+  font-weight: 500;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  margin-left: 4px;
+}
+.cloudtempo-submenu-submenu [cmdk-input] {
+  padding: 12px;
+  font-family: var(--font-sans);
+  border: 0;
+  border-top: 1px solid var(--gray6);
+  font-size: 13px;
+  background: transparent;
+  margin-top: auto;
+  width: 100%;
+  outline: 0;
+  border-radius: 0;
+}
+.cloudtempo-submenu-submenu[data-state="open"] {
+  animation-name: slideIn;
+}
+.cloudtempo-submenu-submenu[data-state="closed"] {
+  animation-name: slideOut;
+}
+.cloudtempo-submenu-submenu [cmdk-empty] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  white-space: pre-wrap;
+  font-size: 14px;
+  color: var(--gray11);
+}
+
+kbd {
+  font-family: var(--font-sans);
+  background: var(--gray5);
+  color: var(--gray11);
+  height: 20px;
+  width: 18px;
+  border-radius: 4px;
+  padding: 0 3 px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+kbd:first-of-type {
+  margin-left: 8px;
 }
