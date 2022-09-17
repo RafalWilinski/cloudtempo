@@ -4,13 +4,14 @@ Todos:
 - [ ] License checking
 - [ ] Indexing tags
 - [ ] Drop us a line
-- [ ] Store documents with accountId prefix to ensure tenant isolation
-- [ ] Encode documents with accountId + something to keep it safe
+- [x] Store documents with accountId prefix to ensure tenant isolation
+- [x] Encode documents with accountId + something to keep it safe
 - [ ] Onboarding flow (thanks for installing, bla bla initial scan in the background)
 - [ ] Recently opened section
 - [ ] Aliases
 - [ ] Menu for selecting services with coming soon section inside configuration
-- [ ] Get rid of vercel references
+- [x] Get rid of vercel references
+- [ ] Proper name, description, and app icon
 
 Marketing:
 
@@ -22,14 +23,15 @@ Services for initial launch:
 - [x] DynamoDB - covered by DynamoDB
 - [x] S3 - covered by DynamoDB
 - [x] CloudFormation - covered by ECS
-- [ ] Cloudwatch Logs - covered by ECS
-- [ ] IAM (Roles, Users, Policies) - covered by ECS
+- [x] Cloudwatch Logs - covered by ECS
+- [x] IAM (Roles, Users) - covered by ECS
 - [ ] EC2 (Instances) - covered by ECS
 - [ ] VPC (VPCs, Subnets, SGs) - covered by ECS
 - [ ] ECS (Clusters, Services) - covered by ECS
 
 Later add:
 
+- IAM Groups
 - RDS
 - Route53
 

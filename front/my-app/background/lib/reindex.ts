@@ -1,6 +1,6 @@
 import pLimit from "p-limit";
+import { AES } from "crypto-js";
 import { Credentials } from "../../src/lib/getCredentials";
-import { getCurrentAccountId } from "../../src/lib/getCurrentAccountId";
 import { set } from "idb-keyval";
 import { reinitializeMinisearch } from "./minisearch";
 import { Document } from "../../src/document";
@@ -15,44 +15,70 @@ import {
 import { getAllIAMRoles, getAllIAMUsers } from "../services/iam";
 
 const limit = pLimit(5);
+export const SECRET_CONST = "cl0udt3mP0";
 
 export type ReindexProps = {
   ddbCredentials: Credentials;
   ecsCredentials: Credentials;
+  accountId: string;
   regions?: string[];
 };
 
 export async function reindex({
   ddbCredentials,
   ecsCredentials,
+  accountId,
   regions = ["us-east-1", "us-west-2", "eu-central-1"],
 }: ReindexProps) {
+  const secretKey = `${SECRET_CONST}-${accountId}`;
+
   console.log("Reindexing...", { ddbCredentials, ecsCredentials });
 
   const regionalFetchFunctions = regions.map((region) =>
     prepareFetchFunctions({ ddbCredentials, ecsCredentials, region })
   );
   const flattened = regionalFetchFunctions.flat();
-  console.log(flattened);
+
+  let progress = 0;
+  const increment = 1 / flattened.length;
 
   const all = await Promise.all(
     flattened.map(async (f) => ({
-      result: await f.fetch().then((docs) => {
-        console.log(`Done! ${f.key}: ${docs.length}`);
-        return docs;
-      }),
+      documents: await f
+        .fetch()
+        .then((docs) => {
+          console.log(`Done! ${f.key}: ${docs.length}`);
+
+          progress += increment;
+          reportProgress(f.key, progress);
+
+          return docs;
+        })
+        .catch((e) => {
+          // todo - pass error to the browser
+
+          console.error("Failed to load data", e, f.key);
+
+          return [];
+        }),
       key: f.key,
     }))
   );
 
-  console.log(all);
+  all.forEach(({ documents, key }) => {
+    set(
+      `documents#${accountId}#${key}`,
+      AES.encrypt(JSON.stringify(documents), secretKey).toString()
+    );
+  });
 
-  // await set(`documents-${getCurrentAccountId()}`, JSON.stringify(allDocuments));
-  // await reinitializeMinisearch(allDocuments);
+  const allDocuments = all.flatMap((a) => a.documents);
+
+  await reinitializeMinisearch(allDocuments, accountId);
 
   console.log("Reindexing done");
 
-  return [];
+  return allDocuments;
 }
 
 type ProcessRegionProps = {
@@ -114,48 +140,15 @@ function prepareFetchFunctions({
   return fetchFunctions;
 }
 
-// async function processRegion({
-//   ecsCredentials,
-//   ddbCredentials,
-//   region,
-// }: ProcessRegionProps): Promise<Document[]> {
-//   const [
-//     allBuckets,
-//     allFunctions,
-//     allTables,
-//     allCloudformationStacks,
-//     allLogGroups,
-//     allAlarms,
-//     allIamRoles,
-//     allIamUsers,
-//   ] = await Promise.all([
-//     /// DynamoDB
-//     getAllS3Buckets(ddbCredentials, region),
-//     getAllLambdaFunctions(ddbCredentials, region),
-//     getAllDynamoDBTables(ddbCredentials, region),
-//     /// ECS
-//     getAllCloudformationStacks(ecsCredentials, region),
-//     getAllCloudwatchLogGroups(ecsCredentials, region),
-//     getAllCloudwatchAlarms(ecsCredentials, region),
-//     getAllIAMRoles(ecsCredentials, region),
-//     getAllIAMUsers(ecsCredentials, region),
-//   ]);
-
-//   const documents = [
-//     /// DynamoDB
-//     ...allBuckets,
-//     ...allFunctions,
-//     ...allTables,
-
-//     /// ECS
-//     ...allCloudformationStacks,
-//     ...allLogGroups,
-//     ...allAlarms,
-//     ...allIamRoles,
-//     ...allIamUsers,
-//   ];
-
-//   // await set(`documents-${region}`, JSON.stringify(documents));
-
-//   return documents;
-// }
+async function reportProgress(key: string, progress: number) {
+  // const tabs = await chrome.tabs.query({
+  //   active: true,
+  // });
+  // console.log({ tabs });
+  // if (tabs[0]) {
+  //   chrome.tabs.sendMessage(tabs[0].id!, {
+  //     key,
+  //     progress,
+  //   });
+  // }
+}

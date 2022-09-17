@@ -8,9 +8,10 @@ import {
   ChatBubbleBottomCenterTextIcon,
   GlobeEuropeAfricaIcon,
 } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { extensionId } from "../../lib/extension";
 import { toast } from "react-hot-toast";
+import { getCurrentAccountId } from "../../lib/getCurrentAccountId";
 
 interface ActionsMenuProps {
   setPages: (pages: string[]) => void;
@@ -20,6 +21,11 @@ interface ActionsMenuProps {
 
 export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
   const [isReindexing, setIsReindexing] = useState(false);
+
+  useEffect(() => {
+    // chrome.runtime.onMessage.addListener(console.log);
+    // chrome.extension.onMessage.addListener(console.log);
+  }, []);
 
   return (
     <Command.Group heading="Actions">
@@ -74,6 +80,7 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
               extensionId,
               {
                 type: "reindex",
+                accountId: getCurrentAccountId(),
               },
               function (_response) {
                 setIsReindexing(false);
@@ -100,7 +107,9 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
       )}
 
       <Command.Item
-        onSelect={() => (location.href = "https://cloudtempo.dev/faq")}
+        onSelect={() => {
+          chrome.tabs.create({ url: "https://cloudtempo.dev/faq" });
+        }}
       >
         <InformationCircleIcon width={20} height={20} />
         FAQ

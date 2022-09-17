@@ -23,9 +23,17 @@ chrome.runtime.onMessageExternal.addListener(async function (
       getECSCredentials(),
     ]);
 
-    sendResponse(await reindex({ ddbCredentials, ecsCredentials }));
+    sendResponse(
+      await reindex({
+        ddbCredentials,
+        ecsCredentials,
+        accountId: request.accountId,
+      })
+    );
   } else if (request.q) {
-    const results = (await getOrInitializeMinisearch()).search(request.q);
+    const results = (await getOrInitializeMinisearch(request.accountId)).search(
+      request.q
+    );
     sendResponse(results);
   }
 });

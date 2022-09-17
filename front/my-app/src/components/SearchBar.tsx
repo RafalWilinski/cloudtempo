@@ -9,7 +9,10 @@ import * as lambda from "./services/Lambda";
 import * as s3 from "./services/S3";
 import * as dynamodb from "./services/DynamoDB";
 import * as cloudformation from "./services/Cloudformation";
-import * as cloudwatchlogs from "./services/CloudwatchLogs";
+import * as cloudwatchLogs from "./services/CloudwatchLogs";
+import * as cloudwatchAlarm from "./services/CloudwatchAlarm";
+import * as iamRole from "./services/IAMRole";
+import * as iamUser from "./services/IAMUser";
 import { Document } from "../document";
 import { RegionsMenu } from "./menus/RegionsMenu";
 import { ActionsMenu } from "./menus/ActionsMenu";
@@ -19,13 +22,17 @@ import { ServicesMenu } from "./menus/ServicesMenu";
 import { getCurrentAccountId } from "../lib/getCurrentAccountId";
 import { demoResources } from "../lib/demoResources";
 import { ActivateMenu } from "./menus/ActivateMenu";
+import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 
 const serviceIconMap: Record<string, any> = {
   lambda: lambda.icon,
   s3: s3.icon,
   dynamodb: dynamodb.icon,
   cloudformation: cloudformation.icon,
-  logs: cloudwatchlogs.icon,
+  logs: cloudwatchLogs.icon,
+  alarm: cloudwatchAlarm.icon,
+  iam_user: iamUser.icon,
+  iam_role: iamRole.icon,
 };
 
 const serviceResourceNameMap: Record<string, string> = {
@@ -34,14 +41,18 @@ const serviceResourceNameMap: Record<string, string> = {
   dynamodb: "DynamoDB Table",
   cloudformation: "CloudFormation Stack",
   logs: "CloudWatch Log Group",
+  alarm: "CloudWatch Alarm",
+  iam_user: "IAM User",
+  iam_role: "IAM Role",
 };
 
-export function VercelCMDK({ isDemo }: { isDemo?: boolean }) {
+export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
   const ref = React.useRef<HTMLDivElement | null>(null);
   const [isVisible, setVisibility] = useState(false);
   const [isDarkMode, setDarkMode] = useState(true);
   const [inputValue, setInputValue] = React.useState("");
   const inputRef = createRef();
+  const currentAccountId = getCurrentAccountId();
 
   const [pages, setPages] = React.useState<string[]>(["Home"]);
   const [selectedDocument, setSelectedDocument] = useState<
@@ -72,7 +83,7 @@ export function VercelCMDK({ isDemo }: { isDemo?: boolean }) {
         setVisibility((v) => !v);
       }
     },
-    [inputValue.length, popPage]
+    [inputValue.length, popPage, isHome]
   );
 
   useEffect(() => {
@@ -98,7 +109,7 @@ export function VercelCMDK({ isDemo }: { isDemo?: boolean }) {
       if (window.location.href.indexOf("localhost") < 0 && !isDemo) {
         chrome.runtime.sendMessage(
           extensionId,
-          { q: inputValue },
+          { q: inputValue, accountId: currentAccountId },
           function (response) {
             console.log(response);
 
@@ -128,10 +139,17 @@ export function VercelCMDK({ isDemo }: { isDemo?: boolean }) {
   return (
     <div
       className={`bg ${isVisible ? "cmdk-not-visible" : "cmdk-visible"}`}
-      onClick={() => setVisibility(false)}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (e.target === e.currentTarget) {
+          setVisibility(false);
+        }
+      }}
     >
       {isVisible && (
-        <div className={`vercel ${isDarkMode ? "dark" : ""}`}>
+        <div className={`cloudtempo ${isDarkMode ? "dark" : ""}`}>
           <Command
             ref={ref}
             onKeyDown={(e: React.KeyboardEvent) => {
@@ -146,7 +164,7 @@ export function VercelCMDK({ isDemo }: { isDemo?: boolean }) {
           >
             <div>
               {pages.map((p) => (
-                <div key={p} cmdk-vercel-badge="">
+                <div key={p} cmdk-cloudtempo-badge="">
                   {p === "Home" ? (
                     <div
                       style={{ cursor: "pointer" }}
@@ -164,21 +182,26 @@ export function VercelCMDK({ isDemo }: { isDemo?: boolean }) {
               ))}
             </div>
             {activePage !== "Configuration" && (
-              <Command.Input
-                ref={inputRef as any}
-                value={inputValue}
-                autoFocus={true}
-                placeholder={
-                  isDemo
-                    ? `Type "DynamoDB", "s3", "graphql" or something else...`
-                    : "Start typing to search..."
-                }
-                onValueChange={(value) => {
-                  setInputValue(value);
-                }}
-              />
+              <div style={{ display: "flex" }}>
+                {activePage !== "Home" && (
+                  <ArrowSmallLeftIcon width={20} height={20} className="back" />
+                )}
+                <Command.Input
+                  ref={inputRef as any}
+                  value={inputValue}
+                  autoFocus={true}
+                  placeholder={
+                    isDemo
+                      ? `Type "DynamoDB", "s3", "graphql" or something else...`
+                      : "Start typing to search..."
+                  }
+                  onValueChange={(value) => {
+                    setInputValue(value);
+                  }}
+                />
+              </div>
             )}
-            {isHome && (
+            {isHome && items.length > 0 && (
               <ResourcesMenu
                 isDemo={isDemo}
                 items={items}
@@ -188,6 +211,9 @@ export function VercelCMDK({ isDemo }: { isDemo?: boolean }) {
                 setInputValue={setInputValue}
                 pages={pages}
               />
+            )}
+            {isHome && (
+              <ActionsMenu setPages={setPages} pages={pages} isDemo={isDemo} />
             )}
             {isHome && <ServicesMenu isDemo={isDemo} />}
             {activePage === "lambda" && (
@@ -257,7 +283,23 @@ function ResourcesMenu({
         break;
       }
       case "logs": {
-        location.href = cloudwatchlogs.url(item.name!, item.region);
+        location.href = cloudwatchLogs.url(item.name!, item.region);
+        break;
+      }
+      case "alarm": {
+        location.href = cloudwatchAlarm.url(item.name!, item.region);
+        break;
+      }
+      case "iam-user": {
+        location.href = iamUser.url(item.name!, item.region);
+        break;
+      }
+      case "iam-role": {
+        location.href = iamRole.url(item.name!, item.region);
+        break;
+      }
+      case "logs": {
+        location.href = cloudwatchLogs.url(item.name!, item.region);
         break;
       }
     }
@@ -325,7 +367,6 @@ function ResourcesMenu({
           })}
         </Command.List>
       </Command.Group>
-      <ActionsMenu setPages={setPages} pages={pages} isDemo={isDemo} />
     </>
   );
 }

@@ -162,7 +162,7 @@
   right: 0;
   width: 100%;
 }
-.vercel {
+.cloudtempo {
   transition: all 0.3s ease-in-out;
   max-width: 640px;
   margin: 50px auto auto;
@@ -177,10 +177,10 @@
   box-shadow: var(--cmdk-shadow);
   transition: transform 250ms ease;
 }
-.dark .vercel [cmdk-root] {
+.dark .cloudtempo [cmdk-root] {
   background: rgba(22, 22, 22, 0.7);
 }
-.vercel [cmdk-input] {
+.cloudtempo [cmdk-input] {
   font-family: var(--font-sans);
   border: none;
   width: 100%;
@@ -193,10 +193,10 @@
   margin-bottom: 16px;
   border-radius: 0;
 }
-.vercel [cmdk-input]::placeholder {
+.cloudtempo [cmdk-input]::placeholder {
   color: var(--gray9);
 }
-.vercel [cmdk-vercel-badge] {
+.cloudtempo [cmdk-cloudtempo-badge] {
   height: 20px;
   background: var(--grayA3);
   display: inline-flex;
@@ -210,7 +210,7 @@
 
   font-weight: 500;
 }
-.vercel [cmdk-item] {
+.cloudtempo [cmdk-item] {
   content-visibility: auto;
   cursor: pointer;
   height: 48px;
@@ -228,38 +228,38 @@
   transition: all 150ms ease;
   transition-property: none;
 }
-.vercel [cmdk-item][aria-selected="true"] {
+.cloudtempo [cmdk-item][aria-selected="true"] {
   background: var(--grayA3);
   color: var(--gray12);
 }
-.vercel [cmdk-item][aria-disabled="true"] {
+.cloudtempo [cmdk-item][aria-disabled="true"] {
   color: var(--gray8);
   cursor: not-allowed;
 }
-.vercel [cmdk-item]:active {
+.cloudtempo [cmdk-item]:active {
   transition-property: background;
   background: var(--gray4);
 }
-.vercel [cmdk-item] + [cmdk-item] {
+.cloudtempo [cmdk-item] + [cmdk-item] {
   margin-top: 4px;
 }
-/* .vercel [cmdk-item] svg {
+/* .cloudtempo [cmdk-item] svg {
   width: 18px;
   height: 18px;
 } */
-.vercel [cmdk-list] {
+.cloudtempo [cmdk-list] {
   max-height: 300px;
   overflow: auto;
   overscroll-behavior: contain;
   transition: 100ms ease;
   transition-property: height;
 }
-.vercel [cmdk-vercel-shortcuts] {
+.cloudtempo [cmdk-cloudtempo-shortcuts] {
   display: flex;
   margin-left: auto;
   gap: 8px;
 }
-.vercel [cmdk-vercel-shortcuts] kbd {
+.cloudtempo [cmdk-cloudtempo-shortcuts] kbd {
   font-family: var(--font-sans);
   font-size: 12px;
   min-width: 20px;
@@ -273,16 +273,16 @@
   justify-content: center;
   text-transform: uppercase;
 }
-.vercel [cmdk-separator] {
+.cloudtempo [cmdk-separator] {
   height: 1px;
   width: 100%;
   background: var(--gray5);
   margin: 4px 0;
 }
-.vercel *:not([hidden]) + [cmdk-group] {
+.cloudtempo *:not([hidden]) + [cmdk-group] {
   margin-top: 8px;
 }
-.vercel [cmdk-group-heading] {
+.cloudtempo [cmdk-group-heading] {
   user-select: none;
   font-size: 12px;
   color: var(--gray11);
@@ -291,7 +291,7 @@
   align-items: center;
   margin-bottom: 8px;
 }
-.vercel [cmdk-empty],
+.cloudtempo [cmdk-empty],
 .aws-search-loading {
   font-size: 14px;
   display: flex;
@@ -300,6 +300,14 @@
   height: 48px;
   white-space: pre-wrap;
   color: var(--gray11);
+}
+.cloudtempo .back {
+  padding: 4px;
+  margin-top: 4px;
+  margin-right: 4px;
+  margin-left: 4px;
+  border-radius: 4px;
+  background-color: var(--grayA3);
 }
 
 .spinning {

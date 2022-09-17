@@ -1,6 +1,8 @@
-import { get } from "idb-keyval";
+import { get, keys } from "idb-keyval";
+import { AES, enc } from "crypto-js";
 import MiniSearch from "minisearch";
 import { Document } from "../../src/document";
+import { SECRET_CONST } from "./reindex";
 
 const CUSTOM_SPACE_OR_PUNCT = /[\n\r -_]+/u;
 let minisearch: MiniSearch | undefined;
@@ -24,27 +26,49 @@ export function createMinisearch() {
   });
 }
 
-export async function reinitializeMinisearch(allDocuments: Document[]) {
+export async function reinitializeMinisearch(
+  allDocuments: Document[],
+  accountId: string
+) {
   if (minisearch) {
     minisearch.removeAll();
     minisearch = createMinisearch();
     minisearch.addAll(allDocuments);
   } else {
-    await getOrInitializeMinisearch();
+    await getOrInitializeMinisearch(accountId);
   }
 }
 
-export async function getOrInitializeMinisearch() {
+export async function getOrInitializeMinisearch(accountId: string) {
   if (minisearch) {
     return minisearch;
   }
 
+  const secretKey = `${SECRET_CONST}-${accountId}`;
+
   console.log("Minisearch not initialized, initializing...");
 
-  const documents = JSON.parse((await get("documents")) || "{}");
+  const allKeys = await keys();
+  const accountDocumentKeys = allKeys
+    .filter((k) => k.toString().startsWith(`documents#${accountId}`))
+    .sort();
+
+  const documentsPerKeys = await Promise.all(
+    accountDocumentKeys.map(async (k) => {
+      const documentsEncrypted = await get(k);
+      const documentsDecrypted = AES.decrypt(
+        documentsEncrypted,
+        secretKey
+      ).toString(enc.Utf8);
+
+      return JSON.parse(documentsDecrypted);
+    })
+  );
+
+  const documentsFlattened = documentsPerKeys.flat();
 
   minisearch = createMinisearch();
-  minisearch.addAll(documents);
+  minisearch.addAll(documentsFlattened);
 
   return minisearch;
 }
