@@ -1,9 +1,17 @@
 {
-  "name": "AWS Search",
-  "description": "AWS Search",
+  "name": "CloudTempo",
+  "description": "Fast & Smart Command Bar for AWS Console.",
   "version": "0.0.1",
   "manifest_version": 3,
   "permissions": ["tabs", "storage"],
+  "homepage_url": "https://cloudtempo.dev",
+  "default_locale": "en",
+  "icons": {
+    "16": "img/icon16.png",
+    "32": "img/icon32.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
   "background": {
     "service_worker": "background.js"
   },

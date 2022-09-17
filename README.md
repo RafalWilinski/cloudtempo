@@ -2,8 +2,8 @@ Todos:
 
 - [ ] Cloudformation menu
 - [ ] License checking
-- [ ] Indexing tags
 - [ ] Drop us a line
+- [ ] Actions menu (favorites, aliases, copy arn)
 - [x] Store documents with accountId prefix to ensure tenant isolation
 - [x] Encode documents with accountId + something to keep it safe
 - [ ] Onboarding flow (thanks for installing, bla bla initial scan in the background)
@@ -31,6 +31,7 @@ Services for initial launch:
 
 Later add:
 
+- [ ] Indexing tags
 - IAM Groups
 - RDS
 - Route53
