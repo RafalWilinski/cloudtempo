@@ -291,8 +291,20 @@
   align-items: center;
   margin-bottom: 8px;
 }
-.cloudtempo [cmdk-cloudtempo-submenu-open-trigger],
+
 .cloudtempo [cmdk-cloudtempo-submenu-subcommand-trigger] {
+  color: var(--gray11);
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+
+  display: flex;
+  border-top: 1px solid var(--gray5);
+  padding-top: 4px;
+}
+
+.cloudtempo [cmdk-cloudtempo-submenu-open-trigger],
+.cloudtempo [cmdk-cloudtempo-submenu-subcommand-trigger] button {
   align-items: center;
   justify-content: center;
   padding: 8px;
@@ -306,7 +318,6 @@
   font-size: 12px;
   height: 28px;
   letter-spacing: -0.25px;
-  float: right;
 }
 
 .cloudtempo [cmdk-empty],
@@ -326,6 +337,7 @@
   margin-left: 4px;
   border-radius: 4px;
   background-color: var(--grayA3);
+  color: var(--grayA11);
 }
 
 .spinning {

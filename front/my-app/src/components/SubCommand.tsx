@@ -8,25 +8,25 @@ import {
   PlayIcon,
   StarIcon,
 } from "@heroicons/react/24/outline";
+import { Document } from "../document";
+import { consoleUrl } from "./services/url";
 
 export function SubCommand({
   inputRef,
   listRef,
   selectedValue,
+  doc,
 }: {
   inputRef: React.RefObject<HTMLInputElement>;
   listRef: React.RefObject<HTMLElement>;
   selectedValue?: string;
+  doc: Document;
 }) {
   const [open, setOpen] = React.useState(false);
   const [inputValue, setInputValue] = React.useState("");
 
   React.useEffect(() => {
     function listener(e: KeyboardEvent) {
-      if (!open) {
-        return;
-      }
-
       if (e.key === "j" && e.metaKey) {
         e.preventDefault();
         setOpen((o) => !o);
@@ -60,15 +60,17 @@ export function SubCommand({
 
   return (
     <Popover.Root open={open} onOpenChange={setOpen} modal={true}>
-      <Popover.Trigger
-        cmdk-cloudtempo-submenu-subcommand-trigger=""
-        onClick={() => setOpen(true)}
-        aria-expanded={open}
-      >
-        Actions
-        <kbd>⌘</kbd>
-        <kbd>J</kbd>
-      </Popover.Trigger>
+      <div cmdk-cloudtempo-submenu-subcommand-trigger="">
+        Last indexing: 3 minutes ago
+        <Popover.Trigger
+          // onClick={() => setOpen(true)}
+          aria-expanded={open}
+        >
+          Actions
+          <kbd>⌘</kbd>
+          <kbd>J</kbd>
+        </Popover.Trigger>
+      </div>
       {open && (
         <Popover.Content
           style={{
@@ -87,25 +89,35 @@ export function SubCommand({
           <Command>
             <Command.List>
               <Command.Group heading={selectedValue}>
-                <SubItem shortcut="↵">
+                <SubItem
+                  shortcut="↵"
+                  onSelect={() => {
+                    location.href = consoleUrl(doc);
+                  }}
+                >
                   <PlayIcon width={20} height={20} />
                   Open
                 </SubItem>
-                <SubItem shortcut="⌘ ↵">
+                <SubItem
+                  shortcut="⌘ ↵"
+                  onSelect={() => {
+                    chrome.tabs.create({ url: consoleUrl(doc) });
+                  }}
+                >
                   <ArrowRightOnRectangleIcon width={20} height={20} />
                   Open in a new tab
                 </SubItem>
-                <SubItem shortcut="⌘ I">
+                <SubItem shortcut="⌘ I" onSelect={() => {}}>
                   <DocumentDuplicateIcon width={20} height={20} />
-                  Copy ARN
+                  Copy ARN (not ready)
                 </SubItem>
-                <SubItem shortcut="⌘ I">
+                <SubItem shortcut="⌘ I" onSelect={() => {}}>
                   <LinkIcon width={20} height={20} />
-                  Set alias
+                  Set alias (not ready)
                 </SubItem>
-                <SubItem shortcut="⌘ ⇧ F">
+                <SubItem shortcut="⌘ ⇧ F" onSelect={() => {}}>
                   <StarIcon width={20} height={20} />
-                  Add to Favorites
+                  Add to Favorites (not ready)
                 </SubItem>
               </Command.Group>
             </Command.List>
@@ -126,12 +138,14 @@ export function SubCommand({
 function SubItem({
   children,
   shortcut,
+  onSelect,
 }: {
   children: React.ReactNode;
   shortcut: string;
+  onSelect: any;
 }) {
   return (
-    <Command.Item>
+    <Command.Item onSelect={onSelect}>
       {children}
       <div cmdk-cloudtempo-submenu-submenu-shortcuts="">
         {shortcut.split(" ").map((key) => {
