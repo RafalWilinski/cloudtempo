@@ -5,7 +5,7 @@ import {
   PutItemCommand,
   QueryCommand,
 } from "@aws-sdk/client-dynamodb";
-import { AES } from "crypto-js";
+import { AES, enc } from "crypto-js";
 import { corsHeaders } from "../lib/cors";
 
 const TableName = process.env.LICENSES_TABLE!;
@@ -42,6 +42,11 @@ export const handler = async (
 
   let licenseKeyItem;
   try {
+    const decryptedUserArn = AES.decrypt(
+      encryptedUserArn,
+      SECRET_CONST
+    ).toString(enc.Utf8);
+
     licenseKeyItem = await getLicenseKeyItem(licenseKey);
 
     if (!licenseKeyItem) {
@@ -64,7 +69,7 @@ export const handler = async (
       };
     }
 
-    await associateUserWithLicense(encryptedUserArn, licenseKey);
+    await associateUserWithLicense(decryptedUserArn, licenseKey);
 
     const licenseKeyEncrypted = AES.encrypt(
       licenseKey,

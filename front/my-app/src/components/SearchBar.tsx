@@ -2,9 +2,10 @@
 // <reference types="chrome"/>
 import React, { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { Toaster } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 import Cookies from "js-cookie";
 import { Command } from "cmdk";
+import confetti from "canvas-confetti";
 import * as lambda from "./services/Lambda";
 import * as cloudformation from "./services/Cloudformation";
 import { Document } from "../document";
@@ -172,7 +173,19 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
         userInfo: Cookies.get("aws-userInfo"),
       },
       function (response) {
-        console.log(response);
+        if (response.ok) {
+          setPages(["Home"]);
+          setInputValue("");
+
+          confetti({
+            particleCount: 100,
+            spread: 90,
+            origin: { y: 0.6 },
+            zIndex: 99999,
+          });
+        } else {
+          toast.error("Problem with activating a license...");
+        }
       }
     );
   };

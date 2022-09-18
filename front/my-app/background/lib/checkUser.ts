@@ -1,4 +1,3 @@
-import { get } from "js-cookie";
 import { AES, enc } from "crypto-js";
 import { SECRET_CONST } from "./reindex";
 
@@ -36,8 +35,11 @@ export async function registerLicenseKey(licenseKey: string, userInfo?: any) {
     ).json();
 
     console.log(response);
+
+    return response;
   } catch (error) {
     console.log(error);
+    return { error: (error as any).message };
   }
 }
 
@@ -56,8 +58,16 @@ export async function checkUser(userInfo?: any): Promise<LicenseInfo> {
       )
     ).json();
 
+    const decryptedReceivedKey = AES.decrypt(
+      response.ok,
+      SECRET_CONST
+    ).toString(enc.Utf8);
+
     if (response.ok) {
-      return checkLicenseKey(response.ok);
+      return {
+        isValid: true,
+        licenseKey: decryptedReceivedKey,
+      };
     }
 
     if (response.n && response.c) {
@@ -76,27 +86,6 @@ export async function checkUser(userInfo?: any): Promise<LicenseInfo> {
       reason: `Error while checking user: ${(error as any).message}`,
     };
   }
-}
-
-function checkLicenseKey(encryptedLicenseKey: string) {
-  const decryptedReceivedKey = AES.decrypt(
-    encryptedLicenseKey,
-    SECRET_CONST
-  ).toString(enc.Utf8);
-  const storedLicenseKey = get("cloudtempo-licensekey");
-  const areKeysMatching = decryptedReceivedKey === storedLicenseKey;
-
-  if (areKeysMatching) {
-    return {
-      isValid: decryptedReceivedKey === storedLicenseKey,
-      licenseKey: decryptedReceivedKey,
-    };
-  }
-
-  return {
-    isValid: false,
-    reason: "There's mismatch between stored and received license keys",
-  };
 }
 
 function checkTrialDatesAndValidity(
