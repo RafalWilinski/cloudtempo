@@ -41,6 +41,10 @@ export const handler = async (
     const decryptedUserArn = AES.decrypt(encryptedArn, SECRET_CONST).toString(
       enc.Utf8
     );
+    const decodedArn = decodeArn(decryptedUserArn);
+
+    console.log({ decodedArn, decryptedUserArn, encryptedArn });
+
     userItem = await getUserItem(encryptedArn);
 
     if (!userItem) {

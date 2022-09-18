@@ -1,9 +1,9 @@
 Todos:
 
 - [ ] Cloudformation menu
-- [ ] License checking
+- [x] License checking
 - [ ] Drop us a line
-- [ ] Actions menu (favorites, aliases, copy arn)
+- [x] Actions menu (favorites, aliases, copy arn)
 - [ ] Onboarding flow (thanks for installing, bla bla initial scan in the background)
 - [ ] Aliases
 - [ ] Menu for selecting services with coming soon section inside configuration
@@ -12,6 +12,7 @@ Todos:
 - [x] Encode documents with accountId + something to keep it safe
 - [x] Get rid of vercel references
 - [x] Proper name, description, and app icon
+- [ ] Fresh AWS Account for CloudTango
 
 Trials:
 
