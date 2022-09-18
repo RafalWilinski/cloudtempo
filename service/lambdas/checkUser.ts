@@ -5,56 +5,88 @@ import {
   PutItemCommand,
 } from "@aws-sdk/client-dynamodb";
 import { AES, enc } from "crypto-js";
+import { corsHeaders } from "../lib/cors";
+import { decodeArn } from "../lib/arn";
 
 const TableName = process.env.LICENSES_TABLE!;
 const dynamodb = new DynamoDBClient({});
 const SECRET_CONST = "cl0udt3mP0";
 
+interface UserItem {
+  id: string;
+  createdAt: string;
+  licenseKey?: string;
+}
+
 export const handler = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
-  const id = event.queryStringParameters!["id"];
-  if (!id) {
+  if (!event.queryStringParameters) {
+    return {
+      statusCode: 400,
+      body: "Please provide query string parameters",
+    };
+  }
+
+  const encryptedArn = event.queryStringParameters["id"];
+  if (!encryptedArn) {
     return {
       statusCode: 400,
       body: "Missing query parameter 'id'",
     };
   }
 
-  let userItem;
   try {
-    userItem = await getUserItem(id);
+    let userItem;
+    const decryptedUserArn = AES.decrypt(encryptedArn, SECRET_CONST).toString(
+      enc.Utf8
+    );
+    userItem = await getUserItem(encryptedArn);
 
     if (!userItem) {
-      userItem = await createUserItem(id);
+      userItem = await createUserItem(encryptedArn, decryptedUserArn);
     }
 
-    console.log(userItem);
+    if (userItem.licenseKey) {
+      // todo: check if license is valid
+      const licenseKeyEncrypted = AES.encrypt(
+        userItem.licenseKey,
+        SECRET_CONST
+      ).toString();
+
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ ok: licenseKeyEncrypted }),
+        headers: corsHeaders,
+      };
+    }
+
+    const accountIdEncrypted = AES.encrypt(
+      decodeArn(decryptedUserArn).accountId,
+      SECRET_CONST
+    ).toString();
+
+    const createdAtEncrypted = AES.encrypt(
+      userItem.createdAt,
+      SECRET_CONST
+    ).toString();
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ userItem }),
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-        "Content-Type": "application/json",
-      },
+      body: JSON.stringify({ n: accountIdEncrypted, c: createdAtEncrypted }),
+      headers: corsHeaders,
     };
   } catch (error) {
     console.log("Error while checking/creating user", error);
     return {
       statusCode: 400,
-      body: JSON.stringify({ error, id }),
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-        "Content-Type": "application/json",
-      },
+      body: JSON.stringify({ error: (error as any).message, id: encryptedArn }),
+      headers: corsHeaders,
     };
   }
 };
 
-async function getUserItem(id: string) {
+async function getUserItem(id: string): Promise<UserItem | undefined> {
   const item = await dynamodb.send(
     new GetItemCommand({
       TableName,
@@ -65,25 +97,27 @@ async function getUserItem(id: string) {
   );
 
   if (item.Item) {
-    const arn = JSON.parse(
-      AES.decrypt(item.Item.arn.S!, SECRET_CONST).toString(enc.Utf8)
-    );
-
-    return arn;
+    return {
+      id: item.Item.id.S!,
+      createdAt: item.Item.createdAt.S!,
+      licenseKey: item.Item.licenseKey ? item.Item.licenseKey.S : undefined,
+    };
   }
 
   return undefined;
 }
 
-async function createUserItem(id: string) {
+async function createUserItem(
+  encryptedArn: string,
+  decryptedUserArn: string
+): Promise<UserItem> {
   const createdAt = new Date().toISOString();
-  const { arn } = JSON.parse(AES.decrypt(id, SECRET_CONST).toString(enc.Utf8));
 
   const command = new PutItemCommand({
     TableName,
     Item: {
-      id: { S: `ID#${id}` },
-      arn: { S: arn },
+      id: { S: `ID#${encryptedArn}` },
+      arn: { S: decryptedUserArn },
       createdAt: { S: createdAt },
     },
   });
@@ -91,8 +125,7 @@ async function createUserItem(id: string) {
   await dynamodb.send(command);
 
   return {
-    id,
-    arn,
+    id: encryptedArn,
     createdAt,
   };
 }

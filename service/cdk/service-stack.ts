@@ -2,6 +2,8 @@ import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 import * as lambda from "aws-cdk-lib/aws-lambda-nodejs";
 import * as s3 from "aws-cdk-lib/aws-s3";
+import * as route53 from "aws-cdk-lib/aws-route53";
+import * as targets from "aws-cdk-lib/aws-route53-targets";
 import * as apigateway from "aws-cdk-lib/aws-apigateway";
 import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
 import { FunctionUrlAuthType } from "aws-cdk-lib/aws-lambda";
@@ -9,6 +11,7 @@ import { PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { Duration } from "aws-cdk-lib";
 import * as events from "aws-cdk-lib/aws-events";
 import { LambdaFunction } from "aws-cdk-lib/aws-events-targets";
+import { Certificate } from "aws-cdk-lib/aws-certificatemanager";
 
 export class SearchServiceStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -70,6 +73,31 @@ export class SearchServiceStack extends cdk.Stack {
     userResource
       .addResource("activate")
       .addMethod("GET", new apigateway.LambdaIntegration(activateUserEndpoint));
+
+    const certificate = Certificate.fromCertificateArn(
+      this,
+      "Certificate",
+      "arn:aws:acm:us-east-1:085108115628:certificate/3c5c91c3-11f8-43cb-b3f5-255dac1c92d1"
+    );
+    api.addDomainName("ApiDomainName", {
+      domainName: "api.cloudtempo.dev",
+      certificate,
+    });
+
+    const zone = route53.HostedZone.fromHostedZoneAttributes(
+      this,
+      "ApiCloudtangoDevHZ",
+      {
+        hostedZoneId: "Z07244831H2LT0J4E34UU",
+        zoneName: "api.cloudtempo.dev",
+      }
+    );
+
+    new route53.ARecord(this, "ApiCloudtempoDevApiAlias", {
+      zone,
+      target: route53.RecordTarget.fromAlias(new targets.ApiGateway(api)),
+      // or - route53.RecordTarget.fromAlias(new alias.ApiGatewayDomain(domainName)),
+    });
 
     /// ----------- END LICENSE / USER MGMT -------------
 

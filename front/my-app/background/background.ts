@@ -3,13 +3,11 @@ import {
   getDynamoDBCredentials,
   getECSCredentials,
 } from "../src/lib/getCredentials";
-import { installActivator } from "./lib/activating";
 import { getOrInitializeMinisearch } from "./lib/minisearch";
+import { checkUser } from "./lib/checkUser";
 import { reindex } from "./lib/reindex";
 
 importScripts("aws-sdk.js");
-
-installActivator();
 
 console.log("Dependencies loaded");
 
@@ -19,6 +17,8 @@ chrome.runtime.onMessageExternal.addListener(async function (
   sendResponse
 ) {
   console.log("MSG", request);
+
+  console.log(await checkUser());
 
   if (request.type === "reindex") {
     const [ddbCredentials, ecsCredentials] = await Promise.all([

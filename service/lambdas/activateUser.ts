@@ -6,6 +6,7 @@ import {
   QueryCommand,
 } from "@aws-sdk/client-dynamodb";
 import { AES } from "crypto-js";
+import { corsHeaders } from "../lib/cors";
 
 const TableName = process.env.LICENSES_TABLE!;
 const dynamodb = new DynamoDBClient({});
@@ -14,8 +15,15 @@ const SECRET_CONST = "cl0udt3mP0";
 export const handler = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
-  const id = event.queryStringParameters!["id"];
-  if (!id) {
+  if (!event.queryStringParameters) {
+    return {
+      statusCode: 400,
+      body: "Please provide query string parameters",
+    };
+  }
+
+  const encryptedUserArn = event.queryStringParameters["id"];
+  if (!encryptedUserArn) {
     return {
       statusCode: 400,
       body: "Missing query parameter 'id'",
@@ -49,7 +57,7 @@ export const handler = async (
       };
     }
 
-    await associateUserWithLicense(id, licenseKey);
+    await associateUserWithLicense(encryptedUserArn, licenseKey);
 
     const licenseKeyEncrypted = AES.encrypt(
       licenseKey,
@@ -59,22 +67,14 @@ export const handler = async (
     return {
       statusCode: 200,
       body: JSON.stringify({ ok: licenseKeyEncrypted }),
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-        "Content-Type": "application/json",
-      },
+      headers: corsHeaders,
     };
   } catch (error) {
     console.log("Error while checking/creating user", error);
     return {
       statusCode: 400,
       body: JSON.stringify({ error, id }),
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-        "Content-Type": "application/json",
-      },
+      headers: corsHeaders,
     };
   }
 };
@@ -111,7 +111,7 @@ async function getLicenseKeyPartition(licenseKey: string) {
 }
 
 async function associateUserWithLicense(id: string, licenseKey: string) {
-  const currentItem = await dynamodb.send(
+  const currentUserItem = await dynamodb.send(
     new GetItemCommand({
       TableName,
       Key: {
@@ -124,7 +124,7 @@ async function associateUserWithLicense(id: string, licenseKey: string) {
     new PutItemCommand({
       TableName,
       Item: {
-        ...(currentItem.Item ?? {}),
+        ...(currentUserItem.Item ?? {}),
         licenseKey: { S: licenseKey },
       },
     })

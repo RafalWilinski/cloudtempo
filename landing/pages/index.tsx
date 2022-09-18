@@ -69,6 +69,10 @@ const Home: NextPage = () => {
           and see for yourself.
         </h3>
         <Demo isDemo={true} />
+
+        <a href="https://cloudtempo.lemonsqueezy.com/checkout/buy/7d4e12d6-d5f4-46e2-a06f-b87329ddedd5?media=0&discount=0">
+          Buy
+        </a>
       </main>
 
       <footer className={styles.footer}>
