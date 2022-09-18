@@ -84,7 +84,7 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
               {
                 type: "reindex",
                 userInfo: Cookies.get("aws-userInfo"),
-                accountId: getCurrentAccountId(),
+                accountId: getCurrentAccountId(isDemo),
               },
               function (_response) {
                 console.log(_response);

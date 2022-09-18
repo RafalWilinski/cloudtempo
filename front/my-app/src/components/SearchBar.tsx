@@ -32,7 +32,7 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const [isActionsMenuVisible, setActionsMenuVisibility] = useState(false);
   const listRef = React.useRef(null);
-  const currentAccountId = getCurrentAccountId();
+  const currentAccountId = getCurrentAccountId(isDemo);
   const [pages, setPages] = React.useState<string[]>(["Home"]);
   const [selectedDocument, setSelectedDocument] = useState<
     Document | undefined

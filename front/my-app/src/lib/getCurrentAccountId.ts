@@ -9,7 +9,6 @@ export function getCurrentAccountId(isDemo?: boolean) {
   const userInfo = Cookies.get("aws-userInfo");
 
   if (!userInfo) {
-    toast.error("No AWS user info found");
     return;
   }
 
