@@ -1,5 +1,5 @@
 import { get } from "js-cookie";
-import { AES } from "crypto-js";
+import { AES, enc } from "crypto-js";
 import { SECRET_CONST } from "./reindex";
 
 export interface AWSInfo {
@@ -18,6 +18,29 @@ export interface LicenseInfo {
   reason?: string;
 }
 
+export async function registerLicenseKey(licenseKey: string, userInfo?: any) {
+  if (!userInfo) {
+    return { isValid: false, reason: "AWS User Info missing" };
+  }
+
+  const user: AWSInfo = JSON.parse(userInfo);
+  const encryptedArn = AES.encrypt(user.arn, SECRET_CONST).toString();
+
+  try {
+    const response = await (
+      await fetch(
+        `https://api.cloudtempo.dev/user/activate?id=${encodeURIComponent(
+          encryptedArn
+        )}&licenseKey=${encodeURIComponent(licenseKey)}`
+      )
+    ).json();
+
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function checkUser(userInfo?: any): Promise<LicenseInfo> {
   if (!userInfo) {
     return { isValid: false, reason: "AWS User Info missing" };
@@ -26,14 +49,12 @@ export async function checkUser(userInfo?: any): Promise<LicenseInfo> {
   const user: AWSInfo = JSON.parse(userInfo);
   const encryptedArn = AES.encrypt(user.arn, SECRET_CONST).toString();
 
-  console.log({ user, encryptedArn });
-
   try {
     const response = await (
-      await fetch(`https://api.cloudtempo.dev/user?id=${encryptedArn}`)
+      await fetch(
+        `https://api.cloudtempo.dev/user?id=${encodeURIComponent(encryptedArn)}`
+      )
     ).json();
-
-    console.log(response);
 
     if (response.ok) {
       return checkLicenseKey(response.ok);
@@ -61,7 +82,7 @@ function checkLicenseKey(encryptedLicenseKey: string) {
   const decryptedReceivedKey = AES.decrypt(
     encryptedLicenseKey,
     SECRET_CONST
-  ).toString();
+  ).toString(enc.Utf8);
   const storedLicenseKey = get("cloudtempo-licensekey");
   const areKeysMatching = decryptedReceivedKey === storedLicenseKey;
 
@@ -85,12 +106,12 @@ function checkTrialDatesAndValidity(
   const decryptedAccountId = AES.decrypt(
     encryptedAccountId,
     SECRET_CONST
-  ).toString();
+  ).toString(enc.Utf8);
 
   const decryptedCreatedAt = AES.decrypt(
     encryptedCreatedAt,
     SECRET_CONST
-  ).toString();
+  ).toString(enc.Utf8);
 
   try {
     const TRIAL_DAYS = 7;
@@ -98,8 +119,6 @@ function checkTrialDatesAndValidity(
     const now = new Date();
     const timeRemaining =
       createdAt.getTime() + 1000 * 60 * 60 * 24 * TRIAL_DAYS - now.getTime();
-
-    console.log({ timeRemaining });
 
     return {
       isValid: timeRemaining > 0,

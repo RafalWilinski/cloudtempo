@@ -6,8 +6,9 @@ export type Details = {
 };
 
 export function decodeArn(arn: string): Details {
+  console.log("Decoding ARN", arn);
   const [arnPrefix, service, region, accountId, resource] = arn.split(":");
-  if (arnPrefix !== "arn" || service !== "sts" || region !== "") {
+  if (arnPrefix !== "arn") {
     throw new Error("Invalid ARN");
   }
   return { accountId, resource };

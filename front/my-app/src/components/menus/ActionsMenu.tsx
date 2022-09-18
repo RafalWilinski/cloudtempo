@@ -13,11 +13,13 @@ import { useEffect, useState } from "react";
 import { extensionId } from "../../lib/extension";
 import { toast } from "react-hot-toast";
 import { getCurrentAccountId } from "../../lib/getCurrentAccountId";
+import { LicenseInfo } from "../../../background/lib/checkUser";
 
 interface ActionsMenuProps {
   setPages: (pages: string[]) => void;
   pages: string[];
   isDemo?: boolean;
+  userInfo?: LicenseInfo;
 }
 
 export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
@@ -85,6 +87,7 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
                 accountId: getCurrentAccountId(),
               },
               function (_response) {
+                console.log(_response);
                 setIsReindexing(false);
                 toast("Reindexing done");
               }

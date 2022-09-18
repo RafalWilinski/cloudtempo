@@ -4,7 +4,7 @@ import {
   getECSCredentials,
 } from "../src/lib/getCredentials";
 import { getOrInitializeMinisearch } from "./lib/minisearch";
-import { checkUser } from "./lib/checkUser";
+import { checkUser, registerLicenseKey } from "./lib/checkUser";
 import { reindex } from "./lib/reindex";
 
 importScripts("aws-sdk.js");
@@ -16,9 +16,9 @@ chrome.runtime.onMessageExternal.addListener(async function (
   _sender,
   sendResponse
 ) {
-  console.log("MSG", request);
+  console.log("MSG", request, _sender);
 
-  console.log(await checkUser(request.userInfo));
+  const licenseInfo = checkUser(request.userInfo);
 
   if (request.type === "reindex") {
     const [ddbCredentials, ecsCredentials] = await Promise.all([
@@ -26,17 +26,21 @@ chrome.runtime.onMessageExternal.addListener(async function (
       getECSCredentials(),
     ]);
 
+    const reindexResponse = await reindex({
+      ddbCredentials,
+      ecsCredentials,
+      accountId: request.accountId,
+    });
+
+    sendResponse({ response: reindexResponse, userInfo: await licenseInfo });
+  } else if (request.licenseKey) {
     sendResponse(
-      await reindex({
-        ddbCredentials,
-        ecsCredentials,
-        accountId: request.accountId,
-      })
+      await registerLicenseKey(request.licenseKey, request.userInfo)
     );
   } else if (request.q) {
     const results = (await getOrInitializeMinisearch(request.accountId)).search(
       request.q
     );
-    sendResponse(results);
+    sendResponse({ results, userInfo: await licenseInfo });
   }
 });

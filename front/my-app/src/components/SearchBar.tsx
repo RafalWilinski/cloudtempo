@@ -20,6 +20,7 @@ import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import { SubCommand } from "./SubCommand";
 import { consoleUrl } from "./services/url";
 import { ResourcesMenu } from "./menus/ResourcesMenu";
+import { LicenseInfo } from "../../background/lib/checkUser";
 
 export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
   const ref = React.useRef<HTMLDivElement | null>(null);
@@ -27,6 +28,7 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
   const [isDarkMode, setDarkMode] = useState(true);
   const [inputValue, setInputValue] = React.useState("");
   const [value, setValue] = React.useState("");
+  const [userInfo, setUserInfo] = React.useState<LicenseInfo>();
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const [isActionsMenuVisible, setActionsMenuVisibility] = useState(false);
   const listRef = React.useRef(null);
@@ -96,7 +98,8 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
         function (response) {
           console.log(response);
 
-          setItems(response);
+          setUserInfo(response.userInfo);
+          setItems(response.results);
           setLoading(false);
         }
       );
@@ -161,7 +164,18 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
     return "Start typing to search...";
   };
 
-  const submitLicenseKey = () => {};
+  const submitLicenseKey = () => {
+    chrome.runtime.sendMessage(
+      extensionId,
+      {
+        licenseKey: inputValue,
+        userInfo: Cookies.get("aws-userInfo"),
+      },
+      function (response) {
+        console.log(response);
+      }
+    );
+  };
 
   return (
     <div
@@ -186,7 +200,6 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
             onKeyDown={(e: React.KeyboardEvent) => {
               if (e.key === "Enter" && activePage === "License") {
                 submitLicenseKey();
-                // bounce();
               }
 
               if (e.key === "Escape") {
@@ -251,6 +264,7 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
                   setPages={setPages}
                   pages={pages}
                   isDemo={isDemo}
+                  userInfo={userInfo}
                 />
               )}
               {isHome && <ServicesMenu isDemo={isDemo} />}
@@ -261,7 +275,7 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
                 <cloudformation.Menu document={selectedDocument!} />
               )}
               {activePage === "Regions" && <RegionsMenu />}
-              {activePage === "License" && <ActivateMenu />}
+              {activePage === "License" && <ActivateMenu setPages={setPages} />}
               {activePage === "Configuration" && (
                 <ConfigurationMenu
                   goToHome={() => setPages(["Home"])}

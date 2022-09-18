@@ -18,7 +18,8 @@ export const handler = async (
   if (!event.queryStringParameters) {
     return {
       statusCode: 400,
-      body: "Please provide query string parameters",
+      headers: corsHeaders,
+      body: JSON.stringify({ error: "Please provide query string parameters" }),
     };
   }
 
@@ -26,14 +27,16 @@ export const handler = async (
   if (!encryptedUserArn) {
     return {
       statusCode: 400,
-      body: "Missing query parameter 'id'",
+      headers: corsHeaders,
+      body: JSON.stringify({ error: "Missing query parameter 'id'" }),
     };
   }
   const licenseKey = event.queryStringParameters!["licenseKey"];
   if (!licenseKey) {
     return {
       statusCode: 400,
-      body: "Missing query parameter 'licenseKey'",
+      headers: corsHeaders,
+      body: JSON.stringify({ error: "Missing query parameter 'licenseKey'" }),
     };
   }
 
@@ -44,7 +47,8 @@ export const handler = async (
     if (!licenseKeyItem) {
       return {
         statusCode: 400,
-        body: "Provided licenseKey does not exist",
+        headers: corsHeaders,
+        body: JSON.stringify({ error: "Provided licenseKey does not exist" }),
       };
     }
 
@@ -53,7 +57,10 @@ export const handler = async (
     if (associatedUsers.length > 5) {
       return {
         statusCode: 400,
-        body: "You've already associated 5 users with this licenseKey",
+        headers: corsHeaders,
+        body: JSON.stringify({
+          error: "You've already associated 5 users with this licenseKey",
+        }),
       };
     }
 
@@ -73,7 +80,7 @@ export const handler = async (
     console.log("Error while checking/creating user", error);
     return {
       statusCode: 400,
-      body: JSON.stringify({ error, id }),
+      body: JSON.stringify({ error, id: encryptedUserArn }),
       headers: corsHeaders,
     };
   }
