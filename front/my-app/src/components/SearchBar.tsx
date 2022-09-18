@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { Toaster } from "react-hot-toast";
-import { set } from "js-cookie";
+import Cookies from "js-cookie";
 import { Command } from "cmdk";
 import * as lambda from "./services/Lambda";
 import * as cloudformation from "./services/Cloudformation";
@@ -252,7 +252,7 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
                   goToHome={() => setPages(["Home"])}
                   setDarkMode={() =>
                     setDarkMode((d) => {
-                      set("cloudtempo-dark-mode", (!d).toString());
+                      Cookies.set("cloudtempo-dark-mode", (!d).toString());
                       return !d;
                     })
                   }

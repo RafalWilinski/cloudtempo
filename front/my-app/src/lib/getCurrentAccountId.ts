@@ -1,4 +1,4 @@
-import { get } from "js-cookie";
+import Cookies from "js-cookie";
 import { toast } from "react-hot-toast";
 
 export function getCurrentAccountId(isDemo?: boolean) {
@@ -6,7 +6,7 @@ export function getCurrentAccountId(isDemo?: boolean) {
     return "demo-account-id";
   }
 
-  const userInfo = get("aws-userInfo");
+  const userInfo = Cookies.get("aws-userInfo");
 
   if (!userInfo) {
     toast.error("No AWS user info found");
