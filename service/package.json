@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.103",
+    "@types/crypto-js": "^4.1.1",
     "@types/jest": "^27.5.2",
     "@types/node": "10.17.27",
     "@types/prettier": "2.6.0",
@@ -32,6 +33,7 @@
     "aws-cdk-lib": "2.41.0",
     "aws-sdk": "^2.1213.0",
     "constructs": "^10.0.0",
+    "crypto-js": "^4.1.1",
     "minisearch": "^5.0.0",
     "source-map-support": "^0.5.21"
   }

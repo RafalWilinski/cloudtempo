@@ -22,6 +22,13 @@ export class SearchServiceStack extends cdk.Stack {
       },
       billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
     });
+    licensesTable.addGlobalSecondaryIndex({
+      indexName: "licenseKey",
+      partitionKey: {
+        name: "licenseKey",
+        type: dynamodb.AttributeType.STRING,
+      },
+    });
 
     const checkUserEndpoint = new lambda.NodejsFunction(
       this,
@@ -37,12 +44,32 @@ export class SearchServiceStack extends cdk.Stack {
     );
     licensesTable.grantReadWriteData(checkUserEndpoint);
 
+    const activateUserEndpoint = new lambda.NodejsFunction(
+      this,
+      "ActivateUserEndpoint",
+      {
+        entry: "./lambdas/activateUser.ts",
+        handler: "handler",
+        environment: {
+          LICENSES_TABLE: licensesTable.tableName,
+        },
+        memorySize: 512,
+      }
+    );
+    licensesTable.grantReadWriteData(activateUserEndpoint);
+
     const api = new apigateway.RestApi(this, "Api", {
       restApiName: "MyApi",
     });
-    api.root
-      .addResource("user")
-      .addMethod("GET", new apigateway.LambdaIntegration(checkUserEndpoint));
+    const userResource = api.root.addResource("user");
+    userResource.addMethod(
+      "GET",
+      new apigateway.LambdaIntegration(checkUserEndpoint)
+    );
+
+    userResource
+      .addResource("activate")
+      .addMethod("GET", new apigateway.LambdaIntegration(activateUserEndpoint));
 
     /// ----------- END LICENSE / USER MGMT -------------
 

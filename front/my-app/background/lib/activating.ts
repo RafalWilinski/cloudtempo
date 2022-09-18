@@ -23,7 +23,7 @@ export async function checkUser() {
 
   try {
     const response = await (
-      await fetch(`https://api.cloudtango.dev/v1/license?id=${encryptedArn}`)
+      await fetch(`https://api.cloudtango.dev/user?id=${encryptedArn}`)
     ).json();
   } catch (error) {
     console.error(error);

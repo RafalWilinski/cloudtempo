@@ -4,9 +4,11 @@ import {
   GetItemCommand,
   PutItemCommand,
 } from "@aws-sdk/client-dynamodb";
+import { AES, enc } from "crypto-js";
 
 const TableName = process.env.LICENSES_TABLE!;
 const dynamodb = new DynamoDBClient({});
+const SECRET_CONST = "cl0udt3mP0";
 
 export const handler = async (
   event: APIGatewayProxyEvent
@@ -26,6 +28,8 @@ export const handler = async (
     if (!userItem) {
       userItem = await createUserItem(id);
     }
+
+    console.log(userItem);
 
     return {
       statusCode: 200,
@@ -50,19 +54,22 @@ export const handler = async (
   }
 };
 
-// todo: Use assymetrical cryptography to return valid or not
 async function getUserItem(id: string) {
   const item = await dynamodb.send(
     new GetItemCommand({
       TableName,
       Key: {
-        id: { S: id },
+        id: { S: `ID#${id}` },
       },
     })
   );
 
   if (item.Item) {
-    return item.Item;
+    const arn = JSON.parse(
+      AES.decrypt(item.Item.arn.S!, SECRET_CONST).toString(enc.Utf8)
+    );
+
+    return arn;
   }
 
   return undefined;
@@ -70,10 +77,13 @@ async function getUserItem(id: string) {
 
 async function createUserItem(id: string) {
   const createdAt = new Date().toISOString();
+  const { arn } = JSON.parse(AES.decrypt(id, SECRET_CONST).toString(enc.Utf8));
+
   const command = new PutItemCommand({
     TableName,
     Item: {
-      id: { S: id },
+      id: { S: `ID#${id}` },
+      arn: { S: arn },
       createdAt: { S: createdAt },
     },
   });
@@ -82,6 +92,7 @@ async function createUserItem(id: string) {
 
   return {
     id,
+    arn,
     createdAt,
   };
 }
