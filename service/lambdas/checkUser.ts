@@ -45,10 +45,10 @@ export const handler = async (
 
     console.log({ decodedArn, decryptedUserArn, encryptedArn });
 
-    userItem = await getUserItem(encryptedArn);
+    userItem = await getUserItem(decryptedUserArn);
 
     if (!userItem) {
-      userItem = await createUserItem(encryptedArn, decryptedUserArn);
+      userItem = await createUserItem(decryptedUserArn);
     }
 
     if (userItem.licenseKey) {
@@ -111,16 +111,13 @@ async function getUserItem(id: string): Promise<UserItem | undefined> {
   return undefined;
 }
 
-async function createUserItem(
-  encryptedArn: string,
-  decryptedUserArn: string
-): Promise<UserItem> {
+async function createUserItem(decryptedUserArn: string): Promise<UserItem> {
   const createdAt = new Date().toISOString();
 
   const command = new PutItemCommand({
     TableName,
     Item: {
-      id: { S: `ID#${encryptedArn}` },
+      id: { S: `ID#${decryptedUserArn}` },
       arn: { S: decryptedUserArn },
       createdAt: { S: createdAt },
     },
@@ -129,7 +126,7 @@ async function createUserItem(
   await dynamodb.send(command);
 
   return {
-    id: encryptedArn,
+    id: decryptedUserArn,
     createdAt,
   };
 }
