@@ -18,7 +18,7 @@ chrome.runtime.onMessageExternal.addListener(async function (
 ) {
   console.log("MSG", request);
 
-  console.log(await checkUser());
+  console.log(await checkUser(request.userInfo));
 
   if (request.type === "reindex") {
     const [ddbCredentials, ecsCredentials] = await Promise.all([

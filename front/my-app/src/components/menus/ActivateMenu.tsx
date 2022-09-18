@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Command } from "cmdk";
 import { KeyIcon, CreditCardIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-hot-toast";
@@ -19,18 +20,8 @@ export function ActivateMenu({
         onSelect={() => (location.href = "https://cloudtempo.dev/buy?ref=app")}
       >
         <CreditCardIcon width={20} height={20} />
-        Buy License
+        If you don't have license yet - Buy here
       </Command.Item>
-      {!isActivated && (
-        <Command.Item
-          onSelect={() => {
-            setPages(["Home", "Activate"]);
-          }}
-        >
-          <KeyIcon width={20} height={20} />
-          Activate License using Key
-        </Command.Item>
-      )}
     </Command.Group>
   );
 }

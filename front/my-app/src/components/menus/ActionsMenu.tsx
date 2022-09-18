@@ -1,4 +1,5 @@
 import { Command } from "cmdk";
+import Cookies from "js-cookie";
 import {
   ArrowPathIcon,
   InformationCircleIcon,
@@ -80,6 +81,7 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
               extensionId,
               {
                 type: "reindex",
+                userInfo: Cookies.get("aws-userInfo"),
                 accountId: getCurrentAccountId(),
               },
               function (_response) {

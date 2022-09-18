@@ -88,7 +88,11 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
     if (window.location.href.indexOf("localhost") < 0 && !isDemo) {
       chrome.runtime.sendMessage(
         extensionId,
-        { q: inputValue, accountId: currentAccountId },
+        {
+          q: inputValue,
+          accountId: currentAccountId,
+          userInfo: Cookies.get("aws-userInfo"),
+        },
         function (response) {
           console.log(response);
 
@@ -157,6 +161,8 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
     return "Start typing to search...";
   };
 
+  const submitLicenseKey = () => {};
+
   return (
     <div
       className={`bg ${isVisible ? "cmdk-not-visible" : "cmdk-visible"}`}
@@ -178,7 +184,8 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
             }}
             ref={ref}
             onKeyDown={(e: React.KeyboardEvent) => {
-              if (e.key === "Enter") {
+              if (e.key === "Enter" && activePage === "License") {
+                submitLicenseKey();
                 // bounce();
               }
 

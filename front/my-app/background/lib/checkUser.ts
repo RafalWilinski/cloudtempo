@@ -18,9 +18,7 @@ export interface LicenseInfo {
   reason?: string;
 }
 
-export async function checkUser(): Promise<LicenseInfo> {
-  const userInfo = get("aws-userInfo");
-
+export async function checkUser(userInfo?: any): Promise<LicenseInfo> {
   if (!userInfo) {
     return { isValid: false, reason: "AWS User Info missing" };
   }
@@ -28,10 +26,14 @@ export async function checkUser(): Promise<LicenseInfo> {
   const user: AWSInfo = JSON.parse(userInfo);
   const encryptedArn = AES.encrypt(user.arn, SECRET_CONST).toString();
 
+  console.log({ user, encryptedArn });
+
   try {
     const response = await (
       await fetch(`https://api.cloudtempo.dev/user?id=${encryptedArn}`)
     ).json();
+
+    console.log(response);
 
     if (response.ok) {
       return checkLicenseKey(response.ok);

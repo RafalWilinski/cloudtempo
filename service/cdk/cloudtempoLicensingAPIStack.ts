@@ -92,7 +92,7 @@ export class CloudTempoLicensingAPI extends cdk.Stack {
     const certificate = Certificate.fromCertificateArn(
       this,
       "Certificate",
-      "arn:aws:acm:us-east-1:085108115628:certificate/3c5c91c3-11f8-43cb-b3f5-255dac1c92d1"
+      "arn:aws:acm:us-east-1:847163508457:certificate/c29e7378-fada-4e92-9ad2-01187217bc65"
     );
     api.addDomainName("ApiDomainName", {
       domainName: "api.cloudtempo.dev",
@@ -103,7 +103,7 @@ export class CloudTempoLicensingAPI extends cdk.Stack {
       this,
       "ApiCloudtangoDevHZ",
       {
-        hostedZoneId: "Z07244831H2LT0J4E34UU",
+        hostedZoneId: "Z01636311JZ4W5EM846KM",
         zoneName: "api.cloudtempo.dev",
       }
     );
