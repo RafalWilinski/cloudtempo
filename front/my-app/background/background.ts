@@ -3,10 +3,13 @@ import {
   getDynamoDBCredentials,
   getECSCredentials,
 } from "../src/lib/getCredentials";
+import { installActivator } from "./lib/activating";
 import { getOrInitializeMinisearch } from "./lib/minisearch";
 import { reindex } from "./lib/reindex";
 
 importScripts("aws-sdk.js");
+
+installActivator();
 
 console.log("Dependencies loaded");
 

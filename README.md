@@ -4,18 +4,29 @@ Todos:
 - [ ] License checking
 - [ ] Drop us a line
 - [ ] Actions menu (favorites, aliases, copy arn)
-- [x] Store documents with accountId prefix to ensure tenant isolation
-- [x] Encode documents with accountId + something to keep it safe
 - [ ] Onboarding flow (thanks for installing, bla bla initial scan in the background)
-- [ ] Recently opened section
 - [ ] Aliases
 - [ ] Menu for selecting services with coming soon section inside configuration
+- [ ] Improve cors authing
+- [x] Store documents with accountId prefix to ensure tenant isolation
+- [x] Encode documents with accountId + something to keep it safe
 - [x] Get rid of vercel references
-- [ ] Proper name, description, and app icon
+- [x] Proper name, description, and app icon
+
+Trials:
+
+- 7 days per `aws-userInfo` cookie
+- Similarily to Dynobase, cloudtango uses getOrCreateMachine functionality
+- Machine record can be enriched with LicenseKey (licenseKey is indexed)
+- License key can be used to activate up to 10 aws identities
+
+- Machine doesn't matter, AWS identity matters (or maybe account?)
 
 Marketing:
 
-- [ ] Lifetime believer plan
+- [ ] Lifetime believer plan (50 user identities) for $399 (limited to 25 users)
+- [ ] Casual plan (3 user identities) $9/month (or $99/year)
+- [ ] Power user plan (50 user identities) $19/month (or $199/year)
 
 Services for initial launch:
 
@@ -32,9 +43,10 @@ Services for initial launch:
 Later add:
 
 - [ ] Indexing tags
-- IAM Groups
-- RDS
-- Route53
+- [ ] Recently opened section
+- [ ] IAM Groups
+- [ ] RDS
+- [ ] Route53
 
 Current challennge:
 Endpoint https://eu-central-1.console.aws.amazon.com/lambda/services/ajax?operation=listFunctions&locale=en

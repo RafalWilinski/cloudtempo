@@ -134,6 +134,11 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
         setInputValue("");
         break;
       }
+      case "cloudformation": {
+        setSelectedDocument(item);
+        setPages([...pages, "CloudFormation"]);
+        setInputValue("");
+      }
       default: {
         consoleUrl(item);
       }
@@ -237,7 +242,7 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
               {activePage === "lambda" && (
                 <lambda.Menu document={selectedDocument!} />
               )}
-              {activePage === "cloudformation" && (
+              {activePage === "CloudFormation" && (
                 <cloudformation.Menu document={selectedDocument!} />
               )}
               {activePage === "Regions" && <RegionsMenu />}

@@ -2,6 +2,8 @@ import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 import * as lambda from "aws-cdk-lib/aws-lambda-nodejs";
 import * as s3 from "aws-cdk-lib/aws-s3";
+import * as apigateway from "aws-cdk-lib/aws-apigateway";
+import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
 import { FunctionUrlAuthType } from "aws-cdk-lib/aws-lambda";
 import { PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { Duration } from "aws-cdk-lib";
@@ -11,6 +13,38 @@ import { LambdaFunction } from "aws-cdk-lib/aws-events-targets";
 export class SearchServiceStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
+
+    /// ----------- LICENSE / USER MGMT -------------
+    const licensesTable = new dynamodb.Table(this, "LicensesTable", {
+      partitionKey: {
+        name: "id",
+        type: dynamodb.AttributeType.STRING,
+      },
+      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+    });
+
+    const checkUserEndpoint = new lambda.NodejsFunction(
+      this,
+      "CheckUserEndpoint",
+      {
+        entry: "./lambdas/checkUser.ts",
+        handler: "handler",
+        environment: {
+          LICENSES_TABLE: licensesTable.tableName,
+        },
+        memorySize: 512,
+      }
+    );
+    licensesTable.grantReadWriteData(checkUserEndpoint);
+
+    const api = new apigateway.RestApi(this, "Api", {
+      restApiName: "MyApi",
+    });
+    api.root
+      .addResource("user")
+      .addMethod("GET", new apigateway.LambdaIntegration(checkUserEndpoint));
+
+    /// ----------- END LICENSE / USER MGMT -------------
 
     const dumpBucket = new s3.Bucket(this, "DumpBucket", {
       enforceSSL: true,
@@ -70,7 +104,7 @@ export class SearchServiceStack extends cdk.Stack {
     }).url;
 
     const rule = new events.Rule(this, "IndexerSchedule", {
-      schedule: events.Schedule.rate(cdk.Duration.minutes(15)),
+      schedule: events.Schedule.rate(cdk.Duration.minutes(60)),
     });
     rule.addTarget(new LambdaFunction(indexer));
 

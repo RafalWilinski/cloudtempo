@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { Document } from "../document";
 import { consoleUrl } from "./services/url";
+import toast from "react-hot-toast";
 
 export function SubCommand({
   inputRef,
@@ -107,15 +108,25 @@ export function SubCommand({
                   <ArrowRightOnRectangleIcon width={20} height={20} />
                   Open in a new tab
                 </SubItem>
-                <SubItem shortcut="⌘ I" onSelect={() => {}}>
+                <SubItem
+                  shortcut="⌘ C"
+                  disabled={!doc.arn}
+                  onSelect={() => {
+                    if (doc.arn) {
+                      toast.success("ARN copied");
+                      navigator.clipboard.writeText(doc.arn);
+                    }
+                    setOpen(false);
+                  }}
+                >
                   <DocumentDuplicateIcon width={20} height={20} />
-                  Copy ARN (not ready)
+                  Copy ARN
                 </SubItem>
-                <SubItem shortcut="⌘ I" onSelect={() => {}}>
+                <SubItem onSelect={() => {}} disabled={true}>
                   <LinkIcon width={20} height={20} />
                   Set alias (not ready)
                 </SubItem>
-                <SubItem shortcut="⌘ ⇧ F" onSelect={() => {}}>
+                <SubItem onSelect={() => {}} disabled={true}>
                   <StarIcon width={20} height={20} />
                   Add to Favorites (not ready)
                 </SubItem>
@@ -139,19 +150,23 @@ function SubItem({
   children,
   shortcut,
   onSelect,
+  disabled,
 }: {
   children: React.ReactNode;
-  shortcut: string;
+  shortcut?: string;
   onSelect: any;
+  disabled?: boolean;
 }) {
   return (
-    <Command.Item onSelect={onSelect}>
+    <Command.Item onSelect={onSelect} disabled={disabled}>
       {children}
-      <div cmdk-cloudtempo-submenu-submenu-shortcuts="">
-        {shortcut.split(" ").map((key) => {
-          return <kbd key={key}>{key}</kbd>;
-        })}
-      </div>
+      {shortcut && (
+        <div cmdk-cloudtempo-submenu-submenu-shortcuts="">
+          {shortcut.split(" ").map((key) => {
+            return <kbd key={key}>{key}</kbd>;
+          })}
+        </div>
+      )}
     </Command.Item>
   );
 }

@@ -4,16 +4,19 @@ import {
   PlayIcon,
   CubeTransparentIcon,
   IdentificationIcon,
+  DocumentCheckIcon,
 } from "@heroicons/react/24/outline";
 import { Document } from "../../document";
+import { getCurrentAccountId } from "../../lib/getCurrentAccountId";
 
 export const url = (
   name: string,
   region: string,
   accountId: string,
-  stackId: string
+  stackId: string,
+  tab: string = "stackinfo"
 ) =>
-  `https://${region}.console.aws.amazon.com/cloudformation/home?region=${region}#/stacks/stackinfo?filteringStatus=active&filteringText=&viewNested=true&hideStacks=false&stackId=arn%3Aaws%3Acloudformation%3A${region}%3A${accountId}%3Astack%2F${name}%2F${stackId}`;
+  `https://${region}.console.aws.amazon.com/cloudformation/home?region=${region}#/stacks/${tab}?filteringStatus=active&filteringText=&viewNested=true&hideStacks=false&stackId=arn%3Aaws%3Acloudformation%3A${region}%3A${accountId}%3Astack%2F${name}%2F${stackId}`;
 
 export const icon =
   "https://d2q66yyjeovezo.cloudfront.net/icon/5d3629a64564e611bbeae9b3045be424-e9ebf1d2d9d9c14a684cec1c80e127eb.svg";
@@ -31,15 +34,22 @@ export function Menu({ document }: MenuProps) {
       <Command.Group heading={document.name}>
         <Command.Item
           onSelect={() => {
-            /* todo */
+            location.href = url(
+              document.name!,
+              document.region,
+              getCurrentAccountId(),
+              (document.arn ?? "").split("/").pop()!
+            );
           }}
         >
           <PlayIcon width={20} height={20} />
           Open
         </Command.Item>
         <Command.Item
-          onSelect={() => {
-            /* todo */
+          onSelect={async () => {
+            if (document.arn) {
+              await navigator.clipboard.writeText(document.arn);
+            }
           }}
         >
           <IdentificationIcon width={20} height={20} />
@@ -47,7 +57,13 @@ export function Menu({ document }: MenuProps) {
         </Command.Item>
         <Command.Item
           onSelect={() => {
-            /* todo */
+            location.href = url(
+              document.name!,
+              document.region,
+              getCurrentAccountId(),
+              (document.arn ?? "").split("/").pop()!,
+              "events"
+            );
           }}
         >
           <CalendarDaysIcon width={20} height={20} />
@@ -55,11 +71,31 @@ export function Menu({ document }: MenuProps) {
         </Command.Item>
         <Command.Item
           onSelect={() => {
-            /* todo */
+            location.href = url(
+              document.name!,
+              document.region,
+              getCurrentAccountId(),
+              (document.arn ?? "").split("/").pop()!,
+              "resources"
+            );
           }}
         >
           <CubeTransparentIcon width={20} height={20} />
-          Show Resources...
+          Resources
+        </Command.Item>
+        <Command.Item
+          onSelect={() => {
+            location.href = url(
+              document.name!,
+              document.region,
+              getCurrentAccountId(),
+              (document.arn ?? "").split("/").pop()!,
+              "resources"
+            );
+          }}
+        >
+          <DocumentCheckIcon width={20} height={20} />
+          Outputs
         </Command.Item>
       </Command.Group>
     </>
