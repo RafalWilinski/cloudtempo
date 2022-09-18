@@ -145,6 +145,18 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
     }
   };
 
+  const renderMainInputPlaceholder = () => {
+    if (isDemo) {
+      return `Type "DynamoDB", "s3", "graphql" or something else...`;
+    }
+
+    if (activePage === "License") {
+      return "Paste your license key here";
+    }
+
+    return "Start typing to search...";
+  };
+
   return (
     <div
       className={`bg ${isVisible ? "cmdk-not-visible" : "cmdk-visible"}`}
@@ -208,11 +220,7 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
                   ref={inputRef}
                   value={inputValue}
                   autoFocus={true}
-                  placeholder={
-                    isDemo
-                      ? `Type "DynamoDB", "s3", "graphql" or something else...`
-                      : "Start typing to search..."
-                  }
+                  placeholder={renderMainInputPlaceholder()}
                   onValueChange={(value) => {
                     setInputValue(value);
                   }}

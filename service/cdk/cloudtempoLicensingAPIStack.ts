@@ -7,7 +7,7 @@ import * as apigateway from "aws-cdk-lib/aws-apigateway";
 import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
 import { Certificate } from "aws-cdk-lib/aws-certificatemanager";
 
-export class SearchServiceStack extends cdk.Stack {
+export class CloudTempoLicensingAPI extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
@@ -23,6 +23,13 @@ export class SearchServiceStack extends cdk.Stack {
       indexName: "licenseKey",
       partitionKey: {
         name: "licenseKey",
+        type: dynamodb.AttributeType.STRING,
+      },
+    });
+    licensesTable.addGlobalSecondaryIndex({
+      indexName: "subscriptionId",
+      partitionKey: {
+        name: "subscriptionId",
         type: dynamodb.AttributeType.STRING,
       },
     });
@@ -104,7 +111,6 @@ export class SearchServiceStack extends cdk.Stack {
     new route53.ARecord(this, "ApiCloudtempoDevApiAlias", {
       zone,
       target: route53.RecordTarget.fromAlias(new targets.ApiGateway(api)),
-      // or - route53.RecordTarget.fromAlias(new alias.ApiGatewayDomain(domainName)),
     });
 
     /// ----------- END LICENSE / USER MGMT -------------

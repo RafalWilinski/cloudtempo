@@ -36,6 +36,7 @@
     "constructs": "^10.0.0",
     "crypto-js": "^4.1.1",
     "minisearch": "^5.0.0",
-    "source-map-support": "^0.5.21"
+    "source-map-support": "^0.5.21",
+    "uuid": "^9.0.0"
   }
 }

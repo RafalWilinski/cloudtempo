@@ -1,14 +1,18 @@
 import { Command } from "cmdk";
 import { KeyIcon, CreditCardIcon } from "@heroicons/react/24/outline";
-import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 interface ActivateMenuProps {
   isDemo?: boolean;
   isActivated?: boolean;
+  setPages: (pages: string[]) => void;
 }
 
-export function ActivateMenu({ isDemo, isActivated }: ActivateMenuProps) {
+export function ActivateMenu({
+  isDemo,
+  isActivated,
+  setPages,
+}: ActivateMenuProps) {
   return (
     <Command.Group heading="Actions">
       <Command.Item
@@ -17,10 +21,16 @@ export function ActivateMenu({ isDemo, isActivated }: ActivateMenuProps) {
         <CreditCardIcon width={20} height={20} />
         Buy License
       </Command.Item>
-      <Command.Item onSelect={() => {}}>
-        <KeyIcon width={20} height={20} />
-        Activate License using Key
-      </Command.Item>
+      {!isActivated && (
+        <Command.Item
+          onSelect={() => {
+            setPages(["Home", "Activate"]);
+          }}
+        >
+          <KeyIcon width={20} height={20} />
+          Activate License using Key
+        </Command.Item>
+      )}
     </Command.Group>
   );
 }

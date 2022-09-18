@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall } from "@aws-sdk/util-dynamodb";
@@ -17,18 +18,26 @@ export const handler = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
   const body = JSON.parse(event.body ?? "{}");
-
-  console.log(body);
-
-  const item = marshall({
+  const item = {
     ...body,
     id: `EVENT#${body.meta.event_name}#${body.data.id}`,
-  });
+    createdAt: new Date().toISOString(),
+  };
+
+  if (body.meta.event_name === "subscription_created") {
+    item.licenseKey = uuidv4();
+  }
+
+  if (body.meta.event_name.includes("subscription_")) {
+    item.subscriptionId = body.data.id;
+  }
+
+  console.log(item);
 
   await dynamodb.send(
     new PutItemCommand({
       TableName,
-      Item: item,
+      Item: marshall(item),
     })
   );
 
