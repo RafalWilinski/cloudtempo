@@ -18,6 +18,18 @@ Todos:
 - [ ] If license key not present, render actual value for X trial left
 - [ ] Deactivate product is license key not present AND timeRemaining negative
 
+Landing:
+
+- [ ] Features section
+  - List supported and planned services
+- [ ] Testimonials Section
+- [ ] FAQ
+- [ ] Note from author
+- [ ] Stay in the loop (newsletter)
+- [ ] Footer (Roadmap, Twitter,Download, Dynobase, Privacy Policy, Terms of Service, Contact Us)
+- [ ] FAQ Page
+- [ ] Buy Page
+
 Trials:
 
 - 7 days per `aws-userInfo` cookie
@@ -52,13 +64,6 @@ Later add:
 - [ ] IAM Groups
 - [ ] RDS
 - [ ] Route53
-
-Current challennge:
-Endpoint https://eu-central-1.console.aws.amazon.com/lambda/services/ajax?operation=listFunctions&locale=en
-is awesome but does not work for regions that haven't been previously visited.
-
-How to headlessly auth to other regions?
-Maybe discover other endpoints, similar to /tb/credentials from dynamodb?
 
 Stack:
 

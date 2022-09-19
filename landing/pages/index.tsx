@@ -6,6 +6,7 @@ import styles from "../styles/Home.module.css";
 import Demo from "../../front/my-app/src/App";
 import { useEffect, useState } from "react";
 import { Pricing } from "../components/Pricing";
+import { SupportedServicesSection } from "../components/SupportedServices";
 
 const Home: NextPage = () => {
   const [demoText, setDemoText] = useState("");
@@ -108,6 +109,7 @@ const Home: NextPage = () => {
           <Demo isDemo={true} demoText={demoText} />
         </div>
 
+        <SupportedServicesSection />
         <Pricing />
       </main>
 
