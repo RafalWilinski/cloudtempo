@@ -26,7 +26,7 @@ Landing:
 - [x] FAQ
 - [ ] Note from author
 - [ ] Stay in the loop (newsletter)
-- [ ] Footer (Roadmap, Twitter,Download, Dynobase, Privacy Policy, Terms of Service, Contact Us)
+- [x] Footer (Roadmap, Twitter,Download, Dynobase, Privacy Policy, Terms of Service, Contact Us)
 - [ ] FAQ Page
 - [ ] Buy Page
 - [ ] Sitemap
