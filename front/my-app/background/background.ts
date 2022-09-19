@@ -24,7 +24,7 @@ chrome.runtime.onMessageExternal.addListener(async function (
       getECSCredentials(),
     ]);
 
-    const { allDocuments, failedKeys } = await reindex({
+    const { allDocuments, failedKeys, totalJobsCount } = await reindex({
       ddbCredentials,
       ecsCredentials,
       accountId: request.accountId,
@@ -36,6 +36,7 @@ chrome.runtime.onMessageExternal.addListener(async function (
       response: allDocuments,
       userInfo: await licenseInfo,
       failedKeys,
+      totalJobsCount,
     });
   } else if (request.licenseKey) {
     sendResponse(

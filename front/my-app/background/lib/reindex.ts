@@ -93,7 +93,7 @@ export async function reindex({
 
   console.log("Reindexing done");
 
-  return { allDocuments, failedKeys };
+  return { allDocuments, failedKeys, totalJobsCount: flattened.length };
 }
 
 type ProcessRegionProps = {
