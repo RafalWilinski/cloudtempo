@@ -7,6 +7,7 @@ import Demo from "../../front/my-app/src/App";
 import { useEffect, useState } from "react";
 import { Pricing } from "../components/Pricing";
 import { SupportedServicesSection } from "../components/SupportedServices";
+import { FAQ } from "../components/FAQ";
 
 const Home: NextPage = () => {
   const [demoText, setDemoText] = useState("");
@@ -111,6 +112,7 @@ const Home: NextPage = () => {
 
         <SupportedServicesSection />
         <Pricing />
+        <FAQ />
       </main>
 
       <footer className={styles.footer}>
