@@ -13,6 +13,7 @@ import * as ddb from "../../front/my-app/src/components/services/DynamoDB";
 import * as apigw from "../../front/my-app/src/components/services/APIGateway";
 import * as role from "../../front/my-app/src/components/services/IAMRole";
 import * as user from "../../front/my-app/src/components/services/IAMUser";
+import * as sfn from "../../front/my-app/src/components/services/SFN";
 
 const services = [
   {
@@ -122,7 +123,7 @@ const services = [
   },
   {
     resourceName: "AWS Step Functions",
-    icon: lambda.icon,
+    icon: sfn.icon,
     status: "soon",
   },
 ];
