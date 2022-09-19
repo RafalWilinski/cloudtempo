@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import styles from "../styles/FAQ.module.css";
 
 const qa = [
