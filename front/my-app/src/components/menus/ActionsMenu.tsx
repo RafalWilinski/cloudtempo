@@ -1,5 +1,4 @@
 import { Command } from "cmdk";
-import Cookies from "js-cookie";
 import {
   ArrowPathIcon,
   InformationCircleIcon,
@@ -10,13 +9,11 @@ import {
   ChatBubbleBottomCenterTextIcon,
   GlobeEuropeAfricaIcon,
 } from "@heroicons/react/24/outline";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { extensionId } from "../../lib/extension";
 import { toast } from "react-hot-toast";
-import { getCurrentAccountId } from "../../lib/getCurrentAccountId";
 import { LicenseInfo } from "../../../background/lib/checkUser";
-import { getCurrentlySelectedRegions } from "./SelectedRegionsMenu";
-import { getCurrentlySelectedServices } from "./SelectedServicesMenu";
+import { useReindexing } from "../../lib/reindexing";
 
 interface ActionsMenuProps {
   setPages: (pages: string[]) => void;
@@ -26,7 +23,7 @@ interface ActionsMenuProps {
 }
 
 export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
-  const [isReindexing, setIsReindexing] = useState(false);
+  const reindexingHook = useReindexing();
 
   useEffect(() => {
     // chrome.runtime.onMessage.addListener(console.log);
@@ -74,40 +71,24 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
       </Command.Item>
 
       <Command.Item
-        disabled={isReindexing || isDemo}
+        disabled={reindexingHook.isReindexing || isDemo}
         onSelect={() => {
           if (isDemo) {
             toast.error("This is just a demo, chill out.");
             return;
           }
 
-          if (!isReindexing) {
-            chrome.runtime.sendMessage(
-              extensionId,
-              {
-                type: "reindex",
-                userInfo: Cookies.get("aws-userInfo"),
-                accountId: getCurrentAccountId(isDemo),
-                selectedRegions: getCurrentlySelectedRegions(),
-                selectedServices: getCurrentlySelectedServices(),
-              },
-              function (_response) {
-                console.log(_response);
-                setIsReindexing(false);
-                toast("Reindexing done");
-              }
-            );
-
-            setIsReindexing(true);
+          if (!reindexingHook.isReindexing) {
+            reindexingHook.sendReindexRequest();
           }
         }}
       >
         <ArrowPathIcon
           width={20}
           height={20}
-          className={isReindexing ? "spinning" : ""}
+          className={reindexingHook.isReindexing ? "spinning" : ""}
         />
-        {isReindexing ? "Reindexing..." : "Reindex search"}
+        {reindexingHook.reindexItemLabel()}
       </Command.Item>
       {!isDemo && (
         <Command.Item onSelect={() => setPages(["Home", "License"])}>

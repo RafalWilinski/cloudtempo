@@ -22,9 +22,9 @@ import { SubCommand } from "./SubCommand";
 import { consoleUrl } from "./services/url";
 import { ResourcesMenu } from "./menus/ResourcesMenu";
 import { LicenseInfo } from "../../background/lib/checkUser";
-import { CommandSelectItem } from "./CommandSelectItem";
 import { SelectedServicesMenu } from "./menus/SelectedServicesMenu";
 import { SelectedRegionsMenu } from "./menus/SelectedRegionsMenu";
+import { OnboardingMenu } from "./menus/OnboardingMenu";
 
 export function CloudTempo({
   isDemo,
@@ -289,6 +289,7 @@ export function CloudTempo({
                   pages={pages}
                 />
               )}
+              <OnboardingMenu setPages={setPages} />
               {isHome && (
                 <ActionsMenu
                   setPages={setPages}

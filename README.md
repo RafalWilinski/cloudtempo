@@ -4,10 +4,10 @@ Todos:
 - [x] License checking
 - [ ] Drop us a line
 - [x] Actions menu (favorites, aliases, copy arn)
-- [ ] Onboarding flow (thanks for installing, bla bla initial scan in the background)
+- [x] Onboarding flow (thanks for installing, bla bla initial scan in the background)
 - [ ] Send an email after purchase (waiting for Postmark confirmation)
 - [ ] Aliases
-- [ ] Menu for selecting services with coming soon section inside configuration
+- [x] Menu for selecting services with coming soon section inside configuration
 - [ ] Improve cors authing - faster, based on retries?
 - [x] Store documents with accountId prefix to ensure tenant isolation
 - [x] Encode documents with accountId + something to keep it safe
