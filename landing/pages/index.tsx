@@ -5,6 +5,7 @@ import { ArrowDownCircleIcon } from "@heroicons/react/24/outline";
 import styles from "../styles/Home.module.css";
 import Demo from "../../front/my-app/src/App";
 import { useEffect, useState } from "react";
+import { Pricing } from "../components/Pricing";
 
 const Home: NextPage = () => {
   const [demoText, setDemoText] = useState("");
@@ -107,9 +108,7 @@ const Home: NextPage = () => {
           <Demo isDemo={true} demoText={demoText} />
         </div>
 
-        {/* <a href="https://cloudtempo.lemonsqueezy.com/checkout/buy/7d4e12d6-d5f4-46e2-a06f-b87329ddedd5?media=0&discount=0">
-          Buy
-        </a> */}
+        <Pricing />
       </main>
 
       <footer className={styles.footer}>

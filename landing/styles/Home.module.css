@@ -3,7 +3,7 @@
 }
 
 .main {
-  min-height: 88vh;
+  min-height: 100vh;
   max-width: 85rem;
   margin: auto;
   padding: 4rem 0;
@@ -47,9 +47,8 @@
 @media only screen and (max-width: 1000px) {
   .headingLeftColumn {
     text-align: center;
-    /* width: 100%; */
-    margin-right: 0;
-    margin-bottom: 20px;
+    width: auto;
+    margin: 0 2rem 20px;
   }
 }
 
