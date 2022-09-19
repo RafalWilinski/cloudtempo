@@ -23,11 +23,17 @@ import { consoleUrl } from "./services/url";
 import { ResourcesMenu } from "./menus/ResourcesMenu";
 import { LicenseInfo } from "../../background/lib/checkUser";
 
-export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
+export function CloudTempo({
+  isDemo,
+  demoInput,
+}: {
+  demoInput?: string;
+  isDemo?: boolean;
+}) {
   const ref = React.useRef<HTMLDivElement | null>(null);
-  const [isVisible, setVisibility] = useState(false);
+  const [isVisible, setVisibility] = useState(isDemo);
   const [isDarkMode, setDarkMode] = useState(true);
-  const [inputValue, setInputValue] = React.useState("");
+  const [_inputValue, setInputValue] = React.useState(demoInput ?? "");
   const [value, setValue] = React.useState("");
   const [userInfo, setUserInfo] = React.useState<LicenseInfo>();
   const inputRef = React.useRef<HTMLInputElement | null>(null);
@@ -43,6 +49,7 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
   >();
   const activePage = pages[pages.length - 1];
   const isHome = activePage === "Home";
+  const inputValue = demoInput || _inputValue;
 
   const popPage = React.useCallback(() => {
     setPages((pages) => {
@@ -192,8 +199,14 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
 
   return (
     <div
-      className={`bg ${isVisible ? "cmdk-not-visible" : "cmdk-visible"}`}
+      className={`${isDemo ? "" : "bg"} ${
+        isVisible ? "cmdk-not-visible" : "cmdk-visible"
+      }`}
       onClick={(e) => {
+        if (isDemo) {
+          return;
+        }
+
         e.preventDefault();
         e.stopPropagation();
 
@@ -250,6 +263,7 @@ export function CloudTempo({ isDemo }: { isDemo?: boolean }) {
                   />
                 )}
                 <Command.Input
+                  id="cloudtempo-main-input"
                   ref={inputRef}
                   value={inputValue}
                   autoFocus={true}

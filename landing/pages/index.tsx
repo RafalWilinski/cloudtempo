@@ -1,10 +1,40 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import { ArrowDownCircleIcon } from "@heroicons/react/24/outline";
 import styles from "../styles/Home.module.css";
 import Demo from "../../front/my-app/src/App";
+import { useEffect, useState } from "react";
 
 const Home: NextPage = () => {
+  const [demoText, setDemoText] = useState("");
+
+  useEffect(() => {
+    const firstTextToSet = "lambda";
+
+    for (let i = 0; i < firstTextToSet.length; i++) {
+      setTimeout(() => {
+        setDemoText(firstTextToSet.substring(0, i + 1));
+      }, 1000 + i * 100);
+    }
+
+    setTimeout(() => {
+      setDemoText("");
+    }, 3000);
+
+    const secondTextToSet = "dynamo";
+
+    for (let i = 0; i < secondTextToSet.length; i++) {
+      setTimeout(() => {
+        setDemoText(secondTextToSet.substring(0, i + 1));
+      }, 5500 + i * 100);
+    }
+
+    setTimeout(() => {
+      setDemoText("");
+    }, 9000);
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -29,50 +59,57 @@ const Home: NextPage = () => {
       </nav>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Fast &{" "}
-          <span
-            style={{
-              backgroundImage:
-                "linear-gradient(135deg, rgb(203, 94, 238) 0%, rgb(75, 225, 236) 100%)",
-              backgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              WebkitBackgroundClip: "text",
-              WebkitBoxDecorationBreak: "clone",
-            }}
-          >
-            <span>Smart</span>
-          </span>{" "}
-          Command Bar for AWS Console
-        </h1>
-        <h3
-          style={{
-            color: "#eee",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          Press
+        <div className={styles.hero}>
           <div
-            style={{
-              fontSize: "1rem",
-              backgroundColor: "#333",
-              padding: "10px",
-              margin: "0 10px",
-              borderRadius: "10px",
-              color: "#ccc",
-            }}
+            style={{ textAlign: "left" }}
+            className={styles.headingLeftColumn}
           >
-            ⌘ + K
+            <h1 className={styles.title} style={{ textAlign: "left" }}>
+              Fast &{" "}
+              <span
+                style={{
+                  backgroundImage:
+                    "linear-gradient(135deg, rgb(203, 94, 238) 0%, rgb(75, 225, 236) 100%)",
+                  backgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  WebkitBackgroundClip: "text",
+                  WebkitBoxDecorationBreak: "clone",
+                }}
+              >
+                <span>Smart</span>
+              </span>{" "}
+              Command Bar for AWS Console
+            </h1>
+            <h3>
+              Navigate through AWS Console with speed. Easily find resources,
+              perform actions with single keystrokes. Designed for power users.
+            </h3>
+            <button className={styles.installBtn}>
+              <ArrowDownCircleIcon
+                width={24}
+                height={24}
+                style={{ marginRight: "4px" }}
+              />
+              Install now
+            </button>
+            <span
+              style={{
+                marginTop: "10px",
+                display: "block",
+                color: "#aaa",
+                fontSize: "12px",
+              }}
+            >
+              Free 7-days trial • Available for Chrome • No email or credit card
+              required
+            </span>
           </div>
-          and see for yourself.
-        </h3>
-        <Demo isDemo={true} />
+          <Demo isDemo={true} demoText={demoText} />
+        </div>
 
-        <a href="https://cloudtempo.lemonsqueezy.com/checkout/buy/7d4e12d6-d5f4-46e2-a06f-b87329ddedd5?media=0&discount=0">
+        {/* <a href="https://cloudtempo.lemonsqueezy.com/checkout/buy/7d4e12d6-d5f4-46e2-a06f-b87329ddedd5?media=0&discount=0">
           Buy
-        </a>
+        </a> */}
       </main>
 
       <footer className={styles.footer}>
