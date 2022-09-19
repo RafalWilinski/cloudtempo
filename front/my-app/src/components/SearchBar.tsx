@@ -289,7 +289,7 @@ export function CloudTempo({
                   pages={pages}
                 />
               )}
-              <OnboardingMenu setPages={setPages} />
+              {!isDemo && <OnboardingMenu setPages={setPages} />}
               {isHome && (
                 <ActionsMenu
                   setPages={setPages}
