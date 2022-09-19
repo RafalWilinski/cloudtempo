@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { CloudTempo } from "./components/SearchBar";
 
 interface HomeProps {
@@ -11,6 +12,7 @@ const Home = ({ isDemo, demoText }: HomeProps) => {
       <main>
         <CloudTempo isDemo={isDemo} demoInput={demoText} />
       </main>
+      <Toaster />
     </div>
   );
 };

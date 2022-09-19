@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Command } from "cmdk";
-import { KeyIcon, CreditCardIcon } from "@heroicons/react/24/outline";
-import { toast } from "react-hot-toast";
+import { CreditCardIcon } from "@heroicons/react/24/outline";
 
 interface ActivateMenuProps {
   isDemo?: boolean;

@@ -1,4 +1,5 @@
 import { APIGatewayProxyEvent } from "aws-lambda";
+import { corsHeaders } from "./cors";
 
 export interface Parameters {
   encryptedArn: string;
@@ -7,6 +8,7 @@ export interface Parameters {
 export interface BadRequestResponse {
   statusCode: number;
   body: string;
+  headers?: any;
 }
 
 export function getQueryStringParameters(
@@ -16,6 +18,7 @@ export function getQueryStringParameters(
     return {
       statusCode: 400,
       body: "Please provide query string parameters",
+      headers: corsHeaders,
     };
   }
 
@@ -24,6 +27,7 @@ export function getQueryStringParameters(
     return {
       statusCode: 400,
       body: JSON.stringify({ error: "Missing query parameter 'id'" }),
+      headers: corsHeaders,
     };
   }
 

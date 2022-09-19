@@ -6,6 +6,7 @@ import {
 import { getOrInitializeMinisearch } from "./lib/minisearch";
 import { checkUser, registerLicenseKey } from "./lib/checkUser";
 import { reindex } from "./lib/reindex";
+import { sendFeedback } from "./lib/feedback";
 
 importScripts("aws-sdk.js");
 
@@ -50,5 +51,7 @@ chrome.runtime.onMessageExternal.addListener(async function (
   } else if (request.openUrl) {
     chrome.tabs.create({ url: request.openUrl });
     sendResponse({});
+  } else if (request.type === "feedback") {
+    sendResponse(await sendFeedback(request));
   }
 });

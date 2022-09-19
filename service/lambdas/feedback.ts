@@ -4,6 +4,7 @@ import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall } from "@aws-sdk/util-dynamodb";
 import { getQueryStringParameters } from "../lib/qs";
 import { AWSLambda } from "@sentry/serverless";
+import { corsHeaders } from "../lib/cors";
 
 AWSLambda.init({
   dsn: "https://4a94f23f925e4c139421bf1760fdd0e5@o1413901.ingest.sentry.io/6753871",
@@ -27,9 +28,12 @@ export const _handler = async (
   const item = {
     id: `FEEDBACK#${feedbackId}`,
     createdAt: new Date().toISOString(),
-    body: body.message,
-    arn: parametersOrBadRequest.encryptedArn,
+    body: body.body,
+    email: body.email,
+    encryptedArn: parametersOrBadRequest.encryptedArn,
   };
+
+  console.log({ item, parametersOrBadRequest });
 
   await dynamodb.send(
     new PutItemCommand({
@@ -41,6 +45,7 @@ export const _handler = async (
   return {
     statusCode: 200,
     body: JSON.stringify({ feedbackId }),
+    headers: corsHeaders,
   };
 };
 export const handler = AWSLambda.wrapHandler(_handler);

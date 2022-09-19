@@ -193,6 +193,24 @@
   margin-bottom: 16px;
   border-radius: 0;
 }
+
+.feedback-email {
+  font-family: var(--font-sans);
+  border: none;
+  width: 50%;
+  font-size: 12px;
+  padding: 8px 8px 8px 8px;
+  outline: none;
+  background: var(--bg);
+  color: var(--gray12);
+  border-bottom: 1px solid var(--gray6);
+  margin-bottom: 16px;
+  border-radius: 0;
+}
+.feedback-email::placeholder {
+  color: var(--gray9);
+}
+
 .cloudtempo [cmdk-input]::placeholder {
   color: var(--gray9);
 }
@@ -522,4 +540,20 @@ kbd {
 
 kbd:first-of-type {
   margin-left: 8px;
+}
+
+.feedback-body {
+  background: var(--app-bg);
+  color: var(--gray12);
+  width: calc(100% - 40px);
+  border: 1px solid var(--gray6);
+  padding: 10px;
+  margin: 5px;
+  font-family: sans-serif;
+  resize: none;
+}
+
+.feedback-send {
+  cursor: pointer;
+  padding: 4px 8px;
 }

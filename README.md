@@ -2,7 +2,7 @@ Todos:
 
 - [ ] Cloudformation menu
 - [x] License checking
-- [ ] Drop us a line
+- [x] Drop me a line
 - [x] Actions menu (favorites, aliases, copy arn)
 - [x] Onboarding flow (thanks for installing, bla bla initial scan in the background)
 - [ ] Send an email after purchase (waiting for Postmark confirmation)
@@ -17,6 +17,9 @@ Todos:
 - [ ] If license key present, do not show "activate" item
 - [ ] If license key not present, render actual value for X trial left
 - [ ] Deactivate product is license key not present AND timeRemaining negative
+- [ ] Proper services to selected services menu
+- [x] Clearing up input value when navigating to submenu
+- [ ] Fix toaster
 
 Landing:
 
@@ -25,12 +28,12 @@ Landing:
 - [ ] Testimonials Section
 - [x] FAQ
 - [ ] Note from author
-- [ ] Stay in the loop (newsletter)
+- [x] Stay in the loop (newsletter)
 - [x] Footer (Roadmap, Twitter,Download, Dynobase, Privacy Policy, Terms of Service, Contact Us)
 - [ ] FAQ Page
 - [ ] Buy Page
-- [ ] Sitemap
-- [ ] Robots.txt
+- [x] Sitemap
+- [x] Robots.txt
 
 Trials:
 

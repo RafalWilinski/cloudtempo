@@ -101,7 +101,11 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
             Activate (6 days of trial left)
           </Command.Item>
         )}
-        <Command.Item onSelect={() => {}}>
+        <Command.Item
+          onSelect={() => {
+            setPages(["Home", "Feedback"]);
+          }}
+        >
           <ChatBubbleBottomCenterTextIcon width={20} height={20} />
           Drop me a line / send feedback
         </Command.Item>

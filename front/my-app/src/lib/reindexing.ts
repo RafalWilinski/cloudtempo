@@ -14,23 +14,25 @@ const useReindex = () => {
   );
 
   const sendReindexRequest = () => {
-    setIsReindexing(true);
-    chrome.runtime.sendMessage(
-      extensionId,
-      {
-        type: "reindex",
-        userInfo: Cookies.get("aws-userInfo"),
-        accountId: getCurrentAccountId(),
-        selectedRegions: getCurrentlySelectedRegions(),
-        selectedServices: getCurrentlySelectedServices(),
-      },
-      function (_response) {
-        console.log(_response);
-        toast("Reindexing done");
-        setIsReindexing(false);
-        setLastReindexDate(new Date().toISOString());
-      }
-    );
+    if (chrome && chrome.runtime) {
+      setIsReindexing(true);
+      chrome.runtime.sendMessage(
+        extensionId,
+        {
+          type: "reindex",
+          userInfo: Cookies.get("aws-userInfo"),
+          accountId: getCurrentAccountId(),
+          selectedRegions: getCurrentlySelectedRegions(),
+          selectedServices: getCurrentlySelectedServices(),
+        },
+        function (_response) {
+          console.log(_response);
+          toast("Reindexing done");
+          setIsReindexing(false);
+          setLastReindexDate(new Date().toISOString());
+        }
+      );
+    }
   };
 
   const timeSinceLastReindex = () => {

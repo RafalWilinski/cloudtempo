@@ -2,7 +2,7 @@
 // <reference types="chrome"/>
 import React, { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import Cookies from "js-cookie";
 import { Command } from "cmdk";
 import confetti from "canvas-confetti";
@@ -25,6 +25,7 @@ import { LicenseInfo } from "../../background/lib/checkUser";
 import { SelectedServicesMenu } from "./menus/SelectedServicesMenu";
 import { SelectedRegionsMenu } from "./menus/SelectedRegionsMenu";
 import { OnboardingMenu } from "./menus/OnboardingMenu";
+import { FeedbackMenu } from "./menus/FeedbackMenu";
 
 export function CloudTempo({
   isDemo,
@@ -43,7 +44,7 @@ export function CloudTempo({
   const [isActionsMenuVisible, setActionsMenuVisibility] = useState(false);
   const listRef = React.useRef(null);
   const currentAccountId = getCurrentAccountId(isDemo);
-  const [pages, setPages] = React.useState<string[]>(["Home"]);
+  const [pages, _setPages] = React.useState<string[]>(["Home"]);
   const [selectedDocument, setSelectedDocument] = useState<
     Document | undefined
   >();
@@ -55,12 +56,18 @@ export function CloudTempo({
   const inputValue = demoInput || _inputValue;
 
   const popPage = React.useCallback(() => {
-    setPages((pages) => {
+    _setPages((pages) => {
       const x = [...pages];
       x.splice(-1, 1);
       return x;
     });
   }, []);
+
+  const setPages = (pages: string[]) => {
+    _setPages(pages);
+    setValue("");
+    setInputValue("");
+  };
 
   const _onKeyDown = React.useCallback(
     (e: KeyboardEvent) => {
@@ -289,7 +296,7 @@ export function CloudTempo({
                   pages={pages}
                 />
               )}
-              {!isDemo && <OnboardingMenu setPages={setPages} />}
+              {!isDemo && isHome && <OnboardingMenu setPages={setPages} />}
               {isHome && (
                 <ActionsMenu
                   setPages={setPages}
@@ -302,6 +309,9 @@ export function CloudTempo({
               {isHome && <ServicesMenu isDemo={isDemo} />}
               {activePage === "lambda" && (
                 <lambda.Menu document={selectedDocument!} />
+              )}
+              {activePage === "Feedback" && (
+                <FeedbackMenu setPages={setPages} />
               )}
               {activePage === "CloudFormation" && (
                 <cloudformation.Menu document={selectedDocument!} />
@@ -333,7 +343,6 @@ export function CloudTempo({
           </Command>
         </div>
       )}
-      <Toaster />
     </div>
   );
 }

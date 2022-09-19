@@ -84,7 +84,7 @@ export class CloudTempoLicensingAPI extends cdk.Stack {
         memorySize: 512,
       }
     );
-    licensesTable.grantReadWriteData(webhookEndpoint);
+    licensesTable.grantReadWriteData(postFeedbackEndpoint);
 
     const api = new apigateway.RestApi(this, "Api", {
       restApiName: "MyApi",
