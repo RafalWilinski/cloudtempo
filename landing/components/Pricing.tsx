@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { PricingPlan } from "./PricingPlan";
 
 export const Pricing = () => {
@@ -17,6 +18,8 @@ export const Pricing = () => {
       >
         <PricingPlan
           name="Basic"
+          href="https://cloudtempo.lemonsqueezy.com/checkout/buy/6ad12ebe-e509-4cf1-89ae-24f704946aae"
+          description=""
           monthly="9"
           yearly="99"
           list={[
@@ -27,6 +30,8 @@ export const Pricing = () => {
           ]}
         />
         <PricingPlan
+          description=""
+          href="https://cloudtempo.lemonsqueezy.com/checkout/buy/6ad12ebe-e509-4cf1-89ae-24f704946aae"
           name="Pro"
           monthly="19"
           yearly="199"
