@@ -15,7 +15,7 @@ import {
   ServerStackIcon,
 } from "@heroicons/react/24/outline";
 import { useEffect } from "react";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import { LicenseInfo } from "../../../background/lib/checkUser";
 import { useReindexing } from "../../lib/reindexing";
 
@@ -45,7 +45,7 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
         <Command.Item
           onSelect={() => {
             if (isDemo) {
-              toast.error("Not available in demo.");
+              toast.warning("Not available in demo.");
               return;
             }
             setPages([...pages, "Configuration"]);
@@ -57,7 +57,9 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
         <Command.Item
           onSelect={() => {
             if (isDemo) {
-              toast.error("Not available in demo.");
+              toast.warning("Not available in demo.", {
+                hideProgressBar: false,
+              });
               return;
             }
           }}
@@ -79,7 +81,9 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
           disabled={reindexingHook.isReindexing || isDemo}
           onSelect={() => {
             if (isDemo) {
-              toast.error("This is just a demo, chill out.");
+              toast.warning("This is just a demo, chill out.", {
+                hideProgressBar: false,
+              });
               return;
             }
 

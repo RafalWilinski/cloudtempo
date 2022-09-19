@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import { getCurrentlySelectedRegions } from "../components/menus/SelectedRegionsMenu";
 import { extensionId } from "./extension";
 import { getCurrentAccountId } from "./getCurrentAccountId";
@@ -25,9 +25,18 @@ const useReindex = () => {
           selectedRegions: getCurrentlySelectedRegions(),
           selectedServices: getCurrentlySelectedServices(),
         },
-        function (_response) {
-          console.log(_response);
-          toast("Reindexing done");
+        function (response) {
+          console.log(response);
+          toast.success(
+            `Reindexing done (${response.response.length} resources found)`,
+            {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+            }
+          );
           setIsReindexing(false);
           setLastReindexDate(new Date().toISOString());
         }

@@ -1,6 +1,6 @@
 import { Command } from "cmdk";
 import { services } from "../../lib/services";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 export function ServicesMenu({ isDemo }: { isDemo?: boolean }) {
   const currentRegion = "us-east-1";
@@ -13,7 +13,9 @@ export function ServicesMenu({ isDemo }: { isDemo?: boolean }) {
             value={`${service.ServiceName} ${service.ServiceShortName}`}
             onSelect={() => {
               if (isDemo) {
-                toast.success("Come on, this ain't real console!");
+                toast.warning("Come on, this ain't real console!", {
+                  hideProgressBar: false,
+                });
                 return;
               }
 

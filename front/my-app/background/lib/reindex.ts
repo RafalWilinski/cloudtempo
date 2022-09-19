@@ -14,7 +14,7 @@ import {
 } from "../services/cloudwatch";
 import { getAllIAMRoles, getAllIAMUsers } from "../services/iam";
 
-const limit = pLimit(5);
+const limit = pLimit(10);
 export const SECRET_CONST = "cl0udt3mP0";
 
 export type ReindexProps = {

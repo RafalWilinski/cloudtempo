@@ -2,7 +2,7 @@
 import { Command } from "cmdk";
 import Cookies from "js-cookie";
 import { useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import { extensionId } from "../../lib/extension";
 
 interface ActivateMenuProps {
@@ -65,9 +65,12 @@ export function FeedbackMenu({ isDemo, setPages }: ActivateMenuProps) {
                   userInfo: Cookies.get("aws-userInfo"),
                 },
                 function () {
-                  toast.success("Thanks for your feedback!", {
-                    duration: 4000,
-                    position: "top-center",
+                  toast.success("Thanks for feedback!", {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
                   });
                   setPages(["Home"]);
                 }

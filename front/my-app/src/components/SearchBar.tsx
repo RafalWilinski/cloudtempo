@@ -2,10 +2,11 @@
 // <reference types="chrome"/>
 import React, { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { toast } from "react-hot-toast";
 import Cookies from "js-cookie";
 import { Command } from "cmdk";
 import confetti from "canvas-confetti";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import * as lambda from "./services/Lambda";
 import * as cloudformation from "./services/Cloudformation";
 import { Document } from "../document";
@@ -201,7 +202,9 @@ export function CloudTempo({
             zIndex: 99999,
           });
         } else {
-          toast.error("Problem with activating a license...");
+          toast.error("Problem with activating a license...", {
+            hideProgressBar: false,
+          });
         }
       }
     );
@@ -343,6 +346,7 @@ export function CloudTempo({
           </Command>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 }

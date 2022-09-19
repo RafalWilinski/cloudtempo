@@ -1,6 +1,6 @@
 import { Command } from "cmdk";
 import Cookies from "js-cookie";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import * as dynamodb from "../services/DynamoDB";
 import * as lambda from "../services/Lambda";
 import * as s3 from "../services/S3";
@@ -45,7 +45,9 @@ export function SelectedServicesMenu({ isDemo }: SelectedServicesProps) {
             value={`${service.code}`}
             onSelect={() => {
               if (isDemo) {
-                toast.success("Come on, this ain't real console!");
+                toast.success("Come on, this ain't real console!", {
+                  hideProgressBar: false,
+                });
                 return;
               }
 

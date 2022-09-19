@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 export function getCurrentAccountId(isDemo?: boolean) {
   if (isDemo) {

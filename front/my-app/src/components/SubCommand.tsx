@@ -10,7 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { Document } from "../document";
 import { consoleUrl } from "./services/url";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 
 export function SubCommand({
   inputRef,
@@ -113,7 +113,9 @@ export function SubCommand({
                   disabled={!doc.arn}
                   onSelect={() => {
                     if (doc.arn) {
-                      toast.success("ARN copied");
+                      toast.success("ARN copied", {
+                        hideProgressBar: false,
+                      });
                       navigator.clipboard.writeText(doc.arn);
                     }
                     setOpen(false);
