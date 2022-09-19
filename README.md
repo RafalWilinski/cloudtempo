@@ -20,10 +20,10 @@ Todos:
 
 Landing:
 
-- [ ] Features section
-  - [x] List supported and planned services
+- [x] Features section
+- [x] List supported and planned services
 - [ ] Testimonials Section
-- [ ] FAQ
+- [x] FAQ
 - [ ] Note from author
 - [ ] Stay in the loop (newsletter)
 - [ ] Footer (Roadmap, Twitter,Download, Dynobase, Privacy Policy, Terms of Service, Contact Us)

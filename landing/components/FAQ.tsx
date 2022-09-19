@@ -35,7 +35,7 @@ export const FAQ = () => {
     <div className={styles.section}>
       <h2
         className={styles.title}
-        style={{ fontSize: "3em", marginBottom: 0, textAlign: "center" }}
+        style={{ fontSize: "2.5em", marginBottom: 0, textAlign: "center" }}
       >
         Frequently asked questions
       </h2>

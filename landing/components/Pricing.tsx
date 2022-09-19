@@ -38,6 +38,10 @@ export const Pricing = () => {
           ]}
         />
       </div>
+      <span style={{ fontSize: "12px", color: "#ccc" }}>
+        Depending on your country's tax rules, additional VAT/GST may be added
+        to the final amount.
+      </span>
     </div>
   );
 };

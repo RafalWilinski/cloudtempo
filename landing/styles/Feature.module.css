@@ -1,0 +1,28 @@
+.container {
+  border-radius: 12px;
+  border: 1px solid #222;
+  overflow: hidden;
+  max-width: 1000px;
+  display: flex;
+  margin-bottom: 80px;
+  margin-top: 20px;
+}
+
+.textSection {
+  padding: 20px 40px;
+  width: 50%;
+}
+
+.title {
+  margin-top: 16px;
+  font-weight: 700;
+  font-size: 2em;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+.description {
+  color: #777;
+  font-size: 1.15em;
+  line-height: 1.34;
+}

@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { Pricing } from "../components/Pricing";
 import { SupportedServicesSection } from "../components/SupportedServices";
 import { FAQ } from "../components/FAQ";
+import { Feature } from "../components/Feature";
+import { Footer } from "../components/Footer";
 
 const Home: NextPage = () => {
   const [demoText, setDemoText] = useState("");
@@ -109,21 +111,55 @@ const Home: NextPage = () => {
           </div>
           <Demo isDemo={true} demoText={demoText} />
         </div>
-
+        <h2 style={{ fontSize: "3em" }}>Speed up your AWS workflow</h2>
+        <Feature
+          title="Find resources cross regions. Fast."
+          description="Was that in us-east-1? Or us-west-2? No need to remember. Just type the name of the resource and CloudTempo will find it for you."
+        >
+          <Image
+            src="/resources.png"
+            alt="Feature"
+            width={545}
+            height={280}
+            quality={100}
+          />
+        </Feature>
+        <Feature
+          title="Pure action"
+          description="Save your time navigating through the console. Jump into desired part of the console straight from the command bar. Just type it."
+          isChildrenFirst={true}
+        >
+          <Image
+            src="/shortcuts.png"
+            alt="Feature"
+            width={545}
+            height={280}
+            quality={100}
+          />
+        </Feature>
+        <Feature
+          title="Misstakesss happen"
+          description="Even to me. I know, typing is hard. CloudTempo got you covered. Thanks to fuzzy matching, we'll find that pesky resource hiding in the console."
+        >
+          <Image
+            src="/mistakes.png"
+            alt="Feature"
+            width={545}
+            height={280}
+            quality={100}
+          />
+        </Feature>
+        <h3>And even more features coming soon like:</h3>
+        Query Language • Aliases • Plugins • Favourites
         <SupportedServicesSection />
         <Pricing />
         <FAQ />
+        <span className={styles.logo} style={{ marginRight: "10px" }}>
+          <Image src="/logo.svg" alt="CloudTempo Logo" width={20} height={20} />
+        </span>
       </main>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://twitter.com/_cloudtempo"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Twitter
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 };

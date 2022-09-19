@@ -131,7 +131,9 @@ const services = [
 export const SupportedServicesSection = () => {
   return (
     <div className={styles.section}>
-      <h2>Supported Services</h2>
+      <h2 style={{ fontSize: "2.5em", marginBottom: 0, marginTop: "80px" }}>
+        Supported Services
+      </h2>
       <h3>
         CloudTempo works with following services. Focusing on a small set of
         Serverless-related services first.
