@@ -110,6 +110,11 @@ const services = [
     icon: logs.icon,
     status: "soon",
   },
+  {
+    resourceName: "AWS Step Functions",
+    icon: lambda.icon,
+    status: "soon",
+  },
 ];
 
 export const SupportedServicesSection = () => {
