@@ -34,13 +34,11 @@ h1 {
 
 .cloudtempo {
   margin: 0 !important;
-  /* transform: scale(0.8); */
   zoom: 0.8;
 }
 
 .cmdk-not-visible {
   min-height: 707px;
-  /* margin-top: -160px !important; */
 }
 
 h3 {
