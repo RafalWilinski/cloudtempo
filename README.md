@@ -5,15 +5,18 @@ Todos:
 - [ ] Drop us a line
 - [x] Actions menu (favorites, aliases, copy arn)
 - [ ] Onboarding flow (thanks for installing, bla bla initial scan in the background)
-- [ ] Send an email after purchase
+- [ ] Send an email after purchase (waiting for Postmark confirmation)
 - [ ] Aliases
 - [ ] Menu for selecting services with coming soon section inside configuration
-- [ ] Improve cors authing
+- [ ] Improve cors authing - faster, based on retries?
 - [x] Store documents with accountId prefix to ensure tenant isolation
 - [x] Encode documents with accountId + something to keep it safe
 - [x] Get rid of vercel references
 - [x] Proper name, description, and app icon
-- [ ] Fresh AWS Account for CloudTango
+- [x] Fresh AWS Account for CloudTango
+- [ ] If license key present, do not show "activate" item
+- [ ] If license key not present, render actual value for X trial left
+- [ ] Deactivate product is license key not present AND timeRemaining negative
 
 Trials:
 
@@ -56,3 +59,11 @@ is awesome but does not work for regions that haven't been previously visited.
 
 How to headlessly auth to other regions?
 Maybe discover other endpoints, similar to /tb/credentials from dynamodb?
+
+Stack:
+
+- Infra: AWS
+- Landing: Vercel
+- Emails: Postmark
+- Domain: Namecheap (DNS) + Route53 (HZ)
+- Shop: LemonSqueezy

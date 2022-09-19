@@ -9,7 +9,7 @@ import { reindex } from "./lib/reindex";
 
 importScripts("aws-sdk.js");
 
-console.log("Dependencies loaded");
+console.log("CloudTempo started");
 
 chrome.runtime.onMessageExternal.addListener(async function (
   request,
@@ -42,5 +42,8 @@ chrome.runtime.onMessageExternal.addListener(async function (
       request.q
     );
     sendResponse({ results, userInfo: await licenseInfo });
+  } else if (request.openUrl) {
+    chrome.tabs.create({ url: request.openUrl });
+    sendResponse({});
   }
 });

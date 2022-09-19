@@ -6,6 +6,7 @@ import {
   CheckBadgeIcon,
   Cog6ToothIcon,
   UserIcon,
+  MapIcon,
   ChatBubbleBottomCenterTextIcon,
   GlobeEuropeAfricaIcon,
 } from "@heroicons/react/24/outline";
@@ -110,10 +111,30 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
           Activate (6 days of trial left)
         </Command.Item>
       )}
-
       <Command.Item
         onSelect={() => {
-          chrome.tabs.create({ url: "https://cloudtempo.dev/faq" });
+          if (isDemo) {
+            location.href =
+              "https://github.com/orgs/cloud-tempo/projects/1/views/1";
+          }
+
+          chrome.runtime.sendMessage(extensionId, {
+            openUrl: "https://github.com/orgs/cloud-tempo/projects/1/views/1",
+          });
+        }}
+      >
+        <MapIcon width={20} height={20} />
+        Roadmap
+      </Command.Item>
+      <Command.Item
+        onSelect={() => {
+          if (isDemo) {
+            location.href = "https://cloudtempo.dev/faq";
+          }
+
+          chrome.runtime.sendMessage(extensionId, {
+            openUrl: "https://cloudtempo.dev/faq",
+          });
         }}
       >
         <InformationCircleIcon width={20} height={20} />
