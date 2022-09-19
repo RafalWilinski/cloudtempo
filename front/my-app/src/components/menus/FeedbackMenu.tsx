@@ -16,6 +16,7 @@ export function FeedbackMenu({ isDemo, setPages }: ActivateMenuProps) {
   return (
     <Command.Group heading="Feedback">
       <textarea
+        autoFocus={true}
         value={body}
         onChange={(e) => setBody(e.target.value)}
         placeholder="What's on your mind?"

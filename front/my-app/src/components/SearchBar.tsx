@@ -231,6 +231,7 @@ export function CloudTempo({
       {isVisible && (
         <div className={`cloudtempo ${isDarkMode ? "dark" : ""}`}>
           <Command
+            shouldFilter={activePage !== "Feedback" && activePage !== "License"}
             value={value}
             onValueChange={(value) => {
               setValue(value);
@@ -275,16 +276,18 @@ export function CloudTempo({
                   onClick={() => popPage()}
                 />
               )}
-              <Command.Input
-                id="cloudtempo-main-input"
-                ref={inputRef}
-                value={inputValue}
-                autoFocus={true}
-                placeholder={renderMainInputPlaceholder()}
-                onValueChange={(value) => {
-                  setInputValue(value);
-                }}
-              />
+              {activePage !== "Feedback" && (
+                <Command.Input
+                  id="cloudtempo-main-input"
+                  ref={inputRef}
+                  value={inputValue}
+                  autoFocus={true}
+                  placeholder={renderMainInputPlaceholder()}
+                  onValueChange={(value) => {
+                    setInputValue(value);
+                  }}
+                />
+              )}
             </div>
 
             <Command.List ref={listRef}>

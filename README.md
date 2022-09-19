@@ -19,7 +19,7 @@ Todos:
 - [ ] Deactivate product is license key not present AND timeRemaining negative
 - [ ] Proper services to selected services menu
 - [x] Clearing up input value when navigating to submenu
-- [ ] Fix toaster
+- [x] Fix toaster
 
 Landing:
 

@@ -354,6 +354,7 @@
   margin-right: 4px;
   margin-left: 4px;
   border-radius: 4px;
+  cursor: pointer;
   background-color: var(--grayA3);
   color: var(--grayA11);
 }

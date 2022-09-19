@@ -39,6 +39,7 @@ const useReindex = () => {
           );
           setIsReindexing(false);
           setLastReindexDate(new Date().toISOString());
+          Cookies.set("lastReindexDate", new Date().toISOString());
         }
       );
     }
@@ -84,6 +85,8 @@ const useReindex = () => {
     if (time.seconds > 0) {
       return "couple seconds ago";
     }
+
+    return "couple seconds ago";
   };
 
   const reindexItemLabel = () => {
