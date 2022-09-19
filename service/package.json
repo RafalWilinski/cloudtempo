@@ -16,6 +16,7 @@
     "@types/jest": "^27.5.2",
     "@types/node": "10.17.27",
     "@types/prettier": "2.6.0",
+    "@types/uuid": "^8.3.4",
     "aws-cdk": "2.41.0",
     "esbuild": "^0.15.7",
     "jest": "^27.5.1",
@@ -31,12 +32,15 @@
     "@aws-sdk/client-lambda": "^3.168.0",
     "@aws-sdk/client-s3": "^3.168.0",
     "@aws-sdk/util-dynamodb": "^3.172.0",
+    "@sentry/serverless": "^7.13.0",
     "aws-cdk-lib": "2.41.0",
     "aws-sdk": "^2.1213.0",
     "constructs": "^10.0.0",
     "crypto-js": "^4.1.1",
     "minisearch": "^5.0.0",
+    "postmark": "^3.0.14",
     "source-map-support": "^0.5.21",
+    "ulid": "^2.3.0",
     "uuid": "^9.0.0"
   }
 }

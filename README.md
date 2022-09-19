@@ -5,6 +5,7 @@ Todos:
 - [ ] Drop us a line
 - [x] Actions menu (favorites, aliases, copy arn)
 - [ ] Onboarding flow (thanks for installing, bla bla initial scan in the background)
+- [ ] Send an email after purchase
 - [ ] Aliases
 - [ ] Menu for selecting services with coming soon section inside configuration
 - [ ] Improve cors authing

@@ -72,6 +72,20 @@ export class CloudTempoLicensingAPI extends cdk.Stack {
     });
     licensesTable.grantReadWriteData(webhookEndpoint);
 
+    const postFeedbackEndpoint = new lambda.NodejsFunction(
+      this,
+      "PostFeedbackEndpoint",
+      {
+        entry: "./lambdas/feedback.ts",
+        handler: "handler",
+        environment: {
+          LICENSES_TABLE: licensesTable.tableName,
+        },
+        memorySize: 512,
+      }
+    );
+    licensesTable.grantReadWriteData(webhookEndpoint);
+
     const api = new apigateway.RestApi(this, "Api", {
       restApiName: "MyApi",
     });
@@ -88,6 +102,12 @@ export class CloudTempoLicensingAPI extends cdk.Stack {
     api.root
       .addResource("webhook")
       .addMethod("POST", new apigateway.LambdaIntegration(webhookEndpoint));
+
+    const feedbackResource = api.root.addResource("feedback");
+    feedbackResource.addMethod(
+      "POST",
+      new apigateway.LambdaIntegration(postFeedbackEndpoint)
+    );
 
     const certificate = Certificate.fromCertificateArn(
       this,

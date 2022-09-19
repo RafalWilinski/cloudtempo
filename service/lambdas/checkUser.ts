@@ -7,6 +7,13 @@ import {
 import { AES, enc } from "crypto-js";
 import { corsHeaders } from "../lib/cors";
 import { decodeArn } from "../lib/arn";
+import { getQueryStringParameters } from "../lib/qs";
+import { AWSLambda } from "@sentry/serverless";
+
+AWSLambda.init({
+  dsn: "https://4a94f23f925e4c139421bf1760fdd0e5@o1413901.ingest.sentry.io/6753871",
+  tracesSampleRate: 1.0,
+});
 
 const TableName = process.env.LICENSES_TABLE!;
 const dynamodb = new DynamoDBClient({});
@@ -18,23 +25,16 @@ interface UserItem {
   licenseKey?: string;
 }
 
-export const handler = async (
+const _handler = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
-  if (!event.queryStringParameters) {
-    return {
-      statusCode: 400,
-      body: "Please provide query string parameters",
-    };
+  const parametersOrBadRequest = getQueryStringParameters(event);
+
+  if ("statusCode" in parametersOrBadRequest) {
+    return parametersOrBadRequest;
   }
 
-  const encryptedArn = event.queryStringParameters["id"];
-  if (!encryptedArn) {
-    return {
-      statusCode: 400,
-      body: "Missing query parameter 'id'",
-    };
-  }
+  const encryptedArn = parametersOrBadRequest.encryptedArn;
 
   try {
     let userItem;
@@ -130,3 +130,5 @@ async function createUserItem(decryptedUserArn: string): Promise<UserItem> {
     createdAt,
   };
 }
+
+export const handler = AWSLambda.wrapHandler(_handler);

@@ -7,12 +7,18 @@ import {
 } from "@aws-sdk/client-dynamodb";
 import { AES, enc } from "crypto-js";
 import { corsHeaders } from "../lib/cors";
+import { AWSLambda } from "@sentry/serverless";
+
+AWSLambda.init({
+  dsn: "https://4a94f23f925e4c139421bf1760fdd0e5@o1413901.ingest.sentry.io/6753871",
+  tracesSampleRate: 1.0,
+});
 
 const TableName = process.env.LICENSES_TABLE!;
 const dynamodb = new DynamoDBClient({});
 const SECRET_CONST = "cl0udt3mP0";
 
-export const handler = async (
+const _handler = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
   if (!event.queryStringParameters) {
@@ -142,3 +148,5 @@ async function associateUserWithLicense(id: string, licenseKey: string) {
     })
   );
 }
+
+export const handler = AWSLambda.wrapHandler(_handler);
