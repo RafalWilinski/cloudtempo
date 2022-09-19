@@ -22,6 +22,9 @@ import { SubCommand } from "./SubCommand";
 import { consoleUrl } from "./services/url";
 import { ResourcesMenu } from "./menus/ResourcesMenu";
 import { LicenseInfo } from "../../background/lib/checkUser";
+import { CommandSelectItem } from "./CommandSelectItem";
+import { SelectedServicesMenu } from "./menus/SelectedServicesMenu";
+import { SelectedRegionsMenu } from "./menus/SelectedRegionsMenu";
 
 export function CloudTempo({
   isDemo,
@@ -252,28 +255,28 @@ export function CloudTempo({
                 </div>
               ))}
             </div>
-            {activePage !== "Configuration" && (
-              <div style={{ display: "flex" }}>
-                {activePage !== "Home" && (
-                  <ArrowSmallLeftIcon
-                    width={20}
-                    height={20}
-                    className="back"
-                    onClick={() => popPage()}
-                  />
-                )}
-                <Command.Input
-                  id="cloudtempo-main-input"
-                  ref={inputRef}
-                  value={inputValue}
-                  autoFocus={true}
-                  placeholder={renderMainInputPlaceholder()}
-                  onValueChange={(value) => {
-                    setInputValue(value);
-                  }}
+
+            <div style={{ display: "flex" }}>
+              {activePage !== "Home" && (
+                <ArrowSmallLeftIcon
+                  width={20}
+                  height={20}
+                  className="back"
+                  onClick={() => popPage()}
                 />
-              </div>
-            )}
+              )}
+              <Command.Input
+                id="cloudtempo-main-input"
+                ref={inputRef}
+                value={inputValue}
+                autoFocus={true}
+                placeholder={renderMainInputPlaceholder()}
+                onValueChange={(value) => {
+                  setInputValue(value);
+                }}
+              />
+            </div>
+
             <Command.List ref={listRef}>
               {isHome && items.length > 0 && (
                 <ResourcesMenu
@@ -294,6 +297,7 @@ export function CloudTempo({
                   userInfo={userInfo}
                 />
               )}
+
               {isHome && <ServicesMenu isDemo={isDemo} />}
               {activePage === "lambda" && (
                 <lambda.Menu document={selectedDocument!} />
@@ -306,6 +310,7 @@ export function CloudTempo({
               {activePage === "Configuration" && (
                 <ConfigurationMenu
                   goToHome={() => setPages(["Home"])}
+                  setPages={setPages}
                   setDarkMode={() =>
                     setDarkMode((d) => {
                       Cookies.set("cloudtempo-dark-mode", (!d).toString());
@@ -314,6 +319,8 @@ export function CloudTempo({
                   }
                 />
               )}
+              {activePage === "Selected Services" && <SelectedServicesMenu />}
+              {activePage === "Selected Regions" && <SelectedRegionsMenu />}
             </Command.List>
             {isHome && isActionsMenuVisible && (
               <SubCommand

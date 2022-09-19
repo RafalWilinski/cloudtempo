@@ -1,6 +1,6 @@
 import { Command } from "cmdk";
 
-const regions = [
+export const regions = [
   { name: "US East (N. Virginia)", code: "us-east-1" },
   { name: "US East (Ohio)", code: "us-east-2" },
   { name: "US West (N. California)", code: "us-west-1" },
