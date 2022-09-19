@@ -21,21 +21,28 @@ export type ReindexProps = {
   ddbCredentials: Credentials;
   ecsCredentials: Credentials;
   accountId: string;
-  regions?: string[];
+  selectedRegions: string[];
+  selectedServices: string[];
 };
 
 export async function reindex({
   ddbCredentials,
   ecsCredentials,
   accountId,
-  regions = ["us-east-1", "us-west-2", "eu-central-1"],
+  selectedRegions,
+  selectedServices,
 }: ReindexProps) {
   const secretKey = `${SECRET_CONST}-${accountId}`;
 
   console.log("Reindexing...", { ddbCredentials, ecsCredentials });
 
-  const regionalFetchFunctions = regions.map((region) =>
-    prepareFetchFunctions({ ddbCredentials, ecsCredentials, region })
+  const regionalFetchFunctions = selectedRegions.map((region) =>
+    prepareFetchFunctions({
+      ddbCredentials,
+      ecsCredentials,
+      region,
+      selectedServices,
+    })
   );
   const flattened = regionalFetchFunctions.flat();
 
@@ -83,6 +90,7 @@ export async function reindex({
 
 type ProcessRegionProps = {
   ddbCredentials: Credentials;
+  selectedServices: string[];
   ecsCredentials: Credentials;
   region: string;
 };
@@ -90,11 +98,13 @@ type ProcessRegionProps = {
 type FetchFunctionKeyPair = {
   fetch: () => Promise<Document[]>;
   key: string;
+  service: string;
 };
 
 function prepareFetchFunctions({
   ddbCredentials,
   ecsCredentials,
+  selectedServices,
   region,
 }: ProcessRegionProps): FetchFunctionKeyPair[] {
   const fetchFunctions: FetchFunctionKeyPair[] = [
@@ -102,14 +112,17 @@ function prepareFetchFunctions({
     {
       fetch: () => limit(() => getAllS3Buckets(ddbCredentials, region)),
       key: `s3#${region}`,
+      service: "s3",
     },
     {
       fetch: () => limit(() => getAllLambdaFunctions(ddbCredentials, region)),
       key: `lambda#${region}`,
+      service: "lambda",
     },
     {
       fetch: () => limit(() => getAllDynamoDBTables(ddbCredentials, region)),
       key: `dynamodb#${region}`,
+      service: "dynamodb",
     },
 
     /// ECS
@@ -117,27 +130,32 @@ function prepareFetchFunctions({
       fetch: () =>
         limit(() => getAllCloudformationStacks(ecsCredentials, region)),
       key: `cloudformation#${region}`,
+      service: "cloudformation",
     },
     {
       fetch: () =>
         limit(() => getAllCloudwatchLogGroups(ecsCredentials, region)),
       key: `logs#${region}`,
+      service: "logs",
     },
     {
       fetch: () => limit(() => getAllCloudwatchAlarms(ecsCredentials, region)),
       key: `alarm#${region}`,
+      service: "alarm",
     },
     {
       fetch: () => limit(() => getAllIAMRoles(ecsCredentials, region)),
       key: `iam-roles#${region}`,
+      service: "iam-roles",
     },
     {
       fetch: () => limit(() => getAllIAMUsers(ecsCredentials, region)),
       key: `iam-users#${region}`,
+      service: "iam-users",
     },
   ];
 
-  return fetchFunctions;
+  return fetchFunctions.filter((f) => selectedServices.includes(f.service));
 }
 
 async function reportProgress(key: string, progress: number) {

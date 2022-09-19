@@ -15,6 +15,8 @@ import { extensionId } from "../../lib/extension";
 import { toast } from "react-hot-toast";
 import { getCurrentAccountId } from "../../lib/getCurrentAccountId";
 import { LicenseInfo } from "../../../background/lib/checkUser";
+import { getCurrentlySelectedRegions } from "./SelectedRegionsMenu";
+import { getCurrentlySelectedServices } from "./SelectedServicesMenu";
 
 interface ActionsMenuProps {
   setPages: (pages: string[]) => void;
@@ -86,6 +88,8 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
                 type: "reindex",
                 userInfo: Cookies.get("aws-userInfo"),
                 accountId: getCurrentAccountId(isDemo),
+                selectedRegions: getCurrentlySelectedRegions(),
+                selectedServices: getCurrentlySelectedServices(),
               },
               function (_response) {
                 console.log(_response);

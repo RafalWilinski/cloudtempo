@@ -5,6 +5,14 @@ import { getCurrentAccountId } from "../../lib/getCurrentAccountId";
 import { CommandSelectItem } from "../CommandSelectItem";
 import { regions } from "./RegionsMenu";
 
+export const getCurrentlySelectedRegions = () => {
+  const cookieKey = `selected-regions-${getCurrentAccountId()}`;
+  const selectedServices = JSON.parse(
+    Cookies.get(cookieKey) ?? JSON.stringify(regions.map((s) => s.code))
+  );
+  return selectedServices;
+};
+
 export function SelectedRegionsMenu() {
   const cookieKey = `selected-regions-${getCurrentAccountId()}`;
   const initialSelectedServices = JSON.parse(

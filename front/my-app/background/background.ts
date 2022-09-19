@@ -30,6 +30,8 @@ chrome.runtime.onMessageExternal.addListener(async function (
       ddbCredentials,
       ecsCredentials,
       accountId: request.accountId,
+      selectedServices: request.selectedServices,
+      selectedRegions: request.selectedRegions,
     });
 
     sendResponse({ response: reindexResponse, userInfo: await licenseInfo });

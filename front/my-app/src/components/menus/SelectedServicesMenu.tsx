@@ -16,6 +16,14 @@ interface SelectedServicesProps {
 
 const services = [dynamodb, lambda, s3, cloudwatchlogs, cloudformation];
 
+export const getCurrentlySelectedServices = () => {
+  const cookieKey = `selected-services-${getCurrentAccountId()}`;
+  const selectedServices = JSON.parse(
+    Cookies.get(cookieKey) ?? JSON.stringify(services.map((s) => s.code))
+  );
+  return selectedServices;
+};
+
 export function SelectedServicesMenu({ isDemo }: SelectedServicesProps) {
   const cookieKey = `selected-services-${getCurrentAccountId()}`;
   const initialSelectedServices = JSON.parse(
