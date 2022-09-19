@@ -10,6 +10,7 @@ import { SupportedServicesSection } from "../components/SupportedServices";
 import { FAQ } from "../components/FAQ";
 import { Feature } from "../components/Feature";
 import { Footer } from "../components/Footer";
+import { NewsletterForm } from "../components/NewsletterForm";
 
 const Home: NextPage = () => {
   const [demoText, setDemoText] = useState("");
@@ -89,15 +90,16 @@ const Home: NextPage = () => {
               Navigate through AWS Console with speed. Easily find resources,
               perform actions with single keystrokes. Designed for power users.
             </h3>
-            <button className={styles.installBtn}>
+            {/* <button className={styles.installBtn}>
               <ArrowDownCircleIcon
                 width={24}
                 height={24}
                 style={{ marginRight: "4px" }}
               />
-              Install now
-            </button>
-            <span
+              Install now (not available yet!)
+            </button> */}
+            <NewsletterForm />
+            {/* <span
               style={{
                 marginTop: "10px",
                 display: "block",
@@ -107,7 +109,7 @@ const Home: NextPage = () => {
             >
               Free 7-days trial • Available for Chrome • No email or credit card
               required
-            </span>
+            </span> */}
           </div>
           <Demo isDemo={true} demoText={demoText} />
         </div>
@@ -154,9 +156,9 @@ const Home: NextPage = () => {
         <SupportedServicesSection />
         <Pricing />
         <FAQ />
-        <span className={styles.logo} style={{ marginRight: "10px" }}>
-          <Image src="/logo.svg" alt="CloudTempo Logo" width={20} height={20} />
-        </span>
+        <div style={{ textAlign: "left", marginLeft: 0 }}>
+          <NewsletterForm />
+        </div>
       </main>
 
       <Footer />

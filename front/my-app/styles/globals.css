@@ -374,7 +374,6 @@
 }
 
 #revue-embed input {
-  background: var(--app-bg);
   border: 1px solid var(--gray10);
   border-radius: 5px;
   padding: 8px 12px;

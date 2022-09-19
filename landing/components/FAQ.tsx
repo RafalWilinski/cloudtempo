@@ -26,7 +26,7 @@ const qa = [
   {
     question: "What's your cancellation policy",
     answer:
-      "If you no longer wish to use CloudTango, you may cancel at any time, and we will not bill you again.",
+      "If you no longer wish to use CloudTempo, you may cancel at any time, and we will not bill you again.",
   },
 ];
 
