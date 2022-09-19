@@ -5,6 +5,7 @@ import { extensionId } from "./extension";
 import { getCurrentAccountId } from "./getCurrentAccountId";
 import { singletonHook } from "react-singleton-hook";
 import { useState } from "react";
+import { getCurrentlySelectedServices } from "../components/menus/SelectedServicesMenu";
 
 const useReindex = () => {
   const [isReindexing, setIsReindexing] = useState(false);
@@ -21,7 +22,7 @@ const useReindex = () => {
         userInfo: Cookies.get("aws-userInfo"),
         accountId: getCurrentAccountId(),
         selectedRegions: getCurrentlySelectedRegions(),
-        selectedServices: getCurrentlySelectedRegions(),
+        selectedServices: getCurrentlySelectedServices(),
       },
       function (_response) {
         console.log(_response);

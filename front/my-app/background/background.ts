@@ -16,8 +16,6 @@ chrome.runtime.onMessageExternal.addListener(async function (
   _sender,
   sendResponse
 ) {
-  console.log("MSG", request, _sender);
-
   const licenseInfo = checkUser(request.userInfo);
 
   if (request.type === "reindex") {
@@ -26,7 +24,7 @@ chrome.runtime.onMessageExternal.addListener(async function (
       getECSCredentials(),
     ]);
 
-    const reindexResponse = await reindex({
+    const { allDocuments, failedKeys } = await reindex({
       ddbCredentials,
       ecsCredentials,
       accountId: request.accountId,
@@ -34,7 +32,11 @@ chrome.runtime.onMessageExternal.addListener(async function (
       selectedRegions: request.selectedRegions,
     });
 
-    sendResponse({ response: reindexResponse, userInfo: await licenseInfo });
+    sendResponse({
+      response: allDocuments,
+      userInfo: await licenseInfo,
+      failedKeys,
+    });
   } else if (request.licenseKey) {
     sendResponse(
       await registerLicenseKey(request.licenseKey, request.userInfo)

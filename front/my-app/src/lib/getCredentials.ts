@@ -9,39 +9,37 @@ let cachedDynamoDBCredentials: Credentials | undefined;
 let cachedECSCredentials: Credentials | undefined;
 
 export async function getDynamoDBCredentials(): Promise<Credentials> {
-  // todo - check if they're not expired first AND valid
   if (cachedDynamoDBCredentials) {
-    return cachedDynamoDBCredentials;
+    const areCachedCredentialsValid =
+      new Date(cachedDynamoDBCredentials.expiration) > new Date();
+
+    if (areCachedCredentialsValid) {
+      return cachedDynamoDBCredentials;
+    }
+
+    console.log("Cached credentials expired. Fetching new.");
   }
 
-  // todo: do not reauth if not needed!
-  const tab = await chrome.tabs.create({
-    url: "https://us-east-1.console.aws.amazon.com/dynamodbv2/home?region=us-east-1",
-    active: false,
-  });
+  let csrfToken = await getDynamoDBHomePageCSRF();
+  let tab;
+  let retriesCount = 0;
 
-  // Wait for 3 seconds
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  while (!csrfToken) {
+    retriesCount++;
+    tab = await chrome.tabs.create({
+      url: "https://us-east-1.console.aws.amazon.com/dynamodbv2/home?region=us-east-1",
+      active: false,
+    });
 
-  // Todo - replace with something smarter
-  // let isLoaded = false;
-  // while (!isLoaded) {
-  //   isLoaded = tab.status === "complete";
-  // }
+    // Wait for a second
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  // Get CSRF token from AWS DynamoDB Console home
-  const dynamoDBHomePage = await fetch(
-    "https://us-east-1.console.aws.amazon.com/dynamodbv2/home?region=us-east-1"
-  );
+    if (retriesCount === 5) {
+      throw new Error("Failed to fetch CSRF token");
+    }
 
-  const htmlContent = await (await dynamoDBHomePage.blob()).text();
-
-  const splitStartToken = "csrfToken&quot;:&quot;";
-  const splitEndToken = "&quot;";
-
-  const csrfToken = htmlContent
-    .split(splitStartToken)[1]
-    .split(splitEndToken)[0];
+    csrfToken = await getDynamoDBHomePageCSRF();
+  }
 
   // Fetch temporary credentials from DynamoDB Console
   const temporaryCredentials = await fetch(
@@ -57,11 +55,38 @@ export async function getDynamoDBCredentials(): Promise<Credentials> {
 
   const temporaryCredentialsJson = await temporaryCredentials.json();
 
-  await chrome.tabs.remove(tab.id!);
+  if (tab) {
+    await chrome.tabs.remove(tab.id!);
+  }
 
   cachedDynamoDBCredentials = temporaryCredentialsJson;
 
   return temporaryCredentialsJson;
+}
+
+async function getDynamoDBHomePageCSRF(): Promise<string | undefined> {
+  try {
+    const dynamoDBHomePage = await fetch(
+      "https://us-east-1.console.aws.amazon.com/dynamodbv2/home?region=us-east-1"
+    );
+
+    const htmlContent = await (await dynamoDBHomePage.blob()).text();
+
+    const splitStartToken = "csrfToken&quot;:&quot;";
+    const splitEndToken = "&quot;";
+
+    const csrfToken = htmlContent
+      .split(splitStartToken)[1]
+      .split(splitEndToken)[0];
+
+    return csrfToken;
+  } catch (error) {
+    console.warn(
+      "Failed to get CSRF token from DynamoDB Console home page",
+      error
+    );
+    return undefined;
+  }
 }
 
 export async function getECSCredentials(): Promise<Credentials> {

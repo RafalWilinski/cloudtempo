@@ -34,7 +34,13 @@ export async function reindex({
 }: ReindexProps) {
   const secretKey = `${SECRET_CONST}-${accountId}`;
 
-  console.log("Reindexing...", { ddbCredentials, ecsCredentials });
+  console.log("Reindexing...", {
+    ddbCredentials,
+    ecsCredentials,
+    selectedRegions,
+    selectedServices,
+    accountId,
+  });
 
   const regionalFetchFunctions = selectedRegions.map((region) =>
     prepareFetchFunctions({
@@ -48,6 +54,7 @@ export async function reindex({
 
   let progress = 0;
   const increment = 1 / flattened.length;
+  const failedKeys: string[] = [];
 
   const all = await Promise.all(
     flattened.map(async (f) => ({
@@ -63,6 +70,7 @@ export async function reindex({
         })
         .catch((e) => {
           // todo - pass error to the browser
+          failedKeys.push(f.key);
 
           console.error("Failed to load data", e, f.key);
 
@@ -85,7 +93,7 @@ export async function reindex({
 
   console.log("Reindexing done");
 
-  return allDocuments;
+  return { allDocuments, failedKeys };
 }
 
 type ProcessRegionProps = {
