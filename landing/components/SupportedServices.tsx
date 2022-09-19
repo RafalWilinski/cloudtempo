@@ -4,8 +4,13 @@ import * as lambda from "../../front/my-app/src/components/services/Lambda";
 import * as cloudformation from "../../front/my-app/src/components/services/Cloudformation";
 import * as alarm from "../../front/my-app/src/components/services/CloudwatchAlarm";
 import * as logs from "../../front/my-app/src/components/services/CloudwatchLogs";
+import * as eks from "../../front/my-app/src/components/services/EKS";
+import * as ec2 from "../../front/my-app/src/components/services/EC2";
+import * as vpc from "../../front/my-app/src/components/services/VPC";
+import * as rds from "../../front/my-app/src/components/services/RDS";
 import * as s3 from "../../front/my-app/src/components/services/S3";
 import * as ddb from "../../front/my-app/src/components/services/DynamoDB";
+import * as apigw from "../../front/my-app/src/components/services/APIGateway";
 import * as role from "../../front/my-app/src/components/services/IAMRole";
 import * as user from "../../front/my-app/src/components/services/IAMUser";
 
@@ -52,57 +57,62 @@ const services = [
   },
   {
     resourceName: "Amazon EC2 Instances",
-    icon: logs.icon,
+    icon: ec2.icon,
     status: "soon",
   },
   {
     resourceName: "Amazon EC2 Load Balancers",
-    icon: logs.icon,
+    icon: ec2.icon,
     status: "soon",
   },
   {
     resourceName: "Amazon EC2 Auto Scaling",
-    icon: logs.icon,
+    icon: ec2.icon,
     status: "soon",
   },
   {
     resourceName: "Amazon VPCs",
-    icon: logs.icon,
+    icon: vpc.icon,
     status: "soon",
   },
   {
     resourceName: "Amazon VPC Subnets",
-    icon: logs.icon,
+    icon: vpc.icon,
     status: "soon",
   },
   {
     resourceName: "Amazon VPC Security Groups",
-    icon: logs.icon,
+    icon: vpc.icon,
     status: "soon",
   },
   {
     resourceName: "AWS ECS Clusters",
-    icon: logs.icon,
+    icon: eks.icon,
     status: "soon",
   },
   {
     resourceName: "AWS ECS Services",
-    icon: logs.icon,
+    icon: eks.icon,
     status: "soon",
   },
   {
     resourceName: "AWS EKS Clusters",
-    icon: logs.icon,
+    icon: eks.icon,
     status: "soon",
   },
   {
     resourceName: "AWS ApiGateway APIs",
-    icon: logs.icon,
+    icon: apigw.icon,
     status: "soon",
   },
   {
     resourceName: "AWS RDS Clusters",
-    icon: logs.icon,
+    icon: rds.icon,
+    status: "soon",
+  },
+  {
+    resourceName: "AWS Aurora Instances",
+    icon: rds.icon,
     status: "soon",
   },
   {

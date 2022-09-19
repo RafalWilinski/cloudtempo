@@ -21,7 +21,7 @@ Todos:
 Landing:
 
 - [ ] Features section
-  - List supported and planned services
+  - [x] List supported and planned services
 - [ ] Testimonials Section
 - [ ] FAQ
 - [ ] Note from author
@@ -29,6 +29,8 @@ Landing:
 - [ ] Footer (Roadmap, Twitter,Download, Dynobase, Privacy Policy, Terms of Service, Contact Us)
 - [ ] FAQ Page
 - [ ] Buy Page
+- [ ] Sitemap
+- [ ] Robots.txt
 
 Trials:
 
