@@ -5,7 +5,7 @@ import * as cloudformation from "../../front/my-app/src/components/services/Clou
 import * as alarm from "../../front/my-app/src/components/services/CloudwatchAlarm";
 import * as logs from "../../front/my-app/src/components/services/CloudwatchLogs";
 import * as eks from "../../front/my-app/src/components/services/EKS";
-import * as ec2 from "../../front/my-app/src/components/services/EC2";
+import * as ec2 from "../../front/my-app/src/components/services/EC2Instance";
 import * as vpc from "../../front/my-app/src/components/services/VPC";
 import * as rds from "../../front/my-app/src/components/services/RDS";
 import * as s3 from "../../front/my-app/src/components/services/S3";
