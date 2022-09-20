@@ -76,11 +76,9 @@ Services for initial launch:
 - [x] CloudFormation - covered by ECS
 - [x] Cloudwatch Logs - covered by ECS
 - [x] IAM (Roles, Users) - covered by ECS
-- [ ] EC2 (Instances) - covered by ECS
+- [x] EC2 (Instances) - covered by ECS
 - [ ] VPC (VPCs, Subnets, SGs) - covered by ECS
 - [ ] ECS (Clusters, Services) - covered by ECS
-- [ ] SSM Parameter Store
-- [ ] Secrets Manager
 
 Later add:
 
@@ -90,6 +88,8 @@ Later add:
 - [ ] Indexing tags
 - [ ] Recently opened section
 - [ ] IAM Groups
+- [ ] SSM Parameter Store
+- [ ] Secrets Manager
 - [ ] RDS
 - [ ] Route53
 
