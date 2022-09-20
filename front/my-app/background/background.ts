@@ -17,8 +17,6 @@ chrome.runtime.onMessageExternal.addListener(async function (
   _sender,
   sendResponse
 ) {
-  const licenseInfo = checkUser(request.userInfo);
-
   if (request.type === "getLicenseInfo") {
     sendResponse(await checkUser(request.userInfo));
   } else if (request.type === "reindex") {
@@ -37,7 +35,6 @@ chrome.runtime.onMessageExternal.addListener(async function (
 
     sendResponse({
       response: allDocuments,
-      userInfo: await licenseInfo,
       failedKeys,
       totalJobsCount,
     });
@@ -49,7 +46,7 @@ chrome.runtime.onMessageExternal.addListener(async function (
     const results = (await getOrInitializeMinisearch(request.accountId)).search(
       request.q
     );
-    sendResponse({ results, userInfo: await licenseInfo });
+    sendResponse({ results });
   } else if (request.openUrl) {
     chrome.tabs.create({ url: request.openUrl });
     sendResponse({});

@@ -26,12 +26,11 @@ const useReindex = () => {
           selectedServices: getCurrentlySelectedServices(),
         },
         function (response) {
-          console.log(response);
           toast.success(
             `Reindexing done (${response.response.length} resources found)`,
             {
               position: "top-right",
-              autoClose: 2000,
+              autoClose: 5000,
               hideProgressBar: true,
               closeOnClick: true,
               pauseOnHover: true,

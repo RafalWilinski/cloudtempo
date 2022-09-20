@@ -4,11 +4,26 @@ import { LicenseInfo } from "../../background/lib/checkUser";
 import { extensionId } from "./extension";
 
 export function useLicenseInfo(isDemo?: boolean) {
+  const REFRESH_INTERVAL_SECONDS = 30;
   const [userInfo, setUserInfo] = useState<LicenseInfo | undefined>(undefined);
 
   // Initial license ask
   useEffect(() => {
-    console.log("Initial ask.");
+    refresh();
+  }, []);
+
+  useEffect(() => {
+    const periodicalCheck = setInterval(() => {
+      refresh();
+    }, 1000 * REFRESH_INTERVAL_SECONDS);
+
+    return () => {
+      clearInterval(periodicalCheck);
+    };
+  });
+
+  function refresh() {
+    console.log("Refresh");
     chrome.runtime.sendMessage(
       extensionId,
       {
@@ -19,12 +34,13 @@ export function useLicenseInfo(isDemo?: boolean) {
         setUserInfo(response);
       }
     );
-  }, []);
+  }
 
   function canUseSoftware(): boolean {
     if (isDemo) {
       return true;
     }
+
     return !userInfo || userInfo.isValid;
   }
 
@@ -65,6 +81,7 @@ export function useLicenseInfo(isDemo?: boolean) {
     setUserInfo,
     canUseSoftware,
     isActivated,
+    refresh,
     getTimeRemainingSeconds,
     getTimeRemainingFormatted,
   };

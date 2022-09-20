@@ -14,12 +14,14 @@ Todos:
 - [x] Get rid of vercel references
 - [x] Proper name, description, and app icon
 - [x] Fresh AWS Account for CloudTango
-- [ ] If license key present, do not show "activate" item
 - [x] If license key not present, render actual value for X trial left
+- [ ] If license key present, do not show "activate" item
 - [ ] Deactivate product is license key not present AND timeRemaining negative
+- [x] Periodic license checking
 - [x] Proper services to selected services menu
 - [x] Clearing up input value when navigating to submenu
 - [x] Fix toaster
+- [ ] Publish to Chrome Web Store
 - [ ] Mozilla Extension
 - [ ] Edge Extension
 

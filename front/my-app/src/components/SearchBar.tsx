@@ -131,7 +131,9 @@ export function CloudTempo({
         function (response) {
           console.log(response);
 
-          setUserInfo(response.userInfo);
+          if (response.userInfo) {
+            setUserInfo(response.userInfo);
+          }
           setItems(response.results);
           setLoading(false);
         }
