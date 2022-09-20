@@ -3,7 +3,7 @@
   "description": "Fast & Smart Command Bar for AWS Console.",
   "version": "0.0.1",
   "manifest_version": 3,
-  "permissions": ["tabs", "storage"],
+  "permissions": ["tabs"],
   "homepage_url": "https://cloudtempo.dev",
 
   "icons": {

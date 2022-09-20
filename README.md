@@ -18,8 +18,8 @@ Todos:
 - [x] Proper services to selected services menu
 - [x] Clearing up input value when navigating to submenu
 - [x] Fix toaster
+- [x] Deactivate product is license key not present AND timeRemaining negative
 - [ ] Improve cors authing - faster, based on retries?
-- [ ] Deactivate product is license key not present AND timeRemaining negative
 - [ ] Send an email after purchase (waiting for Postmark confirmation)
 - [ ] Publish to Chrome Web Store
 - [ ] Mozilla Extension
