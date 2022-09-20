@@ -21,6 +21,7 @@ Todos:
 - [x] Deactivate product is license key not present AND timeRemaining negative
 - [x] Improve cors authing - faster, based on retries?
 - [x] Toast z-index
+- [x] GET /alpha
 - [ ] Send an email after purchase (waiting for Postmark confirmation)
 - [ ] Publish to Chrome Web Store
 - [ ] Mozilla Extension
@@ -39,6 +40,7 @@ Landing:
 - [ ] Note from author
 - [ ] FAQ Page
 - [ ] Buy Page
+- [ ] Privacy Policy Page
 
 Trials:
 
