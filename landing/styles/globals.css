@@ -50,3 +50,7 @@ h3 {
   justify-content: center;
   align-items: center;
 }
+
+p {
+  line-height: 1.5;
+}
