@@ -19,7 +19,9 @@ chrome.runtime.onMessageExternal.addListener(async function (
 ) {
   const licenseInfo = checkUser(request.userInfo);
 
-  if (request.type === "reindex") {
+  if (request.type === "getLicenseInfo") {
+    sendResponse(await checkUser(request.userInfo));
+  } else if (request.type === "reindex") {
     const [ddbCredentials, ecsCredentials] = await Promise.all([
       getDynamoDBCredentials(),
       getECSCredentials(),

@@ -1,7 +1,7 @@
 Todos:
 
 - [x] First install notification
-- [ ] Cloudformation menu
+- [x] Cloudformation menu
 - [x] License checking
 - [x] Drop me a line
 - [x] Actions menu (favorites, aliases, copy arn)
@@ -15,9 +15,9 @@ Todos:
 - [x] Proper name, description, and app icon
 - [x] Fresh AWS Account for CloudTango
 - [ ] If license key present, do not show "activate" item
-- [ ] If license key not present, render actual value for X trial left
+- [x] If license key not present, render actual value for X trial left
 - [ ] Deactivate product is license key not present AND timeRemaining negative
-- [ ] Proper services to selected services menu
+- [x] Proper services to selected services menu
 - [x] Clearing up input value when navigating to submenu
 - [x] Fix toaster
 - [ ] Mozilla Extension
@@ -66,6 +66,7 @@ Services for initial launch:
 
 Later add:
 
+- [ ] CloudFormation Resources Menu
 - [ ] Scrollbar styling?
 - [ ] Aliases
 - [ ] Indexing tags

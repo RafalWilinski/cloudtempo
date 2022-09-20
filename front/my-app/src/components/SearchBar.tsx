@@ -22,12 +22,12 @@ import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import { SubCommand } from "./SubCommand";
 import { consoleUrl } from "./services/url";
 import { ResourcesMenu } from "./menus/ResourcesMenu";
-import { LicenseInfo } from "../../background/lib/checkUser";
 import { SelectedServicesMenu } from "./menus/SelectedServicesMenu";
 import { SelectedRegionsMenu } from "./menus/SelectedRegionsMenu";
 import { OnboardingMenu } from "./menus/OnboardingMenu";
 import { FeedbackMenu } from "./menus/FeedbackMenu";
 import { cmdOrCtrl } from "../lib/cmdOrCtrl";
+import { useLicenseInfo } from "../lib/useLicenseInfo";
 
 export function CloudTempo({
   isDemo,
@@ -41,7 +41,13 @@ export function CloudTempo({
   const [isDarkMode, setDarkMode] = useState(true);
   const [_inputValue, setInputValue] = React.useState(demoInput ?? "");
   const [value, setValue] = React.useState("");
-  const [userInfo, setUserInfo] = React.useState<LicenseInfo>();
+  const {
+    userInfo,
+    setUserInfo,
+    getTimeRemainingFormatted,
+    canUseSoftware,
+    isActivated,
+  } = useLicenseInfo();
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const [isActionsMenuVisible, setActionsMenuVisibility] = useState(false);
   const listRef = React.useRef(null);
@@ -320,6 +326,9 @@ export function CloudTempo({
                     pages={pages}
                     isDemo={isDemo}
                     userInfo={userInfo}
+                    getTimeRemainingFormatted={getTimeRemainingFormatted}
+                    canUseSoftware={canUseSoftware}
+                    isActivated={isActivated}
                   />
                 )}
 

@@ -24,9 +24,17 @@ interface ActionsMenuProps {
   pages: string[];
   isDemo?: boolean;
   userInfo?: LicenseInfo;
+  canUseSoftware(): boolean;
+  isActivated(): boolean;
+  getTimeRemainingFormatted(): string;
 }
 
-export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
+export function ActionsMenu({
+  pages,
+  setPages,
+  isDemo,
+  getTimeRemainingFormatted,
+}: ActionsMenuProps) {
   const reindexingHook = useReindexing();
 
   useEffect(() => {
@@ -102,7 +110,7 @@ export function ActionsMenu({ pages, setPages, isDemo }: ActionsMenuProps) {
         {!isDemo && (
           <Command.Item onSelect={() => setPages(["Home", "License"])}>
             <CheckBadgeIcon width={20} height={20} />
-            Activate (6 days of trial left)
+            Activate ({getTimeRemainingFormatted()} of trial left)
           </Command.Item>
         )}
         <Command.Item
