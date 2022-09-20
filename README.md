@@ -35,7 +35,8 @@ Todos:
 - [ ] Same with onboarding
 - [ ] Clicking Selected Regions/services does not work (only checkbox, text is fine)
 - [ ] Cron running reindex every day
-- [ ] Icons are broken if visiting other regions
+- [ ] Icons are broken if visiting other regions, figure way to bundle images
+- [ ] Selecting DynamoDB option does not work?
 
 Landing:
 
@@ -52,6 +53,8 @@ Landing:
 - [ ] FAQ Page
 - [ ] Buy Page
 - [ ] Nicer roadmap
+- [ ] If on phone, email me a link
+- [ ] Yearly options
 
 Trials:
 

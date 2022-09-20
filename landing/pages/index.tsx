@@ -11,6 +11,7 @@ import { FAQ } from "../components/FAQ";
 import { Feature } from "../components/Feature";
 import { Footer } from "../components/Footer";
 import { NewsletterForm } from "../components/NewsletterForm";
+import { Roadmap } from "../components/Roadmap";
 
 const Home: NextPage = () => {
   const [demoText, setDemoText] = useState("");
@@ -113,7 +114,9 @@ const Home: NextPage = () => {
           </div>
           <Demo isDemo={true} demoText={demoText} />
         </div>
-        <h2 style={{ fontSize: "3em" }}>Speed up your AWS workflow</h2>
+        <h2 style={{ fontSize: "3em", textAlign: "center", margin: "auto" }}>
+          Speed up your AWS workflow
+        </h2>
         <Feature
           title="Find resources cross regions. Fast."
           description="Was that in us-east-1? Or us-west-2? No need to remember. Just type the name of the resource and CloudTempo will find it for you."
@@ -123,6 +126,7 @@ const Home: NextPage = () => {
             alt="Feature"
             width={545}
             height={280}
+            layout="fixed"
             quality={100}
           />
         </Feature>
@@ -134,6 +138,7 @@ const Home: NextPage = () => {
           <Image
             src="/shortcuts.png"
             alt="Feature"
+            layout="fixed"
             width={545}
             height={280}
             quality={100}
@@ -146,13 +151,15 @@ const Home: NextPage = () => {
           <Image
             src="/mistakes.png"
             alt="Feature"
+            layout="fixed"
             width={545}
             height={280}
             quality={100}
           />
         </Feature>
-        <h3>And even more features coming soon like:</h3>
-        Query Language • Aliases • Plugins • Favourites
+        <Roadmap />
+        {/* <h3>And even more features coming soon like:</h3>
+        Query Language • Aliases • Plugins • Favourites */}
         <SupportedServicesSection />
         <Pricing />
         <FAQ />

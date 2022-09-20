@@ -8,6 +8,13 @@
   margin-top: 20px;
 }
 
+@media only screen and (max-width: 600px) {
+  .container {
+    flex-direction: column;
+    margin: 20px auto;
+  }
+}
+
 .textSection {
   padding: 20px 40px;
   width: 50%;

@@ -2,6 +2,16 @@
   padding: 0 2rem;
 }
 
+@media only screen and (max-width: 600px) {
+  .container {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
 .main {
   min-height: 50vh;
   max-width: 85rem;
