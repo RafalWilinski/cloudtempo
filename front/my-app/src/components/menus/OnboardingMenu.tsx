@@ -22,7 +22,7 @@ export function OnboardingMenu({ setPages }: Props) {
 
   return (
     <>
-      <div style={{ color: "white", padding: "12px" }}>
+      <div className="onboarding-container">
         <div style={{ fontWeight: 700 }}>Welcome to CloudTempo!</div>
         <p style={{ fontSize: 12 }}>
           Select enabled regions & services. Then, run the indexing process.

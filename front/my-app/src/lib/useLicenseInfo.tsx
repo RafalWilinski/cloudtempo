@@ -48,7 +48,9 @@ export function useLicenseInfo(isDemo?: boolean) {
     if (isDemo) {
       return 99999999999;
     }
-    return parseInt(userInfo?.timeRemaining ?? "0", 2);
+
+    const secondsStr = userInfo?.timeRemaining ?? "0";
+    return parseInt(secondsStr, 10);
   }
 
   function isActivated(): boolean {
@@ -64,7 +66,7 @@ export function useLicenseInfo(isDemo?: boolean) {
       return "Infinity";
     }
 
-    const seconds = getTimeRemainingSeconds();
+    const seconds = getTimeRemainingSeconds() / 1000;
 
     if (!seconds) {
       return "whoops";
@@ -73,6 +75,15 @@ export function useLicenseInfo(isDemo?: boolean) {
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60);
     const days = Math.floor(hours / 24);
+
+    if (days > 1) {
+      return `${days} days`;
+    }
+
+    if (hours > 1) {
+      return `${hours} hours`;
+    }
+
     return `${days}d ${hours % 24}h ${minutes % 60}m`;
   }
 

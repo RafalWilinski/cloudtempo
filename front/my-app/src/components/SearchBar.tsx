@@ -47,6 +47,7 @@ export function CloudTempo({
     getTimeRemainingFormatted,
     canUseSoftware,
     isActivated,
+    refresh,
   } = useLicenseInfo(isDemo);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const [isActionsMenuVisible, setActionsMenuVisibility] = useState(false);
@@ -192,7 +193,7 @@ export function CloudTempo({
       return `Type "DynamoDB", "s3", "graphql" or something else...`;
     }
 
-    if (activePage === "License") {
+    if (activePage === "License" || !canUseSoftware()) {
       return "Paste your license key here";
     }
 
@@ -210,6 +211,7 @@ export function CloudTempo({
         if (response.ok) {
           setPages(["Home"]);
           setInputValue("");
+          refresh();
 
           confetti({
             particleCount: 100,
@@ -257,7 +259,10 @@ export function CloudTempo({
               }}
               ref={ref}
               onKeyDown={(e: React.KeyboardEvent) => {
-                if (e.key === "Enter" && activePage === "License") {
+                if (
+                  e.key === "Enter" &&
+                  (activePage === "License" || !canUseSoftware())
+                ) {
                   submitLicenseKey();
                 }
 
@@ -309,60 +314,67 @@ export function CloudTempo({
                 )}
               </div>
 
-              <Command.List ref={listRef}>
-                {isHome && items.length > 0 && (
-                  <ResourcesMenu
-                    items={items}
-                    onSelect={onSelect}
-                    loading={loading}
-                    setPages={setPages}
-                    setSelectedDocument={setSelectedDocument}
-                    setInputValue={setInputValue}
-                    pages={pages}
-                  />
-                )}
-                {!isDemo && isHome && <OnboardingMenu setPages={setPages} />}
-                {isHome && (
-                  <ActionsMenu
-                    setPages={setPages}
-                    pages={pages}
-                    isDemo={isDemo}
-                    userInfo={userInfo}
-                    getTimeRemainingFormatted={getTimeRemainingFormatted}
-                    canUseSoftware={canUseSoftware}
-                    isActivated={isActivated}
-                  />
-                )}
+              {!canUseSoftware() && (
+                <ActivateMenu setPages={setPages} isTrialOver={true} />
+              )}
+              {canUseSoftware() && (
+                <Command.List ref={listRef}>
+                  {isHome && items.length > 0 && (
+                    <ResourcesMenu
+                      items={items}
+                      onSelect={onSelect}
+                      loading={loading}
+                      setPages={setPages}
+                      setSelectedDocument={setSelectedDocument}
+                      setInputValue={setInputValue}
+                      pages={pages}
+                    />
+                  )}
+                  {!isDemo && isHome && <OnboardingMenu setPages={setPages} />}
+                  {isHome && (
+                    <ActionsMenu
+                      setPages={setPages}
+                      pages={pages}
+                      isDemo={isDemo}
+                      userInfo={userInfo}
+                      getTimeRemainingFormatted={getTimeRemainingFormatted}
+                      canUseSoftware={canUseSoftware}
+                      isActivated={isActivated}
+                    />
+                  )}
 
-                {isHome && <ServicesMenu isDemo={isDemo} />}
-                {activePage === "lambda" && (
-                  <lambda.Menu document={selectedDocument!} />
-                )}
-                {activePage === "Feedback" && (
-                  <FeedbackMenu setPages={setPages} />
-                )}
-                {activePage === "CloudFormation" && (
-                  <cloudformation.Menu document={selectedDocument!} />
-                )}
-                {activePage === "Regions" && <RegionsMenu />}
-                {activePage === "License" && (
-                  <ActivateMenu setPages={setPages} />
-                )}
-                {activePage === "Configuration" && (
-                  <ConfigurationMenu
-                    goToHome={() => setPages(["Home"])}
-                    setPages={setPages}
-                    setDarkMode={() =>
-                      setDarkMode((d) => {
-                        Cookies.set("cloudtempo-dark-mode", (!d).toString());
-                        return !d;
-                      })
-                    }
-                  />
-                )}
-                {activePage === "Selected Services" && <SelectedServicesMenu />}
-                {activePage === "Selected Regions" && <SelectedRegionsMenu />}
-              </Command.List>
+                  {isHome && <ServicesMenu isDemo={isDemo} />}
+                  {activePage === "lambda" && (
+                    <lambda.Menu document={selectedDocument!} />
+                  )}
+                  {activePage === "Feedback" && (
+                    <FeedbackMenu setPages={setPages} />
+                  )}
+                  {activePage === "CloudFormation" && (
+                    <cloudformation.Menu document={selectedDocument!} />
+                  )}
+                  {activePage === "Regions" && <RegionsMenu />}
+                  {activePage === "License" && (
+                    <ActivateMenu setPages={setPages} />
+                  )}
+                  {activePage === "Configuration" && (
+                    <ConfigurationMenu
+                      goToHome={() => setPages(["Home"])}
+                      setPages={setPages}
+                      setDarkMode={() =>
+                        setDarkMode((d) => {
+                          Cookies.set("cloudtempo-dark-mode", (!d).toString());
+                          return !d;
+                        })
+                      }
+                    />
+                  )}
+                  {activePage === "Selected Services" && (
+                    <SelectedServicesMenu />
+                  )}
+                  {activePage === "Selected Regions" && <SelectedRegionsMenu />}
+                </Command.List>
+              )}
               {isHome && isActionsMenuVisible && (
                 <SubCommand
                   inputRef={inputRef}

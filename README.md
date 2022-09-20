@@ -6,21 +6,21 @@ Todos:
 - [x] Drop me a line
 - [x] Actions menu (favorites, aliases, copy arn)
 - [x] Onboarding flow (thanks for installing, bla bla initial scan in the background)
-- [ ] Send an email after purchase (waiting for Postmark confirmation)
 - [x] Menu for selecting services with coming soon section inside configuration
-- [ ] Improve cors authing - faster, based on retries?
 - [x] Store documents with accountId prefix to ensure tenant isolation
 - [x] Encode documents with accountId + something to keep it safe
 - [x] Get rid of vercel references
 - [x] Proper name, description, and app icon
 - [x] Fresh AWS Account for CloudTango
 - [x] If license key not present, render actual value for X trial left
-- [ ] If license key present, do not show "activate" item
-- [ ] Deactivate product is license key not present AND timeRemaining negative
+- [x] If license key present, do not show "activate" item
 - [x] Periodic license checking
 - [x] Proper services to selected services menu
 - [x] Clearing up input value when navigating to submenu
 - [x] Fix toaster
+- [ ] Improve cors authing - faster, based on retries?
+- [ ] Deactivate product is license key not present AND timeRemaining negative
+- [ ] Send an email after purchase (waiting for Postmark confirmation)
 - [ ] Publish to Chrome Web Store
 - [ ] Mozilla Extension
 - [ ] Edge Extension
@@ -29,15 +29,15 @@ Landing:
 
 - [x] Features section
 - [x] List supported and planned services
-- [ ] Testimonials Section
 - [x] FAQ
-- [ ] Note from author
 - [x] Stay in the loop (newsletter)
 - [x] Footer (Roadmap, Twitter,Download, Dynobase, Privacy Policy, Terms of Service, Contact Us)
-- [ ] FAQ Page
-- [ ] Buy Page
 - [x] Sitemap
 - [x] Robots.txt
+- [ ] Testimonials Section
+- [ ] Note from author
+- [ ] FAQ Page
+- [ ] Buy Page
 
 Trials:
 

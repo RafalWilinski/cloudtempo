@@ -34,6 +34,7 @@ export function ActionsMenu({
   setPages,
   isDemo,
   getTimeRemainingFormatted,
+  isActivated,
 }: ActionsMenuProps) {
   const reindexingHook = useReindexing();
 
@@ -107,7 +108,7 @@ export function ActionsMenu({
           />
           {reindexingHook.reindexItemLabel()}
         </Command.Item>
-        {!isDemo && (
+        {!(isDemo || isActivated()) && (
           <Command.Item onSelect={() => setPages(["Home", "License"])}>
             <CheckBadgeIcon width={20} height={20} />
             Activate ({getTimeRemainingFormatted()} of trial left)

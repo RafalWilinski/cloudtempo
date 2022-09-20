@@ -58,20 +58,20 @@ export async function checkUser(userInfo?: any): Promise<LicenseInfo> {
       )
     ).json();
 
-    const decryptedReceivedKey = AES.decrypt(
-      response.ok,
-      SECRET_CONST
-    ).toString(enc.Utf8);
+    if (response.n && response.c) {
+      return checkTrialDatesAndValidity(response.n, response.c);
+    }
 
     if (response.ok) {
+      const decryptedReceivedKey = AES.decrypt(
+        response.ok,
+        SECRET_CONST
+      ).toString(enc.Utf8);
+
       return {
         isValid: true,
         licenseKey: decryptedReceivedKey,
       };
-    }
-
-    if (response.n && response.c) {
-      return checkTrialDatesAndValidity(response.n, response.c);
     }
 
     return {
@@ -92,11 +92,6 @@ function checkTrialDatesAndValidity(
   encryptedAccountId: string,
   encryptedCreatedAt: string
 ) {
-  const decryptedAccountId = AES.decrypt(
-    encryptedAccountId,
-    SECRET_CONST
-  ).toString(enc.Utf8);
-
   const decryptedCreatedAt = AES.decrypt(
     encryptedCreatedAt,
     SECRET_CONST

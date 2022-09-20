@@ -558,3 +558,8 @@ kbd:first-of-type {
   cursor: pointer;
   padding: 4px 8px;
 }
+
+.onboarding-container {
+  padding: 12px;
+  color: var(--gray12);
+}
