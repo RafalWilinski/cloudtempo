@@ -6,6 +6,8 @@ import * as cloudwatchLogs from "./CloudwatchLogs";
 import * as cloudwatchAlarm from "./CloudwatchAlarm";
 import * as iamRole from "./IAMRole";
 import * as iamUser from "./IAMUser";
+import * as ec2Instance from "./EC2Instance";
+import * as ecsCluster from "./ECSCluster";
 
 export const supportedServices = [
   lambda,
@@ -16,6 +18,8 @@ export const supportedServices = [
   cloudwatchLogs,
   iamRole,
   iamUser,
+  ec2Instance,
+  ecsCluster,
 ];
 
 export const serviceIconMap: Record<string, any> = {
@@ -27,6 +31,8 @@ export const serviceIconMap: Record<string, any> = {
   alarm: cloudwatchAlarm.icon,
   iam_user: iamUser.icon,
   iam_role: iamRole.icon,
+  ecs_cluster: ecsCluster.icon,
+  ec2: ec2Instance.icon,
 };
 
 export const serviceResourceNameMap: Record<string, string> = {
@@ -38,4 +44,6 @@ export const serviceResourceNameMap: Record<string, string> = {
   alarm: "CloudWatch Alarm",
   iam_user: "IAM User",
   iam_role: "IAM Role",
+  ecs_cluster: "ECS Cluster",
+  ec2: "EC2 Instance",
 };

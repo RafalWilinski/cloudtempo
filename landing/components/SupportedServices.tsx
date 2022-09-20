@@ -59,7 +59,7 @@ const services = [
   {
     resourceName: "Amazon EC2 Instances",
     icon: ec2.icon,
-    status: "soon",
+    status: "supported",
   },
   {
     resourceName: "Amazon EC2 Load Balancers",

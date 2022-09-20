@@ -7,6 +7,8 @@ import * as cloudwatchLogs from "./CloudwatchLogs";
 import * as cloudwatchAlarm from "./CloudwatchAlarm";
 import * as iamRole from "./IAMRole";
 import * as iamUser from "./IAMUser";
+import * as ec2Instance from "./EC2Instance";
+import * as ecsCluster from "./ECSCluster";
 
 export function consoleUrl(item: Document): string {
   switch (item.awsService) {
@@ -36,6 +38,12 @@ export function consoleUrl(item: Document): string {
     }
     case "logs": {
       return cloudwatchLogs.url(item.name!, item.region);
+    }
+    case "ec2": {
+      return ec2Instance.url(item.extraFields!.instanceId, item.region);
+    }
+    case "ecs": {
+      return ecsCluster.url(item.name!, item.region);
     }
     default:
       return "missing";

@@ -59,7 +59,6 @@ Trials:
 - Similarily to Dynobase, cloudtango uses getOrCreateMachine functionality
 - Machine record can be enriched with LicenseKey (licenseKey is indexed)
 - License key can be used to activate up to 10 aws identities
-
 - Machine doesn't matter, AWS identity matters (or maybe account?)
 
 Marketing:
@@ -84,6 +83,7 @@ Later add:
 
 - [ ] CloudFormation Resources Menu / Tree view
 - [ ] Scrollbar styling?
+- [ ] Search configuration
 - [ ] Aliases
 - [ ] Indexing tags
 - [ ] Recently opened section

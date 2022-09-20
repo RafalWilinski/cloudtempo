@@ -14,6 +14,7 @@ import {
 } from "../services/cloudwatch";
 import { getAllIAMRoles, getAllIAMUsers } from "../services/iam";
 import { getAllEC2Instances } from "../services/ec2";
+import { getAllECSClusters } from "../services/ecs";
 
 const limit = pLimit(10);
 export const SECRET_CONST = "cl0udt3mP0";
@@ -178,6 +179,11 @@ function prepareFetchFunctions({
       fetch: () => limit(() => getAllEC2Instances(ecsCredentials, region)),
       key: `ec2#${region}`,
       service: "ec2",
+    },
+    {
+      fetch: () => limit(() => getAllECSClusters(ecsCredentials, region)),
+      key: `ecs#${region}`,
+      service: "ecs",
     },
   ];
 
