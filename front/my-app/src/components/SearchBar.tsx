@@ -95,7 +95,11 @@ export function CloudTempo({
         popPage();
       }
 
-      if (e.metaKey && e.code === "KeyK") {
+      if (
+        (e.metaKey && e.code === "KeyK") ||
+        (e.ctrlKey && e.code === "KeyK") ||
+        (e.ctrlKey && e.code === "KeyM")
+      ) {
         setVisibility((v) => !v);
       }
     },
