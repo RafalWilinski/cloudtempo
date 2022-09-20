@@ -25,7 +25,7 @@ export function useLicenseInfo(isDemo?: boolean) {
   function refresh() {
     console.log("Refresh");
     chrome.runtime.sendMessage(
-      extensionId,
+      extensionId(),
       {
         userInfo: Cookies.get("aws-userInfo"),
         type: "getLicenseInfo",

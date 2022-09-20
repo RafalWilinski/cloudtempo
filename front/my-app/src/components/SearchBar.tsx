@@ -6,7 +6,6 @@ import Cookies from "js-cookie";
 import { Command } from "cmdk";
 import confetti from "canvas-confetti";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import * as lambda from "./services/Lambda";
 import * as cloudformation from "./services/Cloudformation";
 import { Document } from "../document";
@@ -127,7 +126,7 @@ export function CloudTempo({
 
     if (window.location.href.indexOf("localhost") < 0 && !isDemo) {
       chrome.runtime.sendMessage(
-        extensionId,
+        extensionId(),
         {
           q: inputValue,
           accountId: currentAccountId,
@@ -206,7 +205,7 @@ export function CloudTempo({
 
   const submitLicenseKey = () => {
     chrome.runtime.sendMessage(
-      extensionId,
+      extensionId(),
       {
         licenseKey: inputValue,
         userInfo: Cookies.get("aws-userInfo"),

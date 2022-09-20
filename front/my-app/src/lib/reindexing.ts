@@ -17,7 +17,7 @@ const useReindex = () => {
     if (chrome && chrome.runtime) {
       setIsReindexing(true);
       chrome.runtime.sendMessage(
-        extensionId,
+        extensionId(),
         {
           type: "reindex",
           userInfo: Cookies.get("aws-userInfo"),

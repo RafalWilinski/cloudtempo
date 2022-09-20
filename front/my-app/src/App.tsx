@@ -1,15 +1,11 @@
 import { CloudTempo } from "./components/SearchBar";
+import "react-toastify/dist/ReactToastify.css";
 
-interface HomeProps {
-  isDemo?: boolean;
-  demoText?: string;
-}
-
-const Home = ({ isDemo, demoText }: HomeProps) => {
+const Home = () => {
   return (
     <div>
       <main>
-        <CloudTempo isDemo={isDemo} demoInput={demoText} />
+        <CloudTempo />
       </main>
     </div>
   );

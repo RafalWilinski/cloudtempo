@@ -58,7 +58,7 @@ export function FeedbackMenu({ isDemo, setPages }: ActivateMenuProps) {
                 });
             } else {
               chrome.runtime.sendMessage(
-                extensionId,
+                extensionId(),
                 {
                   type: "feedback",
                   body,
