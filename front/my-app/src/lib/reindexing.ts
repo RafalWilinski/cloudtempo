@@ -7,13 +7,17 @@ import { singletonHook } from "react-singleton-hook";
 import { useEffect, useState } from "react";
 import { getCurrentlySelectedServices } from "../components/menus/SelectedServicesMenu";
 
-const useReindex = () => {
+const useReindex = (isDemo?: boolean) => {
   const [isReindexing, setIsReindexing] = useState(false);
   const [lastReindexDate, setLastReindexDate] = useState(
     Cookies.get("lastReindexDate")
   );
 
   const getLastReindexingDate = () => {
+    if (isDemo || location.hostname === "localhost") {
+      return;
+    }
+
     chrome.runtime.sendMessage(
       extensionId(),
       {

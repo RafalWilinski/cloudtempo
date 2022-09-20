@@ -9,10 +9,16 @@ export function useLicenseInfo(isDemo?: boolean) {
 
   // Initial license ask
   useEffect(() => {
-    refresh();
+    if (!isDemo) {
+      refresh();
+    }
   }, []);
 
   useEffect(() => {
+    if (isDemo) {
+      return;
+    }
+
     const periodicalCheck = setInterval(() => {
       refresh();
     }, 1000 * REFRESH_INTERVAL_SECONDS);
@@ -23,11 +29,10 @@ export function useLicenseInfo(isDemo?: boolean) {
   });
 
   function refresh() {
-    if (isDemo) {
+    if (isDemo || location.hostname === "localhost") {
       return;
     }
 
-    console.log("Refresh");
     chrome.runtime.sendMessage(
       extensionId(),
       {

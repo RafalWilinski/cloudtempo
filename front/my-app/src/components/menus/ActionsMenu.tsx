@@ -36,7 +36,7 @@ export function ActionsMenu({
   getTimeRemainingFormatted,
   isActivated,
 }: ActionsMenuProps) {
-  const reindexingHook = useReindexing();
+  const reindexingHook = useReindexing(isDemo);
 
   useEffect(() => {
     // chrome.runtime.onMessage.addListener(console.log);

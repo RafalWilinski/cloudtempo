@@ -91,6 +91,10 @@ export function CloudTempo({
           return;
         }
 
+        if (activePage === "Feedback") {
+          return;
+        }
+
         popPage();
       }
 
