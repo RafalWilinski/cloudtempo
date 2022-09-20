@@ -18,7 +18,7 @@ export const Pricing = () => {
       >
         <PricingPlan
           name="Basic"
-          href="https://cloudtempo.lemonsqueezy.com/checkout/buy/6ad12ebe-e509-4cf1-89ae-24f704946aae"
+          href="https://cloudtempo.lemonsqueezy.com/checkout/buy/7d4e12d6-d5f4-46e2-a06f-b87329ddedd5?media=0"
           description=""
           monthly="9"
           yearly="99"
@@ -31,7 +31,7 @@ export const Pricing = () => {
         />
         <PricingPlan
           description=""
-          href="https://cloudtempo.lemonsqueezy.com/checkout/buy/6ad12ebe-e509-4cf1-89ae-24f704946aae"
+          href="https://cloudtempo.lemonsqueezy.com/checkout/buy/8183ebf7-f7b1-4a15-9d10-f923a116a490?media=0"
           name="Pro"
           monthly="19"
           yearly="199"
