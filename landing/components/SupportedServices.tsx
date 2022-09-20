@@ -89,7 +89,7 @@ const services = [
   {
     resourceName: "AWS ECS Clusters",
     icon: eks.icon,
-    status: "soon",
+    status: "supported",
   },
   {
     resourceName: "AWS ECS Services",
