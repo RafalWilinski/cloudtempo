@@ -24,12 +24,15 @@ export async function getDynamoDBCredentials(): Promise<Credentials> {
   let tab;
   let retriesCount = 0;
 
-  while (!csrfToken) {
-    retriesCount++;
+  if (!csrfToken) {
     tab = await chrome.tabs.create({
       url: "https://us-east-1.console.aws.amazon.com/dynamodbv2/home?region=us-east-1",
       active: false,
     });
+  }
+
+  while (!csrfToken) {
+    retriesCount++;
 
     // Wait for a second
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -94,35 +97,29 @@ export async function getECSCredentials(): Promise<Credentials> {
     return cachedECSCredentials;
   }
 
-  /// ---------- Get CSRF token from AWS DynamoDB Console home -------------
-  const tab = await chrome.tabs.create({
-    url: "https://us-east-1.console.aws.amazon.com/ecs/v2/clusters?region=us-east-1",
-    active: false,
-  });
+  let csrfToken = await getECSHomePageCSRF();
+  let tab;
+  let retriesCount = 0;
 
-  // Wait for 3 seconds
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  if (!csrfToken) {
+    tab = await chrome.tabs.create({
+      url: "https://us-east-1.console.aws.amazon.com/ecs/v2/clusters?region=us-east-1",
+      active: false,
+    });
+  }
 
-  // Todo - replace with something smarter
-  // let isLoaded = false;
-  // while (!isLoaded) {
-  //   isLoaded = tab.status === "complete";
-  // }
+  while (!csrfToken) {
+    retriesCount++;
 
-  console.log("ECS Console loaded");
+    // Wait for a second
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  const ecsHomePage = await fetch(
-    "https://us-east-1.console.aws.amazon.com/ecs/v2/clusters?region=us-east-1"
-  );
+    if (retriesCount === 5) {
+      throw new Error("Failed to fetch CSRF token");
+    }
 
-  const ecsHomePageContent = await (await ecsHomePage.blob()).text();
-
-  const splitStartToken = "csrfToken&quot;:&quot;";
-  const splitEndToken = "&quot;";
-
-  const csrfToken = ecsHomePageContent
-    .split(splitStartToken)[1]
-    .split(splitEndToken)[0];
+    csrfToken = await getECSHomePageCSRF();
+  }
 
   //// -----
 
@@ -142,9 +139,36 @@ export async function getECSCredentials(): Promise<Credentials> {
 
   const temporaryCredentialsJson = await temporaryCredentials.json();
 
-  await chrome.tabs.remove(tab.id!);
+  if (tab) {
+    await chrome.tabs.remove(tab.id!);
+  }
 
   cachedECSCredentials = temporaryCredentialsJson;
 
   return temporaryCredentialsJson;
+}
+
+async function getECSHomePageCSRF(): Promise<string | undefined> {
+  try {
+    const ecsHomePage = await fetch(
+      "https://us-east-1.console.aws.amazon.com/ecs/v2/clusters?region=us-east-1"
+    );
+
+    const htmlContent = await (await ecsHomePage.blob()).text();
+
+    const splitStartToken = "csrfToken&quot;:&quot;";
+    const splitEndToken = "&quot;";
+
+    const csrfToken = htmlContent
+      .split(splitStartToken)[1]
+      .split(splitEndToken)[0];
+
+    return csrfToken;
+  } catch (error) {
+    console.warn(
+      "Failed to get CSRF token from DynamoDB Console home page",
+      error
+    );
+    return undefined;
+  }
 }

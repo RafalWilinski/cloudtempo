@@ -1,4 +1,4 @@
-const stylesPath = "./dist/index.e906f795.css";
+const stylesPath = "./dist/index.1001ba1e.css";
 const scriptPath = "./dist/index.a0ed1810.js";
 const htmlBody = `<div id="aws-search-app"></div><div aws-search-extensionid="${chrome.runtime.id}"></div>`;
 

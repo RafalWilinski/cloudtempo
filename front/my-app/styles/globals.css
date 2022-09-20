@@ -563,3 +563,8 @@ kbd:first-of-type {
   padding: 12px;
   color: var(--gray12);
 }
+
+.Toastify__toast-container,
+.Toastify {
+  z-index: 20000 !important;
+}

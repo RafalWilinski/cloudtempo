@@ -19,7 +19,8 @@ Todos:
 - [x] Clearing up input value when navigating to submenu
 - [x] Fix toaster
 - [x] Deactivate product is license key not present AND timeRemaining negative
-- [ ] Improve cors authing - faster, based on retries?
+- [x] Improve cors authing - faster, based on retries?
+- [x] Toast z-index
 - [ ] Send an email after purchase (waiting for Postmark confirmation)
 - [ ] Publish to Chrome Web Store
 - [ ] Mozilla Extension
