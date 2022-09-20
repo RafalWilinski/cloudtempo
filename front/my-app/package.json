@@ -16,7 +16,8 @@
     "postbuild": "npm run remove-map-files",
     "build": "npm run build:front && npm run build:background",
     "zip": "zip -r extension.zip ./extension/*",
-    "move-to-public": "cp extension.zip ../../landing/public/extension.zip"
+    "move-to-public": "cp extension.zip ../../landing/public/extension.zip",
+    "alpha-release": "npm run build && npm run zip && npm run move-to-public"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.10",

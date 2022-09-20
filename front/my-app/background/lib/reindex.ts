@@ -1,7 +1,7 @@
 import pLimit from "p-limit";
 import { AES } from "crypto-js";
 import { Credentials } from "../../src/lib/getCredentials";
-import { set } from "idb-keyval";
+import { get, set } from "idb-keyval";
 import { reinitializeMinisearch } from "./minisearch";
 import { Document } from "../../src/document";
 import { getAllS3Buckets } from "../services/s3";
@@ -13,6 +13,7 @@ import {
   getAllCloudwatchLogGroups,
 } from "../services/cloudwatch";
 import { getAllIAMRoles, getAllIAMUsers } from "../services/iam";
+import { getAllEC2Instances } from "../services/ec2";
 
 const limit = pLimit(10);
 export const SECRET_CONST = "cl0udt3mP0";
@@ -80,12 +81,15 @@ export async function reindex({
     }))
   );
 
-  all.forEach(({ documents, key }) => {
-    set(
+  all.forEach(async ({ documents, key }) => {
+    await set(
       `documents#${accountId}#${key}`,
       AES.encrypt(JSON.stringify(documents), secretKey).toString()
     );
   });
+
+  const lastReindexDate = new Date().toISOString();
+  await set(`lastReindex#${accountId}`, lastReindexDate);
 
   const allDocuments = all.flatMap((a) => a.documents);
 
@@ -93,7 +97,16 @@ export async function reindex({
 
   console.log("Reindexing done");
 
-  return { allDocuments, failedKeys, totalJobsCount: flattened.length };
+  return {
+    allDocuments,
+    failedKeys,
+    totalJobsCount: flattened.length,
+    lastReindexDate,
+  };
+}
+
+export async function getLastReindexDate(accountId: string) {
+  return await get(`lastReindex#${accountId}`);
 }
 
 type ProcessRegionProps = {
@@ -160,6 +173,11 @@ function prepareFetchFunctions({
       fetch: () => limit(() => getAllIAMUsers(ecsCredentials, region)),
       key: `iam-users#${region}`,
       service: "iam-users",
+    },
+    {
+      fetch: () => limit(() => getAllEC2Instances(ecsCredentials, region)),
+      key: `ec2#${region}`,
+      service: "ec2",
     },
   ];
 

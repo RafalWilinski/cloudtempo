@@ -7,4 +7,5 @@ export interface Document {
   description?: string;
   awsService: string;
   region: string;
+  extraFields?: Record<string, string>;
 }

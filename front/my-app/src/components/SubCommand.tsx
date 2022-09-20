@@ -11,6 +11,7 @@ import {
 import { Document } from "../document";
 import { consoleUrl } from "./services/url";
 import { toast } from "react-toastify";
+import { useReindexing } from "../lib/reindexing";
 
 export function SubCommand({
   inputRef,
@@ -25,6 +26,7 @@ export function SubCommand({
 }) {
   const [open, setOpen] = React.useState(false);
   const [inputValue, setInputValue] = React.useState("");
+  const { timeSinceLastReindexString } = useReindexing();
 
   React.useEffect(() => {
     function listener(e: KeyboardEvent) {
@@ -62,7 +64,7 @@ export function SubCommand({
   return (
     <Popover.Root open={open} onOpenChange={setOpen} modal={true}>
       <div cmdk-cloudtempo-submenu-subcommand-trigger="">
-        Last indexing: 3 minutes ago
+        Last indexing: {timeSinceLastReindexString()}
         <Popover.Trigger
           // onClick={() => setOpen(true)}
           aria-expanded={open}
@@ -102,7 +104,10 @@ export function SubCommand({
                 <SubItem
                   shortcut="⌘ ↵"
                   onSelect={() => {
-                    chrome.tabs.create({ url: consoleUrl(doc) });
+                    chrome.runtime.sendMessage({
+                      type: "openInNewTab",
+                      url: consoleUrl(doc),
+                    });
                   }}
                 >
                   <ArrowRightOnRectangleIcon width={20} height={20} />

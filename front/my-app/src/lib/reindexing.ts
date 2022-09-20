@@ -4,7 +4,7 @@ import { getCurrentlySelectedRegions } from "../components/menus/SelectedRegions
 import { extensionId } from "./extension";
 import { getCurrentAccountId } from "./getCurrentAccountId";
 import { singletonHook } from "react-singleton-hook";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getCurrentlySelectedServices } from "../components/menus/SelectedServicesMenu";
 
 const useReindex = () => {
@@ -12,6 +12,24 @@ const useReindex = () => {
   const [lastReindexDate, setLastReindexDate] = useState(
     Cookies.get("lastReindexDate")
   );
+
+  const getLastReindexingDate = () => {
+    chrome.runtime.sendMessage(
+      extensionId(),
+      {
+        type: "getLastReindexDate",
+        accountId: getCurrentAccountId(),
+      },
+      function (response) {
+        setLastReindexDate(response);
+      }
+    );
+  };
+
+  // Initial last indexing date ask
+  useEffect(() => {
+    getLastReindexingDate();
+  }, []);
 
   const sendReindexRequest = () => {
     if (chrome && chrome.runtime) {
@@ -37,8 +55,7 @@ const useReindex = () => {
             }
           );
           setIsReindexing(false);
-          setLastReindexDate(new Date().toISOString());
-          Cookies.set("lastReindexDate", new Date().toISOString());
+          setLastReindexDate(response.lastReindexDate);
         }
       );
     }

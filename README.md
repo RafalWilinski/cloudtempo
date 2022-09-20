@@ -23,9 +23,19 @@ Todos:
 - [x] Toast z-index
 - [x] GET /alpha
 - [x] Send an email after purchase (waiting for Postmark confirmation)
+- [x] Last indexing text is fixed, should be dynamic
+- [x] Open in a new tab is broken
+- [x] Because last reindexed date is stored in a cookie, it doesn't show when changing from AWS Console to S3 console (should be moved to the worker)
+- [ ] Get rid of all Cookies.set calls (unreliable)
+- [ ] Welcome notification appears twice (cookies are unreliable)
+- [ ] If index not ran and onboarding completed, show a banner to run indexing
 - [ ] Publish to Chrome Web Store
 - [ ] Mozilla Extension
-- [ ] Edge Extension
+- [ ] Publish Edge Extension
+- [ ] Same with onboarding
+- [ ] Clicking Selected Regions/services does not work (only checkbox, text is fine)
+- [ ] Cron running reindex every day
+- [ ] Icons are broken if visiting other regions
 
 Landing:
 
@@ -36,11 +46,12 @@ Landing:
 - [x] Footer (Roadmap, Twitter,Download, Dynobase, Privacy Policy, Terms of Service, Contact Us)
 - [x] Sitemap
 - [x] Robots.txt
+- [x] Privacy Policy Page
 - [ ] Testimonials Section
 - [ ] Note from author
 - [ ] FAQ Page
 - [ ] Buy Page
-- [x] Privacy Policy Page
+- [ ] Nicer roadmap
 
 Trials:
 
@@ -54,8 +65,8 @@ Trials:
 Marketing:
 
 - [ ] Lifetime believer plan (50 user identities) for $399 (limited to 25 users)
-- [ ] Casual plan (3 user identities) $9/month (or $99/year)
-- [ ] Power user plan (50 user identities) $19/month (or $199/year)
+- [x] Casual plan (3 user identities) $9/month (or $99/year)
+- [x] Power user plan (50 user identities) $19/month (or $199/year)
 
 Services for initial launch:
 
@@ -68,10 +79,12 @@ Services for initial launch:
 - [ ] EC2 (Instances) - covered by ECS
 - [ ] VPC (VPCs, Subnets, SGs) - covered by ECS
 - [ ] ECS (Clusters, Services) - covered by ECS
+- [ ] SSM Parameter Store
+- [ ] Secrets Manager
 
 Later add:
 
-- [ ] CloudFormation Resources Menu
+- [ ] CloudFormation Resources Menu / Tree view
 - [ ] Scrollbar styling?
 - [ ] Aliases
 - [ ] Indexing tags
@@ -87,3 +100,12 @@ Stack:
 - Emails: Postmark
 - Domain: Namecheap (DNS) + Route53 (HZ)
 - Shop: LemonSqueezy
+
+Edge review note:
+
+This extension is an overlay for AWS Console (Amazon Web Services). After installing, please head to https://847163508457.signin.aws.amazon.com/console and use following credentials to login:
+
+username: edge-review
+password: edge-review-12345
+
+After doing so, you can open actual extension by pressing CTRL + M or CMD + K.
