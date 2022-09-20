@@ -27,6 +27,7 @@ import { SelectedServicesMenu } from "./menus/SelectedServicesMenu";
 import { SelectedRegionsMenu } from "./menus/SelectedRegionsMenu";
 import { OnboardingMenu } from "./menus/OnboardingMenu";
 import { FeedbackMenu } from "./menus/FeedbackMenu";
+import { cmdOrCtrl } from "../lib/cmdOrCtrl";
 
 export function CloudTempo({
   isDemo,
@@ -63,6 +64,13 @@ export function CloudTempo({
       return x;
     });
   }, []);
+
+  useEffect(() => {
+    if (!(Cookies.get("cloudtempo-initial-notification") || isDemo)) {
+      Cookies.set("cloudtempo-initial-notification", "true");
+      toast.success(`CloudTempo installed! Press ${cmdOrCtrl()} + K to start.`);
+    }
+  }, [isDemo]);
 
   const setPages = (pages: string[]) => {
     _setPages(pages);
@@ -211,145 +219,151 @@ export function CloudTempo({
   };
 
   return (
-    <div
-      className={`${isDemo ? "" : "bg"} ${
-        isVisible ? "cmdk-not-visible" : "cmdk-visible"
-      }`}
-      onClick={(e) => {
-        if (isDemo) {
-          return;
-        }
+    <>
+      <div
+        className={`${isDemo ? "" : "bg"} ${
+          isVisible ? "cmdk-not-visible" : "cmdk-visible"
+        }`}
+        onClick={(e) => {
+          if (isDemo) {
+            return;
+          }
 
-        e.preventDefault();
-        e.stopPropagation();
+          e.preventDefault();
+          e.stopPropagation();
 
-        if (e.target === e.currentTarget) {
-          setVisibility(false);
-        }
-      }}
-    >
-      {isVisible && (
-        <div className={`cloudtempo ${isDarkMode ? "dark" : ""}`}>
-          <Command
-            shouldFilter={activePage !== "Feedback" && activePage !== "License"}
-            value={value}
-            onValueChange={(value) => {
-              setValue(value);
-            }}
-            ref={ref}
-            onKeyDown={(e: React.KeyboardEvent) => {
-              if (e.key === "Enter" && activePage === "License") {
-                submitLicenseKey();
+          if (e.target === e.currentTarget) {
+            setVisibility(false);
+          }
+        }}
+      >
+        {isVisible && (
+          <div className={`cloudtempo ${isDarkMode ? "dark" : ""}`}>
+            <Command
+              shouldFilter={
+                activePage !== "Feedback" && activePage !== "License"
               }
+              value={value}
+              onValueChange={(value) => {
+                setValue(value);
+              }}
+              ref={ref}
+              onKeyDown={(e: React.KeyboardEvent) => {
+                if (e.key === "Enter" && activePage === "License") {
+                  submitLicenseKey();
+                }
 
-              if (e.key === "Escape") {
-                setVisibility(false);
-              }
-            }}
-          >
-            <div>
-              {pages.map((p) => (
-                <div key={p} cmdk-cloudtempo-badge="">
-                  {p === "Home" ? (
-                    <div
-                      style={{ cursor: "pointer" }}
-                      onClick={() => setPages(["Home"])}
-                    >
-                      {p} (
-                      {getCurrentAccountId(isDemo) ??
-                        "AWS Account ID not found"}
-                      )
-                    </div>
-                  ) : (
-                    p
-                  )}
-                </div>
-              ))}
-            </div>
+                if (e.key === "Escape") {
+                  setVisibility(false);
+                }
+              }}
+            >
+              <div>
+                {pages.map((p) => (
+                  <div key={p} cmdk-cloudtempo-badge="">
+                    {p === "Home" ? (
+                      <div
+                        style={{ cursor: "pointer" }}
+                        onClick={() => setPages(["Home"])}
+                      >
+                        {p} (
+                        {getCurrentAccountId(isDemo) ??
+                          "AWS Account ID not found"}
+                        )
+                      </div>
+                    ) : (
+                      p
+                    )}
+                  </div>
+                ))}
+              </div>
 
-            <div style={{ display: "flex" }}>
-              {activePage !== "Home" && (
-                <ArrowSmallLeftIcon
-                  width={20}
-                  height={20}
-                  className="back"
-                  onClick={() => popPage()}
-                />
-              )}
-              {activePage !== "Feedback" && (
-                <Command.Input
-                  id="cloudtempo-main-input"
-                  ref={inputRef}
-                  value={inputValue}
-                  autoFocus={true}
-                  placeholder={renderMainInputPlaceholder()}
-                  onValueChange={(value) => {
-                    setInputValue(value);
-                  }}
-                />
-              )}
-            </div>
+              <div style={{ display: "flex" }}>
+                {activePage !== "Home" && (
+                  <ArrowSmallLeftIcon
+                    width={20}
+                    height={20}
+                    className="back"
+                    onClick={() => popPage()}
+                  />
+                )}
+                {activePage !== "Feedback" && (
+                  <Command.Input
+                    id="cloudtempo-main-input"
+                    ref={inputRef}
+                    value={inputValue}
+                    autoFocus={true}
+                    placeholder={renderMainInputPlaceholder()}
+                    onValueChange={(value) => {
+                      setInputValue(value);
+                    }}
+                  />
+                )}
+              </div>
 
-            <Command.List ref={listRef}>
-              {isHome && items.length > 0 && (
-                <ResourcesMenu
-                  items={items}
-                  onSelect={onSelect}
-                  loading={loading}
-                  setPages={setPages}
-                  setSelectedDocument={setSelectedDocument}
-                  setInputValue={setInputValue}
-                  pages={pages}
-                />
-              )}
-              {!isDemo && isHome && <OnboardingMenu setPages={setPages} />}
-              {isHome && (
-                <ActionsMenu
-                  setPages={setPages}
-                  pages={pages}
-                  isDemo={isDemo}
-                  userInfo={userInfo}
-                />
-              )}
+              <Command.List ref={listRef}>
+                {isHome && items.length > 0 && (
+                  <ResourcesMenu
+                    items={items}
+                    onSelect={onSelect}
+                    loading={loading}
+                    setPages={setPages}
+                    setSelectedDocument={setSelectedDocument}
+                    setInputValue={setInputValue}
+                    pages={pages}
+                  />
+                )}
+                {!isDemo && isHome && <OnboardingMenu setPages={setPages} />}
+                {isHome && (
+                  <ActionsMenu
+                    setPages={setPages}
+                    pages={pages}
+                    isDemo={isDemo}
+                    userInfo={userInfo}
+                  />
+                )}
 
-              {isHome && <ServicesMenu isDemo={isDemo} />}
-              {activePage === "lambda" && (
-                <lambda.Menu document={selectedDocument!} />
-              )}
-              {activePage === "Feedback" && (
-                <FeedbackMenu setPages={setPages} />
-              )}
-              {activePage === "CloudFormation" && (
-                <cloudformation.Menu document={selectedDocument!} />
-              )}
-              {activePage === "Regions" && <RegionsMenu />}
-              {activePage === "License" && <ActivateMenu setPages={setPages} />}
-              {activePage === "Configuration" && (
-                <ConfigurationMenu
-                  goToHome={() => setPages(["Home"])}
-                  setPages={setPages}
-                  setDarkMode={() =>
-                    setDarkMode((d) => {
-                      Cookies.set("cloudtempo-dark-mode", (!d).toString());
-                      return !d;
-                    })
-                  }
+                {isHome && <ServicesMenu isDemo={isDemo} />}
+                {activePage === "lambda" && (
+                  <lambda.Menu document={selectedDocument!} />
+                )}
+                {activePage === "Feedback" && (
+                  <FeedbackMenu setPages={setPages} />
+                )}
+                {activePage === "CloudFormation" && (
+                  <cloudformation.Menu document={selectedDocument!} />
+                )}
+                {activePage === "Regions" && <RegionsMenu />}
+                {activePage === "License" && (
+                  <ActivateMenu setPages={setPages} />
+                )}
+                {activePage === "Configuration" && (
+                  <ConfigurationMenu
+                    goToHome={() => setPages(["Home"])}
+                    setPages={setPages}
+                    setDarkMode={() =>
+                      setDarkMode((d) => {
+                        Cookies.set("cloudtempo-dark-mode", (!d).toString());
+                        return !d;
+                      })
+                    }
+                  />
+                )}
+                {activePage === "Selected Services" && <SelectedServicesMenu />}
+                {activePage === "Selected Regions" && <SelectedRegionsMenu />}
+              </Command.List>
+              {isHome && isActionsMenuVisible && (
+                <SubCommand
+                  inputRef={inputRef}
+                  listRef={listRef}
+                  doc={preselectedDocument!}
                 />
               )}
-              {activePage === "Selected Services" && <SelectedServicesMenu />}
-              {activePage === "Selected Regions" && <SelectedRegionsMenu />}
-            </Command.List>
-            {isHome && isActionsMenuVisible && (
-              <SubCommand
-                inputRef={inputRef}
-                listRef={listRef}
-                doc={preselectedDocument!}
-              />
-            )}
-          </Command>
-        </div>
-      )}
+            </Command>
+          </div>
+        )}
+      </div>
       <ToastContainer />
-    </div>
+    </>
   );
 }

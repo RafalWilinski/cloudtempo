@@ -7,6 +7,17 @@ import * as cloudwatchAlarm from "./CloudwatchAlarm";
 import * as iamRole from "./IAMRole";
 import * as iamUser from "./IAMUser";
 
+export const supportedServices = [
+  lambda,
+  s3,
+  dynamodb,
+  cloudformation,
+  cloudwatchAlarm,
+  cloudwatchLogs,
+  iamRole,
+  iamUser,
+];
+
 export const serviceIconMap: Record<string, any> = {
   lambda: lambda.icon,
   s3: s3.icon,

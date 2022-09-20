@@ -8,6 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { Document } from "../../document";
 import { getCurrentAccountId } from "../../lib/getCurrentAccountId";
+import { toast } from "react-toastify";
 
 export const url = (
   name: string,
@@ -49,6 +50,7 @@ export function Menu({ document }: MenuProps) {
           onSelect={async () => {
             if (document.arn) {
               await navigator.clipboard.writeText(document.arn);
+              toast.success("ARN Copied to clipboard");
             }
           }}
         >
@@ -90,7 +92,7 @@ export function Menu({ document }: MenuProps) {
               document.region,
               getCurrentAccountId(),
               (document.arn ?? "").split("/").pop()!,
-              "resources"
+              "outputs"
             );
           }}
         >

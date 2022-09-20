@@ -1,12 +1,12 @@
 Todos:
 
+- [x] First install notification
 - [ ] Cloudformation menu
 - [x] License checking
 - [x] Drop me a line
 - [x] Actions menu (favorites, aliases, copy arn)
 - [x] Onboarding flow (thanks for installing, bla bla initial scan in the background)
 - [ ] Send an email after purchase (waiting for Postmark confirmation)
-- [ ] Aliases
 - [x] Menu for selecting services with coming soon section inside configuration
 - [ ] Improve cors authing - faster, based on retries?
 - [x] Store documents with accountId prefix to ensure tenant isolation
@@ -20,6 +20,8 @@ Todos:
 - [ ] Proper services to selected services menu
 - [x] Clearing up input value when navigating to submenu
 - [x] Fix toaster
+- [ ] Mozilla Extension
+- [ ] Edge Extension
 
 Landing:
 
@@ -64,6 +66,8 @@ Services for initial launch:
 
 Later add:
 
+- [ ] Scrollbar styling?
+- [ ] Aliases
 - [ ] Indexing tags
 - [ ] Recently opened section
 - [ ] IAM Groups
