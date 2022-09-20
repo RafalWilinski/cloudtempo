@@ -47,7 +47,7 @@ export function CloudTempo({
     getTimeRemainingFormatted,
     canUseSoftware,
     isActivated,
-  } = useLicenseInfo();
+  } = useLicenseInfo(isDemo);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const [isActionsMenuVisible, setActionsMenuVisibility] = useState(false);
   const listRef = React.useRef(null);
