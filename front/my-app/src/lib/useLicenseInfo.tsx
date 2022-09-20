@@ -23,6 +23,10 @@ export function useLicenseInfo(isDemo?: boolean) {
   });
 
   function refresh() {
+    if (isDemo) {
+      return;
+    }
+
     console.log("Refresh");
     chrome.runtime.sendMessage(
       extensionId(),
