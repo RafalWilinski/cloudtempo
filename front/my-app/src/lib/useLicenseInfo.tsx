@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { LicenseInfo } from "../../background/lib/checkUser";
 import { extensionId } from "./extension";
 
-export function useLicenseInfo() {
+export function useLicenseInfo(isDemo?: boolean) {
   const [userInfo, setUserInfo] = useState<LicenseInfo | undefined>(undefined);
 
   // Initial license ask
@@ -22,14 +22,24 @@ export function useLicenseInfo() {
   }, []);
 
   function canUseSoftware(): boolean {
+    if (isDemo) {
+      return true;
+    }
     return !userInfo || userInfo.isValid;
   }
 
   function getTimeRemainingSeconds(): number {
+    if (isDemo) {
+      return 99999999999;
+    }
     return parseInt(userInfo?.timeRemaining ?? "0", 2);
   }
 
   function isActivated(): boolean {
+    if (isDemo) {
+      return true;
+    }
+
     return !!(userInfo && userInfo.licenseKey);
   }
 
