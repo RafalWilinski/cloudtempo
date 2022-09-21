@@ -31,13 +31,13 @@ Todos:
 - [x] Selecting DynamoDB option does not work?
 - [x] Clicking Selected Regions/services does not work (only checkbox, text is fine)
 - [x] Open in a new tab
+- [x] Icons are broken if visiting other regions, figure way to bundle images
 - [ ] Get rid of all Cookies.set calls (unreliable)
 - [ ] Welcome notification appears twice (cookies are unreliable)
 - [ ] Same with onboarding
 - [ ] If index not ran and onboarding completed, show a banner to run indexing
-- [ ] X to close onboarding
+- [x] X to close onboarding
 - [ ] Cron running reindex every day
-- [ ] Icons are broken if visiting other regions, figure way to bundle images
 - [ ] Publish to Chrome Web Store
 - [ ] Publish Edge Extension
 - [ ] Mozilla Extension
@@ -54,11 +54,14 @@ Landing:
 - [x] Privacy Policy Page
 - [x] Nicer roadmap
 - [x] FAQ Page
-- [ ] Testimonials Section
 - [ ] Note from author
 - [ ] Buy Page
+- [ ] Nav
 - [ ] If on phone, email me a link
 - [ ] Yearly options
+- [ ] Layout
+- [ ] MDX setup
+- [ ] Testimonials Section
 
 Trials:
 
@@ -83,8 +86,8 @@ Services for initial launch:
 - [x] Cloudwatch Logs - covered by ECS
 - [x] IAM (Roles, Users) - covered by ECS
 - [x] EC2 (Instances) - covered by ECS
-- [ ] VPC (VPCs, Subnets, SGs) - covered by ECS
-- [ ] ECS (Clusters, Services) - covered by ECS
+- [x//] VPC (VPCs, Subnets, SGs) - covered by ECS
+- [x/] ECS (Clusters, Services) - covered by ECS
 
 Later add:
 

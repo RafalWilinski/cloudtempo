@@ -5,6 +5,7 @@ import {
   ArrowUturnLeftIcon,
   GlobeEuropeAfricaIcon,
   ArrowPathIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import confetti from "canvas-confetti";
 import { useReindexing } from "../../lib/reindexing";
@@ -23,6 +24,16 @@ export function OnboardingMenu({ setPages }: Props) {
   return (
     <>
       <div className="onboarding-container">
+        <XMarkIcon
+          width={16}
+          height={16}
+          className="onboarding-close"
+          onClick={() => {
+            setPages(["Home "]);
+            Cookies.set("onboarding-completed", "1");
+            setPages(["Home"]);
+          }}
+        />
         <div style={{ fontWeight: 700 }}>Welcome to CloudTempo!</div>
         <p style={{ fontSize: 12 }}>
           Select enabled regions & services. Then, run the indexing process.

@@ -560,6 +560,7 @@ kbd:first-of-type {
 }
 
 .onboarding-container {
+  position: relative;
   padding: 12px;
   color: var(--gray12);
 }
@@ -601,4 +602,12 @@ kbd:first-of-type {
   margin-top: -3px;
   margin-right: 3px;
   -webkit-font-smoothing: antialiased;
+}
+
+.onboarding-close {
+  position: absolute;
+  cursor: pointer;
+  top: 4px;
+  right: 8px;
+  color: var(--gray10);
 }
