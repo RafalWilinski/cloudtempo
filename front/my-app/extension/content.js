@@ -1,11 +1,12 @@
-const stylesPath = "./dist/index.355ab1b1.css";
-const scriptPath = "./dist/index.f6d8959f.js";
+const stylesPath = "./dist/index.897d314b.css";
+const scriptPath = "./dist/index.76f481ee.js";
 const htmlBody = `<div id="aws-search-app"></div><div aws-search-extensionid="${chrome.runtime.id}"></div>`;
 
 document.body.insertAdjacentHTML("beforeend", htmlBody);
 
 const scriptElement = document.createElement("script");
 scriptElement.src = chrome.runtime.getURL(scriptPath);
+scriptElement.type = "module";
 (document.head || document.documentElement).appendChild(scriptElement);
 
 const linkElement = document.createElement("link");

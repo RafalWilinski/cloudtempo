@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { LicenseInfo } from "../../../background/lib/checkUser";
 import { useReindexing } from "../../lib/reindexing";
+import { Icon } from "../Icon";
 
 interface ActionsMenuProps {
   setPages: (pages: string[]) => void;
@@ -165,7 +166,14 @@ export function ActionsMenu({
             location.href = "https://aws.permissions.cloud";
           }}
         >
-          <CloudIcon width={20} height={20} />
+          <Icon
+            src={
+              new URL(
+                "../../img/permissions-cloud.svg?height=20&width=20",
+                import.meta.url
+              )
+            }
+          />
           Better IAM Reference
         </Command.Item>
         <Command.Item

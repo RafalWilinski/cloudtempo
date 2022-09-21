@@ -33,9 +33,9 @@ Todos:
 - [x] Open in a new tab
 - [ ] Get rid of all Cookies.set calls (unreliable)
 - [ ] Welcome notification appears twice (cookies are unreliable)
+- [ ] Same with onboarding
 - [ ] If index not ran and onboarding completed, show a banner to run indexing
 - [ ] X to close onboarding
-- [ ] Same with onboarding
 - [ ] Cron running reindex every day
 - [ ] Icons are broken if visiting other regions, figure way to bundle images
 - [ ] Publish to Chrome Web Store

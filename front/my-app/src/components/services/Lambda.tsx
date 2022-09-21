@@ -11,8 +11,7 @@ import {
   IdentificationIcon,
 } from "@heroicons/react/24/outline";
 
-export const icon =
-  "https://d2q66yyjeovezo.cloudfront.net/icon/945f3fc449518a73b9f5f32868db466c-926961f91b072604c42b7f39ce2eaf1c.svg";
+export const icon = new URL("../../img/lambda.svg", import.meta.url);
 
 export const url = (name: string, region: string, tab: string = "code") =>
   `https://${region}.console.aws.amazon.com/lambda/home?region=${region}#/functions/${name}?tab=${tab}`;

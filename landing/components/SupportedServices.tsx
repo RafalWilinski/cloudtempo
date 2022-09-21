@@ -143,7 +143,7 @@ export const SupportedServicesSection = () => {
           return (
             <div key={service.resourceName} className={styles.service}>
               <img
-                src={service.icon}
+                src={service.icon.toString()}
                 alt={service.resourceName}
                 style={{
                   filter:

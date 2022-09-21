@@ -4,6 +4,7 @@ document.body.insertAdjacentHTML("beforeend", htmlBody);
 
 const scriptElement = document.createElement("script");
 scriptElement.src = chrome.runtime.getURL(scriptPath);
+scriptElement.type = "module";
 (document.head || document.documentElement).appendChild(scriptElement);
 
 const linkElement = document.createElement("link");
