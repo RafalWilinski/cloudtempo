@@ -32,6 +32,7 @@ Todos:
 - [x] Clicking Selected Regions/services does not work (only checkbox, text is fine)
 - [x] Open in a new tab
 - [x] Icons are broken if visiting other regions, figure way to bundle images
+- [ ] Notification theme should match overall theme
 - [ ] Get rid of all Cookies.set calls (unreliable)
 - [ ] Welcome notification appears twice (cookies are unreliable)
 - [ ] Same with onboarding
@@ -57,6 +58,7 @@ Landing:
 - [ ] Note from author
 - [ ] Buy Page
 - [ ] Nav
+- [ ] Favicon
 - [ ] If on phone, email me a link
 - [ ] Yearly options
 - [ ] Layout

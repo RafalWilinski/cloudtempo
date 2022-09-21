@@ -55,7 +55,9 @@ export function ActionsMenu({
         <Command.Item
           onSelect={() => {
             if (isDemo) {
-              toast.warning("Not available in demo.");
+              toast.warning("Not available in demo.", {
+                hideProgressBar: false,
+              });
               return;
             }
             setPages([...pages, "Configuration"]);
