@@ -48,8 +48,9 @@ const Home: NextPage = () => {
         <title>CloudTempo - Fast & Smart CMD + K for AWS Console</title>
         <meta
           name="description"
-          content="Fast & Smart Command Bar for AWS Console"
+          content="CloudTempo - Fast & Smart Command Bar for AWS Console"
         />
+        <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Nav />

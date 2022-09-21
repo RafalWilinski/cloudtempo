@@ -62,7 +62,7 @@ Landing:
 - [x] Favicon
 - [ ] Changelog
 - [x] Buy Page
-- [ ] Meta for homepage
+- [x] Meta for homepage
 - [ ] og-images
 - [ ] If on phone, email me a link
 - [x] Yearly options
