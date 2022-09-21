@@ -43,7 +43,7 @@ export function Menu({ document }: MenuProps) {
         </Command.Item>
         <Command.Item
           onSelect={() => {
-            window.location.href = url(document.name!, document.region);
+            navigator.clipboard.writeText(document.arn ?? "ARN missing");
           }}
         >
           <IdentificationIcon width={20} height={20} />
