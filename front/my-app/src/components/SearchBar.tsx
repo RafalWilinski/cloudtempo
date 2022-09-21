@@ -190,7 +190,7 @@ export function CloudTempo({
         setInputValue("");
       }
       default: {
-        consoleUrl(item);
+        location.href = consoleUrl(item);
       }
     }
   };
@@ -266,6 +266,42 @@ export function CloudTempo({
               }}
               ref={ref}
               onKeyDown={(e: React.KeyboardEvent) => {
+                if (
+                  !isDemo &&
+                  preselectedDocument &&
+                  e.key === "Enter" &&
+                  value &&
+                  (e.metaKey || e.ctrlKey)
+                ) {
+                  e.preventDefault();
+
+                  const url = consoleUrl(preselectedDocument);
+
+                  console.log({
+                    consoleUrl: url,
+                    value,
+                  });
+
+                  chrome.runtime.sendMessage(extensionId(), {
+                    type: "openInNewTab",
+                    url,
+                  });
+                  return;
+                }
+
+                if (
+                  preselectedDocument &&
+                  e.key === "c" &&
+                  (e.metaKey || e.ctrlKey)
+                ) {
+                  e.preventDefault();
+
+                  navigator.clipboard.writeText(preselectedDocument.arn!);
+                  toast.success("ARN copied to clipboard!", {
+                    hideProgressBar: false,
+                  });
+                }
+
                 if (
                   e.key === "Enter" &&
                   (activePage === "License" || !canUseSoftware())

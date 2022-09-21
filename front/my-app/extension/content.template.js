@@ -12,3 +12,13 @@ linkElement.href = chrome.runtime.getURL(stylesPath);
 (document.head || document.documentElement).appendChild(linkElement);
 
 console.log("AWS Search Extension injected!");
+
+const reindexingProgressChannel = new BroadcastChannel(
+  "reindexing-progress-channel"
+);
+
+chrome.runtime.onMessage.addListener((request) => {
+  if (request.type === "reindexing-progress") {
+    reindexingProgressChannel.postMessage(request);
+  }
+});

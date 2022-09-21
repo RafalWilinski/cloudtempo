@@ -50,7 +50,9 @@ export function Menu({ document }: MenuProps) {
           onSelect={async () => {
             if (document.arn) {
               await navigator.clipboard.writeText(document.arn);
-              toast.success("ARN Copied to clipboard");
+              toast.success("ARN copied to clipboard!", {
+                hideProgressBar: false,
+              });
             }
           }}
         >

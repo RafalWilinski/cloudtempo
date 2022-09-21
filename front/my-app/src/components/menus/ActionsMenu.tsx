@@ -86,7 +86,17 @@ export function ActionsMenu({
           Create AWS Support Ticket...
         </Command.Item>
 
+        <style
+          dangerouslySetInnerHTML={{
+            __html: [
+              ".reindexing-command-item:after {",
+              `  right: ${100 - parseInt(reindexingHook.progress, 10)}%`,
+              "}",
+            ].join("\n"),
+          }}
+        />
         <Command.Item
+          className="reindexing-command-item"
           disabled={reindexingHook.isReindexing || isDemo}
           onSelect={() => {
             if (isDemo) {
@@ -108,6 +118,7 @@ export function ActionsMenu({
           />
           {reindexingHook.reindexItemLabel()}
         </Command.Item>
+
         {!(isDemo || isActivated()) && (
           <Command.Item onSelect={() => setPages(["Home", "License"])}>
             <CheckBadgeIcon width={20} height={20} />

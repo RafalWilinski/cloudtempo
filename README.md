@@ -26,6 +26,10 @@ Todos:
 - [x] Last indexing text is fixed, should be dynamic
 - [x] Open in a new tab is broken
 - [x] Because last reindexed date is stored in a cookie, it doesn't show when changing from AWS Console to S3 console (should be moved to the worker)
+- [x] Regions menu double nested
+- [x] Indexing progress bar
+- [x] Selecting DynamoDB option does not work?
+- [ ] Open in a new tab
 - [ ] Get rid of all Cookies.set calls (unreliable)
 - [ ] Welcome notification appears twice (cookies are unreliable)
 - [ ] If index not ran and onboarding completed, show a banner to run indexing
@@ -36,7 +40,6 @@ Todos:
 - [ ] Clicking Selected Regions/services does not work (only checkbox, text is fine)
 - [ ] Cron running reindex every day
 - [ ] Icons are broken if visiting other regions, figure way to bundle images
-- [ ] Selecting DynamoDB option does not work?
 
 Landing:
 
@@ -48,11 +51,11 @@ Landing:
 - [x] Sitemap
 - [x] Robots.txt
 - [x] Privacy Policy Page
+- [x] Nicer roadmap
+- [x] FAQ Page
 - [ ] Testimonials Section
 - [ ] Note from author
-- [ ] FAQ Page
 - [ ] Buy Page
-- [ ] Nicer roadmap
 - [ ] If on phone, email me a link
 - [ ] Yearly options
 

@@ -14,7 +14,7 @@ console.log("CloudTempo started");
 
 chrome.runtime.onMessageExternal.addListener(async function (
   request,
-  _sender,
+  sender,
   sendResponse
 ) {
   if (request.type === "getLicenseInfo") {
@@ -34,6 +34,7 @@ chrome.runtime.onMessageExternal.addListener(async function (
         accountId: request.accountId,
         selectedServices: request.selectedServices,
         selectedRegions: request.selectedRegions,
+        sender,
       });
 
     sendResponse({

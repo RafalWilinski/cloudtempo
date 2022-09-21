@@ -25,6 +25,7 @@ export type ReindexProps = {
   accountId: string;
   selectedRegions: string[];
   selectedServices: string[];
+  sender: chrome.runtime.MessageSender;
 };
 
 export async function reindex({
@@ -33,16 +34,9 @@ export async function reindex({
   accountId,
   selectedRegions,
   selectedServices,
+  sender,
 }: ReindexProps) {
   const secretKey = `${SECRET_CONST}-${accountId}`;
-
-  console.log("Reindexing...", {
-    ddbCredentials,
-    ecsCredentials,
-    selectedRegions,
-    selectedServices,
-    accountId,
-  });
 
   const regionalFetchFunctions = selectedRegions.map((region) =>
     prepareFetchFunctions({
@@ -66,7 +60,14 @@ export async function reindex({
           console.log(`Done! ${f.key}: ${docs.length}`);
 
           progress += increment;
-          reportProgress(f.key, progress);
+          reportProgress(
+            sender.tab!.id!,
+            f.key,
+            progress,
+            true,
+            flattened.length,
+            docs.length
+          );
 
           return docs;
         })
@@ -74,7 +75,18 @@ export async function reindex({
           // todo - pass error to the browser
           failedKeys.push(f.key);
 
+          progress += increment;
+
           console.error("Failed to load data", e, f.key);
+
+          reportProgress(
+            sender.tab!.id!,
+            f.key,
+            progress,
+            false,
+            flattened.length,
+            0
+          );
 
           return [];
         }),
@@ -190,15 +202,20 @@ function prepareFetchFunctions({
   return fetchFunctions.filter((f) => selectedServices.includes(f.service));
 }
 
-async function reportProgress(key: string, progress: number) {
-  // const tabs = await chrome.tabs.query({
-  //   active: true,
-  // });
-  // console.log({ tabs });
-  // if (tabs[0]) {
-  //   chrome.tabs.sendMessage(tabs[0].id!, {
-  //     key,
-  //     progress,
-  //   });
-  // }
+async function reportProgress(
+  tabId: number,
+  key: string,
+  progress: number,
+  isSuccess: boolean,
+  totalCount: number,
+  addedCount: number
+) {
+  chrome.tabs.sendMessage(tabId, {
+    type: "reindexing-progress",
+    key,
+    progress,
+    isSuccess,
+    totalCount,
+    addedCount,
+  });
 }

@@ -568,3 +568,19 @@ kbd:first-of-type {
 .Toastify {
   z-index: 20000 !important;
 }
+
+.reindexing-command-item {
+  position: relative;
+}
+.reindexing-command-item:after {
+  transition: all 0.2s ease-in-out;
+  position: absolute;
+  background-color: #ccc;
+  opacity: 0.075;
+  content: "";
+  top: 0;
+  bottom: 0;
+  z-index: 30000;
+  left: 0;
+  right: var(--reindexing-progress);
+}

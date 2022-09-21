@@ -12,6 +12,8 @@ import { Document } from "../document";
 import { consoleUrl } from "./services/url";
 import { toast } from "react-toastify";
 import { useReindexing } from "../lib/reindexing";
+import { extensionId } from "../lib/extension";
+import { cmdOrCtrl } from "../lib/cmdOrCtrl";
 
 export function SubCommand({
   inputRef,
@@ -70,7 +72,7 @@ export function SubCommand({
           aria-expanded={open}
         >
           Actions
-          <kbd>⌘</kbd>
+          <kbd>{cmdOrCtrl()}</kbd>
           <kbd>J</kbd>
         </Popover.Trigger>
       </div>
@@ -102,9 +104,9 @@ export function SubCommand({
                   Open
                 </SubItem>
                 <SubItem
-                  shortcut="⌘ ↵"
+                  shortcut={`${cmdOrCtrl()} ↵`}
                   onSelect={() => {
-                    chrome.runtime.sendMessage({
+                    chrome.runtime.sendMessage(extensionId(), {
                       type: "openInNewTab",
                       url: consoleUrl(doc),
                     });
@@ -114,11 +116,11 @@ export function SubCommand({
                   Open in a new tab
                 </SubItem>
                 <SubItem
-                  shortcut="⌘ C"
+                  shortcut={`${cmdOrCtrl()} C`}
                   disabled={!doc.arn}
                   onSelect={() => {
                     if (doc.arn) {
-                      toast.success("ARN copied", {
+                      toast.success("ARN copied to clipboard!", {
                         hideProgressBar: false,
                       });
                       navigator.clipboard.writeText(doc.arn);

@@ -7,11 +7,36 @@ import { singletonHook } from "react-singleton-hook";
 import { useEffect, useState } from "react";
 import { getCurrentlySelectedServices } from "../components/menus/SelectedServicesMenu";
 
+interface ReindexingProgress {
+  errors: number;
+  errorKeys: string[];
+  progress: string;
+  totalJobsCount: number;
+  resourcesCount: number;
+}
+
+interface ReindexingProgressMessage {
+  addedCount: number;
+  isSuccess: boolean;
+  key: string;
+  progress: number;
+  totalCount: number;
+}
+
 const useReindex = (isDemo?: boolean) => {
   const [isReindexing, setIsReindexing] = useState(false);
   const [lastReindexDate, setLastReindexDate] = useState(
     Cookies.get("lastReindexDate")
   );
+
+  const [reindexingProgress, setReindexingProgress] =
+    useState<ReindexingProgress>({
+      errors: 0,
+      errorKeys: [],
+      progress: "0",
+      totalJobsCount: 0,
+      resourcesCount: 0,
+    });
 
   const getLastReindexingDate = () => {
     if (isDemo || location.hostname === "localhost") {
@@ -33,6 +58,21 @@ const useReindex = (isDemo?: boolean) => {
   // Initial last indexing date ask
   useEffect(() => {
     getLastReindexingDate();
+
+    const broadcast = new BroadcastChannel("reindexing-progress-channel");
+    console.log("Listening to reindexing progress");
+
+    broadcast.onmessage = (event) => {
+      const data = event.data as ReindexingProgressMessage;
+
+      setReindexingProgress((p) => ({
+        errorKeys: data.isSuccess ? p.errorKeys : [...p.errorKeys, data.key],
+        errors: data.isSuccess ? p.errors : p.errors + 1,
+        progress: (data.progress * 100).toFixed(0),
+        totalJobsCount: data.totalCount,
+        resourcesCount: p.resourcesCount + data.addedCount,
+      }));
+    };
   }, []);
 
   const sendReindexRequest = () => {
@@ -60,6 +100,13 @@ const useReindex = (isDemo?: boolean) => {
           );
           setIsReindexing(false);
           setLastReindexDate(response.lastReindexDate);
+          setReindexingProgress({
+            errors: 0,
+            errorKeys: [],
+            progress: "0",
+            totalJobsCount: 0,
+            resourcesCount: 0,
+          });
         }
       );
     }
@@ -110,8 +157,16 @@ const useReindex = (isDemo?: boolean) => {
   };
 
   const reindexItemLabel = () => {
-    if (isReindexing) {
-      return "Reindexing...";
+    if (isReindexing && reindexingProgress.progress === "100") {
+      return "Reindexing... (Almost done!)";
+    }
+
+    if (isReindexing && reindexingProgress.progress === "0") {
+      return "Reindexing... (Initializing)";
+    }
+
+    if (isReindexing && reindexingProgress.progress !== "0") {
+      return `Reindexing... (${reindexingProgress.progress}%, ${reindexingProgress.resourcesCount} resources indexed)`;
     }
 
     const lastReindexDate = timeSinceLastReindexString();
@@ -130,6 +185,7 @@ const useReindex = (isDemo?: boolean) => {
     isReindexing,
     lastReindexDate,
     reindexItemLabel,
+    progress: reindexingProgress.progress,
   };
 };
 
@@ -140,6 +196,7 @@ export const useReindexing = singletonHook(
     timeSinceLastReindexString: () => undefined,
     sendReindexRequest: () => undefined,
     lastReindexDate: "never",
+    progress: "0",
     reindexItemLabel: () => "Create search index (needed to make search work)",
   },
   useReindex

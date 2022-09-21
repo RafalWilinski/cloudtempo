@@ -47,6 +47,7 @@ export function OnboardingMenu({ setPages }: Props) {
         </Command.Item>
         <Command.Item
           value="onboarding-reindexing"
+          className="reindexing-command-item"
           disabled={reindexingHook.isReindexing}
           onSelect={() => {
             if (!reindexingHook.isReindexing) {

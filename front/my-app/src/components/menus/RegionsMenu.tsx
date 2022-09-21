@@ -27,21 +27,19 @@ export const regions = [
 export function RegionsMenu() {
   return (
     <Command.Group heading="Regions">
-      <Command.List>
-        {regions.map((region) => {
-          return (
-            <Command.Item
-              key={`${region.code} ${region.name}`}
-              value={`${region.code} ${region.name}`}
-              onSelect={() => {
-                location.href = `https://${region.code}.console.aws.amazon.com/console/home?region=${region.code}`;
-              }}
-            >
-              {region.name} - {region.code}
-            </Command.Item>
-          );
-        })}
-      </Command.List>
+      {regions.map((region) => {
+        return (
+          <Command.Item
+            key={`${region.code} ${region.name}`}
+            value={`${region.code} ${region.name}`}
+            onSelect={() => {
+              location.href = `https://${region.code}.console.aws.amazon.com/console/home?region=${region.code}`;
+            }}
+          >
+            {region.name} - {region.code}
+          </Command.Item>
+        );
+      })}
     </Command.Group>
   );
 }
