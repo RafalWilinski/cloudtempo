@@ -5,15 +5,19 @@ export const PricingPlan = ({
   name,
   monthly,
   yearly,
-  href,
+  isMonthly,
+  monthlyHref,
+  yearlyHref,
   list,
   description,
 }: {
   name: string;
   monthly: string;
+  isMonthly: boolean;
   description: string;
   yearly: string;
-  href: string;
+  monthlyHref: string;
+  yearlyHref: string;
   list: string[];
 }) => {
   return (
@@ -31,13 +35,18 @@ export const PricingPlan = ({
             $
           </div>
           <div style={{ fontSize: "4em" }} className={styles.figure}>
-            {monthly}
+            {isMonthly ? monthly : yearly}
           </div>
-          <div style={{ marginTop: "44px", color: "#777" }}>/month</div>
+          <div style={{ marginTop: "44px", color: "#777" }}>
+            {isMonthly ? "/month" : "/year"}
+          </div>
         </div>
 
         <button className={styles.buyButton}>
-          <a href={href} style={{ textDecoration: "none" }}>
+          <a
+            href={isMonthly ? monthlyHref : yearlyHref}
+            style={{ textDecoration: "none" }}
+          >
             Buy
           </a>
         </button>

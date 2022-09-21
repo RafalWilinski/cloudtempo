@@ -39,8 +39,8 @@ Todos:
 - [ ] Same with onboarding
 - [ ] If index not ran and onboarding completed, show a banner to run indexing
 - [ ] Cron running reindex every day
-- [ ] Publish to Chrome Web Store
-- [ ] Publish Edge Extension
+- [x] Publish to Chrome Web Store
+- [x] Publish Edge Extension
 - [ ] Mozilla Extension
 
 Landing:
@@ -59,13 +59,13 @@ Landing:
 - [x] MDX setup
 - [x] Alpha download instructions page
 - [x] Nav
+- [x] Favicon
 - [ ] Changelog
-- [ ] Buy Page
+- [x] Buy Page
 - [ ] Meta for homepage
 - [ ] og-images
-- [x] Favicon
 - [ ] If on phone, email me a link
-- [ ] Yearly options
+- [x] Yearly options
 - [ ] Testimonials Section
 
 Trials:
