@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px 30px;
+  justify-content: space-between;
+}
+
+.home {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.productName {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  text-decoration: none;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+  margin: 0 10px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  color: #999;
+  transition: 0.2s all ease-in-out;
+}
+
+.link:hover {
+  color: white;
+}

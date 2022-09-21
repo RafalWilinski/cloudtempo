@@ -37,7 +37,9 @@ export const PricingPlan = ({
         </div>
 
         <button className={styles.buyButton}>
-          <a href={href}>Buy</a>
+          <a href={href} style={{ textDecoration: "none" }}>
+            Buy
+          </a>
         </button>
 
         <ul className={styles.list}>

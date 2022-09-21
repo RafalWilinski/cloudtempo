@@ -6,6 +6,7 @@
   justify-content: center;
   align-items: center;
   margin: auto;
+  background: #020202;
 }
 
 .links {
@@ -29,6 +30,7 @@
 .link {
   margin-top: 5px;
   color: #ccc;
+  text-decoration: none;
 }
 
 .link:hover {

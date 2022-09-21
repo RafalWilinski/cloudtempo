@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { ArrowDownCircleIcon } from "@heroicons/react/24/outline";
 import styles from "../styles/Home.module.css";
 import Demo from "../../front/my-app/src/Demo";
 import { useEffect, useState } from "react";
@@ -12,6 +11,7 @@ import { Feature } from "../components/Feature";
 import { Footer } from "../components/Footer";
 import { NewsletterForm } from "../components/NewsletterForm";
 import { Roadmap } from "../components/Roadmap";
+import { Nav } from "../components/Nav";
 
 const Home: NextPage = () => {
   const [demoText, setDemoText] = useState("");
@@ -52,19 +52,7 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <nav
-        style={{
-          padding: "20px",
-          display: "flex",
-        }}
-      >
-        <span className={styles.logo} style={{ marginRight: "10px" }}>
-          <Image src="/logo.svg" alt="CloudTempo Logo" width={20} height={20} />
-        </span>
-        <strong style={{ marginTop: "1px" }}>CloudTempo</strong>
-      </nav>
-
+      <Nav />
       <main className={styles.main}>
         <div className={styles.hero}>
           <div
@@ -91,26 +79,7 @@ const Home: NextPage = () => {
               Navigate through AWS Console with speed. Easily find resources,
               perform actions with single keystrokes. Designed for power users.
             </h3>
-            {/* <button className={styles.installBtn}>
-              <ArrowDownCircleIcon
-                width={24}
-                height={24}
-                style={{ marginRight: "4px" }}
-              />
-              Install now (not available yet!)
-            </button> */}
             <NewsletterForm />
-            {/* <span
-              style={{
-                marginTop: "10px",
-                display: "block",
-                color: "#aaa",
-                fontSize: "12px",
-              }}
-            >
-              Free 7-days trial • Available for Chrome • No email or credit card
-              required
-            </span> */}
           </div>
           <Demo isDemo={true} demoText={demoText} />
         </div>
@@ -158,8 +127,6 @@ const Home: NextPage = () => {
           />
         </Feature>
         <Roadmap />
-        {/* <h3>And even more features coming soon like:</h3>
-        Query Language • Aliases • Plugins • Favourites */}
         <SupportedServicesSection />
         <Pricing />
         <FAQ />

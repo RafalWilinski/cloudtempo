@@ -4,7 +4,9 @@ import { PricingPlan } from "./PricingPlan";
 export const Pricing = () => {
   return (
     <div style={{ textAlign: "center", margin: "80px auto" }}>
-      <h2 style={{ fontSize: "3em", marginBottom: 0 }}>Pricing & Plans</h2>
+      <h2 id="pricing" style={{ fontSize: "3em", marginBottom: 0 }}>
+        Pricing & Plans
+      </h2>
       <h3>
         Basic plan for people with limited set of accounts. Pro plan for people
         juggling a lot of accounts.

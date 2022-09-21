@@ -59,6 +59,10 @@ const useReindex = (isDemo?: boolean) => {
   useEffect(() => {
     getLastReindexingDate();
 
+    if (isDemo) {
+      return;
+    }
+
     const broadcast = new BroadcastChannel("reindexing-progress-channel");
     console.log("Listening to reindexing progress");
 

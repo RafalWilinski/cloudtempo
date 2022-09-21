@@ -28,7 +28,7 @@
   min-height: 50vh;
   max-width: 60rem;
   margin: auto;
-  padding: 4rem 0;
+  padding: 4rem 2rem;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -72,36 +72,6 @@
     width: auto;
     margin: 0 2rem 20px;
   }
-}
-
-.installBtn {
-  text-rendering: auto;
-  image-rendering: crisp-edges;
-  cursor: pointer;
-  padding: 12px 34px;
-  font-size: 16px;
-  border: 0;
-  border-radius: 4px;
-  color: white;
-  font-weight: 600;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: white;
-  color: black;
-  transition: all 0.3s;
-}
-
-.installBtn:hover {
-  background: linear-gradient(
-    135deg,
-    rgb(203, 94, 238) 0%,
-    rgb(75, 225, 236) 100%
-  );
-  color: white;
-  transform: scale(1.05);
 }
 
 .hero {

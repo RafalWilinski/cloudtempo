@@ -55,14 +55,16 @@ Landing:
 - [x] Privacy Policy Page
 - [x] Nicer roadmap
 - [x] FAQ Page
+- [x] Layout
+- [x] MDX setup
 - [ ] Note from author
 - [ ] Buy Page
 - [ ] Nav
+- [ ] Meta for homepage
+- [ ] og-images
 - [ ] Favicon
 - [ ] If on phone, email me a link
 - [ ] Yearly options
-- [ ] Layout
-- [ ] MDX setup
 - [ ] Testimonials Section
 
 Trials:
