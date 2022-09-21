@@ -29,17 +29,18 @@ Todos:
 - [x] Regions menu double nested
 - [x] Indexing progress bar
 - [x] Selecting DynamoDB option does not work?
-- [ ] Open in a new tab
+- [x] Clicking Selected Regions/services does not work (only checkbox, text is fine)
+- [x] Open in a new tab
 - [ ] Get rid of all Cookies.set calls (unreliable)
 - [ ] Welcome notification appears twice (cookies are unreliable)
 - [ ] If index not ran and onboarding completed, show a banner to run indexing
-- [ ] Publish to Chrome Web Store
-- [ ] Mozilla Extension
-- [ ] Publish Edge Extension
+- [ ] X to close onboarding
 - [ ] Same with onboarding
-- [ ] Clicking Selected Regions/services does not work (only checkbox, text is fine)
 - [ ] Cron running reindex every day
 - [ ] Icons are broken if visiting other regions, figure way to bundle images
+- [ ] Publish to Chrome Web Store
+- [ ] Publish Edge Extension
+- [ ] Mozilla Extension
 
 Landing:
 

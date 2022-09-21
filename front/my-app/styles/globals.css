@@ -584,3 +584,21 @@ kbd:first-of-type {
   left: 0;
   right: var(--reindexing-progress);
 }
+
+.command-select-item-selected {
+  color: var(--blue10);
+  font-weight: 800;
+  font-size: 20px;
+  margin-top: -3px;
+  margin-right: 3px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.command-select-item-not-selected {
+  color: var(--gray6);
+  font-weight: 800;
+  font-size: 20px;
+  margin-top: -3px;
+  margin-right: 3px;
+  -webkit-font-smoothing: antialiased;
+}

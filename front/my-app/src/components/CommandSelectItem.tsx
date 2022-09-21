@@ -15,13 +15,16 @@ export function CommandSelectItem({
 }: CommandSelectItemProps) {
   return (
     <Command.Item value={value} onSelect={onSelect}>
-      <input
-        checked={isChecked}
-        type="checkbox"
-        id={`command-select-item-${value}`}
-        name={value}
-        value={value}
-      />
+      <div
+        className={
+          isChecked
+            ? "command-select-item-selected"
+            : "command-select-item-not-selected"
+        }
+      >
+        •
+      </div>
+
       <label htmlFor={`command-select-item-${value}`}> {label}</label>
     </Command.Item>
   );
