@@ -32,12 +32,12 @@ Todos:
 - [x] Clicking Selected Regions/services does not work (only checkbox, text is fine)
 - [x] Open in a new tab
 - [x] Icons are broken if visiting other regions, figure way to bundle images
-- [ ] Notification theme should match overall theme
+- [x] X to close onboarding
+- [x] Notification theme should match overall theme
 - [ ] Get rid of all Cookies.set calls (unreliable)
 - [ ] Welcome notification appears twice (cookies are unreliable)
 - [ ] Same with onboarding
 - [ ] If index not ran and onboarding completed, show a banner to run indexing
-- [x] X to close onboarding
 - [ ] Cron running reindex every day
 - [ ] Publish to Chrome Web Store
 - [ ] Publish Edge Extension
@@ -57,12 +57,13 @@ Landing:
 - [x] FAQ Page
 - [x] Layout
 - [x] MDX setup
-- [ ] Note from author
+- [x] Alpha download instructions page
+- [x] Nav
+- [ ] Changelog
 - [ ] Buy Page
-- [ ] Nav
 - [ ] Meta for homepage
 - [ ] og-images
-- [ ] Favicon
+- [x] Favicon
 - [ ] If on phone, email me a link
 - [ ] Yearly options
 - [ ] Testimonials Section
