@@ -1,2 +1,61 @@
 https://github.com/iann0036/vscode-aws-cloudshell/blob/main/src/extension.ts
 https://blog.christophetd.fr/retrieving-aws-security-credentials-from-the-aws-console/
+
+https://us-east-1.console.aws.amazon.com/dynamodbv2/tb/creds
+ECS false
+EC2 true
+S3 true
+Lambda true
+DynamoDB true
+SNS true
+checkIAM true
+checkKinesis true
+checkDAX true
+
+https://us-east-1.console.aws.amazon.com/ecs/v2/tb/creds
+ECS true
+EC2 true
+Lambda true
+checkCloudwatch true
+checkIAM true
+checkCloudFormation true
+checkEC2AutoscalingGroups true
+checkEC2LoadBalancers true
+checkAutoscaling true
+
+https://us-east-1.console.aws.amazon.com/kinesis/tb/creds (Worthless)
+checkKinesis true
+
+https://us-east-1.console.aws.amazon.com/ec2globalview/tb/creds
+EC2 true
+checkEC2AutoscalingGroups true
+checkAutoscaling true
+
+https://us-east-1.console.aws.amazon.com/gluestudio/tb/creds (from https://us-east-1.console.aws.amazon.com/gluestudio/home?region=us-east-1#/connectors)
+EC2 true
+S3 true
+Lambda true
+DynamoDB true
+RDS true
+checkIAM true
+checkCloudFormation true
+checkRedshift true
+checkKinesis true
+checkSageMaker true
+checkSecretsManager true
+
+https://us-east-1.console.aws.amazon.com/kms/tb/creds
+checkKSM true
+checkIAM true
+
+https://us-east-1.console.aws.amazon.com/appsync/tb/creds
+S3 true
+Lambda true
+DynamoDB true
+RDS true
+checkCloudwatch true
+checkIAM true
+checkCloudFormation true
+Elasticsearch true
+checkAppSync true
+checkSecretsManager true

@@ -45,6 +45,7 @@ Todos:
 - [ ] Better services indexing (remake services menu based on awsc-mezz)
 - [ ] Subnets indexing
 - [ ] Check if step functions can be indexed
+- [ ] CMD+K does not work on CW page
 
 Landing:
 
