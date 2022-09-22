@@ -36,12 +36,15 @@ Todos:
 - [x] Notification theme should match overall theme
 - [ ] Get rid of all Cookies.set calls (unreliable)
 - [ ] Welcome notification appears twice (cookies are unreliable)
-- [ ] Same with onboarding
-- [ ] If index not ran and onboarding completed, show a banner to run indexing
-- [ ] Cron running reindex every day
+- [x] Onboarding if index on found
 - [x] Publish to Chrome Web Store
 - [x] Publish Edge Extension
 - [ ] Mozilla Extension
+- [ ] ECS Services indexing
+- [ ] SGs indexing
+- [ ] Better services indexing (remake services menu based on awsc-mezz)
+- [ ] Subnets indexing
+- [ ] Check if step functions can be indexed
 
 Landing:
 
@@ -67,6 +70,7 @@ Landing:
 - [ ] If on phone, email me a link
 - [x] Yearly options
 - [ ] Testimonials Section
+- [ ] Usable on mobile
 
 Trials:
 

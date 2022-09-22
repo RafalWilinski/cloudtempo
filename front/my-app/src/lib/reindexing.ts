@@ -64,7 +64,6 @@ const useReindex = (isDemo?: boolean) => {
     }
 
     const broadcast = new BroadcastChannel("reindexing-progress-channel");
-    console.log("Listening to reindexing progress");
 
     broadcast.onmessage = (event) => {
       const data = event.data as ReindexingProgressMessage;

@@ -38,7 +38,7 @@ export function CloudTempo({
   const ref = React.useRef<HTMLDivElement | null>(null);
   const [isVisible, setVisibility] = useState(isDemo);
   const [isDarkMode, setDarkMode] = useState(
-    Cookies.get("cloudtempo-dark-mode") === "true" || isDemo
+    Cookies.get("cloudtempo-dark-mode") === "false" || isDemo
   );
   const [_inputValue, setInputValue] = React.useState(demoInput ?? "");
   const [value, setValue] = React.useState("");

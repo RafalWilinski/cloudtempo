@@ -183,6 +183,8 @@
 .cloudtempo [cmdk-input] {
   font-family: var(--font-sans);
   border: none;
+  box-shadow: none !important;
+  margin-top: 10px !important;
   width: 100%;
   font-size: 17px;
   padding: 8px 8px 16px 8px;

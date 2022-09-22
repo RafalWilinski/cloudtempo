@@ -17,8 +17,8 @@ export interface Props {
 export function OnboardingMenu({ setPages }: Props) {
   const reindexingHook = useReindexing();
 
-  if (Cookies.get("onboarding-completed")) {
-    return <></>;
+  if (reindexingHook.timeSinceLastReindex !== undefined) {
+    return <div />;
   }
 
   return (
