@@ -59,3 +59,30 @@ checkCloudFormation true
 Elasticsearch true
 checkAppSync true
 checkSecretsManager true
+
+https://us-east-1.console.aws.amazon.com/amplify/tb/creds
+S3 true
+Lambda true
+SNS true
+checkCloudwatch true
+checkIAM true
+checkAppSync true
+checkRoute53 true
+checkAmplify true
+checkEventBridge true
+
+https://us-east-1.console.aws.amazon.com/batch/tb/creds
+EC2 true
+S3 true
+checkIAM true
+
+https://us-east-1.console.aws.amazon.com/athena/tb/creds
+EC2 true
+S3 true
+Lambda true
+SNS true
+checkStepFunctions true
+
+https://us-east-1.console.aws.amazon.com/monitron/tb/creds
+-nothing-
+
