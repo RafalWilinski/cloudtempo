@@ -7,10 +7,15 @@ import * as cloudwatchLogs from "./CloudwatchLogs";
 import * as cloudwatchAlarm from "./CloudwatchAlarm";
 import * as iamRole from "./IAMRole";
 import * as iamUser from "./IAMUser";
+import * as snsTopic from "./SNS";
 import * as ec2Instance from "./EC2Instance";
 import * as ecsCluster from "./ECSCluster";
+import * as ecsService from "./ECSService";
+import * as vpc from "./VPC";
+import * as sg from "./SecurityGroup";
+import * as subnet from "./Subnet";
 
-export function consoleUrl(item: Document): string {
+export function consoleUrl(item: Document, accountId: string): string {
   switch (item.awsService) {
     case "lambda": {
       return lambda.url(item.name!, item.region);
@@ -30,10 +35,10 @@ export function consoleUrl(item: Document): string {
     case "alarm": {
       return cloudwatchAlarm.url(item.name!, item.region);
     }
-    case "iam-user": {
+    case "iam_user": {
       return iamUser.url(item.name!, item.region);
     }
-    case "iam-role": {
+    case "iam_role": {
       return iamRole.url(item.name!, item.region);
     }
     case "logs": {
@@ -42,8 +47,23 @@ export function consoleUrl(item: Document): string {
     case "ec2": {
       return ec2Instance.url(item.extraFields!.instanceId, item.region);
     }
-    case "ecs": {
+    case "ecs_cluster": {
       return ecsCluster.url(item.name!, item.region);
+    }
+    case "ecs_service": {
+      return ecsService.url(item.name!, item.region);
+    }
+    case "sns_topic": {
+      return snsTopic.url(item.arn!, item.region);
+    }
+    case vpc.code: {
+      return vpc.url(item.name!, item.region);
+    }
+    case sg.code: {
+      return sg.url(item.name!, item.region);
+    }
+    case subnet.code: {
+      return subnet.url(item.name!, item.region);
     }
     default:
       return "missing";

@@ -9,6 +9,12 @@
   background: #020202;
 }
 
+@media only screen and (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+}
+
 .links {
   max-width: 800px;
   width: 100%;
@@ -21,6 +27,12 @@
   font-size: 14px;
   display: flex;
   flex-direction: column;
+}
+
+@media only screen and (max-width: 600px) {
+  .linkGroup {
+    width: 45%;
+  }
 }
 
 .linkGroupTitle {

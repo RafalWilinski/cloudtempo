@@ -4,7 +4,7 @@ import { LicenseInfo } from "../../background/lib/checkUser";
 import { extensionId } from "./extension";
 
 export function useLicenseInfo(isDemo?: boolean) {
-  const REFRESH_INTERVAL_SECONDS = 30;
+  const REFRESH_INTERVAL_SECONDS = 90;
   const [userInfo, setUserInfo] = useState<LicenseInfo | undefined>(undefined);
 
   // Initial license ask

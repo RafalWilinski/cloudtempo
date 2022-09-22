@@ -1,0 +1,32 @@
+import Layout from "../components/Layout";
+
+export const meta = {
+  author: "Rafal Wilinski",
+  title: "CloudTempo Changelog",
+};
+
+## 0.0.4 - 22 / 09 / 2022
+
+> Reindexing heavily recommended!
+
+- Added support for ECS Services, VPCs, Security Groups, Subnets, DAX Clusters, and SNS Topics
+- Added indexing progress bar
+- Increased scanning parallelism to `15`
+- Links from `Useful links` section are now opened in a new tab
+- Fixed bunch of links to services
+- Fixed problem with some resources being not "openable"
+- Fixed problem with checkboxes being not clickable
+- Removed "double list nesting" in regions menu
+
+## 0.0.3 - 21 / 09 / 2022
+
+- Added support for CloudFormation stacks
+- Added `X` button to close onboarding
+- Improved authentication mechanism to be faster
+- Fixed notifications style being out of sync with the rest of app
+- Fixed bunch of keyboard shortcuts
+- Fixed rendering icons if in a different region than `us-east-1`
+- Fixed `Backspace` behavior in Send Feedback menu
+- Fixed notifications z-index
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>;

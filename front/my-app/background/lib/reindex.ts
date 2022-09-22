@@ -14,9 +14,16 @@ import {
 } from "../services/cloudwatch";
 import { getAllIAMRoles, getAllIAMUsers } from "../services/iam";
 import { getAllEC2Instances } from "../services/ec2";
-import { getAllECSClusters } from "../services/ecs";
+import { getAllECSClusters, getAllECSServices } from "../services/ecs";
+import { getAllDAXClusters } from "../services/dax";
+import {
+  getAllSecurityGroups,
+  getAllSubnets,
+  getAllVPCs,
+} from "../services/vpc";
+import { getAllSNSTopics } from "../services/sns";
 
-const limit = pLimit(10);
+const limit = pLimit(15);
 export const SECRET_CONST = "cl0udt3mP0";
 
 export type ReindexProps = {
@@ -37,6 +44,9 @@ export async function reindex({
   sender,
 }: ReindexProps) {
   const secretKey = `${SECRET_CONST}-${accountId}`;
+
+  ddbCredentials.accountId = accountId;
+  ecsCredentials.accountId = accountId;
 
   const regionalFetchFunctions = selectedRegions.map((region) =>
     prepareFetchFunctions({
@@ -158,6 +168,31 @@ function prepareFetchFunctions({
       key: `dynamodb#${region}`,
       service: "dynamodb",
     },
+    {
+      fetch: () => limit(() => getAllDAXClusters(ddbCredentials, region)),
+      key: `dax#${region}`,
+      service: "dax",
+    },
+    {
+      fetch: () => limit(() => getAllSubnets(ddbCredentials, region)),
+      key: `ec2_subnet#${region}`,
+      service: "ec2_subnet",
+    },
+    {
+      fetch: () => limit(() => getAllSecurityGroups(ddbCredentials, region)),
+      key: `ec2_sg#${region}`,
+      service: "ec2_sg",
+    },
+    {
+      fetch: () => limit(() => getAllVPCs(ddbCredentials, region)),
+      key: `ec2_vpc#${region}`,
+      service: "ec2_vpc",
+    },
+    {
+      fetch: () => limit(() => getAllSNSTopics(ddbCredentials, region)),
+      key: `sns#${region}`,
+      service: "sns_topic",
+    },
 
     /// ECS
     {
@@ -179,13 +214,13 @@ function prepareFetchFunctions({
     },
     {
       fetch: () => limit(() => getAllIAMRoles(ecsCredentials, region)),
-      key: `iam-roles#${region}`,
-      service: "iam-roles",
+      key: `iam_role#${region}`,
+      service: "iam_role",
     },
     {
       fetch: () => limit(() => getAllIAMUsers(ecsCredentials, region)),
-      key: `iam-users#${region}`,
-      service: "iam-users",
+      key: `iam_user#${region}`,
+      service: "iam_user",
     },
     {
       fetch: () => limit(() => getAllEC2Instances(ecsCredentials, region)),
@@ -194,8 +229,13 @@ function prepareFetchFunctions({
     },
     {
       fetch: () => limit(() => getAllECSClusters(ecsCredentials, region)),
-      key: `ecs#${region}`,
-      service: "ecs",
+      key: `ecs_cluster#${region}`,
+      service: "ecs_cluster",
+    },
+    {
+      fetch: () => limit(() => getAllECSServices(ecsCredentials, region)),
+      key: `ecs_service#${region}`,
+      service: "ecs_service",
     },
   ];
 

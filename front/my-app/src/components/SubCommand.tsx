@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { useReindexing } from "../lib/reindexing";
 import { extensionId } from "../lib/extension";
 import { cmdOrCtrl } from "../lib/cmdOrCtrl";
+import { getCurrentAccountId } from "../lib/getCurrentAccountId";
 
 export function SubCommand({
   inputRef,
@@ -97,7 +98,7 @@ export function SubCommand({
                 <SubItem
                   shortcut="↵"
                   onSelect={() => {
-                    location.href = consoleUrl(doc);
+                    location.href = consoleUrl(doc, getCurrentAccountId());
                   }}
                 >
                   <PlayIcon width={20} height={20} />
@@ -108,7 +109,7 @@ export function SubCommand({
                   onSelect={() => {
                     chrome.runtime.sendMessage(extensionId(), {
                       type: "openInNewTab",
-                      url: consoleUrl(doc),
+                      url: consoleUrl(doc, getCurrentAccountId()),
                     });
                   }}
                 >

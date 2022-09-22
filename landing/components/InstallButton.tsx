@@ -12,7 +12,7 @@ export const InstallButton = ({ withSubtext, style }: any) => {
             height={24}
             style={{ marginRight: "4px" }}
           />
-          Download now
+          Alpha Access
         </button>
       </Link>
       {withSubtext && (

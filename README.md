@@ -34,18 +34,19 @@ Todos:
 - [x] Icons are broken if visiting other regions, figure way to bundle images
 - [x] X to close onboarding
 - [x] Notification theme should match overall theme
-- [ ] Get rid of all Cookies.set calls (unreliable)
-- [ ] Welcome notification appears twice (cookies are unreliable)
 - [x] Onboarding if index on found
 - [x] Publish to Chrome Web Store
 - [x] Publish Edge Extension
 - [ ] Mozilla Extension
-- [ ] ECS Services indexing
-- [ ] SGs indexing
-- [ ] Better services indexing (remake services menu based on awsc-mezz)
-- [ ] Subnets indexing
-- [ ] Check if step functions can be indexed
+- [x] ECS Services indexing
+- [x] SGs/subnet/vpc indexing
+- [x] DAX
+- [x] SNS
+- [x] But add icons and supported serivces!
+- [x] Enhance credentials with accountId (because it's needed for ARN)
+- [ ] Better services (remake services menu based on awsc-mezz)
 - [ ] CMD+K does not work on CW page
+- [ ] Centralize services definitions
 
 Landing:
 
@@ -96,8 +97,10 @@ Services for initial launch:
 - [x] Cloudwatch Logs - covered by ECS
 - [x] IAM (Roles, Users) - covered by ECS
 - [x] EC2 (Instances) - covered by ECS
-- [x//] VPC (VPCs, Subnets, SGs) - covered by ECS
-- [x/] ECS (Clusters, Services) - covered by ECS
+- [x] VPC (VPCs, Subnets, SGs) - covered by ECS
+- [x] ECS (Clusters, Services) - covered by ECS
+- [x] SNS
+- [x] DAX
 
 Later add:
 

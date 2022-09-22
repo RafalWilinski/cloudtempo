@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 
 export function getCurrentAccountId(isDemo?: boolean) {
-  if (isDemo) {
+  if (isDemo || location.hostname === "cloudtempo.dev") {
     return "demo-account-id";
   }
 

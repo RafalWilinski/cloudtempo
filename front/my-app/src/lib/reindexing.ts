@@ -23,7 +23,9 @@ interface ReindexingProgressMessage {
   totalCount: number;
 }
 
-const useReindex = (isDemo?: boolean) => {
+const useReindex = () => {
+  const isDemo = location.hostname === "cloudtempo.dev";
+
   const [isReindexing, setIsReindexing] = useState(false);
   const [lastReindexDate, setLastReindexDate] = useState(
     Cookies.get("lastReindexDate")
@@ -43,6 +45,8 @@ const useReindex = (isDemo?: boolean) => {
       return;
     }
 
+    console.log("getLastReindexingDate");
+
     chrome.runtime.sendMessage(
       extensionId(),
       {
@@ -57,11 +61,11 @@ const useReindex = (isDemo?: boolean) => {
 
   // Initial last indexing date ask
   useEffect(() => {
-    getLastReindexingDate();
-
     if (isDemo) {
       return;
     }
+
+    getLastReindexingDate();
 
     const broadcast = new BroadcastChannel("reindexing-progress-channel");
 

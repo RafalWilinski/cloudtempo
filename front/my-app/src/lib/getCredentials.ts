@@ -3,6 +3,7 @@ export interface Credentials {
   secretAccessKey: string;
   sessionToken: string;
   expiration: string;
+  accountId?: string;
 }
 
 let cachedDynamoDBCredentials: Credentials | undefined;

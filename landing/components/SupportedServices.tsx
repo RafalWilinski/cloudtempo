@@ -14,6 +14,10 @@ import * as apigw from "../../front/my-app/src/components/services/APIGateway";
 import * as role from "../../front/my-app/src/components/services/IAMRole";
 import * as user from "../../front/my-app/src/components/services/IAMUser";
 import * as sfn from "../../front/my-app/src/components/services/SFN";
+import * as sns from "../../front/my-app/src/components/services/SNS";
+import * as kinesis from "../../front/my-app/src/components/services/SNS";
+import * as amplify from "../../front/my-app/src/components/services/Amplify";
+import * as appsync from "../../front/my-app/src/components/services/AppSync";
 
 const services = [
   {
@@ -74,37 +78,47 @@ const services = [
   {
     resourceName: "Amazon VPCs",
     icon: vpc.icon,
-    status: "soon",
+    status: "supported",
   },
   {
     resourceName: "Amazon VPC Subnets",
     icon: vpc.icon,
-    status: "soon",
+    status: "supported",
   },
   {
     resourceName: "Amazon VPC Security Groups",
     icon: vpc.icon,
-    status: "soon",
+    status: "supported",
   },
   {
-    resourceName: "AWS ECS Clusters",
+    resourceName: "Amazon ECS Clusters",
     icon: eks.icon,
     status: "supported",
   },
   {
-    resourceName: "AWS ECS Services",
+    resourceName: "Amazon ECS Services",
+    icon: eks.icon,
+    status: "supported",
+  },
+  {
+    resourceName: "Amazon ECS Task Definitions",
     icon: eks.icon,
     status: "soon",
   },
   {
-    resourceName: "AWS EKS Clusters",
+    resourceName: "Amazon EKS Clusters",
     icon: eks.icon,
     status: "soon",
   },
   {
-    resourceName: "AWS ApiGateway APIs",
+    resourceName: "Amazon ApiGateway APIs",
     icon: apigw.icon,
     status: "soon",
+  },
+  {
+    resourceName: "Amazon SNS Topics",
+    icon: sns.icon,
+    status: "supported",
   },
   {
     resourceName: "AWS RDS Clusters",
@@ -112,18 +126,38 @@ const services = [
     status: "soon",
   },
   {
-    resourceName: "AWS Aurora Instances",
+    resourceName: "AWS DAX Clusters",
+    icon: ddb.icon,
+    status: "supported",
+  },
+  {
+    resourceName: "Amazon Aurora Instances",
     icon: rds.icon,
     status: "soon",
   },
   {
-    resourceName: "AWS Cognito Pools",
+    resourceName: "Amazon Cognito Pools",
     icon: logs.icon,
     status: "soon",
   },
   {
     resourceName: "AWS Step Functions",
     icon: sfn.icon,
+    status: "soon",
+  },
+  {
+    resourceName: "Amazon Kinesis",
+    icon: kinesis.icon,
+    status: "soon",
+  },
+  {
+    resourceName: "AWS Amplify",
+    icon: amplify.icon,
+    status: "soon",
+  },
+  {
+    resourceName: "AWS AppSync APIs",
+    icon: appsync.icon,
     status: "soon",
   },
 ];

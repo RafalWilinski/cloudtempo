@@ -28,13 +28,7 @@ export const Pricing = () => {
         <div>Yearly</div>
       </label>
 
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <div className={styles.pricingPlansContainer}>
         <PricingPlan
           isMonthly={isMonthly}
           name="Basic"

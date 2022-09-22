@@ -35,10 +35,14 @@ export function CloudTempo({
   demoInput?: string;
   isDemo?: boolean;
 }) {
+  if (!Cookies.get("cloudtempo-dark-mode")) {
+    Cookies.set("cloudtempo-dark-mode", "true");
+  }
+
   const ref = React.useRef<HTMLDivElement | null>(null);
   const [isVisible, setVisibility] = useState(isDemo);
   const [isDarkMode, setDarkMode] = useState(
-    Cookies.get("cloudtempo-dark-mode") === "false" || isDemo
+    Cookies.get("cloudtempo-dark-mode") === "true" || isDemo
   );
   const [_inputValue, setInputValue] = React.useState(demoInput ?? "");
   const [value, setValue] = React.useState("");
@@ -182,7 +186,7 @@ export function CloudTempo({
     switch (item.awsService) {
       case "lambda": {
         setSelectedDocument(item);
-        setPages([...pages, "lambda"]);
+        setPages([...pages, "Lambda"]);
         setInputValue("");
         break;
       }
@@ -190,9 +194,10 @@ export function CloudTempo({
         setSelectedDocument(item);
         setPages([...pages, "CloudFormation"]);
         setInputValue("");
+        break;
       }
       default: {
-        location.href = consoleUrl(item);
+        location.href = consoleUrl(item, getCurrentAccountId());
       }
     }
   };
@@ -277,7 +282,10 @@ export function CloudTempo({
                 ) {
                   e.preventDefault();
 
-                  const url = consoleUrl(preselectedDocument);
+                  const url = consoleUrl(
+                    preselectedDocument,
+                    getCurrentAccountId()
+                  );
 
                   console.log({
                     consoleUrl: url,
@@ -389,7 +397,7 @@ export function CloudTempo({
                   )}
 
                   {isHome && <ServicesMenu isDemo={isDemo} />}
-                  {activePage === "lambda" && (
+                  {activePage === "Lambda" && (
                     <lambda.Menu document={selectedDocument!} />
                   )}
                   {activePage === "Feedback" && (

@@ -30,7 +30,7 @@ export async function getAllEC2Instances(
           instance.InstanceId ??
           "unnamed-instance",
         // todo
-        arn: `arn:aws:ec2:${region}:<ACCOUNT_ID>:instance/${
+        arn: `arn:aws:ec2:${region}:${credentials.accountId}:instance/${
           instance.InstanceId ?? "instance-id-missing"
         }`,
         description: "",
