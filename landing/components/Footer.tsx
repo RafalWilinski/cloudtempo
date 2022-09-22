@@ -16,6 +16,10 @@ const links = [
         title: "Issues",
         href: "https://github.com/cloud-tempo/cloudtempo/issues",
       },
+      {
+        title: "Changelog",
+        href: "/changelog",
+      },
     ],
   },
   {
