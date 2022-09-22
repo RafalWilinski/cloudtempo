@@ -101,6 +101,8 @@ async function getUserItem(id: string): Promise<UserItem | undefined> {
   );
 
   if (item.Item) {
+    await updateLastCheckedAt(item.Item);
+
     return {
       id: item.Item.id.S!,
       createdAt: item.Item.createdAt.S!,
@@ -129,6 +131,18 @@ async function createUserItem(decryptedUserArn: string): Promise<UserItem> {
     id: decryptedUserArn,
     createdAt,
   };
+}
+
+async function updateLastCheckedAt(item: any) {
+  const command = new PutItemCommand({
+    TableName,
+    Item: {
+      ...item,
+      lastCheckedAt: { S: new Date().toISOString() },
+    },
+  });
+
+  await dynamodb.send(command);
 }
 
 export const handler = AWSLambda.wrapHandler(_handler);
