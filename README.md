@@ -47,6 +47,7 @@ Todos:
 - [ ] Better services (remake services menu based on awsc-mezz)
 - [ ] CMD+K does not work on CW page
 - [ ] Centralize services definitions
+- [ ] API for checking latest version
 
 Landing:
 

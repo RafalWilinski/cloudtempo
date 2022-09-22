@@ -27,6 +27,7 @@ import { OnboardingMenu } from "./menus/OnboardingMenu";
 import { FeedbackMenu } from "./menus/FeedbackMenu";
 import { cmdOrCtrl } from "../lib/cmdOrCtrl";
 import { useLicenseInfo } from "../lib/useLicenseInfo";
+import { useCheckVersion } from "../lib/useCheckVersion";
 
 export function CloudTempo({
   isDemo,
@@ -65,6 +66,7 @@ export function CloudTempo({
   const [preselectedDocument, setPreSelectedDocument] = useState<
     Document | undefined
   >();
+  const { getNewAvailableVersionInfo } = useCheckVersion();
   const activePage = pages[pages.length - 1];
   const isHome = activePage === "Home";
   const inputValue = demoInput || _inputValue;
@@ -263,6 +265,7 @@ export function CloudTempo({
       >
         {isVisible && (
           <div className={`cloudtempo ${isDarkMode ? "dark" : ""}`}>
+            <div>{JSON.stringify(getNewAvailableVersionInfo())}</div>
             <Command
               shouldFilter={
                 activePage !== "Feedback" && activePage !== "License"

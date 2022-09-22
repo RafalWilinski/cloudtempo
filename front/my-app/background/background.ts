@@ -7,6 +7,7 @@ import { getOrInitializeMinisearch } from "./lib/minisearch";
 import { checkUser, registerLicenseKey } from "./lib/checkUser";
 import { getLastReindexDate, reindex } from "./lib/reindex";
 import { sendFeedback } from "./lib/feedback";
+import { checkVersion } from "./lib/checkVersion";
 
 importScripts("aws-sdk.js");
 
@@ -19,6 +20,8 @@ chrome.runtime.onMessageExternal.addListener(async function (
 ) {
   if (request.type === "getLicenseInfo") {
     sendResponse(await checkUser(request.userInfo));
+  } else if (request.type === "checkVersion") {
+    sendResponse(await checkVersion());
   } else if (request.type === "getLastReindexDate") {
     sendResponse(await getLastReindexDate(request.accountId));
   } else if (request.type === "reindex") {
