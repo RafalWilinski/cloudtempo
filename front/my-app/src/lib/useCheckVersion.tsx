@@ -15,6 +15,13 @@ export function useCheckVersion() {
   );
 
   useEffect(() => {
+    if (
+      location.hostname === "localhost" ||
+      location.hostname === "cloudtempo.dev"
+    ) {
+      return undefined;
+    }
+
     chrome.runtime.sendMessage(
       extensionId(),
       {
