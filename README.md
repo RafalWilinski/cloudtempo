@@ -47,7 +47,7 @@ Todos:
 - [ ] Better services (remake services menu based on awsc-mezz)
 - [ ] CMD+K does not work on CW page
 - [ ] Centralize services definitions
-- [ ] API for checking latest version
+- [x] API for checking latest version
 
 Landing:
 
@@ -66,7 +66,7 @@ Landing:
 - [x] Alpha download instructions page
 - [x] Nav
 - [x] Favicon
-- [ ] Changelog
+- [x] Changelog
 - [x] Buy Page
 - [x] Meta for homepage
 - [ ] og-images

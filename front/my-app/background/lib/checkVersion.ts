@@ -3,7 +3,7 @@ export async function checkVersion() {
 
   try {
     const response = await (
-      await fetch("https://cloudtempo.dev/api/latest")
+      await fetch("https://cloudtempo.dev/api/version/latest")
     ).json();
 
     console.log(response);
