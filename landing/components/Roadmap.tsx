@@ -10,12 +10,20 @@ const roadmapItems = [
     description: "Your favourite resources always at your fingertips.",
   },
   {
+    title: "More supported services",
+    description: "In the meantime, majority of AWS services will be supported.",
+  },
+  {
     title: "Query Language",
     description: "Find resources using a powerful query language.",
   },
   {
     title: "Plugins",
     description: "Extends the functionality of the platform.",
+  },
+  {
+    title: "Plugins Directory",
+    description: "Discover and install plugins from a central repository.",
   },
 ];
 
@@ -39,6 +47,12 @@ export const Roadmap = () => {
           </div>
         ))}
       </div>
+      <span style={{ fontSize: "12px", color: "#ccc", marginTop: "20px" }}>
+        See whole{" "}
+        <a href="https://github.com/orgs/cloud-tempo/projects/1/views/1">
+          roadmap on Github
+        </a>
+      </span>
     </div>
   );
 };

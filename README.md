@@ -35,19 +35,23 @@ Todos:
 - [x] X to close onboarding
 - [x] Notification theme should match overall theme
 - [x] Onboarding if index on found
-- [x] Publish to Chrome Web Store
-- [x] Publish Edge Extension
-- [ ] Mozilla Extension
 - [x] ECS Services indexing
 - [x] SGs/subnet/vpc indexing
 - [x] DAX
 - [x] SNS
 - [x] But add icons and supported serivces!
 - [x] Enhance credentials with accountId (because it's needed for ARN)
+- [x] API for checking latest version
 - [ ] Better services (remake services menu based on awsc-mezz)
+- [x] Scrollbar styling
 - [ ] CMD+K does not work on CW page
 - [ ] Centralize services definitions
-- [x] API for checking latest version
+- [ ] Improve error reporting
+- [ ] Arrow down sometimes jumps to next section instead of first resource
+
+- [x] Publish to Chrome Web Store
+- [x] Publish Edge Extension
+- [ ] Mozilla Extension
 
 Landing:
 
@@ -69,9 +73,9 @@ Landing:
 - [x] Changelog
 - [x] Buy Page
 - [x] Meta for homepage
+- [x] Yearly options
 - [ ] og-images
 - [ ] If on phone, email me a link
-- [x] Yearly options
 - [ ] Testimonials Section
 - [ ] Usable on mobile
 
@@ -106,7 +110,6 @@ Services for initial launch:
 Later add:
 
 - [ ] CloudFormation Resources Menu / Tree view
-- [ ] Scrollbar styling?
 - [ ] Search configuration
 - [ ] Aliases
 - [ ] Indexing tags

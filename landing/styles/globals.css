@@ -59,8 +59,18 @@ h3 {
   /* align-items: center; */
 }
 
+blockquote {
+  margin: 0;
+  padding: 10px 25px;
+  background: #111;
+}
+
 p {
   line-height: 1.5;
+}
+
+li {
+  line-height: 1.8;
 }
 
 img {

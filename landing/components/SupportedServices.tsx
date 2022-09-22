@@ -160,6 +160,16 @@ const services = [
     icon: appsync.icon,
     status: "soon",
   },
+  {
+    resourceName: "AWS Secrets Manager Secrets",
+    icon: appsync.icon,
+    status: "soon",
+  },
+  {
+    resourceName: "Amazon Elasticsearch Clusters",
+    icon: appsync.icon,
+    status: "soon",
+  },
 ];
 
 export const SupportedServicesSection = () => {

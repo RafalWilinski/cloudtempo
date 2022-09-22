@@ -15,10 +15,6 @@ export function useLicenseInfo(isDemo?: boolean) {
   }, []);
 
   useEffect(() => {
-    if (isDemo) {
-      return;
-    }
-
     const periodicalCheck = setInterval(() => {
       refresh();
     }, 1000 * REFRESH_INTERVAL_SECONDS);
