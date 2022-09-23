@@ -12,6 +12,7 @@ import { Footer } from "../components/Footer";
 import { NewsletterForm } from "../components/NewsletterForm";
 import { Roadmap } from "../components/Roadmap";
 import { Nav } from "../components/Nav";
+import { Testimonial } from "../components/Testimonial";
 
 const Home: NextPage = () => {
   const [demoText, setDemoText] = useState("");
@@ -127,6 +128,36 @@ const Home: NextPage = () => {
             quality={100}
           />
         </Feature>
+
+        <h2
+          style={{ fontSize: "3em", textAlign: "center", margin: "4rem auto" }}
+        >
+          Trusted by AWS experts
+        </h2>
+
+        <Testimonial
+          authorName="Marek Kuczyński"
+          authorHref="https://twitter.com/marekq"
+          authorTitle="ex-AWS Strategic Accounts Solutions Architect"
+          description={() => (
+            <p>
+              CloudTempo gives me a <strong>massive advantage</strong> with
+              debugging serverless architectures. I used to click around in the
+              console to find buckets, functions and tables, but now just jump
+              straight to the resource I need. 10/10, would recommend!
+            </p>
+          )}
+        >
+          <Image
+            style={{ borderRadius: "50%" }}
+            src="/testimonials/marekk.jpeg"
+            alt="Marek Kuczynski"
+            layout="fixed"
+            width={64}
+            height={64}
+            quality={100}
+          />
+        </Testimonial>
         <Roadmap />
         <SupportedServicesSection />
         <Pricing />
