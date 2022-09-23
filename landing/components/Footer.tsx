@@ -6,7 +6,7 @@ const links = [
     links: [
       {
         title: "Download",
-        href: "/alpha",
+        href: "/beta",
       },
       {
         title: "Roadmap",

@@ -1,12 +1,8 @@
 import styles from "../styles/NewsletterForm.module.css";
-export const NewsletterForm = () => {
+export const EmailMeDownloadLink = () => {
   return (
-    <div
-      id="revue-embed"
-      className={styles.container}
-      style={{ width: "100%" }}
-    >
-      <h2>Stay in the loop</h2>
+    <div id="revue-embed" className={styles.container}>
+      <h2>Email me download link</h2>
       <form
         action="https://www.getrevue.co/profile/_cloudtempo/add_subscriber"
         method="post"
@@ -36,11 +32,21 @@ export const NewsletterForm = () => {
           <input
             className={styles.button}
             type="submit"
-            value="Notify me once ready"
+            value="Email me download link"
             name="member[subscribe]"
             id="member_submit"
           />
         </div>
+        <span
+          style={{
+            marginTop: "10px",
+            display: "block",
+            color: "#aaa",
+            fontSize: "12px",
+          }}
+        >
+          CloudTempo is available only for desktop browsers.
+        </span>
       </form>
     </div>
   );

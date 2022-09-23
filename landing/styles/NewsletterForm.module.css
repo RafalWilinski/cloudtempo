@@ -6,6 +6,12 @@
   width: 340px;
 }
 
+@media only screen and (max-width: 1000px) {
+  .container {
+    margin: auto;
+  }
+}
+
 .button {
   text-rendering: auto;
   image-rendering: crisp-edges;

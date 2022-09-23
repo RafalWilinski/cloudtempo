@@ -2,17 +2,24 @@ import { ArrowDownCircleIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import styles from "../styles/InstallButton.module.css";
 
-export const InstallButton = ({ withSubtext, style }: any) => {
+export const InstallButton = ({ withSubtext, style, href, text }: any) => {
   return (
     <>
-      <Link href="/alpha">
+      <Link
+        href={href || "/beta"}
+        onClick={() => {
+          if (href.includes("download")) {
+            window.fathom?.trackGoal("JMLUGQGR", 0);
+          }
+        }}
+      >
         <button className={styles.installBtn} style={style ?? {}}>
           <ArrowDownCircleIcon
             width={24}
             height={24}
             style={{ marginRight: "4px" }}
           />
-          Alpha Access
+          {text ?? "Beta Access"}
         </button>
       </Link>
       {withSubtext && (

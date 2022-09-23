@@ -6,10 +6,27 @@
   justify-content: space-between;
 }
 
+@media only screen and (max-width: 800px) {
+  .container {
+    width: 100%;
+    padding: 20px 10px;
+  }
+}
+
 .home {
   margin-top: 3px;
   cursor: pointer;
   text-decoration: none;
+}
+
+.homeA {
+  margin-top: 3px;
+}
+
+@media only screen and (max-width: 800px) {
+  .homeA {
+    margin-top: 0;
+  }
 }
 
 .productName {

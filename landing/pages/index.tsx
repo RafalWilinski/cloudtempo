@@ -13,12 +13,17 @@ import { NewsletterForm } from "../components/NewsletterForm";
 import { Roadmap } from "../components/Roadmap";
 import { Nav } from "../components/Nav";
 import { Testimonial } from "../components/Testimonial";
+import { InstallButton } from "../components/InstallButton";
+import { EmailMeDownloadLink } from "../components/EmailMeTheDownloadLink";
 
 const Home: NextPage = () => {
   const [demoText, setDemoText] = useState("");
+  const [isOnMobile, setIsOnMobile] = useState(false);
 
   useEffect(() => {
     const firstTextToSet = "lambda";
+
+    setIsOnMobile(isMobile());
 
     for (let i = 0; i < firstTextToSet.length; i++) {
       setTimeout(() => {
@@ -51,6 +56,7 @@ const Home: NextPage = () => {
           name="description"
           content="CloudTempo - Fast & Smart Command Bar for AWS Console"
         />
+        {/* <meta name="viewport" content="width=device-width, initial-scale=1" /> */}
         <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -81,7 +87,11 @@ const Home: NextPage = () => {
               Navigate through AWS Console with speed. Easily find resources,
               perform actions with single keystrokes. Designed for power users.
             </h3>
-            <NewsletterForm />
+            {isOnMobile ? (
+              <EmailMeDownloadLink />
+            ) : (
+              <InstallButton withSubtext />
+            )}
           </div>
           <Demo isDemo={true} demoText={demoText} />
         </div>
@@ -196,5 +206,17 @@ const Home: NextPage = () => {
     </div>
   );
 };
+
+function isMobile() {
+  if (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    )
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 export default Home;

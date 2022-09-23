@@ -1,6 +1,7 @@
 {
   "redirects": [
     { "source": "/download", "destination": "/extension.zip" },
-    { "source": "/buy", "destination": "/#pricing" }
+    { "source": "/buy", "destination": "/#pricing" },
+    { "source": "/alpha", "destination": "/beta" }
   ]
 }

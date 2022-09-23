@@ -23,7 +23,8 @@ export const Nav = () => {
     <nav className={styles.container}>
       <Link className={styles.home} href="/">
         <a
-          style={{ display: "flex", textDecoration: "none", marginTop: "3px" }}
+          className={styles.homeA}
+          style={{ display: "flex", textDecoration: "none" }}
         >
           <span className={styles.logo} style={{ marginRight: "10px" }}>
             <Image
