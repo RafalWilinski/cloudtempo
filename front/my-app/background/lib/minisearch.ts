@@ -3,27 +3,51 @@ import { AES, enc } from "crypto-js";
 import MiniSearch from "minisearch";
 import { Document } from "../../src/document";
 import { SECRET_CONST } from "./reindex";
+import { servicesData } from "./awsServicesData";
+import queryParser from "search-query-parser";
 
 const CUSTOM_SPACE_OR_PUNCT = /[\n\r -_]+/u;
 let minisearch: MiniSearch | undefined;
 
-export function createMinisearch() {
-  return new MiniSearch({
-    fields: ["name"],
-    storeFields: ["name", "arn", "awsService", "region"],
+export function createMinisearch(): MiniSearch {
+  const search = new MiniSearch({
+    fields: ["name", "description", "awsService"],
+    storeFields: ["name", "arn", "awsService", "region", "description", "url"],
     idField: "arn",
     searchOptions: {
-      boost: { awsService: 2 },
+      processTerm: (term) => term.toLowerCase(),
+      boost: { awsService: 3 },
       fuzzy: 0.3,
       prefix: true,
     },
     tokenize: (text: string) => [
       ...text
         .split(CUSTOM_SPACE_OR_PUNCT)
-        .map((t) => t.replace(/([a-z])([A-Z])/g, "$1 $2"))
+        // Split camelCase into two lowercased words and keep the original word lowercased
+        .map(
+          (t) => `${t.toLowerCase()} ${t.replace(/([a-z])([A-Z])/g, "$1 $2")}`
+        )
         .map((s) => s.toLowerCase()),
     ],
   });
+
+  search.addAll(
+    servicesData.services
+      .filter(
+        (s) => (s.abbreviation || s.label) && s.description && !s.unlisted
+      )
+      .map((s) => {
+        return {
+          name: s.label,
+          arn: s.abbreviation?.toLowerCase() || s.label?.toLowerCase(),
+          awsService: "service",
+          description: s.description?.toLowerCase(),
+          url: s.url,
+        };
+      })
+  );
+
+  return search;
 }
 
 export async function reinitializeMinisearch(
@@ -71,4 +95,102 @@ export async function getOrInitializeMinisearch(accountId: string) {
   minisearch.addAll(documentsFlattened);
 
   return minisearch;
+}
+
+async function getDocumentsByRegionOrService(
+  accountId: string,
+  region?: string,
+  service?: string
+) {
+  const secretKey = `${SECRET_CONST}-${accountId}`;
+  const allKeys = await keys();
+
+  const accountDocumentKeys = allKeys
+    .filter((k) => k.toString().startsWith(`documents#${accountId}`))
+    .sort();
+
+  const regionDocumentKeys = region
+    ? accountDocumentKeys.filter((k) => k.toString().includes(`#${region}`))
+    : accountDocumentKeys;
+
+  const serviceDocumentKeys = service
+    ? regionDocumentKeys.filter((k) => k.toString().includes(`#${service}`))
+    : regionDocumentKeys;
+
+  const documentsPerKeys = await Promise.all(
+    serviceDocumentKeys.map(async (k) => {
+      const documentsEncrypted = await get(k);
+      const documentsDecrypted = AES.decrypt(
+        documentsEncrypted,
+        secretKey
+      ).toString(enc.Utf8);
+
+      return JSON.parse(documentsDecrypted);
+    })
+  );
+
+  const documentsFlattened = documentsPerKeys.flat();
+
+  return documentsFlattened;
+}
+
+export async function search(
+  accountId: string,
+  term: string,
+  servicesCountLimit = 10
+) {
+  if (term.startsWith("$") || term.startsWith(">")) {
+    return query(accountId, term);
+  }
+
+  const results = (await getOrInitializeMinisearch(accountId)).search(term);
+
+  const servicesResults = results
+    .filter((s) => s.awsService === "service")
+    .slice(0, servicesCountLimit);
+
+  const resourcesResults = results.filter((s) => s.awsService !== "service");
+
+  return [...resourcesResults, ...servicesResults];
+}
+
+export async function query(accountId: string, term: string) {
+  const query = term.split(/[\$\>]/).pop()!;
+
+  if (!query) {
+    return [];
+  }
+
+  const params = queryParser.parse(query.trim(), {
+    keywords: ["service", "svc", "s", "region", "reg", "r"],
+  });
+
+  if (typeof params !== "object") {
+    return [];
+  }
+
+  const service = params.service || params.svc || params.s;
+  const region = params.region || params.reg || params.r;
+  const text = params.text;
+
+  console.log(query, params, service, region, text);
+
+  const documents = await getDocumentsByRegionOrService(
+    accountId,
+    region,
+    service
+  );
+
+  if (!text) {
+    return documents;
+  }
+
+  const textLowercased = ((text as string) ?? "").toLowerCase();
+
+  return documents.filter(
+    (d) =>
+      (d.name ?? "").toLowerCase().includes(textLowercased) ||
+      (d.description ?? "").toLowerCase().includes(textLowercased) ||
+      (d.arn ?? "").toLowerCase().includes(textLowercased)
+  );
 }

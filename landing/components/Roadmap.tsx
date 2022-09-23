@@ -10,12 +10,17 @@ const roadmapItems = [
     description: "Your favourite resources always at your fingertips.",
   },
   {
+    title: "Tags & Resource Groups support",
+    description: "Probably the best ways to organize resources in the console",
+  },
+  {
     title: "More supported services",
     description: "In the meantime, majority of AWS services will be supported.",
   },
   {
-    title: "Query Language",
-    description: "Find resources using a powerful query language.",
+    title: "Query Language Improvements",
+    description:
+      "Even more powerful query language. Query by runtime, status, description, etc.",
   },
   {
     title: "Plugins",

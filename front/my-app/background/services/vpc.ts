@@ -69,7 +69,7 @@ export async function getAllSubnets(
         name: subnet.SubnetId,
         arn: `arn:aws:ec2:${region}:${credentials.accountId}:subnet/${subnet.SubnetId}`,
         description: subnet.CidrBlock ?? "CIDR block missing",
-        awsService: "subnet",
+        awsService: "ec2_subnet",
         extraFields: {
           cirdBlock: subnet.CidrBlock ?? "",
         },

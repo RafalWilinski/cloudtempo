@@ -39,7 +39,7 @@ export function ResourcesMenu({
                 justifyContent: "space-between",
               }}
               key={(item as any).arn}
-              value={`${(item as any).name!} ${(item as any).region} ${
+              value={`result ${(item as any).name!} ${(item as any).region} ${
                 (item as any).awsService
               } resource`}
               onSelect={() => {

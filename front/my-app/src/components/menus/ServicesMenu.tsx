@@ -1,16 +1,22 @@
 import { Command } from "cmdk";
-import { services } from "../../lib/services";
 import { toast } from "react-toastify";
+import { Document } from "../../document";
 
-export function ServicesMenu({ isDemo }: { isDemo?: boolean }) {
+export function ServicesMenu({
+  isDemo,
+  services,
+}: {
+  isDemo?: boolean;
+  services: Document[];
+}) {
   const currentRegion = "us-east-1";
   return (
     <Command.Group heading="Services" style={{ marginTop: "10px" }}>
-      {services.map((service) => {
+      {(services ?? []).map((service) => {
         return (
           <Command.Item
-            key={`${service.ServiceName} ${service.ServiceShortName}`}
-            value={`${service.ServiceName} ${service.ServiceShortName}`}
+            key={`${service.arn}`}
+            value={`result ${service.name}`}
             onSelect={() => {
               if (isDemo) {
                 toast.warning("Come on, this ain't real console!", {
@@ -19,14 +25,33 @@ export function ServicesMenu({ isDemo }: { isDemo?: boolean }) {
                 return;
               }
 
-              if (service.ConsoleLink) {
-                location.href = service.ConsoleLink;
+              if (service.url) {
+                location.href = service.url;
               } else {
                 location.href = `https://${currentRegion}.console.aws.amazon.com/${service.ServiceShortName}/home?region=${currentRegion}#/functions`;
               }
             }}
+            style={{
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "flex-start",
+            }}
           >
-            {service.ServiceName}
+            <span style={{ marginBottom: 0 }}>{service.name}</span>
+            <p
+              style={{
+                display: "block",
+                marginTop: 0,
+                marginBottom: 0,
+                fontSize: "10px",
+                width: "100%",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+              }}
+            >
+              {service.description}
+            </p>
           </Command.Item>
         );
       })}

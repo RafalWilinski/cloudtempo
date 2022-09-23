@@ -3,7 +3,7 @@ import {
   getDynamoDBCredentials,
   getECSCredentials,
 } from "../src/lib/getCredentials";
-import { getOrInitializeMinisearch } from "./lib/minisearch";
+import { getOrInitializeMinisearch, search } from "./lib/minisearch";
 import { checkUser, registerLicenseKey } from "./lib/checkUser";
 import { getLastReindexDate, reindex } from "./lib/reindex";
 import { sendFeedback } from "./lib/feedback";
@@ -51,9 +51,7 @@ chrome.runtime.onMessageExternal.addListener(async function (
       await registerLicenseKey(request.licenseKey, request.userInfo)
     );
   } else if (request.q) {
-    const results = (await getOrInitializeMinisearch(request.accountId)).search(
-      request.q
-    );
+    const results = await search(request.accountId, request.q);
     sendResponse({ results });
   } else if (request.openUrl) {
     chrome.tabs.create({ url: request.openUrl });

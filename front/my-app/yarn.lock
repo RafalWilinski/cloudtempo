@@ -3153,6 +3153,11 @@
   dependencies:
     "loose-envify" "^1.1.0"
 
+"search-query-parser@^1.6.0":
+  "integrity" "sha512-bhf+phLlKF38nuniwLcVHWPArHGdzenlPhPi955CR3vm1QQifXIuPHwAffhjapojdVVzmv4hgIJ6NOX1d/w+Uw=="
+  "resolved" "https://registry.npmjs.org/search-query-parser/-/search-query-parser-1.6.0.tgz"
+  "version" "1.6.0"
+
 "semver@^5.7.0":
   "integrity" "sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ=="
   "resolved" "https://registry.npmjs.org/semver/-/semver-5.7.1.tgz"

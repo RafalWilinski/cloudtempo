@@ -47,8 +47,10 @@ export const serviceIconMap: Record<string, any> = {
   ecs_task: ecsTask.icon,
   ec2: ec2Instance.icon,
   ec2_sg: securityGroup.icon,
+  sg: securityGroup.icon,
   ec2_vpc: vpc.icon,
   subnet: subnet.icon,
+  ec2_subnet: subnet.icon,
   sns_topic: snsTopic.icon,
 };
 
@@ -67,7 +69,9 @@ export const serviceResourceNameMap: Record<string, string> = {
   ec2: "EC2 Instance",
   ec2_vpc: "VPC",
   ec2_subnet: "VPC Subnet",
-  ec2_security_group: "VPC Security Group",
+  subnet: "VPC Subnet",
+  ec2_sg: "VPC Security Group",
+  sg: "VPC Security Group",
   sns_topic: "SNS Topic",
   rds: "RDS Cluster",
   appsync: "AppSync API",

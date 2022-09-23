@@ -264,9 +264,24 @@ export function CloudTempo({
         }}
       >
         {isVisible && (
-          <div className={`cloudtempo ${isDarkMode ? "dark" : ""}`}>
+          <div
+            className={`cloudtempo ${isDarkMode ? "dark" : ""}`}
+            id="cloudtempo"
+          >
             <NewVersionBanner />
             <Command
+              filter={(value, search) => {
+                if (
+                  value.startsWith("result") &&
+                  !isDemo &&
+                  location.hostname !== "localhost"
+                ) {
+                  return 1;
+                }
+
+                if (value.includes(search.toLowerCase())) return 1;
+                return 0;
+              }}
               shouldFilter={
                 activePage !== "Feedback" && activePage !== "License"
               }
@@ -377,7 +392,9 @@ export function CloudTempo({
                 <Command.List ref={listRef}>
                   {isHome && items.length > 0 && (
                     <ResourcesMenu
-                      items={items}
+                      items={items.filter(
+                        (item) => item.awsService !== "service"
+                      )}
                       onSelect={onSelect}
                       loading={loading}
                       setPages={setPages}
@@ -399,7 +416,14 @@ export function CloudTempo({
                     />
                   )}
 
-                  {isHome && <ServicesMenu isDemo={isDemo} />}
+                  {isHome && (
+                    <ServicesMenu
+                      isDemo={isDemo}
+                      services={items.filter(
+                        (item) => item.awsService === "service"
+                      )}
+                    />
+                  )}
                   {activePage === "Lambda" && (
                     <lambda.Menu document={selectedDocument!} />
                   )}

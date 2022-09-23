@@ -8,4 +8,5 @@ export interface Document {
   awsService: string;
   region: string;
   extraFields?: Record<string, string>;
+  url?: string;
 }

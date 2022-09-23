@@ -42,14 +42,16 @@ Todos:
 - [x] But add icons and supported serivces!
 - [x] Enhance credentials with accountId (because it's needed for ARN)
 - [x] API for checking latest version
-- [ ] Better services (remake services menu based on awsc-mezz)
+- [x] Better services (remake services menu based on awsc-mezz)
 - [x] Scrollbar styling
+- [x] Move filtering primarly to Minisearch
+- [ ] ARN to Console link (check if correct account!)
 - [ ] CMD+K does not work on CW page
 - [ ] Centralize services definitions
 - [ ] Improve error reporting
-- [ ] Arrow down sometimes jumps to next section instead of first resource
+- [ ] Parametrize search / expose settings to the user
 
-- [x] Publish to Chrome Web Store
+- [ ] Publish to Chrome Web Store
 - [x] Publish Edge Extension
 - [ ] Mozilla Extension
 

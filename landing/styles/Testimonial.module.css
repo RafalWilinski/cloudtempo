@@ -10,9 +10,11 @@
 .authorName {
   display: block;
   margin-bottom: 0;
+  font-weight: 400;
 }
 .authorTitle {
   margin-top: 4px;
   color: #777;
   font-size: 14px;
+  font-weight: 400;
 }

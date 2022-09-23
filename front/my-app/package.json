@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "parcel src/index.html",
+    "start": "rm -fr .parcel-cache && parcel src/index.html",
     "build:aws-sdk": "cd ../../aws-sdk-serviceworker && npm i && MINIFY=true SERVICES=ec2,s3,dynamodb npm run build && cp aws-sdk-2.1209.0-sw.js ../front/my-app/extension/aws-sdk.js",
     "minify-aws-sdk": "",
     "build:background": "parcel build background/background.ts && cp ./dist/background.js extension/background.js",
@@ -40,6 +40,7 @@
     "react-dom": "18.2.0",
     "react-singleton-hook": "^4.0.0",
     "react-toastify": "^9.0.8",
+    "search-query-parser": "^1.6.0",
     "use-debounce": "^8.0.4"
   },
   "devDependencies": {

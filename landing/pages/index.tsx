@@ -116,6 +116,31 @@ const Home: NextPage = () => {
           />
         </Feature>
         <Feature
+          title="Query Language"
+          description="Find precisely what you're looking for with our query language. Filter by name, service type, region and more."
+        >
+          <div
+            style={{
+              marginBottom: "-20px",
+              marginTop: "12px",
+              marginLeft: "12px",
+            }}
+          >
+            <Image
+              src="/query-lang.png"
+              alt="Feature"
+              width={545}
+              height={280}
+              quality={100}
+              style={{
+                borderRadius: "10px",
+              }}
+            />
+          </div>
+        </Feature>
+
+        <Feature
+          isChildrenFirst={true}
           title="Misstakesss happen"
           description="Even to me. I know, typing is hard. CloudTempo got you covered. Thanks to fuzzy matching, we'll find that pesky resource hiding in the console."
         >

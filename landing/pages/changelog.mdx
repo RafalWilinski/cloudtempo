@@ -7,13 +7,20 @@ export const meta = {
 
 # Changelog
 
+## 0.0.5 - 22 / 09 / 2022
+
+- Query Language. Now you can find resources by service type and region using following syntax: `> service:ec2 region:eu-west-1`. You can also use `reg` or `r` as an alias for `region`, and `svc` or `s` as an alias for `service`.
+- Improvements to the tokenizer yielding better search results
+- Boosted resource type importance in the search results. For example, when looking for a `lambda`, Functions will always come first in the results despite not having the word `lambda` in their name whereas log groups having that name (e.g. `/aws/lambda/lambda-name`) will be ranked lower.
+- AWS Service search has been moved to the service worker and capped to 10 best results.
+- Added styled scrollbar
+
 ## 0.0.4 - 22 / 09 / 2022
 
 > Reindexing recommended! Internal representation of the index has changed a bit.
 
 - Added support for ECS Services, VPCs, Security Groups, Subnets, DAX Clusters, and SNS Topics
 - Added indexing progress bar
-- Added styled scrollbar
 - Increased scanning parallelism to `15`
 - Links from `Useful links` section are now opened in a new tab
 - Fixed bunch of links to services

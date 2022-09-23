@@ -177,6 +177,18 @@ export function ActionsMenu({
           CloudTempo Homepage
         </Command.Item>
         <Command.Item
+          value="twitter"
+          onSelect={() => {
+            chrome.runtime.sendMessage(extensionId(), {
+              type: "openInNewTab",
+              url: "https://twitter.com/_cloudtempo",
+            });
+          }}
+        >
+          <UserCircleIcon width={20} height={20} />
+          CloudTempo Twitter
+        </Command.Item>
+        <Command.Item
           value="aws iam permissions cloud better iam reference"
           onSelect={() => {
             chrome.runtime.sendMessage(extensionId(), {
@@ -218,18 +230,6 @@ export function ActionsMenu({
         >
           <ChatBubbleBottomCenterTextIcon width={20} height={20} />
           re:Post forums
-        </Command.Item>
-        <Command.Item
-          value="twitter"
-          onSelect={() => {
-            chrome.runtime.sendMessage(extensionId(), {
-              type: "openInNewTab",
-              url: "https://twitter.com/_cloudtempo",
-            });
-          }}
-        >
-          <UserCircleIcon width={20} height={20} />
-          CloudTempo Twitter
         </Command.Item>
         <Command.Item
           value="dynobase"

@@ -9,7 +9,7 @@ export const Testimonial = ({
 }: any) => {
   return (
     <div className={styles.container}>
-      <p className={styles.description}>{description()}</p>
+      <div className={styles.description}>{description()}</div>
       {children}
       <a
         href={authorHref}

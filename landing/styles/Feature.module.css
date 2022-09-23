@@ -21,6 +21,12 @@
   width: 50%;
 }
 
+@media only screen and (max-width: 800px) {
+  .textSection {
+    width: 100%;
+  }
+}
+
 .title {
   margin-top: 16px;
   font-weight: 700;
