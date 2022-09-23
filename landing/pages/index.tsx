@@ -57,6 +57,21 @@ const Home: NextPage = () => {
           content="CloudTempo - Fast & Smart Command Bar for AWS Console"
         />
         {/* <meta name="viewport" content="width=device-width, initial-scale=1" /> */}
+        <meta
+          property="og:title"
+          content="CloudTempo - Fast & Smart Command Bar for AWS Console"
+        />
+        <meta property="og:locale" content="en_US" />
+        <meta
+          property="og:description"
+          content="CloudTempo - Fast & Smart Command Bar for AWS Console"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://cloudtempo.dev" />
+        <meta
+          property="og:image"
+          content="https://cloudtempo.dev/og-image.png"
+        />
         <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
