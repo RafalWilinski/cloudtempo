@@ -1,3 +1,4 @@
+import { ListFunctionsResponse } from "aws-sdk/clients/lambda";
 import { Document } from "../../src/document";
 
 export async function getAllLambdaFunctions(
@@ -13,7 +14,7 @@ export async function getAllLambdaFunctions(
   let functions: Document[] = [];
 
   do {
-    const response: any = await lambda
+    const response: ListFunctionsResponse = await lambda
       .listFunctions({
         Marker: token,
       })
@@ -21,9 +22,9 @@ export async function getAllLambdaFunctions(
 
     functions = [
       ...functions,
-      ...(response.Functions ?? []).map((fn: any) => ({
+      ...(response.Functions ?? []).map((fn) => ({
         name: fn.FunctionName,
-        arn: fn.FunctionArn,
+        arn: fn.FunctionArn!,
         description: fn.Description,
         awsService: "lambda",
         region,

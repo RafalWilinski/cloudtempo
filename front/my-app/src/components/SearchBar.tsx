@@ -161,16 +161,17 @@ export function CloudTempo({
   }, 100);
 
   useEffect(() => {
-    setActionsMenuVisibility(value.indexOf("resource") > 0);
-
     if (value.indexOf("resource") > 0) {
-      const [name, region, awsService] = value.split(" ");
+      const [, name, region, awsService] = value.split(" ");
+
       const resource = items.find(
         (item) =>
-          item.name === name &&
+          item.name?.toLowerCase() === name &&
           item.region === region &&
           item.awsService === awsService
       );
+
+      setActionsMenuVisibility(!!resource);
 
       if (resource) {
         setPreSelectedDocument(resource);

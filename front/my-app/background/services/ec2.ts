@@ -29,7 +29,6 @@ export async function getAllEC2Instances(
           instance.Tags?.find((t) => t.Key === "Name")?.Value ??
           instance.InstanceId ??
           "unnamed-instance",
-        // todo
         arn: `arn:aws:ec2:${region}:${credentials.accountId}:instance/${
           instance.InstanceId ?? "instance-id-missing"
         }`,

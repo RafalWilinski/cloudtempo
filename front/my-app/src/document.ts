@@ -1,7 +1,7 @@
 import { Tag } from "aws-sdk/clients/cloudformation";
 
 export interface Document {
-  arn?: string;
+  arn: string;
   tags?: Tag[];
   name?: string;
   description?: string;

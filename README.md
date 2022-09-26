@@ -76,10 +76,10 @@ Landing:
 - [x] Buy Page
 - [x] Meta for homepage
 - [x] Yearly options
-- [ ] og-images
-- [ ] If on phone, email me a link
+- [x] og-images
+- [x] If on phone, email me a link
 - [ ] Testimonials Section
-- [ ] Usable on mobile
+- [x] Usable on mobile
 
 Trials:
 

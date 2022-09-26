@@ -23,7 +23,7 @@ export async function getAllCloudformationStacks(
       ...stacks,
       ...(response.Stacks ?? []).map((stack) => ({
         name: stack.StackName,
-        arn: stack.StackId,
+        arn: stack.StackId!,
         awsService: "cloudformation",
         description: stack.Description,
         tags: stack.Tags,
