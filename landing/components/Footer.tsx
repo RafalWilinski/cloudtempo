@@ -43,6 +43,15 @@ const links = [
       },
     ],
   },
+  {
+    title: "Blog",
+    links: [
+      {
+        title: "What is ARN? Complete guide",
+        href: "/blog/arn-complete-guide",
+      },
+    ],
+  },
 ];
 
 export const Footer = () => {

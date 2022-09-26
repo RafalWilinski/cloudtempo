@@ -41,7 +41,7 @@ export function ResourcesMenu({
               key={(item as any).arn}
               value={`result ${(item as any).name!} ${(item as any).region} ${
                 (item as any).awsService
-              } resource`}
+              } ${(item as any)?.arn ?? ""} resource`}
               onSelect={() => {
                 onSelect(item);
               }}
