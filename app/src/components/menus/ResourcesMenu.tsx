@@ -70,7 +70,10 @@ export function ResourcesMenu({
                       fontSize: "10px",
                     }}
                   >
-                    {serviceResourceNameMap[item.awsService]} {item.subtext}
+                    {serviceResourceNameMap[item.awsService]}{" "}
+                    {item.subtext
+                      ? `/ ${item.subtext}`
+                      : `${item.description ?? ""}`}
                   </p>
                 </div>
               </div>

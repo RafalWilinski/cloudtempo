@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import Demo from "../../front/my-app/src/Demo";
+import Demo from "../../app/src/Demo";
 import { useEffect, useState } from "react";
 import { Pricing } from "../components/Pricing";
 import { SupportedServicesSection } from "../components/SupportedServices";

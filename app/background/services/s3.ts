@@ -31,11 +31,15 @@ export async function getAllS3Buckets(
 }
 
 async function describeBucketTags(s3: AWS.S3, bucketName: string) {
-  const tagsResponse = await s3
-    .getBucketTagging({
-      Bucket: bucketName,
-    })
-    .promise();
+  try {
+    const tagsResponse = await s3
+      .getBucketTagging({
+        Bucket: bucketName,
+      })
+      .promise();
 
-  return tagsResponse.TagSet;
+    return tagsResponse.TagSet;
+  } catch (_error) {
+    return [];
+  }
 }

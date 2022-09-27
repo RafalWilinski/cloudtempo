@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import "../../front/my-app/styles/globals.css";
+import "../../app/styles/globals.css";
 import "react-toastify/dist/ReactToastify.css";
 import "@fontsource/inter";
 import type { AppProps } from "next/app";

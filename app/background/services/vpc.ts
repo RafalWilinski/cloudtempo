@@ -29,8 +29,9 @@ export async function getAllVPCs(
       ...(response.Vpcs ?? []).map((vpc) => ({
         name: vpc.VpcId,
         arn: `arn:aws:ec2:${region}:${credentials.accountId}:vpc/${vpc.VpcId}`,
-        description: vpc.CidrBlock ?? "CIDR block missing",
+        description: "",
         awsService: "ec2_vpc",
+        subtext: vpc.CidrBlock ?? "",
         extraFields: {
           cirdBlock: vpc.CidrBlock ?? "",
         },
@@ -69,8 +70,9 @@ export async function getAllSubnets(
       ...(response.Subnets ?? []).map((subnet) => ({
         name: subnet.SubnetId,
         arn: `arn:aws:ec2:${region}:${credentials.accountId}:subnet/${subnet.SubnetId}`,
-        description: subnet.CidrBlock ?? "CIDR block missing",
+        description: subnet.CidrBlock ?? "",
         awsService: "ec2_subnet",
+        subtext: `${subnet.CidrBlock} / ${subnet.VpcId}`,
         extraFields: {
           cirdBlock: subnet.CidrBlock ?? "",
         },
@@ -108,11 +110,8 @@ export async function getAllSecurityGroups(
       ...(response.SecurityGroups ?? []).map((securityGroup) => ({
         name: securityGroup.GroupId,
         arn: `arn:aws:ec2:${region}:${credentials.accountId}:security-group/${securityGroup.GroupId}`,
-        description: securityGroup.Description ?? "Description missing",
+        description: securityGroup.Description ?? "",
         awsService: "ec2_sg",
-        extraFields: {
-          description: securityGroup.Description ?? "",
-        },
         region,
       })),
     ];

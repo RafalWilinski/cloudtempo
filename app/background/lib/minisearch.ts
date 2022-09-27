@@ -5,6 +5,7 @@ import { Document } from "../../src/document";
 import { SECRET_CONST } from "./reindex";
 import { servicesData } from "./awsServicesData";
 import queryParser from "search-query-parser";
+import { Tag } from "aws-sdk/clients/cloudformation";
 
 const CUSTOM_SPACE_OR_PUNCT = /[\n\r -_]+/u;
 let minisearch: MiniSearch | undefined;
@@ -12,7 +13,16 @@ let minisearch: MiniSearch | undefined;
 export function createMinisearch(): MiniSearch {
   const search = new MiniSearch({
     fields: ["name", "description", "awsService"],
-    storeFields: ["name", "arn", "awsService", "region", "description", "url"],
+    storeFields: [
+      "name",
+      "arn",
+      "awsService",
+      "region",
+      "description",
+      "url",
+      "subtext",
+      "tags",
+    ],
     idField: "arn",
     searchOptions: {
       processTerm: (term) => term.toLowerCase(),
@@ -100,7 +110,8 @@ export async function getOrInitializeMinisearch(accountId: string) {
 async function getDocumentsByRegionOrService(
   accountId: string,
   region?: string,
-  service?: string
+  service?: string,
+  tagValue?: string
 ) {
   const secretKey = `${SECRET_CONST}-${accountId}`;
   const allKeys = await keys();
@@ -131,7 +142,13 @@ async function getDocumentsByRegionOrService(
 
   const documentsFlattened = documentsPerKeys.flat();
 
-  return documentsFlattened;
+  const documentsWithTag = tagValue
+    ? documentsFlattened.filter((d) => {
+        return d.tags?.some((t: Tag) => t.Value.includes(tagValue));
+      })
+    : documentsFlattened;
+
+  return documentsWithTag;
 }
 
 export async function search(
@@ -162,7 +179,7 @@ export async function query(accountId: string, term: string) {
   }
 
   const params = queryParser.parse(query.trim(), {
-    keywords: ["service", "svc", "s", "region", "reg", "r"],
+    keywords: ["service", "svc", "s", "region", "reg", "r", "tag", "tags", "t"],
   });
 
   if (typeof params !== "object") {
@@ -171,14 +188,16 @@ export async function query(accountId: string, term: string) {
 
   const service = params.service || params.svc || params.s;
   const region = params.region || params.reg || params.r;
+  const tag = params.tag || params.tags || params.t;
   const text = params.text;
 
-  console.log(query, params, service, region, text);
+  console.log(query, params, service, region, text, tag);
 
   const documents = await getDocumentsByRegionOrService(
     accountId,
     region,
-    service
+    service,
+    tag
   );
 
   if (!text) {

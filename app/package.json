@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "rm -fr .parcel-cache && parcel src/index.html",
-    "build:aws-sdk": "cd ../../aws-sdk-serviceworker && npm i && MINIFY=true SERVICES=ec2,s3,dynamodb npm run build && cp aws-sdk-2.1209.0-sw.js ../front/my-app/extension/aws-sdk.js",
+    "build:aws-sdk": "cd ../aws-sdk-serviceworker && npm i && MINIFY=true SERVICES=ec2,s3,dynamodb npm run build && cp aws-sdk-2.1209.0-sw.js ../app/extension/aws-sdk.js",
     "minify-aws-sdk": "",
     "build:background": "parcel build background/background.ts && cp ./dist/background.js extension/background.js",
     "remove-map-files": "rm -fr extension/dist/*.map",
@@ -16,7 +16,7 @@
     "postbuild": "npm run remove-map-files",
     "build": "npm run build:front && npm run build:background",
     "zip": "zip -r extension.zip ./extension/*",
-    "move-to-public": "cp extension.zip ../../landing/public/extension.zip",
+    "move-to-public": "cp extension.zip ../landing/public/extension.zip",
     "alpha-release": "npm run build && npm run zip && npm run move-to-public"
   },
   "dependencies": {

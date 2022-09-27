@@ -28,9 +28,9 @@ export default async function handler(
   await runMiddleware(req, res, cors);
 
   res.status(200).json({
-    latest: "0.0.5",
-    changes: "Query Language",
-    moreUrl: "https://cloudtempo.dev/changelog#0.0.5",
-    createdAt: "2021-09-23T00:00:00.000Z",
+    latest: "0.1.0",
+    changes: "Indexing tags, ARN-to-URL and more",
+    moreUrl: "https://cloudtempo.dev/changelog#0.1.0",
+    createdAt: "2021-09-27T00:00:00.000Z",
   });
 }

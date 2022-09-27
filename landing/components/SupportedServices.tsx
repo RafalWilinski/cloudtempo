@@ -1,23 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
 import styles from "../styles/Service.module.css";
-import * as lambda from "../../front/my-app/src/components/services/Lambda";
-import * as cloudformation from "../../front/my-app/src/components/services/Cloudformation";
-import * as alarm from "../../front/my-app/src/components/services/CloudwatchAlarm";
-import * as logs from "../../front/my-app/src/components/services/CloudwatchLogs";
-import * as eks from "../../front/my-app/src/components/services/EKS";
-import * as ec2 from "../../front/my-app/src/components/services/EC2Instance";
-import * as vpc from "../../front/my-app/src/components/services/VPC";
-import * as rds from "../../front/my-app/src/components/services/RDS";
-import * as s3 from "../../front/my-app/src/components/services/S3";
-import * as ddb from "../../front/my-app/src/components/services/DynamoDB";
-import * as apigw from "../../front/my-app/src/components/services/APIGateway";
-import * as role from "../../front/my-app/src/components/services/IAMRole";
-import * as user from "../../front/my-app/src/components/services/IAMUser";
-import * as sfn from "../../front/my-app/src/components/services/SFN";
-import * as sns from "../../front/my-app/src/components/services/SNS";
-import * as kinesis from "../../front/my-app/src/components/services/SNS";
-import * as amplify from "../../front/my-app/src/components/services/Amplify";
-import * as appsync from "../../front/my-app/src/components/services/AppSync";
+import * as lambda from "../../app/src/components/services/Lambda";
+import * as cloudformation from "../../app/src/components/services/Cloudformation";
+import * as alarm from "../../app/src/components/services/CloudwatchAlarm";
+import * as logs from "../../app/src/components/services/CloudwatchLogs";
+import * as eks from "../../app/src/components/services/EKS";
+import * as ec2 from "../../app/src/components/services/EC2Instance";
+import * as vpc from "../../app/src/components/services/VPC";
+import * as rds from "../../app/src/components/services/RDS";
+import * as s3 from "../../app/src/components/services/S3";
+import * as ddb from "../../app/src/components/services/DynamoDB";
+import * as apigw from "../../app/src/components/services/APIGateway";
+import * as role from "../../app/src/components/services/IAMRole";
+import * as user from "../../app/src/components/services/IAMUser";
+import * as sfn from "../../app/src/components/services/SFN";
+import * as sns from "../../app/src/components/services/SNS";
+import * as kinesis from "../../app/src/components/services/SNS";
+import * as amplify from "../../app/src/components/services/Amplify";
+import * as appsync from "../../app/src/components/services/AppSync";
 
 const services = [
   {
