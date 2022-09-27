@@ -76,7 +76,7 @@ Landing:
 - [x] Buy Page
 - [x] Meta for homepage
 - [x] Yearly options
-- [ ] og-images
+- [x] og-images
 - [ ] If on phone, email me a link
 - [ ] Testimonials Section
 - [ ] Usable on mobile
@@ -138,3 +138,12 @@ username: edge-review
 password: edge-review-12345
 
 After doing so, you can open actual extension by pressing CTRL + M or CMD + K.
+
+Content plan:
+
+- How to use CloudTango AWS query language?
+- aws find all resources
+- aws find all lambda functions
+- how to find aws access key
+- unable to resolve module ./aws-exports / Cannot find file './aws-exports'
+-
