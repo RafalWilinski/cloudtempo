@@ -45,7 +45,7 @@ Todos:
 - [x] Better services (remake services menu based on awsc-mezz)
 - [x] Scrollbar styling
 - [x] Move filtering primarly to Minisearch
-- [ ] ARN to Console link (check if correct account!)
+- [x] ARN to Console link (check if correct account!)
 - [ ] CMD+K does not work on CW page
 - [ ] Centralize services definitions
 - [ ] Improve error reporting
@@ -77,12 +77,9 @@ Landing:
 - [x] Meta for homepage
 - [x] Yearly options
 - [x] og-images
-      <<<<<<< HEAD
-- [ ] # If on phone, email me a link
 - [x] If on phone, email me a link
-  > > > > > > > f294699e17b55bbba446deed1500587f072303ef
-- [ ] Testimonials Section
-- [ ] Usable on mobile
+- [x] Testimonials Section
+- [x] Usable on mobile
 
 Trials:
 
@@ -149,4 +146,3 @@ Content plan:
 - aws find all lambda functions
 - how to find aws access key
 - unable to resolve module ./aws-exports / Cannot find file './aws-exports'
--

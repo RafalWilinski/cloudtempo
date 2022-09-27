@@ -1,0 +1,961 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B53956C728E3174200554D22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53956C628E3174200554D22 /* AppDelegate.swift */; };
+		B53956C928E3174200554D22 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53956C828E3174200554D22 /* SceneDelegate.swift */; };
+		B53956CC28E3174200554D22 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B53956CA28E3174200554D22 /* LaunchScreen.storyboard */; };
+		B53956CF28E3174200554D22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B53956CD28E3174200554D22 /* Main.storyboard */; };
+		B53956D828E3174200554D22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53956D728E3174200554D22 /* AppDelegate.swift */; };
+		B53956DB28E3174200554D22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B53956D928E3174200554D22 /* Main.storyboard */; };
+		B53956E328E3174200554D22 /* CloudTempo Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B53956E228E3174200554D22 /* CloudTempo Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B53956ED28E3174200554D22 /* CloudTempo Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B53956EC28E3174200554D22 /* CloudTempo Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B53956F328E3174200554D22 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = B53956B628E3174100554D22 /* Main.html */; };
+		B53956F428E3174200554D22 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = B53956B628E3174100554D22 /* Main.html */; };
+		B53956F528E3174200554D22 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B53956B828E3174100554D22 /* Icon.png */; };
+		B53956F628E3174200554D22 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B53956B828E3174100554D22 /* Icon.png */; };
+		B53956F728E3174200554D22 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = B53956B928E3174100554D22 /* Style.css */; };
+		B53956F828E3174200554D22 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = B53956B928E3174100554D22 /* Style.css */; };
+		B53956F928E3174200554D22 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = B53956BA28E3174100554D22 /* Script.js */; };
+		B53956FA28E3174200554D22 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = B53956BA28E3174100554D22 /* Script.js */; };
+		B53956FB28E3174200554D22 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53956BB28E3174100554D22 /* ViewController.swift */; };
+		B53956FC28E3174200554D22 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53956BB28E3174100554D22 /* ViewController.swift */; };
+		B53956FD28E3174200554D22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B53956BC28E3174200554D22 /* Assets.xcassets */; };
+		B53956FE28E3174200554D22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B53956BC28E3174200554D22 /* Assets.xcassets */; };
+		B53956FF28E3174200554D22 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53956BE28E3174200554D22 /* SafariWebExtensionHandler.swift */; };
+		B539570028E3174200554D22 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53956BE28E3174200554D22 /* SafariWebExtensionHandler.swift */; };
+		B539571928E3174200554D22 /* content.template.js in Resources */ = {isa = PBXBuildFile; fileRef = B539571228E3174200554D22 /* content.template.js */; };
+		B539571A28E3174200554D22 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = B539571328E3174200554D22 /* background.js */; };
+		B539571B28E3174200554D22 /* dist in Resources */ = {isa = PBXBuildFile; fileRef = B539571428E3174200554D22 /* dist */; };
+		B539571C28E3174200554D22 /* img in Resources */ = {isa = PBXBuildFile; fileRef = B539571528E3174200554D22 /* img */; };
+		B539571D28E3174200554D22 /* aws-sdk.js in Resources */ = {isa = PBXBuildFile; fileRef = B539571628E3174200554D22 /* aws-sdk.js */; };
+		B539571E28E3174200554D22 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B539571728E3174200554D22 /* manifest.json */; };
+		B539571F28E3174200554D22 /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = B539571828E3174200554D22 /* content.js */; };
+		B539572028E3174200554D22 /* content.template.js in Resources */ = {isa = PBXBuildFile; fileRef = B539571228E3174200554D22 /* content.template.js */; };
+		B539572128E3174200554D22 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = B539571328E3174200554D22 /* background.js */; };
+		B539572228E3174200554D22 /* dist in Resources */ = {isa = PBXBuildFile; fileRef = B539571428E3174200554D22 /* dist */; };
+		B539572328E3174200554D22 /* img in Resources */ = {isa = PBXBuildFile; fileRef = B539571528E3174200554D22 /* img */; };
+		B539572428E3174200554D22 /* aws-sdk.js in Resources */ = {isa = PBXBuildFile; fileRef = B539571628E3174200554D22 /* aws-sdk.js */; };
+		B539572528E3174200554D22 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B539571728E3174200554D22 /* manifest.json */; };
+		B539572628E3174200554D22 /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = B539571828E3174200554D22 /* content.js */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B53956E428E3174200554D22 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B53956B028E3174100554D22 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B53956E128E3174200554D22;
+			remoteInfo = "CloudTempo Extension (iOS)";
+		};
+		B53956EE28E3174200554D22 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B53956B028E3174100554D22 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B53956EB28E3174200554D22;
+			remoteInfo = "CloudTempo Extension (macOS)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B539570628E3174200554D22 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B53956E328E3174200554D22 /* CloudTempo Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B539570D28E3174200554D22 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B53956ED28E3174200554D22 /* CloudTempo Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		B53956B728E3174100554D22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
+		B53956B828E3174100554D22 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		B53956B928E3174100554D22 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
+		B53956BA28E3174100554D22 /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
+		B53956BB28E3174100554D22 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B53956BC28E3174200554D22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B53956BE28E3174200554D22 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		B53956C328E3174200554D22 /* CloudTempo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudTempo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B53956C628E3174200554D22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B53956C828E3174200554D22 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		B53956CB28E3174200554D22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B53956CE28E3174200554D22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B53956D028E3174200554D22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B53956D528E3174200554D22 /* CloudTempo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudTempo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B53956D728E3174200554D22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B53956DA28E3174200554D22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B53956DC28E3174200554D22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B53956DD28E3174200554D22 /* CloudTempo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CloudTempo.entitlements; sourceTree = "<group>"; };
+		B53956E228E3174200554D22 /* CloudTempo Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "CloudTempo Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B53956E728E3174200554D22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B53956EC28E3174200554D22 /* CloudTempo Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "CloudTempo Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B53956F128E3174200554D22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B53956F228E3174200554D22 /* CloudTempo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CloudTempo.entitlements; sourceTree = "<group>"; };
+		B539571228E3174200554D22 /* content.template.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = content.template.js; path = ../../app/extension/content.template.js; sourceTree = "<group>"; };
+		B539571328E3174200554D22 /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = background.js; path = ../../app/extension/background.js; sourceTree = "<group>"; };
+		B539571428E3174200554D22 /* dist */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dist; path = ../../app/extension/dist; sourceTree = "<group>"; };
+		B539571528E3174200554D22 /* img */ = {isa = PBXFileReference; lastKnownFileType = folder; name = img; path = ../../app/extension/img; sourceTree = "<group>"; };
+		B539571628E3174200554D22 /* aws-sdk.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = "aws-sdk.js"; path = "../../app/extension/aws-sdk.js"; sourceTree = "<group>"; };
+		B539571728E3174200554D22 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = manifest.json; path = ../../app/extension/manifest.json; sourceTree = "<group>"; };
+		B539571828E3174200554D22 /* content.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = content.js; path = ../../app/extension/content.js; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B53956C028E3174200554D22 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B53956D228E3174200554D22 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B53956DF28E3174200554D22 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B53956E928E3174200554D22 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B53956AF28E3174100554D22 = {
+			isa = PBXGroup;
+			children = (
+				B53956B428E3174100554D22 /* Shared (App) */,
+				B53956BD28E3174200554D22 /* Shared (Extension) */,
+				B53956C528E3174200554D22 /* iOS (App) */,
+				B53956D628E3174200554D22 /* macOS (App) */,
+				B53956E628E3174200554D22 /* iOS (Extension) */,
+				B53956F028E3174200554D22 /* macOS (Extension) */,
+				B53956C428E3174200554D22 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B53956B428E3174100554D22 /* Shared (App) */ = {
+			isa = PBXGroup;
+			children = (
+				B53956BB28E3174100554D22 /* ViewController.swift */,
+				B53956BC28E3174200554D22 /* Assets.xcassets */,
+				B53956B528E3174100554D22 /* Resources */,
+			);
+			path = "Shared (App)";
+			sourceTree = "<group>";
+		};
+		B53956B528E3174100554D22 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B53956B628E3174100554D22 /* Main.html */,
+				B53956B828E3174100554D22 /* Icon.png */,
+				B53956B928E3174100554D22 /* Style.css */,
+				B53956BA28E3174100554D22 /* Script.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B53956BD28E3174200554D22 /* Shared (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				B539571128E3174200554D22 /* Resources */,
+				B53956BE28E3174200554D22 /* SafariWebExtensionHandler.swift */,
+			);
+			path = "Shared (Extension)";
+			sourceTree = "<group>";
+		};
+		B53956C428E3174200554D22 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B53956C328E3174200554D22 /* CloudTempo.app */,
+				B53956D528E3174200554D22 /* CloudTempo.app */,
+				B53956E228E3174200554D22 /* CloudTempo Extension.appex */,
+				B53956EC28E3174200554D22 /* CloudTempo Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B53956C528E3174200554D22 /* iOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				B53956C628E3174200554D22 /* AppDelegate.swift */,
+				B53956C828E3174200554D22 /* SceneDelegate.swift */,
+				B53956CA28E3174200554D22 /* LaunchScreen.storyboard */,
+				B53956CD28E3174200554D22 /* Main.storyboard */,
+				B53956D028E3174200554D22 /* Info.plist */,
+			);
+			path = "iOS (App)";
+			sourceTree = "<group>";
+		};
+		B53956D628E3174200554D22 /* macOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				B53956D728E3174200554D22 /* AppDelegate.swift */,
+				B53956D928E3174200554D22 /* Main.storyboard */,
+				B53956DC28E3174200554D22 /* Info.plist */,
+				B53956DD28E3174200554D22 /* CloudTempo.entitlements */,
+			);
+			path = "macOS (App)";
+			sourceTree = "<group>";
+		};
+		B53956E628E3174200554D22 /* iOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				B53956E728E3174200554D22 /* Info.plist */,
+			);
+			path = "iOS (Extension)";
+			sourceTree = "<group>";
+		};
+		B53956F028E3174200554D22 /* macOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				B53956F128E3174200554D22 /* Info.plist */,
+				B53956F228E3174200554D22 /* CloudTempo.entitlements */,
+			);
+			path = "macOS (Extension)";
+			sourceTree = "<group>";
+		};
+		B539571128E3174200554D22 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B539571228E3174200554D22 /* content.template.js */,
+				B539571328E3174200554D22 /* background.js */,
+				B539571428E3174200554D22 /* dist */,
+				B539571528E3174200554D22 /* img */,
+				B539571628E3174200554D22 /* aws-sdk.js */,
+				B539571728E3174200554D22 /* manifest.json */,
+				B539571828E3174200554D22 /* content.js */,
+			);
+			name = Resources;
+			path = "Shared (Extension)";
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B53956C228E3174200554D22 /* CloudTempo (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B539570728E3174200554D22 /* Build configuration list for PBXNativeTarget "CloudTempo (iOS)" */;
+			buildPhases = (
+				B53956BF28E3174200554D22 /* Sources */,
+				B53956C028E3174200554D22 /* Frameworks */,
+				B53956C128E3174200554D22 /* Resources */,
+				B539570628E3174200554D22 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B53956E528E3174200554D22 /* PBXTargetDependency */,
+			);
+			name = "CloudTempo (iOS)";
+			productName = "CloudTempo (iOS)";
+			productReference = B53956C328E3174200554D22 /* CloudTempo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B53956D428E3174200554D22 /* CloudTempo (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B539570E28E3174200554D22 /* Build configuration list for PBXNativeTarget "CloudTempo (macOS)" */;
+			buildPhases = (
+				B53956D128E3174200554D22 /* Sources */,
+				B53956D228E3174200554D22 /* Frameworks */,
+				B53956D328E3174200554D22 /* Resources */,
+				B539570D28E3174200554D22 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B53956EF28E3174200554D22 /* PBXTargetDependency */,
+			);
+			name = "CloudTempo (macOS)";
+			productName = "CloudTempo (macOS)";
+			productReference = B53956D528E3174200554D22 /* CloudTempo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B53956E128E3174200554D22 /* CloudTempo Extension (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B539570328E3174200554D22 /* Build configuration list for PBXNativeTarget "CloudTempo Extension (iOS)" */;
+			buildPhases = (
+				B53956DE28E3174200554D22 /* Sources */,
+				B53956DF28E3174200554D22 /* Frameworks */,
+				B53956E028E3174200554D22 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CloudTempo Extension (iOS)";
+			productName = "CloudTempo Extension (iOS)";
+			productReference = B53956E228E3174200554D22 /* CloudTempo Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		B53956EB28E3174200554D22 /* CloudTempo Extension (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B539570A28E3174200554D22 /* Build configuration list for PBXNativeTarget "CloudTempo Extension (macOS)" */;
+			buildPhases = (
+				B53956E828E3174200554D22 /* Sources */,
+				B53956E928E3174200554D22 /* Frameworks */,
+				B53956EA28E3174200554D22 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CloudTempo Extension (macOS)";
+			productName = "CloudTempo Extension (macOS)";
+			productReference = B53956EC28E3174200554D22 /* CloudTempo Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B53956B028E3174100554D22 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					B53956C228E3174200554D22 = {
+						CreatedOnToolsVersion = 14.0.1;
+					};
+					B53956D428E3174200554D22 = {
+						CreatedOnToolsVersion = 14.0.1;
+					};
+					B53956E128E3174200554D22 = {
+						CreatedOnToolsVersion = 14.0.1;
+					};
+					B53956EB28E3174200554D22 = {
+						CreatedOnToolsVersion = 14.0.1;
+					};
+				};
+			};
+			buildConfigurationList = B53956B328E3174100554D22 /* Build configuration list for PBXProject "CloudTempo" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B53956AF28E3174100554D22;
+			productRefGroup = B53956C428E3174200554D22 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B53956C228E3174200554D22 /* CloudTempo (iOS) */,
+				B53956D428E3174200554D22 /* CloudTempo (macOS) */,
+				B53956E128E3174200554D22 /* CloudTempo Extension (iOS) */,
+				B53956EB28E3174200554D22 /* CloudTempo Extension (macOS) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B53956C128E3174200554D22 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B53956F528E3174200554D22 /* Icon.png in Resources */,
+				B53956CC28E3174200554D22 /* LaunchScreen.storyboard in Resources */,
+				B53956F328E3174200554D22 /* Main.html in Resources */,
+				B53956F928E3174200554D22 /* Script.js in Resources */,
+				B53956FD28E3174200554D22 /* Assets.xcassets in Resources */,
+				B53956CF28E3174200554D22 /* Main.storyboard in Resources */,
+				B53956F728E3174200554D22 /* Style.css in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B53956D328E3174200554D22 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B53956F628E3174200554D22 /* Icon.png in Resources */,
+				B53956F828E3174200554D22 /* Style.css in Resources */,
+				B53956DB28E3174200554D22 /* Main.storyboard in Resources */,
+				B53956FA28E3174200554D22 /* Script.js in Resources */,
+				B53956FE28E3174200554D22 /* Assets.xcassets in Resources */,
+				B53956F428E3174200554D22 /* Main.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B53956E028E3174200554D22 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B539572328E3174200554D22 /* img in Resources */,
+				B539572228E3174200554D22 /* dist in Resources */,
+				B539572128E3174200554D22 /* background.js in Resources */,
+				B539572028E3174200554D22 /* content.template.js in Resources */,
+				B539572528E3174200554D22 /* manifest.json in Resources */,
+				B539572628E3174200554D22 /* content.js in Resources */,
+				B539572428E3174200554D22 /* aws-sdk.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B53956EA28E3174200554D22 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B539571C28E3174200554D22 /* img in Resources */,
+				B539571B28E3174200554D22 /* dist in Resources */,
+				B539571A28E3174200554D22 /* background.js in Resources */,
+				B539571928E3174200554D22 /* content.template.js in Resources */,
+				B539571E28E3174200554D22 /* manifest.json in Resources */,
+				B539571F28E3174200554D22 /* content.js in Resources */,
+				B539571D28E3174200554D22 /* aws-sdk.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B53956BF28E3174200554D22 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B53956FB28E3174200554D22 /* ViewController.swift in Sources */,
+				B53956C728E3174200554D22 /* AppDelegate.swift in Sources */,
+				B53956C928E3174200554D22 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B53956D128E3174200554D22 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B53956FC28E3174200554D22 /* ViewController.swift in Sources */,
+				B53956D828E3174200554D22 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B53956DE28E3174200554D22 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B53956FF28E3174200554D22 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B53956E828E3174200554D22 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B539570028E3174200554D22 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B53956E528E3174200554D22 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B53956E128E3174200554D22 /* CloudTempo Extension (iOS) */;
+			targetProxy = B53956E428E3174200554D22 /* PBXContainerItemProxy */;
+		};
+		B53956EF28E3174200554D22 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B53956EB28E3174200554D22 /* CloudTempo Extension (macOS) */;
+			targetProxy = B53956EE28E3174200554D22 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B53956B628E3174100554D22 /* Main.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B53956B728E3174100554D22 /* Base */,
+			);
+			name = Main.html;
+			sourceTree = "<group>";
+		};
+		B53956CA28E3174200554D22 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B53956CB28E3174200554D22 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B53956CD28E3174200554D22 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B53956CE28E3174200554D22 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B53956D928E3174200554D22 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B53956DA28E3174200554D22 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B539570128E3174200554D22 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B539570228E3174200554D22 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		B539570428E3174200554D22 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F4C734MPM2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "CloudTempo Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.cloudtempo.CloudTempo.Extension;
+				PRODUCT_NAME = "CloudTempo Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B539570528E3174200554D22 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F4C734MPM2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "CloudTempo Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.cloudtempo.CloudTempo.Extension;
+				PRODUCT_NAME = "CloudTempo Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B539570828E3174200554D22 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F4C734MPM2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = CloudTempo;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.cloudtempo.CloudTempo;
+				PRODUCT_NAME = CloudTempo;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B539570928E3174200554D22 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F4C734MPM2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = CloudTempo;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.cloudtempo.CloudTempo;
+				PRODUCT_NAME = CloudTempo;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B539570B28E3174200554D22 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/CloudTempo.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "CloudTempo Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.cloudtempo.CloudTempo.Extension;
+				PRODUCT_NAME = "CloudTempo Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B539570C28E3174200554D22 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/CloudTempo.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "CloudTempo Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.cloudtempo.CloudTempo.Extension;
+				PRODUCT_NAME = "CloudTempo Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		B539570F28E3174200554D22 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/CloudTempo.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = CloudTempo;
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.cloudtempo.CloudTempo;
+				PRODUCT_NAME = CloudTempo;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B539571028E3174200554D22 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/CloudTempo.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = CloudTempo;
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.cloudtempo.CloudTempo;
+				PRODUCT_NAME = CloudTempo;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B53956B328E3174100554D22 /* Build configuration list for PBXProject "CloudTempo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B539570128E3174200554D22 /* Debug */,
+				B539570228E3174200554D22 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B539570328E3174200554D22 /* Build configuration list for PBXNativeTarget "CloudTempo Extension (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B539570428E3174200554D22 /* Debug */,
+				B539570528E3174200554D22 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B539570728E3174200554D22 /* Build configuration list for PBXNativeTarget "CloudTempo (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B539570828E3174200554D22 /* Debug */,
+				B539570928E3174200554D22 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B539570A28E3174200554D22 /* Build configuration list for PBXNativeTarget "CloudTempo Extension (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B539570B28E3174200554D22 /* Debug */,
+				B539570C28E3174200554D22 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B539570E28E3174200554D22 /* Build configuration list for PBXNativeTarget "CloudTempo (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B539570F28E3174200554D22 /* Debug */,
+				B539571028E3174200554D22 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B53956B028E3174100554D22 /* Project object */;
+}
