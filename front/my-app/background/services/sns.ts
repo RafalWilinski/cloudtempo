@@ -24,7 +24,7 @@ export async function getAllSNSTopics(
       ...documents,
       ...(response.Topics ?? []).map((topic) => ({
         name: topic.TopicArn?.split("/").pop() ?? "Malformed SNS Topic ARN",
-        arn: topic.TopicArn,
+        arn: topic.TopicArn!,
         description: "",
         awsService: "sns_topic",
         region,

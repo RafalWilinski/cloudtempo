@@ -3,7 +3,7 @@ import {
   getDynamoDBCredentials,
   getECSCredentials,
 } from "../src/lib/getCredentials";
-import { getOrInitializeMinisearch, search } from "./lib/minisearch";
+import { search } from "./lib/minisearch";
 import { checkUser, registerLicenseKey } from "./lib/checkUser";
 import { getLastReindexDate, reindex } from "./lib/reindex";
 import { sendFeedback } from "./lib/feedback";

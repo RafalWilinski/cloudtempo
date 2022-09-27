@@ -1,0 +1,23 @@
+.content {
+  min-height: 50vh;
+  max-width: 60rem;
+  margin: auto;
+  padding: 4rem 2rem;
+  flex: 1;
+  text-align: left;
+  display: block;
+}
+
+.content p {
+  line-height: 1.9;
+  font-size: 1.1em;
+}
+
+.content h2 {
+  margin-top: 4rem;
+}
+
+.date {
+  color: #777;
+  margin-bottom: -40px;
+}

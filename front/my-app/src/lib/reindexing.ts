@@ -45,8 +45,6 @@ const useReindex = () => {
       return;
     }
 
-    console.log("getLastReindexingDate");
-
     chrome.runtime.sendMessage(
       extensionId(),
       {

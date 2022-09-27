@@ -23,7 +23,7 @@ export async function getAllCloudwatchLogGroups(
       ...documents,
       ...(response.logGroups ?? []).map((logGroup) => ({
         name: logGroup.logGroupName,
-        arn: logGroup.arn,
+        arn: logGroup.arn!,
         awsService: "logs",
         region,
       })),

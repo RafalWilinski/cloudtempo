@@ -77,7 +77,10 @@ Landing:
 - [x] Meta for homepage
 - [x] Yearly options
 - [x] og-images
-- [ ] If on phone, email me a link
+      <<<<<<< HEAD
+- [ ] # If on phone, email me a link
+- [x] If on phone, email me a link
+  > > > > > > > f294699e17b55bbba446deed1500587f072303ef
 - [ ] Testimonials Section
 - [ ] Usable on mobile
 
