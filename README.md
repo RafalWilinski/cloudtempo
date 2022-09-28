@@ -50,8 +50,10 @@ Todos:
 - [ ] Centralize services definitions
 - [ ] Improve error reporting
 - [ ] Parametrize search / expose settings to the user
+- [ ] [Safari] (chrome ?? browser) in `app/src`
+- [ ] [Safari] fetch ECS/DynamoDB Home Page Origin
 
-- [ ] Publish to Chrome Web Store
+- [x] Publish to Chrome Web Store
 - [x] Publish Edge Extension
 - [ ] Mozilla Extension
 

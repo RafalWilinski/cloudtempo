@@ -21,63 +21,62 @@ export async function getDynamoDBCredentials(): Promise<Credentials> {
     console.log("Cached credentials expired. Fetching new.");
   }
 
-  let csrfToken = await getDynamoDBHomePageCSRF();
-  let tab;
-  let retriesCount = 0;
+  let csrfToken: string | undefined;
+  let tab: any;
 
-  if (!csrfToken) {
-    tab = await browser.tabs.create({
-      url: "https://us-east-1.console.aws.amazon.com/dynamodbv2/home?region=us-east-1",
-      active: false,
-    });
-  }
+  browser.runtime.onMessageExternal.addListener(async function (request: any) {
+    console.log("ddb onMessageExternal", request);
+    if (request.type === "ddbCsrfToken") {
+      csrfToken = request.csrfToken;
 
-  while (!csrfToken) {
-    retriesCount++;
+      // Fetch temporary credentials from DynamoDB Console
+      const temporaryCredentials = await fetch(
+        "https://us-east-1.console.aws.amazon.com/dynamodbv2/tb/creds",
+        {
+          credentials: "same-origin",
+          method: "POST",
+          headers: {
+            "X-CSRF-Token": csrfToken!,
+          },
+        }
+      );
 
-    // Wait for a second
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+      const temporaryCredentialsJson = await temporaryCredentials.json();
 
-    if (retriesCount === 5) {
-      throw new Error("Failed to fetch CSRF token");
+      if (tab) {
+        await browser.tabs.remove(tab.id!);
+      }
+
+      cachedDynamoDBCredentials = temporaryCredentialsJson;
+
+      return temporaryCredentialsJson;
     }
+  });
 
-    csrfToken = await getDynamoDBHomePageCSRF();
-  }
-
-  // Fetch temporary credentials from DynamoDB Console
-  const temporaryCredentials = await fetch(
-    "https://us-east-1.console.aws.amazon.com/dynamodbv2/tb/creds",
-    {
-      credentials: "same-origin",
-      method: "POST",
-      headers: {
-        "X-CSRF-Token": csrfToken,
-      },
-    }
-  );
-
-  const temporaryCredentialsJson = await temporaryCredentials.json();
-
-  if (tab) {
-    await browser.tabs.remove(tab.id!);
-  }
-
-  cachedDynamoDBCredentials = temporaryCredentialsJson;
-
-  return temporaryCredentialsJson;
+  tab = await browser.tabs.create({
+    url: "https://us-east-1.console.aws.amazon.com/dynamodbv2/home?region=us-east-1",
+    active: false,
+  });
 }
 
 async function getDynamoDBHomePageCSRF(): Promise<string | undefined> {
   try {
     const dynamoDBHomePage = await fetch(
-      "https://us-east-1.console.aws.amazon.com/dynamodbv2/home?region=us-east-1"
+      "https://us-east-1.console.aws.amazon.com/dynamodbv2/home?region=us-east-1",
+      {
+        headers: {
+          origin: "https://us-east-1.console.aws.amazon.com",
+        },
+        mode: "cors",
+      }
     );
 
     const htmlContent = await (await dynamoDBHomePage.blob()).text();
 
     const splitStartToken = "csrfToken&quot;:&quot;";
     const splitEndToken = "&quot;";
+
+    console.log(htmlContent);
 
     const csrfToken = htmlContent
       .split(splitStartToken)[1]
@@ -101,6 +100,13 @@ export async function getECSCredentials(): Promise<Credentials> {
   let csrfToken = await getECSHomePageCSRF();
   let tab;
   let retriesCount = 0;
+
+  browser.runtime.onMessageExternal.addListener(async function (request) {
+    console.log("ecs onMessageExternal", request);
+    if (request.type === "ecsCsrfToken") {
+      csrfToken = request.csrfToken;
+    }
+  });
 
   if (!csrfToken) {
     tab = await browser.tabs.create({
@@ -152,10 +158,20 @@ export async function getECSCredentials(): Promise<Credentials> {
 async function getECSHomePageCSRF(): Promise<string | undefined> {
   try {
     const ecsHomePage = await fetch(
-      "https://us-east-1.console.aws.amazon.com/ecs/v2/clusters?region=us-east-1"
+      "https://us-east-1.console.aws.amazon.com/ecs/v2/clusters?region=us-east-1",
+      {
+        headers: {
+          origin: "https://us-east-1.console.aws.amazon.com",
+        },
+        mode: "no-cors",
+      }
     );
 
+    console.log(ecsHomePage);
+
     const htmlContent = await (await ecsHomePage.blob()).text();
+
+    console.log(htmlContent);
 
     const splitStartToken = "csrfToken&quot;:&quot;";
     const splitEndToken = "&quot;";
@@ -166,10 +182,7 @@ async function getECSHomePageCSRF(): Promise<string | undefined> {
 
     return csrfToken;
   } catch (error) {
-    console.warn(
-      "Failed to get CSRF token from DynamoDB Console home page",
-      error
-    );
+    console.warn("Failed to get CSRF token from ECS Console home page", error);
     return undefined;
   }
 }

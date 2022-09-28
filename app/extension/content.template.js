@@ -26,5 +26,7 @@ const reindexingProgressChannel = new BroadcastChannel(
 chrome.runtime.onMessage.addListener((request) => {
   if (request.type === "reindexing-progress") {
     reindexingProgressChannel.postMessage(request);
+  } else if (request.type === "getDynamoDBCsrfToken") {
+    console.log("content.js getDynamoDBCsrfToken");
   }
 });

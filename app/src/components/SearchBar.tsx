@@ -28,6 +28,7 @@ import { FeedbackMenu } from "./menus/FeedbackMenu";
 import { cmdOrCtrl } from "../lib/cmdOrCtrl";
 import { useLicenseInfo } from "../lib/useLicenseInfo";
 import { NewVersionBanner } from "./NewVersionBanner";
+import { extractCSRFToken } from "../lib/extractCSRFToken";
 
 export function CloudTempo({
   isDemo,
@@ -69,6 +70,8 @@ export function CloudTempo({
   const activePage = pages[pages.length - 1];
   const isHome = activePage === "Home";
   const inputValue = demoInput || _inputValue;
+
+  extractCSRFToken();
 
   const popPage = React.useCallback(() => {
     _setPages((pages) => {
