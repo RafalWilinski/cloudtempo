@@ -57,7 +57,7 @@ export function FeedbackMenu({ isDemo, setPages }: ActivateMenuProps) {
                   setPages(["Home"]);
                 });
             } else {
-              chrome.runtime.sendMessage(
+              browser.runtime.sendMessage(
                 extensionId(),
                 {
                   type: "feedback",

@@ -39,11 +39,6 @@ export function ActionsMenu({
 }: ActionsMenuProps) {
   const reindexingHook = useReindexing();
 
-  useEffect(() => {
-    // chrome.runtime.onMessage.addListener(console.log);
-    // chrome.extension.onMessage.addListener(console.log);
-  }, []);
-
   return (
     <>
       <Command.Group heading="Actions">
@@ -143,7 +138,7 @@ export function ActionsMenu({
         <Command.Item
           value="cloudtempo roadmap"
           onSelect={() => {
-            chrome.runtime.sendMessage(extensionId(), {
+            browser.runtime.sendMessage(extensionId(), {
               type: "openInNewTab",
               url: "https://github.com/orgs/cloud-tempo/projects/1/views/1",
             });
@@ -155,7 +150,7 @@ export function ActionsMenu({
         <Command.Item
           value="cloudtempo faq"
           onSelect={() => {
-            chrome.runtime.sendMessage(extensionId(), {
+            browser.runtime.sendMessage(extensionId(), {
               type: "openInNewTab",
               url: "https://cloudtempo.dev/faq",
             });
@@ -167,7 +162,7 @@ export function ActionsMenu({
         <Command.Item
           value="cloudtempo homepage"
           onSelect={() => {
-            chrome.runtime.sendMessage(extensionId(), {
+            browser.runtime.sendMessage(extensionId(), {
               type: "openInNewTab",
               url: "https://cloudtempo.dev/",
             });
@@ -179,7 +174,7 @@ export function ActionsMenu({
         <Command.Item
           value="twitter"
           onSelect={() => {
-            chrome.runtime.sendMessage(extensionId(), {
+            browser.runtime.sendMessage(extensionId(), {
               type: "openInNewTab",
               url: "https://twitter.com/_cloudtempo",
             });
@@ -191,7 +186,7 @@ export function ActionsMenu({
         <Command.Item
           value="aws iam permissions cloud better iam reference"
           onSelect={() => {
-            chrome.runtime.sendMessage(extensionId(), {
+            browser.runtime.sendMessage(extensionId(), {
               type: "openInNewTab",
               url: "https://aws.permissions.cloud",
             });
@@ -210,7 +205,7 @@ export function ActionsMenu({
         <Command.Item
           value="ec2 instances reference"
           onSelect={() => {
-            chrome.runtime.sendMessage(extensionId(), {
+            browser.runtime.sendMessage(extensionId(), {
               type: "openInNewTab",
               url: "https://instances.vantage.sh",
             });
@@ -222,7 +217,7 @@ export function ActionsMenu({
         <Command.Item
           value="repost forums"
           onSelect={() => {
-            chrome.runtime.sendMessage(extensionId(), {
+            browser.runtime.sendMessage(extensionId(), {
               type: "openInNewTab",
               url: "https://repost.aws",
             });
@@ -234,7 +229,7 @@ export function ActionsMenu({
         <Command.Item
           value="dynobase"
           onSelect={() => {
-            chrome.runtime.sendMessage(extensionId(), {
+            browser.runtime.sendMessage(extensionId(), {
               type: "openInNewTab",
               url: "https://dynobase.dev",
             });

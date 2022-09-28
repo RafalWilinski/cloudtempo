@@ -29,7 +29,7 @@ export function useLicenseInfo(isDemo?: boolean) {
       return;
     }
 
-    chrome.runtime.sendMessage(
+    browser.runtime.sendMessage(
       extensionId(),
       {
         userInfo: Cookies.get("aws-userInfo"),

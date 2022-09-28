@@ -107,7 +107,7 @@ export function SubCommand({
                 <SubItem
                   shortcut={`${cmdOrCtrl()} ↵`}
                   onSelect={() => {
-                    chrome.runtime.sendMessage(extensionId(), {
+                    browser.runtime.sendMessage(extensionId(), {
                       type: "openInNewTab",
                       url: consoleUrl(doc, getCurrentAccountId()),
                     });

@@ -7,43 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B53956D828E3174200554D22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53956D728E3174200554D22 /* AppDelegate.swift */; };
-		B53956DB28E3174200554D22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B53956D928E3174200554D22 /* Main.storyboard */; };
-		B53956ED28E3174200554D22 /* CloudTempo Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B53956EC28E3174200554D22 /* CloudTempo Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		B53956F428E3174200554D22 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = B53956B628E3174100554D22 /* Main.html */; };
-		B53956F628E3174200554D22 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B53956B828E3174100554D22 /* Icon.png */; };
-		B53956F828E3174200554D22 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = B53956B928E3174100554D22 /* Style.css */; };
-		B53956FA28E3174200554D22 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = B53956BA28E3174100554D22 /* Script.js */; };
-		B53956FC28E3174200554D22 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53956BB28E3174100554D22 /* ViewController.swift */; };
-		B53956FE28E3174200554D22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B53956BC28E3174200554D22 /* Assets.xcassets */; };
-		B539570028E3174200554D22 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53956BE28E3174200554D22 /* SafariWebExtensionHandler.swift */; };
-		B539571928E3174200554D22 /* content.template.js in Resources */ = {isa = PBXBuildFile; fileRef = B539571228E3174200554D22 /* content.template.js */; };
-		B539571A28E3174200554D22 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = B539571328E3174200554D22 /* background.js */; };
-		B539571B28E3174200554D22 /* dist in Resources */ = {isa = PBXBuildFile; fileRef = B539571428E3174200554D22 /* dist */; };
-		B539571C28E3174200554D22 /* img in Resources */ = {isa = PBXBuildFile; fileRef = B539571528E3174200554D22 /* img */; };
-		B539571D28E3174200554D22 /* aws-sdk.js in Resources */ = {isa = PBXBuildFile; fileRef = B539571628E3174200554D22 /* aws-sdk.js */; };
-		B539571E28E3174200554D22 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B539571728E3174200554D22 /* manifest.json */; };
-		B539571F28E3174200554D22 /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = B539571828E3174200554D22 /* content.js */; };
+		B548795D28E47226008CE1C0 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B548795C28E47226008CE1C0 /* icon.png */; };
+		B5FA06CB28E4706300BA72B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FA06CA28E4706300BA72B6 /* AppDelegate.swift */; };
+		B5FA06CE28E4706300BA72B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5FA06CC28E4706300BA72B6 /* Main.storyboard */; };
+		B5FA06E028E4706300BA72B6 /* CloudTempo Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B5FA06DF28E4706300BA72B6 /* CloudTempo Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B5FA06E728E4706300BA72B6 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = B5FA06A928E4706200BA72B6 /* Main.html */; };
+		B5FA06E928E4706300BA72B6 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5FA06AB28E4706200BA72B6 /* Icon.png */; };
+		B5FA06EB28E4706300BA72B6 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = B5FA06AC28E4706200BA72B6 /* Style.css */; };
+		B5FA06ED28E4706300BA72B6 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = B5FA06AD28E4706200BA72B6 /* Script.js */; };
+		B5FA06EF28E4706300BA72B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FA06AE28E4706200BA72B6 /* ViewController.swift */; };
+		B5FA06F128E4706300BA72B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5FA06AF28E4706300BA72B6 /* Assets.xcassets */; };
+		B5FA06F328E4706300BA72B6 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FA06B128E4706300BA72B6 /* SafariWebExtensionHandler.swift */; };
+		B5FA070D28E4706300BA72B6 /* content.template.js in Resources */ = {isa = PBXBuildFile; fileRef = B5FA070528E4706300BA72B6 /* content.template.js */; };
+		B5FA070E28E4706300BA72B6 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = B5FA070628E4706300BA72B6 /* background.js */; };
+		B5FA070F28E4706300BA72B6 /* dist in Resources */ = {isa = PBXBuildFile; fileRef = B5FA070728E4706300BA72B6 /* dist */; };
+		B5FA071128E4706300BA72B6 /* img in Resources */ = {isa = PBXBuildFile; fileRef = B5FA070928E4706300BA72B6 /* img */; };
+		B5FA071228E4706300BA72B6 /* aws-sdk.js in Resources */ = {isa = PBXBuildFile; fileRef = B5FA070A28E4706300BA72B6 /* aws-sdk.js */; };
+		B5FA071328E4706300BA72B6 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B5FA070B28E4706300BA72B6 /* manifest.json */; };
+		B5FA071428E4706300BA72B6 /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = B5FA070C28E4706300BA72B6 /* content.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B53956EE28E3174200554D22 /* PBXContainerItemProxy */ = {
+		B5FA06E128E4706300BA72B6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = B53956B028E3174100554D22 /* Project object */;
+			containerPortal = B5FA06A328E4706200BA72B6 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = B53956EB28E3174200554D22;
+			remoteGlobalIDString = B5FA06DE28E4706300BA72B6;
 			remoteInfo = "CloudTempo Extension (macOS)";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		B539570D28E3174200554D22 /* Embed Foundation Extensions */ = {
+		B5FA070028E4706300BA72B6 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				B53956ED28E3174200554D22 /* CloudTempo Extension.appex in Embed Foundation Extensions */,
+				B5FA06E028E4706300BA72B6 /* CloudTempo Extension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -51,45 +52,47 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B53956B728E3174100554D22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
-		B53956B828E3174100554D22 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		B53956B928E3174100554D22 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
-		B53956BA28E3174100554D22 /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
-		B53956BB28E3174100554D22 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B53956BC28E3174200554D22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B53956BE28E3174200554D22 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
-		B53956C628E3174200554D22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B53956C828E3174200554D22 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B53956CB28E3174200554D22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		B53956CE28E3174200554D22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B53956D028E3174200554D22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B53956D528E3174200554D22 /* CloudTempo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudTempo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B53956D728E3174200554D22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B53956DA28E3174200554D22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B53956DC28E3174200554D22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B53956DD28E3174200554D22 /* CloudTempo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CloudTempo.entitlements; sourceTree = "<group>"; };
-		B53956E728E3174200554D22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B53956EC28E3174200554D22 /* CloudTempo Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "CloudTempo Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B53956F128E3174200554D22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B53956F228E3174200554D22 /* CloudTempo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CloudTempo.entitlements; sourceTree = "<group>"; };
-		B539571228E3174200554D22 /* content.template.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = content.template.js; path = ../../app/extension/content.template.js; sourceTree = "<group>"; };
-		B539571328E3174200554D22 /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = background.js; path = ../../app/extension/background.js; sourceTree = "<group>"; };
-		B539571428E3174200554D22 /* dist */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dist; path = ../../app/extension/dist; sourceTree = "<group>"; };
-		B539571528E3174200554D22 /* img */ = {isa = PBXFileReference; lastKnownFileType = folder; name = img; path = ../../app/extension/img; sourceTree = "<group>"; };
-		B539571628E3174200554D22 /* aws-sdk.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = "aws-sdk.js"; path = "../../app/extension/aws-sdk.js"; sourceTree = "<group>"; };
-		B539571728E3174200554D22 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = manifest.json; path = ../../app/extension/manifest.json; sourceTree = "<group>"; };
-		B539571828E3174200554D22 /* content.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = content.js; path = ../../app/extension/content.js; sourceTree = "<group>"; };
+		B548795C28E47226008CE1C0 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../app/extension/icon.png; sourceTree = "<group>"; };
+		B5FA06AA28E4706200BA72B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
+		B5FA06AB28E4706200BA72B6 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		B5FA06AC28E4706200BA72B6 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
+		B5FA06AD28E4706200BA72B6 /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
+		B5FA06AE28E4706200BA72B6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B5FA06AF28E4706300BA72B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B5FA06B128E4706300BA72B6 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		B5FA06B928E4706300BA72B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B5FA06BB28E4706300BA72B6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		B5FA06BE28E4706300BA72B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B5FA06C128E4706300BA72B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B5FA06C328E4706300BA72B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5FA06C828E4706300BA72B6 /* CloudTempo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudTempo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5FA06CA28E4706300BA72B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B5FA06CD28E4706300BA72B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B5FA06CF28E4706300BA72B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5FA06D028E4706300BA72B6 /* CloudTempo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CloudTempo.entitlements; sourceTree = "<group>"; };
+		B5FA06DA28E4706300BA72B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5FA06DF28E4706300BA72B6 /* CloudTempo Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "CloudTempo Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5FA06E428E4706300BA72B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5FA06E528E4706300BA72B6 /* CloudTempo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CloudTempo.entitlements; sourceTree = "<group>"; };
+		B5FA070528E4706300BA72B6 /* content.template.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = content.template.js; path = ../../app/extension/content.template.js; sourceTree = "<group>"; };
+		B5FA070628E4706300BA72B6 /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = background.js; path = ../../app/extension/background.js; sourceTree = "<group>"; };
+		B5FA070728E4706300BA72B6 /* dist */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dist; path = ../../app/extension/dist; sourceTree = "<group>"; };
+		B5FA070828E4706300BA72B6 /* icon48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon48.png; path = ../../app/extension/icon48.png; sourceTree = "<group>"; };
+		B5FA070928E4706300BA72B6 /* img */ = {isa = PBXFileReference; lastKnownFileType = folder; name = img; path = ../../app/extension/img; sourceTree = "<group>"; };
+		B5FA070A28E4706300BA72B6 /* aws-sdk.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = "aws-sdk.js"; path = "../../app/extension/aws-sdk.js"; sourceTree = "<group>"; };
+		B5FA070B28E4706300BA72B6 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = manifest.json; path = ../../app/extension/manifest.json; sourceTree = "<group>"; };
+		B5FA070C28E4706300BA72B6 /* content.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = content.js; path = ../../app/extension/content.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B53956D228E3174200554D22 /* Frameworks */ = {
+		B5FA06C528E4706300BA72B6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B53956E928E3174200554D22 /* Frameworks */ = {
+		B5FA06DC28E4706300BA72B6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -99,108 +102,110 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B53956AF28E3174100554D22 = {
+		B5FA06A228E4706200BA72B6 = {
 			isa = PBXGroup;
 			children = (
-				B53956B428E3174100554D22 /* Shared (App) */,
-				B53956BD28E3174200554D22 /* Shared (Extension) */,
-				B53956C528E3174200554D22 /* iOS (App) */,
-				B53956D628E3174200554D22 /* macOS (App) */,
-				B53956E628E3174200554D22 /* iOS (Extension) */,
-				B53956F028E3174200554D22 /* macOS (Extension) */,
-				B53956C428E3174200554D22 /* Products */,
+				B548795C28E47226008CE1C0 /* icon.png */,
+				B5FA06A728E4706200BA72B6 /* Shared (App) */,
+				B5FA06B028E4706300BA72B6 /* Shared (Extension) */,
+				B5FA06B828E4706300BA72B6 /* iOS (App) */,
+				B5FA06C928E4706300BA72B6 /* macOS (App) */,
+				B5FA06D928E4706300BA72B6 /* iOS (Extension) */,
+				B5FA06E328E4706300BA72B6 /* macOS (Extension) */,
+				B5FA06B728E4706300BA72B6 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		B53956B428E3174100554D22 /* Shared (App) */ = {
+		B5FA06A728E4706200BA72B6 /* Shared (App) */ = {
 			isa = PBXGroup;
 			children = (
-				B53956BB28E3174100554D22 /* ViewController.swift */,
-				B53956BC28E3174200554D22 /* Assets.xcassets */,
-				B53956B528E3174100554D22 /* Resources */,
+				B5FA06AE28E4706200BA72B6 /* ViewController.swift */,
+				B5FA06AF28E4706300BA72B6 /* Assets.xcassets */,
+				B5FA06A828E4706200BA72B6 /* Resources */,
 			);
 			path = "Shared (App)";
 			sourceTree = "<group>";
 		};
-		B53956B528E3174100554D22 /* Resources */ = {
+		B5FA06A828E4706200BA72B6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B53956B628E3174100554D22 /* Main.html */,
-				B53956B828E3174100554D22 /* Icon.png */,
-				B53956B928E3174100554D22 /* Style.css */,
-				B53956BA28E3174100554D22 /* Script.js */,
+				B5FA06A928E4706200BA72B6 /* Main.html */,
+				B5FA06AB28E4706200BA72B6 /* Icon.png */,
+				B5FA06AC28E4706200BA72B6 /* Style.css */,
+				B5FA06AD28E4706200BA72B6 /* Script.js */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		B53956BD28E3174200554D22 /* Shared (Extension) */ = {
+		B5FA06B028E4706300BA72B6 /* Shared (Extension) */ = {
 			isa = PBXGroup;
 			children = (
-				B539571128E3174200554D22 /* Resources */,
-				B53956BE28E3174200554D22 /* SafariWebExtensionHandler.swift */,
+				B5FA070428E4706300BA72B6 /* Resources */,
+				B5FA06B128E4706300BA72B6 /* SafariWebExtensionHandler.swift */,
 			);
 			path = "Shared (Extension)";
 			sourceTree = "<group>";
 		};
-		B53956C428E3174200554D22 /* Products */ = {
+		B5FA06B728E4706300BA72B6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B53956D528E3174200554D22 /* CloudTempo.app */,
-				B53956EC28E3174200554D22 /* CloudTempo Extension.appex */,
+				B5FA06C828E4706300BA72B6 /* CloudTempo.app */,
+				B5FA06DF28E4706300BA72B6 /* CloudTempo Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B53956C528E3174200554D22 /* iOS (App) */ = {
+		B5FA06B828E4706300BA72B6 /* iOS (App) */ = {
 			isa = PBXGroup;
 			children = (
-				B53956C628E3174200554D22 /* AppDelegate.swift */,
-				B53956C828E3174200554D22 /* SceneDelegate.swift */,
-				B53956CA28E3174200554D22 /* LaunchScreen.storyboard */,
-				B53956CD28E3174200554D22 /* Main.storyboard */,
-				B53956D028E3174200554D22 /* Info.plist */,
+				B5FA06B928E4706300BA72B6 /* AppDelegate.swift */,
+				B5FA06BB28E4706300BA72B6 /* SceneDelegate.swift */,
+				B5FA06BD28E4706300BA72B6 /* LaunchScreen.storyboard */,
+				B5FA06C028E4706300BA72B6 /* Main.storyboard */,
+				B5FA06C328E4706300BA72B6 /* Info.plist */,
 			);
 			path = "iOS (App)";
 			sourceTree = "<group>";
 		};
-		B53956D628E3174200554D22 /* macOS (App) */ = {
+		B5FA06C928E4706300BA72B6 /* macOS (App) */ = {
 			isa = PBXGroup;
 			children = (
-				B53956D728E3174200554D22 /* AppDelegate.swift */,
-				B53956D928E3174200554D22 /* Main.storyboard */,
-				B53956DC28E3174200554D22 /* Info.plist */,
-				B53956DD28E3174200554D22 /* CloudTempo.entitlements */,
+				B5FA06CA28E4706300BA72B6 /* AppDelegate.swift */,
+				B5FA06CC28E4706300BA72B6 /* Main.storyboard */,
+				B5FA06CF28E4706300BA72B6 /* Info.plist */,
+				B5FA06D028E4706300BA72B6 /* CloudTempo.entitlements */,
 			);
 			path = "macOS (App)";
 			sourceTree = "<group>";
 		};
-		B53956E628E3174200554D22 /* iOS (Extension) */ = {
+		B5FA06D928E4706300BA72B6 /* iOS (Extension) */ = {
 			isa = PBXGroup;
 			children = (
-				B53956E728E3174200554D22 /* Info.plist */,
+				B5FA06DA28E4706300BA72B6 /* Info.plist */,
 			);
 			path = "iOS (Extension)";
 			sourceTree = "<group>";
 		};
-		B53956F028E3174200554D22 /* macOS (Extension) */ = {
+		B5FA06E328E4706300BA72B6 /* macOS (Extension) */ = {
 			isa = PBXGroup;
 			children = (
-				B53956F128E3174200554D22 /* Info.plist */,
-				B53956F228E3174200554D22 /* CloudTempo.entitlements */,
+				B5FA06E428E4706300BA72B6 /* Info.plist */,
+				B5FA06E528E4706300BA72B6 /* CloudTempo.entitlements */,
 			);
 			path = "macOS (Extension)";
 			sourceTree = "<group>";
 		};
-		B539571128E3174200554D22 /* Resources */ = {
+		B5FA070428E4706300BA72B6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B539571228E3174200554D22 /* content.template.js */,
-				B539571328E3174200554D22 /* background.js */,
-				B539571428E3174200554D22 /* dist */,
-				B539571528E3174200554D22 /* img */,
-				B539571628E3174200554D22 /* aws-sdk.js */,
-				B539571728E3174200554D22 /* manifest.json */,
-				B539571828E3174200554D22 /* content.js */,
+				B5FA070528E4706300BA72B6 /* content.template.js */,
+				B5FA070628E4706300BA72B6 /* background.js */,
+				B5FA070728E4706300BA72B6 /* dist */,
+				B5FA070828E4706300BA72B6 /* icon48.png */,
+				B5FA070928E4706300BA72B6 /* img */,
+				B5FA070A28E4706300BA72B6 /* aws-sdk.js */,
+				B5FA070B28E4706300BA72B6 /* manifest.json */,
+				B5FA070C28E4706300BA72B6 /* content.js */,
 			);
 			name = Resources;
 			path = "Shared (Extension)";
@@ -209,32 +214,32 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B53956D428E3174200554D22 /* CloudTempo (macOS) */ = {
+		B5FA06C728E4706300BA72B6 /* CloudTempo (macOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B539570E28E3174200554D22 /* Build configuration list for PBXNativeTarget "CloudTempo (macOS)" */;
+			buildConfigurationList = B5FA070128E4706300BA72B6 /* Build configuration list for PBXNativeTarget "CloudTempo (macOS)" */;
 			buildPhases = (
-				B53956D128E3174200554D22 /* Sources */,
-				B53956D228E3174200554D22 /* Frameworks */,
-				B53956D328E3174200554D22 /* Resources */,
-				B539570D28E3174200554D22 /* Embed Foundation Extensions */,
+				B5FA06C428E4706300BA72B6 /* Sources */,
+				B5FA06C528E4706300BA72B6 /* Frameworks */,
+				B5FA06C628E4706300BA72B6 /* Resources */,
+				B5FA070028E4706300BA72B6 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				B53956EF28E3174200554D22 /* PBXTargetDependency */,
+				B5FA06E228E4706300BA72B6 /* PBXTargetDependency */,
 			);
 			name = "CloudTempo (macOS)";
 			productName = "CloudTempo (macOS)";
-			productReference = B53956D528E3174200554D22 /* CloudTempo.app */;
+			productReference = B5FA06C828E4706300BA72B6 /* CloudTempo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B53956EB28E3174200554D22 /* CloudTempo Extension (macOS) */ = {
+		B5FA06DE28E4706300BA72B6 /* CloudTempo Extension (macOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B539570A28E3174200554D22 /* Build configuration list for PBXNativeTarget "CloudTempo Extension (macOS)" */;
+			buildConfigurationList = B5FA06FD28E4706300BA72B6 /* Build configuration list for PBXNativeTarget "CloudTempo Extension (macOS)" */;
 			buildPhases = (
-				B53956E828E3174200554D22 /* Sources */,
-				B53956E928E3174200554D22 /* Frameworks */,
-				B53956EA28E3174200554D22 /* Resources */,
+				B5FA06DB28E4706300BA72B6 /* Sources */,
+				B5FA06DC28E4706300BA72B6 /* Frameworks */,
+				B5FA06DD28E4706300BA72B6 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -242,28 +247,28 @@
 			);
 			name = "CloudTempo Extension (macOS)";
 			productName = "CloudTempo Extension (macOS)";
-			productReference = B53956EC28E3174200554D22 /* CloudTempo Extension.appex */;
+			productReference = B5FA06DF28E4706300BA72B6 /* CloudTempo Extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		B53956B028E3174100554D22 /* Project object */ = {
+		B5FA06A328E4706200BA72B6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
-					B53956D428E3174200554D22 = {
+					B5FA06C728E4706300BA72B6 = {
 						CreatedOnToolsVersion = 14.0.1;
 					};
-					B53956EB28E3174200554D22 = {
+					B5FA06DE28E4706300BA72B6 = {
 						CreatedOnToolsVersion = 14.0.1;
 					};
 				};
 			};
-			buildConfigurationList = B53956B328E3174100554D22 /* Build configuration list for PBXProject "CloudTempo" */;
+			buildConfigurationList = B5FA06A628E4706200BA72B6 /* Build configuration list for PBXProject "CloudTempo" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -271,104 +276,105 @@
 				en,
 				Base,
 			);
-			mainGroup = B53956AF28E3174100554D22;
-			productRefGroup = B53956C428E3174200554D22 /* Products */;
+			mainGroup = B5FA06A228E4706200BA72B6;
+			productRefGroup = B5FA06B728E4706300BA72B6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B53956D428E3174200554D22 /* CloudTempo (macOS) */,
-				B53956EB28E3174200554D22 /* CloudTempo Extension (macOS) */,
+				B5FA06C728E4706300BA72B6 /* CloudTempo (macOS) */,
+				B5FA06DE28E4706300BA72B6 /* CloudTempo Extension (macOS) */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		B53956D328E3174200554D22 /* Resources */ = {
+		B5FA06C628E4706300BA72B6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B53956F628E3174200554D22 /* Icon.png in Resources */,
-				B53956F828E3174200554D22 /* Style.css in Resources */,
-				B53956DB28E3174200554D22 /* Main.storyboard in Resources */,
-				B53956FA28E3174200554D22 /* Script.js in Resources */,
-				B53956FE28E3174200554D22 /* Assets.xcassets in Resources */,
-				B53956F428E3174200554D22 /* Main.html in Resources */,
+				B5FA06E928E4706300BA72B6 /* Icon.png in Resources */,
+				B5FA06EB28E4706300BA72B6 /* Style.css in Resources */,
+				B5FA06CE28E4706300BA72B6 /* Main.storyboard in Resources */,
+				B5FA06ED28E4706300BA72B6 /* Script.js in Resources */,
+				B5FA06F128E4706300BA72B6 /* Assets.xcassets in Resources */,
+				B5FA06E728E4706300BA72B6 /* Main.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B53956EA28E3174200554D22 /* Resources */ = {
+		B5FA06DD28E4706300BA72B6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B539571C28E3174200554D22 /* img in Resources */,
-				B539571B28E3174200554D22 /* dist in Resources */,
-				B539571A28E3174200554D22 /* background.js in Resources */,
-				B539571928E3174200554D22 /* content.template.js in Resources */,
-				B539571E28E3174200554D22 /* manifest.json in Resources */,
-				B539571F28E3174200554D22 /* content.js in Resources */,
-				B539571D28E3174200554D22 /* aws-sdk.js in Resources */,
+				B548795D28E47226008CE1C0 /* icon.png in Resources */,
+				B5FA071428E4706300BA72B6 /* content.js in Resources */,
+				B5FA071128E4706300BA72B6 /* img in Resources */,
+				B5FA071328E4706300BA72B6 /* manifest.json in Resources */,
+				B5FA070F28E4706300BA72B6 /* dist in Resources */,
+				B5FA070E28E4706300BA72B6 /* background.js in Resources */,
+				B5FA071228E4706300BA72B6 /* aws-sdk.js in Resources */,
+				B5FA070D28E4706300BA72B6 /* content.template.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		B53956D128E3174200554D22 /* Sources */ = {
+		B5FA06C428E4706300BA72B6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B53956FC28E3174200554D22 /* ViewController.swift in Sources */,
-				B53956D828E3174200554D22 /* AppDelegate.swift in Sources */,
+				B5FA06EF28E4706300BA72B6 /* ViewController.swift in Sources */,
+				B5FA06CB28E4706300BA72B6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B53956E828E3174200554D22 /* Sources */ = {
+		B5FA06DB28E4706300BA72B6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B539570028E3174200554D22 /* SafariWebExtensionHandler.swift in Sources */,
+				B5FA06F328E4706300BA72B6 /* SafariWebExtensionHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B53956EF28E3174200554D22 /* PBXTargetDependency */ = {
+		B5FA06E228E4706300BA72B6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B53956EB28E3174200554D22 /* CloudTempo Extension (macOS) */;
-			targetProxy = B53956EE28E3174200554D22 /* PBXContainerItemProxy */;
+			target = B5FA06DE28E4706300BA72B6 /* CloudTempo Extension (macOS) */;
+			targetProxy = B5FA06E128E4706300BA72B6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		B53956B628E3174100554D22 /* Main.html */ = {
+		B5FA06A928E4706200BA72B6 /* Main.html */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B53956B728E3174100554D22 /* Base */,
+				B5FA06AA28E4706200BA72B6 /* Base */,
 			);
 			name = Main.html;
 			sourceTree = "<group>";
 		};
-		B53956CA28E3174200554D22 /* LaunchScreen.storyboard */ = {
+		B5FA06BD28E4706300BA72B6 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B53956CB28E3174200554D22 /* Base */,
+				B5FA06BE28E4706300BA72B6 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		B53956CD28E3174200554D22 /* Main.storyboard */ = {
+		B5FA06C028E4706300BA72B6 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B53956CE28E3174200554D22 /* Base */,
+				B5FA06C128E4706300BA72B6 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		B53956D928E3174200554D22 /* Main.storyboard */ = {
+		B5FA06CC28E4706300BA72B6 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B53956DA28E3174200554D22 /* Base */,
+				B5FA06CD28E4706300BA72B6 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -376,7 +382,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		B539570128E3174200554D22 /* Debug */ = {
+		B5FA06F428E4706300BA72B6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -426,6 +432,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -434,7 +441,7 @@
 			};
 			name = Debug;
 		};
-		B539570228E3174200554D22 /* Release */ = {
+		B5FA06F528E4706300BA72B6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -478,6 +485,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -485,7 +493,7 @@
 			};
 			name = Release;
 		};
-		B539570B28E3174200554D22 /* Debug */ = {
+		B5FA06FE28E4706300BA72B6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/CloudTempo.entitlements";
@@ -517,7 +525,7 @@
 			};
 			name = Debug;
 		};
-		B539570C28E3174200554D22 /* Release */ = {
+		B5FA06FF28E4706300BA72B6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/CloudTempo.entitlements";
@@ -549,14 +557,13 @@
 			};
 			name = Release;
 		};
-		B539570F28E3174200554D22 /* Debug */ = {
+		B5FA070228E4706300BA72B6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "macOS (App)/CloudTempo.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F4C734MPM2;
@@ -564,7 +571,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (App)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = CloudTempo;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -587,14 +593,13 @@
 			};
 			name = Debug;
 		};
-		B539571028E3174200554D22 /* Release */ = {
+		B5FA070328E4706300BA72B6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "macOS (App)/CloudTempo.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F4C734MPM2;
@@ -602,7 +607,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (App)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = CloudTempo;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -628,34 +632,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B53956B328E3174100554D22 /* Build configuration list for PBXProject "CloudTempo" */ = {
+		B5FA06A628E4706200BA72B6 /* Build configuration list for PBXProject "CloudTempo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B539570128E3174200554D22 /* Debug */,
-				B539570228E3174200554D22 /* Release */,
+				B5FA06F428E4706300BA72B6 /* Debug */,
+				B5FA06F528E4706300BA72B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B539570A28E3174200554D22 /* Build configuration list for PBXNativeTarget "CloudTempo Extension (macOS)" */ = {
+		B5FA06FD28E4706300BA72B6 /* Build configuration list for PBXNativeTarget "CloudTempo Extension (macOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B539570B28E3174200554D22 /* Debug */,
-				B539570C28E3174200554D22 /* Release */,
+				B5FA06FE28E4706300BA72B6 /* Debug */,
+				B5FA06FF28E4706300BA72B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B539570E28E3174200554D22 /* Build configuration list for PBXNativeTarget "CloudTempo (macOS)" */ = {
+		B5FA070128E4706300BA72B6 /* Build configuration list for PBXNativeTarget "CloudTempo (macOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B539570F28E3174200554D22 /* Debug */,
-				B539571028E3174200554D22 /* Release */,
+				B5FA070228E4706300BA72B6 /* Debug */,
+				B5FA070328E4706300BA72B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = B53956B028E3174100554D22 /* Project object */;
+	rootObject = B5FA06A328E4706200BA72B6 /* Project object */;
 }

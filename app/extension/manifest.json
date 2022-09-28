@@ -6,10 +6,11 @@
   "permissions": [],
   "homepage_url": "https://cloudtempo.dev",
   "icons": {
-    "16": "img/icon16.png",
-    "32": "img/icon32.png",
-    "48": "img/icon48.png",
+    "48": "icon.png",
     "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png"
   },
   "background": {
     "service_worker": "background.js"
@@ -34,7 +35,6 @@
     }
   ],
   "externally_connectable": {
-    "ids": ["dfdbbkddkbcggkpdkgnogjhpijiahcep"],
     "matches": ["https://*.console.aws.amazon.com/*"]
   },
   "content_security_policy": {

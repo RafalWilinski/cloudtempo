@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-// <reference types="chrome"/>
+// <reference types="browser"/>
 import React, { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import Cookies from "js-cookie";
@@ -27,7 +27,6 @@ import { OnboardingMenu } from "./menus/OnboardingMenu";
 import { FeedbackMenu } from "./menus/FeedbackMenu";
 import { cmdOrCtrl } from "../lib/cmdOrCtrl";
 import { useLicenseInfo } from "../lib/useLicenseInfo";
-import { useCheckVersion } from "../lib/useCheckVersion";
 import { NewVersionBanner } from "./NewVersionBanner";
 
 export function CloudTempo({
@@ -139,14 +138,14 @@ export function CloudTempo({
     setLoading(true);
 
     if (window.location.href.indexOf("localhost") < 0 && !isDemo) {
-      chrome.runtime.sendMessage(
+      browser.runtime.sendMessage(
         extensionId(),
         {
           q: inputValue,
           accountId: currentAccountId,
           userInfo: Cookies.get("aws-userInfo"),
         },
-        function (response) {
+        function (response: any) {
           console.log(response);
 
           if (response.userInfo) {
@@ -220,13 +219,13 @@ export function CloudTempo({
   };
 
   const submitLicenseKey = () => {
-    chrome.runtime.sendMessage(
+    browser.runtime.sendMessage(
       extensionId(),
       {
         licenseKey: inputValue,
         userInfo: Cookies.get("aws-userInfo"),
       },
-      function (response) {
+      function (response: any) {
         if (response.ok) {
           setPages(["Home"]);
           setInputValue("");
@@ -282,7 +281,9 @@ export function CloudTempo({
                   return 1;
                 }
 
-                if (value.includes(search.toLowerCase())) return 1;
+                if (value.includes(search.toLowerCase())) {
+                  return 1;
+                }
                 return 0;
               }}
               shouldFilter={
@@ -313,7 +314,7 @@ export function CloudTempo({
                     value,
                   });
 
-                  chrome.runtime.sendMessage(extensionId(), {
+                  browser.runtime.sendMessage(extensionId(), {
                     type: "openInNewTab",
                     url,
                   });

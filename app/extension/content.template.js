@@ -2,6 +2,11 @@ const htmlBody = `<div id="aws-search-app"></div><div aws-search-extensionid="${
 
 document.body.insertAdjacentHTML("beforeend", htmlBody);
 
+const awsSdkScriptElement = document.createElement("script");
+awsSdkScriptElement.src = chrome.runtime.getURL("./aws-sdk.js");
+awsSdkScriptElement.type = "module";
+(document.head || document.documentElement).appendChild(awsSdkScriptElement);
+
 const scriptElement = document.createElement("script");
 scriptElement.src = chrome.runtime.getURL(scriptPath);
 scriptElement.type = "module";

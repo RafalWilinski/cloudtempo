@@ -15,7 +15,7 @@ export const NewVersionBanner = () => {
       className="new-version-banner"
       style={{ cursor: "pointer" }}
       onClick={() => {
-        chrome.runtime.sendMessage(extensionId(), {
+        browser.runtime.sendMessage(extensionId(), {
           type: "openInNewTab",
           url: "https://cloudtempo.dev/alpha",
         });

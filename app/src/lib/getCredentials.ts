@@ -26,7 +26,7 @@ export async function getDynamoDBCredentials(): Promise<Credentials> {
   let retriesCount = 0;
 
   if (!csrfToken) {
-    tab = await chrome.tabs.create({
+    tab = await browser.tabs.create({
       url: "https://us-east-1.console.aws.amazon.com/dynamodbv2/home?region=us-east-1",
       active: false,
     });
@@ -60,7 +60,7 @@ export async function getDynamoDBCredentials(): Promise<Credentials> {
   const temporaryCredentialsJson = await temporaryCredentials.json();
 
   if (tab) {
-    await chrome.tabs.remove(tab.id!);
+    await browser.tabs.remove(tab.id!);
   }
 
   cachedDynamoDBCredentials = temporaryCredentialsJson;
@@ -103,7 +103,7 @@ export async function getECSCredentials(): Promise<Credentials> {
   let retriesCount = 0;
 
   if (!csrfToken) {
-    tab = await chrome.tabs.create({
+    tab = await browser.tabs.create({
       url: "https://us-east-1.console.aws.amazon.com/ecs/v2/clusters?region=us-east-1",
       active: false,
     });
@@ -141,7 +141,7 @@ export async function getECSCredentials(): Promise<Credentials> {
   const temporaryCredentialsJson = await temporaryCredentials.json();
 
   if (tab) {
-    await chrome.tabs.remove(tab.id!);
+    await browser.tabs.remove(tab.id!);
   }
 
   cachedECSCredentials = temporaryCredentialsJson;

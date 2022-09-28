@@ -22,7 +22,7 @@ export function useCheckVersion() {
       return undefined;
     }
 
-    chrome.runtime.sendMessage(
+    browser.runtime.sendMessage(
       extensionId(),
       {
         type: "checkVersion",

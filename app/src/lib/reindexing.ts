@@ -45,7 +45,7 @@ const useReindex = () => {
       return;
     }
 
-    chrome.runtime.sendMessage(
+    browser.runtime.sendMessage(
       extensionId(),
       {
         type: "getLastReindexDate",
@@ -81,9 +81,9 @@ const useReindex = () => {
   }, []);
 
   const sendReindexRequest = () => {
-    if (chrome && chrome.runtime) {
+    if (browser && browser.runtime) {
       setIsReindexing(true);
-      chrome.runtime.sendMessage(
+      browser.runtime.sendMessage(
         extensionId(),
         {
           type: "reindex",

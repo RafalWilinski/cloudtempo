@@ -9,7 +9,7 @@ import { getLastReindexDate, reindex } from "./lib/reindex";
 import { sendFeedback } from "./lib/feedback";
 import { checkVersion } from "./lib/checkVersion";
 
-importScripts("aws-sdk.js");
+// importScripts("aws-sdk.js");
 
 console.log("CloudTempo started");
 
