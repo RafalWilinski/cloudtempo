@@ -35,6 +35,7 @@ export async function getDynamoDBCredentials(): Promise<Credentials> {
         {
           credentials: "same-origin",
           method: "POST",
+          mode: "no-cors",
           headers: {
             "X-CSRF-Token": csrfToken!,
           },
@@ -72,16 +73,17 @@ export async function getECSCredentials(): Promise<Credentials> {
   let tab: any;
 
   browser.runtime.onMessageExternal.addListener(async function (request: any) {
-    console.log("ddb onMessageExternal", request);
-    if (request.type === "ddbCsrfToken") {
+    console.log("ecs onMessageExternal", request);
+    if (request.type === "ecsCsrfToken") {
       csrfToken = request.csrfToken;
 
       // Fetch temporary credentials from DynamoDB Console
       const temporaryCredentials = await fetch(
-        "https://us-east-1.console.aws.amazon.com/dynamodbv2/tb/creds",
+        "https://us-east-1.console.aws.amazon.com/ecs/v2/tb/creds",
         {
           credentials: "same-origin",
           method: "POST",
+          mode: "no-cors",
           headers: {
             "X-CSRF-Token": csrfToken!,
           },
@@ -94,13 +96,18 @@ export async function getECSCredentials(): Promise<Credentials> {
         await browser.tabs.remove(tab.id!);
       }
 
-      cachedDynamoDBCredentials = temporaryCredentialsJson;
+      cachedECSCredentials = temporaryCredentialsJson;
 
       return temporaryCredentialsJson;
     }
   });
 
   setTimeout(() => {
-    throw new Error("Failed to get DDB credentials within 10 seconds");
+    throw new Error("Failed to get ECS credentials within 10 seconds");
   }, 10000);
+
+  tab = await browser.tabs.create({
+    url: "https://console.aws.amazon.com/ecs/v2/home?region=us-east-1",
+    active: false,
+  });
 }
