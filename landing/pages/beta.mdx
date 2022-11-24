@@ -1,0 +1,27 @@
+import Layout from "../components/Layout";
+import { InstallButton } from "../components/InstallButton";
+
+export const meta = {
+  author: "Rafal Wilinski",
+  title: "CloudTempo Beta - Download Instructions",
+};
+
+## CloudTempo Beta [(0.2.0)](/changelog)
+
+CloudTempo is currently in beta. This means that it is not available in the Chrome Web Store / Edge Addons or any other official extensions store yet. You can install it, but you will need to do so manually.
+
+<InstallButton href="/download" text="Download" />
+### Instructions
+
+1. Download the [latest version of CloudTempo extension (0.2.0)](/download)
+2. Unzip the downloaded `extension.zip` file
+3. Open Chrome and go to `chrome://extensions`
+4. Enable developer mode
+   ![/install-developer-mode.png](/install-developer-mode.png)
+
+5. Click on `Load unpacked` and select the unzipped folder
+   ![/install-load-unpacked.png](/install-load-unpacked.png)
+
+6. Go to [AWS Console](https://console.aws.amazon.com/console/home) and press `CMD + K` (on Mac) or `CTRL + K` (on Windows/Linux) to open the CloudTempo.
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>;

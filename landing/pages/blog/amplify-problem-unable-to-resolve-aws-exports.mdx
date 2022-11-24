@@ -1,0 +1,48 @@
+import Blogpost from "../../components/Blogpost";
+
+export const meta = {
+  author: "Rafal Wilinski",
+  title: "[Solution] AWS Amplify: Cannot find file './aws-exports'",
+  date: "September 29, 2022",
+  description:
+    "Solution to an AWS Amplify problem: Unable to resolve module ./aws-exports and Cannot find file './aws-exports'.",
+  authorImage:
+    "https://pbs.twimg.com/profile_images/1390706809548197895/SVCKpLNE_400x400.png",
+};
+
+## Solution _tl;dr_
+
+If you are using AWS Amplify and you are getting an error like this:
+
+```bash
+Unable to resolve "./aws-exports" from "App.js"
+# or
+Cannot find file './aws-exports'.
+```
+
+All you need to do is use `@aws-amplify/cli` to pull that file from the cloud, like this:
+
+```bash
+amplify env pull --restore
+```
+
+Make sure you have:
+
+- `@aws-amplify/cli` installed and configured
+- AWS credentials are set up
+- You're using the right set of _AWS credentials_ and you're targeting _correct region_ (where the Amplify project is deployed)
+- You're importing the `aws-exports` file with the right path (e.g. `App.js`)
+
+Alternatively, you can use `amplify push` but it will also push your local changes to the cloud.
+
+## Explanation
+
+This is a common error when you are using AWS Amplify and you are trying to run your app locally on a new machine. It's a bit misleading because it's not really a problem with the file itself, but rather with the fact that you might be importing a config file that's missing.
+
+Because it is not advised to push this file to the repository (it contains sensitive variables so by default it's listed inside `.gitignore`), you need to pull it from the cloud. You can do it with `amplify env pull --restore` command.
+
+## What is aws-exports.js file?
+
+`aws-exports.js` file This file is generated for JavaScript/TypeScript projects that are using AWS Amplify. It contains the consolidated outputs from all the categories, such as Auth, API, Hosting, etc., and is placed under the `src` directory that the developer specified during the `amplify init` process.
+
+export default ({ children }) => <Blogpost meta={meta}>{children}</Blogpost>;

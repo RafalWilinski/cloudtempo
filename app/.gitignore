@@ -1,0 +1,9 @@
+node_modules
+.parcel-cache
+dist
+extension/dist
+extension/background.js
+extension/content.js
+extension/aws-sdk.js
+.DS_Store
+extension.zip

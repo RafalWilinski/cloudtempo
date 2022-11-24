@@ -1,0 +1,19 @@
+.section {
+  max-width: 800px;
+  margin-bottom: 80px;
+  padding: 0 2em;
+}
+
+.description {
+  margin-bottom: 2em;
+}
+
+.question {
+  margin-top: 2em;
+  font-size: 1.2em;
+  color: #aaa;
+}
+
+.answer {
+  line-height: 1.75;
+}

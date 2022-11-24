@@ -1,0 +1,28 @@
+import Blogpost from "../../components/Blogpost";
+
+export const meta = {
+  author: "Rafal Wilinski",
+  title: "How To Enable Dark Mode in the AWS Console",
+  date: "October 7, 2022",
+  description:
+    "Solution How To Enable Dark Mode in the AWS Console without using Dev Tools",
+  authorImage:
+    "https://pbs.twimg.com/profile_images/1390706809548197895/SVCKpLNE_400x400.png",
+};
+
+It's a little known fact that you can enable dark mode in the AWS Console. It's not a feature that's advertised anywhere, it's not even available in the UI but it's there, trust me. In this post, I'll show you how to enable it without using Dev Tools, using [CloudTempo](/).
+
+![AWS Console dark mode](/blog/aws-console-dark-mode.png)
+
+## How to enable dark mode in the AWS Console using CloudTempo
+
+1. [Download CloudTempo](/get) extension for your browser. You can find it available on [Chrome Web Store for Chrome](https://chrome.google.com/webstore/detail/cloudtempo/hnjemcffliolmflachhfoeaojlomanph?hl=en&authuser=0) and [Edge Addons for Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/cloudtempo/blflgmdpajfmmcgbbekldlldolbpmdhb)
+
+2. Open the AWS Console and press CMD + K (on Mac) or CTRL + M (on Linux and Windows) to open the CloudTempo menu.
+3. Type `dark` and select `AWS Console Dark Mode: Enable` option and press `Enter`.
+
+![Enabling AWS Console dark mode using CloudTempo](/blog/cloudtempo-dark-mode.png)
+
+After a second, you'll see the AWS Console in dark mode!
+
+export default ({ children }) => <Blogpost meta={meta}>{children}</Blogpost>;

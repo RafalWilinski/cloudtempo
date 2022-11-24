@@ -1,0 +1,114 @@
+.container {
+  padding: 0 2rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 0.75rem;
+  }
+}
+
+.main {
+  min-height: 50vh;
+  max-width: 85rem;
+  margin: auto;
+  padding: 4rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  min-height: 50vh;
+  max-width: 60rem;
+  margin: auto;
+  padding: 4rem 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.title {
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.15;
+  font-size: 4rem;
+}
+
+.title,
+.description {
+  text-align: center;
+}
+
+.description {
+  margin: 4rem 0;
+  line-height: 1.5;
+  font-size: 1.5rem;
+}
+
+.headingLeftColumn {
+  width: 50%;
+  margin-right: 32px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .headingLeftColumn {
+    text-align: center;
+    width: auto;
+    margin: 0 2rem 20px;
+  }
+}
+
+.hero {
+  margin-top: 8rem;
+  display: flex;
+  min-height: 750px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .hero {
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+  }
+}
+
+.chromeIcon {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin: 0 4px;
+}
+
+.chromeIcon:hover {
+  transform: scale(1.05);
+}
+
+.safariIcon {
+  cursor: not-allowed;
+  margin: 0 4px;
+  filter: grayscale();
+  opacity: 0.8;
+}
+
+.availableFor {
+  color: #777;
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 6px;
+}

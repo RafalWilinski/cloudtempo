@@ -1,0 +1,51 @@
+.container {
+  width: 100%;
+  border-top: 1px solid #333;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  background: #020202;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    min-width: 100%;
+    padding: 10px;
+  }
+}
+
+.links {
+  max-width: 800px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.linkGroup {
+  width: 30%;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 600px) {
+  .linkGroup {
+    width: 45%;
+  }
+}
+
+.linkGroupTitle {
+  margin-bottom: 10px;
+}
+
+.link {
+  margin-top: 5px;
+  color: #ccc;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: white;
+}

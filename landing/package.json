@@ -1,0 +1,47 @@
+{
+  "name": "landing",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "postbuild": "next-sitemap"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^4.5.12",
+    "@heroicons/react": "^2.0.11",
+    "@mdx-js/loader": "^2.1.3",
+    "@mdx-js/react": "^2.1.3",
+    "@next/mdx": "^12.3.1",
+    "@radix-ui/react-select": "^1.1.1",
+    "@vercel/analytics": "^0.1.1",
+    "cmdk": "^0.1.20",
+    "cors": "^2.8.5",
+    "fathom-client": "^3.5.0",
+    "glob": "^8.0.3",
+    "js-cookie": "^3.0.1",
+    "next": "^13.0.0",
+    "next-sitemap": "^3.1.22",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-highlight": "^0.14.0",
+    "react-hot-toast": "^2.4.0",
+    "react-toastify": "^9.0.8",
+    "rehype-autolink-headings": "^6.1.1",
+    "rehype-highlight": "^5.0.2",
+    "rehype-slug": "^5.0.1",
+    "remark-toc": "^8.0.1",
+    "use-debounce": "^8.0.4"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/node": "18.7.18",
+    "@types/react": "18.0.20",
+    "@types/react-dom": "18.0.6",
+    "eslint": "8.23.1",
+    "eslint-config-next": "^13.0.0",
+    "typescript": "4.8.3"
+  }
+}

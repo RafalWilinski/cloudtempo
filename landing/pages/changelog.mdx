@@ -1,0 +1,65 @@
+import Layout from "../components/Layout";
+
+export const meta = {
+  author: "Rafal Wilinski",
+  title: "CloudTempo Changelog",
+};
+
+# Changelog
+
+## 0.2.0 - 20 / 10 / 2022
+
+- Favourites support. Add your favourite resources, they will always be on top of the resources list.
+- Adds `logs` alias for CloudWatch and `fargate` for ECS
+- Adds button to open CloudTempo next to the AWS native resource search
+- Fixes problem with the view being scrollable when modal is open
+- Styling issues
+
+## 0.1.1 - 11 / 10 / 2022
+
+- Onboarding experience
+- Add an ability to toggle between dark mode and light mode in AWS Console
+- Speed & stability improvements
+- Styling fixes
+
+## 0.1.0 - 27 / 09 / 2022
+
+- Subtexts - you can now see more information about the resource in the search results
+  ![Contextualized info](/contextualized-info.gif)
+- Indexing tags - now resources are also indexed based on tags
+- Removed Chrome's `tabs` permission
+- Added ability to convert [ARN to URL](/blog/arn-complete-guide)
+
+## 0.0.5 - 22 / 09 / 2022
+
+- Query Language. Now you can find resources by service type and region using following syntax: `> service:ec2 region:eu-west-1`. You can also use `reg` or `r` as an alias for `region`, and `svc` or `s` as an alias for `service`.
+- Improvements to the tokenizer yielding better search results
+- Boosted resource type importance in the search results. For example, when looking for a `lambda`, Functions will always come first in the results despite not having the word `lambda` in their name whereas log groups having that name (e.g. `/aws/lambda/lambda-name`) will be ranked lower.
+- AWS Service search has been moved to the service worker and capped to 10 best results.
+- Added styled scrollbar
+
+## 0.0.4 - 22 / 09 / 2022
+
+> Reindexing recommended! Internal representation of the index has changed a bit.
+
+- Added support for ECS Services, VPCs, Security Groups, Subnets, DAX Clusters, and SNS Topics
+- Added indexing progress bar
+- Increased scanning parallelism to `15`
+- Links from `Useful links` section are now opened in a new tab
+- Fixed bunch of links to services
+- Fixed problem with some resources being not "openable"
+- Fixed problem with checkboxes being not clickable
+- Removed "double list nesting" in regions menu
+
+## 0.0.3 - 21 / 09 / 2022
+
+- Added support for CloudFormation stacks
+- Added `X` button to close onboarding
+- Improved authentication mechanism to be faster
+- Fixed notifications style being out of sync with the rest of app
+- Fixed bunch of keyboard shortcuts
+- Fixed rendering icons if in a different region than `us-east-1`
+- Fixed `Backspace` behavior in Send Feedback menu
+- Fixed notifications z-index
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>;
