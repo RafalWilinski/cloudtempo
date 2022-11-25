@@ -31,6 +31,17 @@ Chrome Extension is being composed of a few parts:
 - Frontend - React app that's being injected into AWS Console (`app/src/App.tsx`)
 - Content Script - a thin shim that allows mounting frontend into AWS Console. It also acts as a bridge between frontend and service worker using [`BroadcastChannel`](https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API) API for reporting indexing progress.
 
+### Building
+
+```sh
+cd app
+npm i
+npm run build:full
+npm run zip
+```
+
+The generated ZIP file can be loaded in your browser by navigating to `chrome://extensions/` URL. More detailed instructions can be found [here](https://cloudtempo.dev/beta)
+
 ### Service Worker
 
 Backend responds to following messages of following `type`:
